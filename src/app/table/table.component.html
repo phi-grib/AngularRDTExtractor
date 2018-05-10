@@ -1,0 +1,67 @@
+<h1 align="center">Data preview</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr class="text-left" bgcolor=lightgray>
+        <th>Study ID</th>
+        <th>Organ</th>
+        <th>Observation</th>
+        <th>Species</th>
+        <th>Route</th>
+        <th>Sex</th>
+        <th class="text-right">Exposure period (days)</th>
+        <th class="text-right">Treatment-related</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let row of data">
+        <td>{{row.study_id}}</td>
+        <td>{{row.organ_normalised}}</td>
+        <td>{{row.observation_normalised}}</td>
+        <td>{{row.normalised_species}}</td>
+        <td>{{row.normalised_administration_route}}</td>
+        <td>{{row.normalised_sex }}</td>
+        <td class="text-right"> {{row.exposure_period_days}} </td>
+        <td class="text-right">{{row.relevance}}</td>
+      </tr>
+    
+  </tbody>
+</table>
+
+
+    <nav aria-label="Page navigation example" class="nav justify-content-center" *ngIf="num_pages > 0">
+        <ul class="pagination">
+         <!-- {% if previous_page > 0 %}-->
+         <div *ngIf=" previous_page > 0;then previous else no_previous"></div>
+         <ng-template #previous>
+           <li class="page-item"><a class="page-link" style="color:blue;" >First</a> </li>
+           <li class="page-item"><a class="page-link" style="color:blue;" >&laquo;</a></li>
+         </ng-template>
+         <ng-template #no_previous>
+          <li class="page-item disabled"><a class="page-link"  tabindex="-1">First</a></li>
+          <li class="page-item disabled"><a class="page-link"  tabindex="-1">&laquo;</a></li>
+        </ng-template> 
+        <!-- {% for i in range_pages %}
+          {% if page == i %}-->
+            <li class="page-item active">
+                <a class="page-link">{{ i }} <span class="sr-only">(current)</span></a>
+            </li>
+          <!-- {% else %}-->
+            <li class="page-item"><a class="page-link" style="color:blue;" > Aqui </a></li>
+          <!-- {% endif %}-->
+         <!--{% endfor %}
+          {% if next_page > 0 %}-->
+          <div *ngIf=" next_page > 0;then next else no_next"></div>
+          <ng-template #next>
+            <li class="page-item"><a class="page-link" style="color:blue;" >&raquo;</a></li>
+            <li class="page-item"><a class="page-link" style="color:blue;" >Last</a> </li>
+          </ng-template> 
+           <!--{% else %}-->
+           <ng-template #no_next>
+            <li class="page-item disabled"><a class="page-link"  tabindex="-1">&raquo;</a></li>
+            <li class="page-item disabled"><a class="page-link"  tabindex="-1">Last</a></li>
+          </ng-template> 
+           <!--{% endif %}-->
+        </ul>
+         <!--{% endif %}-->
+        </nav>
