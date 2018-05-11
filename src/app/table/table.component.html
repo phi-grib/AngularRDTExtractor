@@ -31,7 +31,6 @@
 
     <nav aria-label="Page navigation example" class="nav justify-content-center" *ngIf="num_pages > 0">
         <ul class="pagination">
-         <!-- {% if previous_page > 0 %}-->
          <div *ngIf=" previous_page > 0;then previous else no_previous"></div>
          <ng-template #previous>
            <li class="page-item"><a class="page-link" style="color:blue;" >First</a> </li>
@@ -41,27 +40,25 @@
           <li class="page-item disabled"><a class="page-link"  tabindex="-1">First</a></li>
           <li class="page-item disabled"><a class="page-link"  tabindex="-1">&laquo;</a></li>
         </ng-template> 
-        <!-- {% for i in range_pages %}
-          {% if page == i %}-->
-            <li class="page-item active">
+        
+        <ng-container *ngFor="let i of range_pages">
+         
+            <li class="page-item active" *ngIf ="page == i" >
                 <a class="page-link">{{ i }} <span class="sr-only">(current)</span></a>
             </li>
-          <!-- {% else %}-->
-            <li class="page-item"><a class="page-link" style="color:blue;" > Aqui </a></li>
-          <!-- {% endif %}-->
-         <!--{% endfor %}
-          {% if next_page > 0 %}-->
+            <li class="page-item" *ngIf="page != i">
+              <a class="page-link" > {{i}} </a>
+            </li>
+        </ng-container>
           <div *ngIf=" next_page > 0;then next else no_next"></div>
           <ng-template #next>
             <li class="page-item"><a class="page-link" style="color:blue;" >&raquo;</a></li>
             <li class="page-item"><a class="page-link" style="color:blue;" >Last</a> </li>
           </ng-template> 
-           <!--{% else %}-->
+        
            <ng-template #no_next>
             <li class="page-item disabled"><a class="page-link"  tabindex="-1">&raquo;</a></li>
             <li class="page-item disabled"><a class="page-link"  tabindex="-1">Last</a></li>
-          </ng-template> 
-           <!--{% endif %}-->
+          </ng-template>        
         </ul>
-         <!--{% endif %}-->
-        </nav>
+      </nav>
