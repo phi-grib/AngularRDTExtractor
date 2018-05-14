@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "my-app"
+    "name": "PROJECT_NAME"
   },
   "apps": [
     {
@@ -36,6 +36,7 @@
   },
   "lint": [
     {
+<<<<<<< HEAD
       "project": "src/tsconfig.app.json",
       "exclude": "**/node_modules/**"
     },
@@ -46,6 +47,15 @@
     {
       "project": "e2e/tsconfig.e2e.json",
       "exclude": "**/node_modules/**"
+=======
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json"
+>>>>>>> 6cf84c3d79c11de1fa002b970fba8aa2659e0aa0
     }
   ],
   "test": {
@@ -57,4 +67,8 @@
     "styleExt": "css",
     "component": {}
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 6cf84c3d79c11de1fa002b970fba8aa2659e0aa0

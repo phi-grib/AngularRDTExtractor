@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
+import { FindingsService } from '../findings.service';
 
 
 @Component({
