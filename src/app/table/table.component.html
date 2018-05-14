@@ -43,14 +43,21 @@
         </ng-template> 
         <!-- {% for i in range_pages %}
           {% if page == i %}-->
-            <li class="page-item active">
-                <a class="page-link">{{ i }} <span class="sr-only">(current)</span></a>
-            </li>
+          <ng-container *ngFor="let i range_pages">
+            <div *ngIf="page===i ;then current else no_current"></div>
+            <ng-template #current>
+              <li class="page-item active">
+                  <a class="page-link">{{ i }} <span class="sr-only">(current)</span></a>
+              </li>
+          </ng-template>
           <!-- {% else %}-->
+          <ng-template #no_current>
             <li class="page-item"><a class="page-link" style="color:blue;" > Aqui </a></li>
-          <!-- {% endif %}-->
+          </ng-template>
+          <!-- {% endif %}-->git a
+          </ng-container>
          <!--{% endfor %}
-          {% if next_page > 0 %}-->
+          {% if next_page > 0 %}--
           <div *ngIf=" next_page > 0;then next else no_next"></div>
           <ng-template #next>
             <li class="page-item"><a class="page-link" style="color:blue;" >&raquo;</a></li>
