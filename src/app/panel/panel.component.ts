@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FindingsService } from '../findings.service';
 
 @Component({
   selector: 'app-panel',
@@ -8,27 +9,32 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PanelComponent implements OnInit {
 
   objectKeys = Object.keys;
-  @Input() search_info = {};
+  @Input() searchFormPanel = {};
   @Output()relevantClose: EventEmitter<boolean> = new EventEmitter<boolean>();
-  constructor() { }
+  
+
+  constructor(private findService : FindingsService) { }
 
   ngOnInit() {
-  }
+    this.findService.currentTable.subscribe ();
+  }  
+
   removeThis(key: string,value: string){
 
-   
     if (key=="relevantOnly"){
+      delete this.searchFormPanel[key];
       this.relevantClose.emit(false);
     }
 
     if (value===undefined){
-      delete this.search_info[key];
+      delete this.searchFormPanel[key];
     }
     else{
-      this.search_info[key].splice(value, 1);
-      if (this.search_info[key].length==0){
-        delete this.search_info[key];
+      this.searchFormPanel[key].splice(value, 1);
+      if (this.searchFormPanel[key].length==0){
+        delete this.searchFormPanel[key];
       }
-    }   
-  }
+    } 
+    this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info =>this.findService.changeTable(table_info));
+  }  
 }

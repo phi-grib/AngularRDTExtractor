@@ -1,0 +1,2 @@
+npm install bootstrap --save-dev
+npm install jquery --save-dev
