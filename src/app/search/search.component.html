@@ -1,4 +1,4 @@
-<div class="row">
+<!--div class="row">
         <div class="col-lg-8 offset-md-2">
             <div class="row">
                 <div class="form-inline col-lg-2">
@@ -75,4 +75,97 @@
     </div>
  </div>
  <app-panel [searchFormPanel] = search_form (relevantClose)="change_relevant($event)"></app-panel>
- <app-table [searchFormTable] = search_form></app-table>
+ <app-table [searchFormTable] = search_form></app-table>-->
+
+<div class="container">
+    <div class ="row">
+        <div class="col-md-3">     
+        </div>
+        <div class="col-md-9">
+                <div align="center" style="font: italic bold 20px/50px Georgia, serif">
+                    <span style="color:red">{{ num_studies }}</span><span > studies and </span>
+                    <span style="color:red">{{ num_structures}}</span><span > structures </span>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3" style="background-color:lightgray;">
+            <br>
+            Exposure period (days):
+            <div class="form-inline">
+                <span id="min_exposure_value"></span>-<span id="max_exposure_value"></span>
+                <br>
+                <div class="container">
+                    <div id="slider-range"></div>
+                </div>
+                <br>
+            </div>
+            <br>
+            Sex:
+            <div class="form-inline">
+                <div *ngFor="let value of sex">
+                &nbsp;&nbsp;<input  type="checkbox" name="sex" id="sex" (change)="addSearchCheckBox($event)" value={{value}}>&nbsp;{{ value }}
+                </div> 
+            </div>
+            <br>
+            Route:
+            <div class="form-inline">
+                <select class="form-control" id="routes" (change)="addSearchSelect($event)">
+                        <option disabled selected value> -- select an option -- </option>
+                        <option *ngFor="let route of routes">{{route}}</option>         
+                </select>
+            </div>
+            <app-panel [searchFormPanel] = search_form [key]= "'routes'" ></app-panel>
+            Species:
+            <div class="form-inline">
+                <select class="form-control" id="species" (change)="addSearchSelect($event)">
+                    <option disabled selected value> -- select an option -- </option>
+                    <option *ngFor="let specie of species">{{specie}}</option>   
+                </select>
+            </div>
+            <app-panel [searchFormPanel] = search_form [key]= "'species'" ></app-panel>
+            Strain:
+            <div class="form-inline">
+                <select class="form-control" id="strain" (change)="addSearchSelect($event)" style="width: 200px" disabled>
+                    <option disabled selected value> -- select an option -- </option>
+                </select>
+            </div>
+            <app-panel [searchFormPanel] = search_form [key]= "'strain'" ></app-panel>
+            Organ:
+            <div class="form-inline">
+                <select class="form-control" id="organs" (change)="addSearchSelect($event)" style="width: 200px">
+                    <option disabled selected value> -- select an option -- </option>
+                    <option *ngFor="let organ of organs">{{organ}}</option>
+                </select>
+            </div>
+            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
+            Observation:
+            <div class="form-inline">
+                <select class="form-control" id="observations" (change)="addSearchSelect($event)" style="width: 200px">
+                    <option disabled selected value> -- select an option -- </option>
+                    <option *ngFor="let observation of observations">{{observation}}</option>
+                </select>
+            </div>
+            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
+            <br>
+            
+                <button type="button" class="btn" onclick="resetFilters()"> Reset Filters </button>
+                <button type="button" class="btn" onclick="download()"> Export </button>
+         
+        </div>
+        <div class="col-md-9">
+            <app-table [searchFormTable] = search_form></app-table>   
+        </div>
+    </div>
+</div>
+<div class=".container-fluid row" style="border: 1px solid red; padding: 10px;">
+        <div class="col-lg-2" style="border: 1px solid green; padding: 10px;" *ngFor="let key of objectKeys(search_form)">
+            <div class='divlabel'><b>{{key|capitalize}}</b></div>
+            <button class = 'x' (click)="removeThis(key,None)">X</button>
+            <div class="chip" *ngFor="let value of search_form[key]">
+                {{value}}       
+                <span class="closebtn" (click)="removeThis(key,value)">&times;</span>  
+            </div>
+        <div>
+    </div>
+    

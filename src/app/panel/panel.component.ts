@@ -10,6 +10,7 @@ export class PanelComponent implements OnInit {
 
   objectKeys = Object.keys;
   @Input() searchFormPanel = {};
+  @Input() key :string;
   @Output()relevantClose: EventEmitter<boolean> = new EventEmitter<boolean>();
   
 
@@ -20,7 +21,6 @@ export class PanelComponent implements OnInit {
   }  
 
   removeThis(key: string,value: string){
-
     if (key=="relevantOnly"){
       delete this.searchFormPanel[key];
       this.relevantClose.emit(false);

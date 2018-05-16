@@ -11,6 +11,7 @@ export class SearchComponent implements OnInit {
 
   relevant_form : boolean;
 
+  objectKeys = Object.keys;
   search_form = {};
   table_info = {}
 
@@ -119,12 +120,10 @@ export class SearchComponent implements OnInit {
   change_relevant(count){
 
    this.relevant_form=false;
-   alert("Holaaa");
    this.findService.changeSearch(this.search_form); 
    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
                                                                this.findService.changeTable(this.table_info);
                                                                });
 
-  } 
-  
+  }   
 }
