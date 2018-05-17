@@ -10,6 +10,11 @@ import { FindingsService } from '../findings.service';
 export class SearchComponent implements OnInit {
 
   relevant_form : boolean;
+  F:boolean=false;
+  M:boolean=false;
+  BOTH:boolean=false;
+  min_exposure: number =1;
+  max_exposure: number =100;
 
   objectKeys = Object.keys;
   search_form = {};
@@ -27,9 +32,7 @@ export class SearchComponent implements OnInit {
     
     this.findService.currentSearch.subscribe (search_form => this.search_form = search_form);
     this.findService.changeSearch(this.search_form);
-
     //this.findService.currentTable.subscribe (table_info => this.table_info = table_info);
-  
     this.showOrgans();
     this.showObservations();
     this.showSpecies();
@@ -80,7 +83,6 @@ export class SearchComponent implements OnInit {
       this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
                                                                   this.findService.changeTable(this.table_info);
                                                                   });
-    
   } 
 
   addSearchText(event: any){
@@ -100,11 +102,26 @@ export class SearchComponent implements OnInit {
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
                                                                 this.findService.changeTable(this.table_info);
                                                                 });
-
   }
 
   addSearchCheckBox(event: any){
-
+ 
+    if (this.sex.indexOf(event.target.value)!=-1){  
+      if (event.target.checked){
+          if (event.target.value=="F"){
+            this.M=false;
+            this.BOTH=false;
+          }
+          else if (event.target.value=="M"){
+            this.F=false;
+            this.BOTH=false;
+          }
+          else{
+            this.M=false;
+            this.F=false;
+          }
+      }
+    }
     if (event.target.checked){   
       this.search_form[event.target.id]=[event.target.value];   
     }
@@ -117,13 +134,20 @@ export class SearchComponent implements OnInit {
       });
 
   }
-  change_relevant(count){
+  addSliderInfo($event){
 
-   this.relevant_form=false;
-   this.findService.changeSearch(this.search_form); 
-   this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-                                                               this.findService.changeTable(this.table_info);
-                                                               });
+    delete this.search_form['min_exposure'];
+    delete this.search_form['min_exposure'];
+    if (this.min_exposure!=$event.from){
+      this.search_form['min_exposure']=$event.from;
+    }
+    if (this.max_exposure!=$event.to){
+      this.search_form['max_exposure']=$event.to;
+    }
+    this.findService.changeSearch(this.search_form);
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
+      this.findService.changeTable(this.table_info);
+      });
+  }
 
-  }   
 }

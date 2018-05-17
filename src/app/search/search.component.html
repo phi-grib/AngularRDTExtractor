@@ -1,87 +1,8 @@
-<!--div class="row">
-        <div class="col-lg-8 offset-md-2">
-            <div class="row">
-                <div class="form-inline col-lg-2">
-                    <label for="usr">Min exposure (days):</label>
-                </div>
-                <div class="form-inline col-lg-4">
-                    <input type="text" class="form-control" id="min_exposure" (keypress)="addSearchText($event)">
-                </div>
-                <div class="form-inline col-lg-2">
-                    <label for="usr">Max exposure (days):</label>
-                </div>
-                <div class="form-inline col-lg-4">
-                    <input type="text" class="form-control" id="max_exposure" (keypress)="addSearchText($event)">
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-inline col-lg-2">
-                    <label for="usr">Route:</label>
-                </div>
-                <div class="form-inline col-lg-4">
-                    <select class="form-control" id="routes" (change)="addSearchSelect($event)">
-                            <option disabled selected value> -- select an option -- </option>
-                            <option *ngFor="let route of routes">{{route}}</option>         
-                    </select>
-                </div>
-                <div class="form-inline col-lg-2">
-                    <label for="usr">Species:</label>
-                </div>
-                <div class="form-inline col-lg-4">
-                    <select class="form-control" id="species" (change)="addSearchSelect($event)">
-                            <option disabled selected value> -- select an option -- </option>
-                            <option *ngFor="let specie of species">{{specie}}</option>           
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-inline col-lg-2">
-                    <label for="usr">Sex:</label>
-                </div>
-                <div class="form-inline col-lg-4">
-                    <select class="form-control" id="sex" (change)="addSearchSelect($event)">
-                            <option disabled selected value> -- select an option -- </option>
-                            <option *ngFor="let value of sex">{{value}}</option>           
-                    </select>
-                </div>
-                <div class="form-inline col-lg-2">
-                    <label for="usr">Organ:</label>
-                </div>
-                <div class="form-inline col-lg-4">
-                    <select class="form-control" id="organs" (change)="addSearchSelect($event)">
-                            <option disabled selected value> -- select an option -- </option>
-                            <option *ngFor="let organ of organs">{{organ}}</option>          
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-inline col-lg-2">
-                    <label for="usr">Observation:</label>
-                </div>
-                <div class="form-inline col-lg-10">
-                    <select class="form-control" id="observations" (change)="addSearchSelect($event)">
-                            <option disabled selected value> -- select an option -- </option>
-                            <option *ngFor="let observation of observations">{{observation}}</option>          
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-inline col-lg-2"></div>
-                <div class="form-inline col-lg-10">
-                    <input type="checkbox" id="relevantOnly" name="relevant" (change)="addSearchCheckBox($event)" [(ngModel)]="relevant_form">
-                    <label for="relevantOnly">Relevant findings only</label>
-                </div>
-        </div>
-    </div>
- </div>
- <app-panel [searchFormPanel] = search_form (relevantClose)="change_relevant($event)"></app-panel>
- <app-table [searchFormTable] = search_form></app-table>-->
-
-<div class="container">
+<div class="container-fluid">
     <div class ="row">
-        <div class="col-md-3">     
+        <div class="col-md-auto">     
         </div>
-        <div class="col-md-9">
+        <div class="col-md-10">
                 <div align="center" style="font: italic bold 20px/50px Georgia, serif">
                     <span style="color:red">{{ num_studies }}</span><span > studies and </span>
                     <span style="color:red">{{ num_structures}}</span><span > structures </span>
@@ -89,23 +10,24 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3" style="background-color:lightgray;">
+        <div class="col-md-2 offset-md-1" style="background-color:lightgray;">
             <br>
             Exposure period (days):
-            <div class="form-inline">
-                <span id="min_exposure_value"></span>-<span id="max_exposure_value"></span>
-                <br>
-                <div class="container">
-                    <div id="slider-range"></div>
-                </div>
-                <br>
+            <div>
+                <ion-range-slider #sliderElement
+                    type="double"
+                    min="1"
+                    max="100"
+                    from=1
+                    postfix=" days"
+                    (onFinish)="addSliderInfo($event)"></ion-range-slider>
             </div>
             <br>
             Sex:
             <div class="form-inline">
-                <div *ngFor="let value of sex">
-                &nbsp;&nbsp;<input  type="checkbox" name="sex" id="sex" (change)="addSearchCheckBox($event)" value={{value}}>&nbsp;{{ value }}
-                </div> 
+                <label *ngFor="let value of sex">
+                &nbsp;&nbsp;<input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}
+                </label>
             </div>
             <br>
             Route:
@@ -148,17 +70,24 @@
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
             <br>
+            <div class="form-inline">
+                <br>
+                <input type="checkbox" id="treatmentRelated" name="relevantOnly" value="relevant"  (click)="addSearchCheckBox($event)">
+                &nbsp;Treatment-related only
+            </div>
+            <br>
             
                 <button type="button" class="btn" onclick="resetFilters()"> Reset Filters </button>
                 <button type="button" class="btn" onclick="download()"> Export </button>
          
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <app-table [searchFormTable] = search_form></app-table>   
         </div>
     </div>
 </div>
-<div class=".container-fluid row" style="border: 1px solid red; padding: 10px;">
+Both: {{BOTH}}
+<!--<div class=".container-fluid row" style="border: 1px solid red; padding: 10px;">
         <div class="col-lg-2" style="border: 1px solid green; padding: 10px;" *ngFor="let key of objectKeys(search_form)">
             <div class='divlabel'><b>{{key|capitalize}}</b></div>
             <button class = 'x' (click)="removeThis(key,None)">X</button>
@@ -167,5 +96,4 @@
                 <span class="closebtn" (click)="removeThis(key,value)">&times;</span>  
             </div>
         <div>
-    </div>
-    
+    </div>-->

@@ -16,6 +16,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
+import { IonRangeSliderModule } from "ng2-ion-range-slider";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { BrowseComponent } from './browse/browse.component';
     FormsModule,
     HttpClientModule,
     DataTablesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    IonRangeSliderModule
   ],
   providers: [FindingsService],
   bootstrap: [AppComponent]
