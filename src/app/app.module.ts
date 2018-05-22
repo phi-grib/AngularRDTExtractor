@@ -17,6 +17,9 @@ import { ExploreComponent } from './explore/explore.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { QualitativeTableComponent } from './qualitative-table/qualitative-table.component';
+import { QuantitativeTableComponent } from './quantitative-table/quantitative-table.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { IonRangeSliderModule } from "ng2-ion-range-slider";
     TabsComponent,
     ExploreComponent,
     ConnectComponent,
-    BrowseComponent
+    BrowseComponent,
+    QualitativeTableComponent,
+    QuantitativeTableComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,8 @@ import { IonRangeSliderModule } from "ng2-ion-range-slider";
     HttpClientModule,
     DataTablesModule,
     AppRoutingModule,
-    IonRangeSliderModule
+    IonRangeSliderModule,
+    Ng4LoadingSpinnerModule
   ],
   providers: [FindingsService],
   bootstrap: [AppComponent]

@@ -12,4 +12,7 @@ export class ConnectComponent implements OnInit {
   ngOnInit() {
   }
 
+  CheckConnection(){
+    alert("CheckConnection");
+  }
 }

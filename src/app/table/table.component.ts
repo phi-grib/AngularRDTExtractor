@@ -19,12 +19,7 @@ export class TableComponent implements OnInit {
   constructor(private findService : FindingsService) {}
 
   ngOnInit() {
-   
-    //this.findService.currentSearch.subscribe (search_form => this.search_form = search_form);
     this.findService.currentTable.subscribe (table_info => this.table_info = table_info);
-    this.findService.searchFinding(this.searchFormTable,1).subscribe(table_info => this.table_info = table_info);
-
-   
   }
 
   Page(page:number){

@@ -1,11 +1,12 @@
 <div class="container-fluid">
     <div class ="row">
-        <div class="col-md-auto">     
+        <div class="col-md-2 offset-md-1">     
         </div>
-        <div class="col-md-10">
+        <div class="col-md-8">
                 <div align="center" style="font: italic bold 20px/50px Georgia, serif">
-                    <span style="color:red">{{ num_studies }}</span><span > studies and </span>
-                    <span style="color:red">{{ num_structures}}</span><span > structures </span>
+                    <span style="color:red">{{ table_info.num_studies }}</span><span > studies and </span>
+                    <span style="color:red">{{ table_info.num_structures}}</span><span > structures </span>
+                    
                 </div>
         </div>
     </div>
@@ -16,9 +17,10 @@
             <div>
                 <ion-range-slider #sliderElement
                     type="double"
-                    min="1"
+                    min="1" 
                     max="100"
-                    from=1
+                    from="1"
+                    to="100"
                     postfix=" days"
                     (onFinish)="addSliderInfo($event)"></ion-range-slider>
             </div>
@@ -72,28 +74,46 @@
             <br>
             <div class="form-inline">
                 <br>
-                <input type="checkbox" id="treatmentRelated" name="relevantOnly" value="relevant"  (click)="addSearchCheckBox($event)">
+                <input type="checkbox" id="treatmentRelated"  value="relevant"  (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
                 &nbsp;Treatment-related only
             </div>
             <br>
             
-                <button type="button" class="btn" onclick="resetFilters()"> Reset Filters </button>
-                <button type="button" class="btn" onclick="download()"> Export </button>
+                <button type="button" class="btn" (click)="resetFilters()"> Reset Filters </button>
+                <button type="button" class="btn" (click)="download()"> Export </button>
          
         </div>
         <div class="col-md-8">
-            <app-table [searchFormTable] = search_form></app-table>   
+                <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#profile" role="tab" data-toggle="tab"> Info </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#buzz" role="tab" data-toggle="tab"> Qualitative </a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#references" role="tab" data-toggle="tab"> Quantitative </a>
+                        </li>
+                </ul>
+                 <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="profile">
+                    <app-table [searchFormTable] = search_form></app-table> 
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="buzz">
+                    <app-qualitative-table></app-qualitative-table> 
+
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="references">
+                    <app-quantitative-table></app-quantitative-table> 
+                </div>
+             </div>
+            <!--  -->
         </div>
     </div>
 </div>
-Both: {{BOTH}}
-<!--<div class=".container-fluid row" style="border: 1px solid red; padding: 10px;">
-        <div class="col-lg-2" style="border: 1px solid green; padding: 10px;" *ngFor="let key of objectKeys(search_form)">
-            <div class='divlabel'><b>{{key|capitalize}}</b></div>
-            <button class = 'x' (click)="removeThis(key,None)">X</button>
-            <div class="chip" *ngFor="let value of search_form[key]">
-                {{value}}       
-                <span class="closebtn" (click)="removeThis(key,value)">&times;</span>  
-            </div>
-        <div>
-    </div>-->
+
+
+
+      
+     
