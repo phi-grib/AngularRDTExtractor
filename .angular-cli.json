@@ -19,9 +19,18 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "styles.css",
+        "../node_modules/ion-rangeslider/css/ion.rangeSlider.css",
+        "../node_modules/ion-rangeslider/css/ion.rangeSlider.skinNice.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
+        "../node_modules/jquery/dist/jquery.min.js", 
+        "../node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
+        "../node_modules/smiles-drawer/dist/smiles-drawer.min.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -36,18 +45,6 @@
   },
   "lint": [
     {
-<<<<<<< HEAD
-      "project": "src/tsconfig.app.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "src/tsconfig.spec.json",
-      "exclude": "**/node_modules/**"
-    },
-    {
-      "project": "e2e/tsconfig.e2e.json",
-      "exclude": "**/node_modules/**"
-=======
       "project": "src/tsconfig.app.json"
     },
     {
@@ -55,7 +52,6 @@
     },
     {
       "project": "e2e/tsconfig.e2e.json"
->>>>>>> 6cf84c3d79c11de1fa002b970fba8aa2659e0aa0
     }
   ],
   "test": {
@@ -67,8 +63,4 @@
     "styleExt": "css",
     "component": {}
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 6cf84c3d79c11de1fa002b970fba8aa2659e0aa0
