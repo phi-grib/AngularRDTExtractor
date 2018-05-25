@@ -14,6 +14,8 @@
         <div class="col-md-2 offset-md-1" style="background-color:lightgray;">
             <br>
             Exposure period (days):
+            <!-- <span><input id="minRange" value="" style="width: 40px" onchange="addSliderInfoMin(this.value)"> - <input id="maxRange" value="" style="width: 40px"></span>
+            <br> -->
             <div>
                 <ion-range-slider #sliderElement
                     type="double"
@@ -21,7 +23,6 @@
                     max="100"
                     from="1"
                     to="100"
-                    postfix=" days"
                     (onFinish)="addSliderInfo($event)"></ion-range-slider>
             </div>
             Sex:
@@ -32,7 +33,7 @@
             </div>
             Route:
             <div class="form-inline">
-                <select class="form-control" id="routes" (change)="addSearchSelect($event)" style="width: 100%">
+                <select class="form-control" id="routes" (change)="addSearchSelect($event)">
                         <option disabled selected value> -- select an option -- </option>
                         <option *ngFor="let route of routes">{{route}}</option>         
                 </select>
@@ -40,7 +41,7 @@
             <app-panel [searchFormPanel] = search_form [key]= "'routes'" ></app-panel>
             Species:
             <div class="form-inline">
-                <select class="form-control" id="species" (change)="addSearchSelect($event)" style="width: 100%">
+                <select class="form-control" id="species" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select an option -- </option>
                     <option *ngFor="let specie of species">{{specie}}</option>   
                 </select>
@@ -48,14 +49,14 @@
             <app-panel [searchFormPanel] = search_form [key]= "'species'" ></app-panel>
             Strain:
             <div class="form-inline">
-                <select class="form-control" id="strain" (change)="addSearchSelect($event)" style="width: 100%" disabled>
+                <select class="form-control" id="strain" (change)="addSearchSelect($event)" disabled>
                     <option disabled selected value> -- select an option -- </option>
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'strain'" ></app-panel>
             Organ:
             <div class="form-inline">
-                <select class="form-control" id="organs" (change)="addSearchSelect($event)" style="width: 100%">
+                <select class="form-control" id="organs" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select an option -- </option>
                     <option *ngFor="let organ of organs">{{organ}}</option>
                 </select>
@@ -63,7 +64,7 @@
             <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
             Observation:
             <div class="form-inline">
-                <select class="form-control" id="observations" (change)="addSearchSelect($event)" style="width: 100%">
+                <select class="form-control" id="observations" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select an option -- </option>
                     <option *ngFor="let observation of observations">{{observation}}</option>
                 </select>
@@ -72,13 +73,18 @@
             <br>
             <div class="form-inline">
                 <br>
-                <input type="checkbox" id="treatmentRelated"  value="relevant"  (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
+                <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
                 &nbsp;Treatment-related only
             </div>
+            <br><br>
+            <div align="center">
+                <button type="button" class="btn" (click)="resetFilters()"> Reset Filters </button>
+            </div>
             <br>
-            <button type="button" class="btn" (click)="resetFilters()"> Reset Filters </button>
-            <button type="button" class="btn" (click)="download()"> Export </button>
-         
+            <div align="center">
+                <button type="button" class="btn" (click)="download()"> Export </button>
+            </div>
+            <br>
         </div>
         <div class="col-md-8">
             <ul class="nav nav-tabs" role="tablist">
