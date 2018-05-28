@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let row of table_info.data">
+      <tr *ngFor="let row of table_info.data" [ngClass]="{'not-relevant':row.relevance != 'treatment related'}">
         <td>{{row.study_id}}</td>
         <td>{{row.organ_normalised}}</td>
         <td>{{row.observation_normalised}}</td>
@@ -22,8 +22,7 @@
         <td>{{row.normalised_sex }}</td>
         <td class="text-right"> {{row.exposure_period_days}} </td>
         <td class="text-right">{{row.relevance}}</td>
-      </tr>
-    
+      </tr>    
   </tbody>
 </table>
 <nav aria-label="Page navigation example" class="nav justify-content-center" *ngIf="table_info.num_pages > 0">
