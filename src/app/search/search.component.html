@@ -99,15 +99,17 @@
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="info">
-                    <app-table [searchFormTable] = search_form></app-table> 
+                <div role="tabpanel" class="tab-pane fade in active show" id="info">
+                   <app-table [searchFormTable] = search_form></app-table>
+                   
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="qualitative">
-                    <app-qualitative-table></app-qualitative-table> 
-
+                    <app-qualitative-table></app-qualitative-table>
+                    
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="quantitative">
-                    <app-quantitative-table></app-quantitative-table> 
+                  <app-quantitative-table></app-quantitative-table>
+                  
                 </div>
              </div>
             <!--  -->

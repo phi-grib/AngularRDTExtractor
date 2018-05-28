@@ -32,7 +32,7 @@ export class TableComponent implements OnInit,AfterViewInit {
       if (this.components !== undefined){
         this.components.forEach((child) => { 
          
-          let options = {'width':200, 'height':200};
+          let options = {'width':150, 'height':100};
           let smilesDrawer = new SmilesDrawer.Drawer(options);
         
           SmilesDrawer.parse("CC(=O)OC1=CC=CC=C1C(=O)O", function (tree) {
