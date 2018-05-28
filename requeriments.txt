@@ -2,3 +2,4 @@ npm install bootstrap --save-dev
 npm install jquery --save-dev
 npm i ng4-loading-spinner --save
 npm install ng2-ion-range-slider --save
+npm i smiles-drawer --save

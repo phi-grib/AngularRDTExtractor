@@ -33,8 +33,8 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(){ 
     
-    this.findService.currentSearch.subscribe (search_form => this.search_form = search_form);
-    this.findService.changeSearch(this.search_form);
+    /*this.findService.currentSearch.subscribe (search_form => this.search_form = search_form);
+    this.findService.changeSearch(this.search_form);*/
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
                                                                   this.findService.changeTable(this.table_info);
                                                                   });
@@ -84,7 +84,7 @@ export class SearchComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      this.findService.changeSearch(this.search_form);
+      /*this.findService.changeSearch(this.search_form);*/
       this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
                                                                   this.findService.changeTable(this.table_info);
                                                                   });
@@ -103,7 +103,7 @@ export class SearchComponent implements OnInit {
       }
 
     }
-    this.findService.changeSearch(this.search_form);
+   /* this.findService.changeSearch(this.search_form);*/
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
                                                                 this.findService.changeTable(this.table_info);
                                                                 });
@@ -133,7 +133,7 @@ export class SearchComponent implements OnInit {
     else{   
       delete this.search_form[event.target.id];
     }
-    this.findService.changeSearch(this.search_form);
+    /*this.findService.changeSearch(this.search_form);*/
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
       this.findService.changeTable(this.table_info);
       });
@@ -149,7 +149,7 @@ export class SearchComponent implements OnInit {
     if (this.max_exposure!=$event.to){
       this.search_form['max_exposure']=$event.to;
     }
-    this.findService.changeSearch(this.search_form);
+    /*this.findService.changeSearch(this.search_form);*/
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
       this.findService.changeTable(this.table_info);
       });
@@ -167,7 +167,7 @@ export class SearchComponent implements OnInit {
     this.M = false;
     this.sliderElement.reset();
     this.relevant_form = false;
-    this.findService.changeSearch(this.search_form);
+    /*this.findService.changeSearch(this.search_form);*/
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
       this.findService.changeTable(this.table_info);
       });

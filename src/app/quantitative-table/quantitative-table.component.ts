@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChildren,QueryList  } from '@angular/core';
+import * as SmilesDrawer from 'smiles-drawer';
 
 @Component({
   selector: 'app-quantitative-table',
@@ -10,6 +11,7 @@ export class QuantitativeTableComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }

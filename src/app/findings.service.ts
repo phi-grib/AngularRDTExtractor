@@ -6,8 +6,8 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class FindingsService {
 
-  private search_form = new BehaviorSubject<any>({});
-  currentSearch = this.search_form.asObservable();
+  /*private search_form = new BehaviorSubject<any>({});
+  currentSearch = this.search_form.asObservable();*/
 
   private table_form = new BehaviorSubject<any>({});
   currentTable = this.table_form.asObservable();
@@ -16,9 +16,9 @@ export class FindingsService {
 
   constructor(private http: HttpClient) { }
 
-  changeSearch(search){
+  /*changeSearch(search){
     this.search_form.next(search);
-  }
+  }*/
 
   changeTable(table){
     this.table_form.next(table);
