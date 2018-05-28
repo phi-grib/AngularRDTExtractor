@@ -8,7 +8,7 @@ import { BrowseComponent } from './browse/browse.component';
 
 const routes : Routes = [
   {
-    path:'',
+    path:'connect',
     component: ConnectComponent
   },
   {
@@ -22,6 +22,11 @@ const routes : Routes = [
   {
     path:'browse',
     component: BrowseComponent
+  },
+  {
+    path:'',
+    redirectTo: '/connect', 
+    pathMatch: 'full'
   }
 ];
 
