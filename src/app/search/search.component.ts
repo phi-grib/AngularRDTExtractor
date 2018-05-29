@@ -74,9 +74,6 @@ export class SearchComponent implements OnInit {
       // If the key(field of search) is already inserted   
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted
-        if (event.target.id == "sex"){
-          this.search_form[event.target.id].pop()
-        }
         if (this.search_form[event.target.id].indexOf(event.target.value)==-1){   
           this.search_form[event.target.id].push(event.target.value);
         }
@@ -89,25 +86,6 @@ export class SearchComponent implements OnInit {
           this.findService.changeTable(this.table_info);
           });
   } 
-
-  addSearchText(event: any){
-
-    if (event.key=="Enter"){ 
-      if (event.target.id in this.search_form){
-        // If the value(name to search) is already inserted
-        this.search_form[event.target.id].pop();  
-        this.search_form[event.target.id].push(event.target.value);
-      }
-      else{
-        this.search_form[event.target.id]=[event.target.value];
-      }
-
-    }
-   /* this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-      this.findService.changeTable(this.table_info);
-      });
-  }
 
   addSearchCheckBox(event: any){
  
@@ -139,6 +117,7 @@ export class SearchComponent implements OnInit {
       });
 
   }
+
   addSliderInfo($event){
 
     delete this.search_form['min_exposure'];
@@ -166,6 +145,5 @@ export class SearchComponent implements OnInit {
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
       this.findService.changeTable(this.table_info);
       });
-
   }
 }
