@@ -1,29 +1,33 @@
 
 <table class="table table-hover">
   <thead>
+    <tr class="text-center" bgcolor=lightgray>
+      <th colspan="1" rowspan="2" style="border-right: 1px solid whitesmoke">ID</th>
+      <th colspan="4" style="border-right: 1px solid whitesmoke">Study</th>
+      <th colspan="4">Finding</th>
+    </tr>
     <tr class="text-left" bgcolor=lightgray>
-        <th>Study ID</th>
         <th>Compound</th>
-        <th>Organ</th>
-        <th>Observation</th>
         <th>Species</th>
         <th>Route</th>
+        <th style="border-right: 1px solid whitesmoke">Exposure period (days)</th>
+        <th>Organ</th>
+        <th>Observation</th>
         <th>Sex</th>
-        <th class="text-right">Exposure period (days)</th>
-        <th class="text-right">Treatment-related</th>
+        <th>Treatment-related</th>
     </tr>
   </thead>
   <tbody>
-      <tr  *ngFor="let row of table_info.data; let i = index" [ngClass]="{'not-relevant':row.relevance != 'treatment related'}">
-        <td class="align-middle"><button type="button" class="btn btn-link" (click)="openCustomModal()">{{row.study_id}}</button></td>
-        <td  class="align-middle"><canvas #cmp id="{{'canvas_'+i}}" width="100" height="100" value="CC(=O)OC1=CC=CC=C1C(=O)O"></canvas></td>
-        <td class="align-middle">{{row.organ_normalised}}</td>
-        <td class="align-middle">{{row.observation_normalised}}</td>
+      <tr *ngFor="let row of table_info.data; let i = index" [ngClass]="{'not-relevant':row.relevance != 'treatment related'}">
+        <td class="align-middle" style="border-right: 1px solid lightgray" ><button type="button" class="btn btn-link" (click)="openCustomModal()" >{{row.study_id}}</button></td>
+        <td class="align-middle"><canvas #cmp id="{{'canvas_'+i}}" width="100" height="100" value="CC(=O)OC1=CC=CC=C1C(=O)O"></canvas></td>
         <td class="align-middle">{{row.normalised_species}}</td>
         <td class="align-middle">{{row.normalised_administration_route}}</td>
+        <td class="text-right align-middle" style="border-right: 1px solid lightgray"> {{row.exposure_period_days}} </td>
+        <td class="align-middle">{{row.organ_normalised}}</td>
+        <td class="align-middle">{{row.observation_normalised}}</td>
         <td class="align-middle">{{row.normalised_sex }}</td>
-        <td class="text-right align-middle"> {{row.exposure_period_days}} </td>
-        <td class="text-right align-middle">{{row.relevance}}</td>
+        <td class="align-middle">{{row.relevance}}</td>
       </tr>    
   </tbody>
 </table>

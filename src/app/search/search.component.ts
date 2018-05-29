@@ -36,8 +36,8 @@ export class SearchComponent implements OnInit {
     /*this.findService.currentSearch.subscribe (search_form => this.search_form = search_form);
     this.findService.changeSearch(this.search_form);*/
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-                                                                  this.findService.changeTable(this.table_info);
-                                                                  });
+      this.findService.changeTable(this.table_info);
+      });
     this.showOrgans();
     this.showObservations();
     this.showSpecies();
@@ -86,8 +86,8 @@ export class SearchComponent implements OnInit {
       }
       /*this.findService.changeSearch(this.search_form);*/
       this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-                                                                  this.findService.changeTable(this.table_info);
-                                                                  });
+          this.findService.changeTable(this.table_info);
+          });
   } 
 
   addSearchText(event: any){
@@ -105,8 +105,8 @@ export class SearchComponent implements OnInit {
     }
    /* this.findService.changeSearch(this.search_form);*/
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-                                                                this.findService.changeTable(this.table_info);
-                                                                });
+      this.findService.changeTable(this.table_info);
+      });
   }
 
   addSearchCheckBox(event: any){
@@ -155,12 +155,7 @@ export class SearchComponent implements OnInit {
       });
   }
 
-  resetFilters(){
-
-  
-   
- 
-    
+  resetFilters(){    
     this.search_form={}
     this.BOTH = false;
     this.F = false;
