@@ -1,7 +1,9 @@
-import { Component, OnInit, Input,ViewChildren,QueryList,ElementRef,AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input,ViewChildren,QueryList,ElementRef,AfterViewInit ,ViewContainerRef} from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
+import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import { CustomModalComponent } from '../dialog/dialog.component';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class TableComponent implements OnInit,AfterViewInit {
   @ViewChildren('cmp') components:QueryList<ElementRef>;
   
 
-  constructor(private findService : FindingsService) {}
+  constructor(private findService : FindingsService, private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef) {}
 
   ngOnInit() {
     this.findService.currentTable.subscribe (table_info => this.table_info = table_info);
@@ -47,6 +49,17 @@ export class TableComponent implements OnInit,AfterViewInit {
   }
   Page(page:number){
     this.findService.searchFinding(this.searchFormTable,page).subscribe(res => this.table_info = res); 
+  }
+
+  openCustomModal() {
+    this.modalDialogService.openDialog(this.viewContainer, {
+      title: 'Study Information',
+      childComponent: CustomModalComponent,
+      settings: {
+        closeButtonClass: 'close theme-icon-close'
+      },
+      data: 'Hey, we are data passed from the parent!'
+    });
   }
 
 }

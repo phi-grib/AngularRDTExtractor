@@ -20,6 +20,9 @@ import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { QualitativeTableComponent } from './qualitative-table/qualitative-table.component';
 import { QuantitativeTableComponent } from './quantitative-table/quantitative-table.component';
+import { ModalDialogModule } from 'ngx-modal-dialog';
+import { CustomModalComponent } from './dialog/dialog.component';
+import {TooltipModule} from "ngx-tooltip";
 
 @NgModule({
   declarations: [
@@ -34,7 +37,8 @@ import { QuantitativeTableComponent } from './quantitative-table/quantitative-ta
     ConnectComponent,
     BrowseComponent,
     QualitativeTableComponent,
-    QuantitativeTableComponent
+    QuantitativeTableComponent,
+    CustomModalComponent
   ],
   imports: [
     BrowserModule,
@@ -43,9 +47,12 @@ import { QuantitativeTableComponent } from './quantitative-table/quantitative-ta
     DataTablesModule,
     AppRoutingModule,
     IonRangeSliderModule,
-    Ng4LoadingSpinnerModule
+    Ng4LoadingSpinnerModule,
+    ModalDialogModule.forRoot(),
+    TooltipModule
   ],
   providers: [FindingsService],
+  entryComponents: [CustomModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

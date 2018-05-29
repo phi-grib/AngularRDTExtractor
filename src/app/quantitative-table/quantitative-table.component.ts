@@ -1,17 +1,14 @@
-import { Component, OnInit,ViewChildren,QueryList  } from '@angular/core';
-import * as SmilesDrawer from 'smiles-drawer';
+import { Component, ViewContainerRef } from '@angular/core';
+import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import {TooltipModule} from "ngx-tooltip";
 
 @Component({
   selector: 'app-quantitative-table',
   templateUrl: './quantitative-table.component.html',
   styleUrls: ['./quantitative-table.component.css']
 })
-export class QuantitativeTableComponent implements OnInit {
+export class QuantitativeTableComponent{
 
-  constructor() { }
-
-  ngOnInit() {
-
-  }
+  constructor() {}
 
 }
