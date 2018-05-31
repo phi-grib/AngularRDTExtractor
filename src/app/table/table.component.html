@@ -19,7 +19,7 @@
   </thead>
   <tbody>
       <tr *ngFor="let row of table_info.data; let i = index" [ngClass]="{'not-relevant':row.relevance != 'treatment related'}">
-        <td class="align-middle" style="border-right: 1px solid lightgray" ><button type="button" class="btn btn-link" (click)="openCustomModal()" >{{row.study_id}}</button></td>
+        <td class="align-middle" style="border-right: 1px solid lightgray" ><button type="button" class="btn btn-link" (click)="openCustomModal(row.study_id)" >{{row.study_id}}</button></td>
         <td class="align-middle"><canvas #cmp id="{{'canvas_'+i}}" width="100" height="100" value="CC(=O)OC1=CC=CC=C1C(=O)O"></canvas></td>
         <td class="align-middle">{{row.normalised_species}}</td>
         <td class="align-middle">{{row.normalised_administration_route}}</td>
@@ -31,6 +31,7 @@
       </tr>    
   </tbody>
 </table>
+<!--PAGINATION-->
 <nav aria-label="Page navigation example" class="nav justify-content-center" *ngIf="table_info.num_pages > 0">
   <ul class="pagination">
     <div *ngIf=" table_info.previous_page > 0;then previous else no_previous"></div>

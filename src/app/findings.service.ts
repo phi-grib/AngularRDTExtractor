@@ -12,7 +12,7 @@ export class FindingsService {
   private table_form = new BehaviorSubject<any>({});
   currentTable = this.table_form.asObservable();
 
-  apiRoot = 'http://localhost:8000/api/findings';
+  apiRoot = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
 
@@ -25,27 +25,33 @@ export class FindingsService {
   }
   
   getOrgans():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/organs');
+    return this.http.get<string[]>(this.apiRoot+'/findings/organs');
   }
   getObservations():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/observations');
+    return this.http.get<string[]>(this.apiRoot+'/findings/observations');
   }
   getRoutes():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/routes');
+    return this.http.get<string[]>(this.apiRoot+'/findings/routes');
   }
   getSpecies():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/species');
+    return this.http.get<string[]>(this.apiRoot+'/findings/species');
   }
   getSex():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/sex');
+    return this.http.get<string[]>(this.apiRoot+'/findings/sex');
   }
 
   searchFinding(search_filter,page): Observable<any>{
-    let url: string = this.apiRoot;
+    let url: string = this.apiRoot+"/findings";
     let params = new HttpParams({ fromObject: search_filter });
     params = params.set('page',page.toString())
     return this.http.get(url, {params: params})
     
+  }
+
+  getStudy(study_id): Observable<any>{
+    let params = new HttpParams();
+    params = params.set('id',study_id.toString())
+    return this.http.get(this.apiRoot+'/study', {params: params})
   }
 }
 
