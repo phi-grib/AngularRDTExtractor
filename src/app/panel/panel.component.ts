@@ -12,7 +12,6 @@ export class PanelComponent implements OnInit {
   @Input() searchFormPanel = {};
   @Input() key :string;
   @Output()relevantClose: EventEmitter<boolean> = new EventEmitter<boolean>();
-  
 
   constructor(private findService : FindingsService) { }
 
@@ -35,6 +34,6 @@ export class PanelComponent implements OnInit {
         delete this.searchFormPanel[key];
       }
     } 
-    this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info =>this.findService.changeTable(table_info));
+    this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
   }  
 }
