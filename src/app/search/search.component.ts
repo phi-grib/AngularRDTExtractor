@@ -84,6 +84,8 @@ export class SearchComponent implements OnInit {
       }
       /*this.findService.changeSearch(this.search_form);*/
       this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+
+      event.target.selectedIndex = "0";
   } 
 
   addSearchCheckBox(event: any){
