@@ -24,7 +24,7 @@ export class CustomModalComponent implements IModalDialog {
     let options = {'width':250, 'height':250};
     let smilesDrawer = new SmilesDrawer.Drawer(options);
 
-    SmilesDrawer.parse("CC(=O)OC1=CC=CC=C1C(=O)O", function (tree) {
+    SmilesDrawer.parse(this.parentInfo['smiles'][0], function (tree) {
       smilesDrawer.draw(tree,"canvas",'light', false);
       }, function (err) {
         console.log(err);

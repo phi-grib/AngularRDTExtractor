@@ -51,8 +51,7 @@ export class TableComponent implements OnInit,AfterViewInit {
          
           let options = {'width':75, 'height':50};
           let smilesDrawer = new SmilesDrawer.Drawer(options);
-        
-          SmilesDrawer.parse("CC(=O)OC1=CC=CC=C1C(=O)O", function (tree) {
+          SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
             smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
             }, function (err) {
               console.log(err);

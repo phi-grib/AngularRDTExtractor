@@ -1,4 +1,5 @@
-<div class="container-fluid shadow p-3 mb-5 bg-white rounded" style="margin-top:30px">
+<h4><b>Report number:</b> {{parentInfo['report_number'][0]}}</h4>
+<div class="container-fluid shadow p-4 bg-white rounded text-monospace " style="margin-top:30px">
     <div class="row">
         <div class="col-lg-5">
             <h5>{{parentInfo['common_name'][0]}}</h5>
@@ -6,61 +7,73 @@
                 <canvas class="border border-primary" id="canvas" value="CC(=O)OC1=CC=CC=C1C(=O)O"></canvas>
             </div>
         </div>
-        <div class="col-lg-7 text-monospace">
+        <div class="col-lg-7">
             <br>
+            <div class="row">
+                    <span class="font-weight-bold bg-light">Source (company):  </span>
+                    <span> {{parentInfo['source_company'][0]}}</span>
+            </div>
+            <div class="row align-items-center">
+                    <span class="font-weight-bold bg-light">Specie: </span>
+                    <span>{{parentInfo['normalised_species'][0]}}</span>
+            </div>
+            <div class="row align-items-center">
+                    <span  class="font-weight-bold bg-light">Strain: </span>
+                    <span>{{parentInfo['normalised_strain'][0]}}</span>
+            </div>   
+            <div class="row align-items-center">
+                    <span class="font-weight-bold bg-light">Sex: </span>
+                    <span>{{parentInfo['normalised_sex'][0]}}</span>
+            </div>
+            <div class="row">
+                    <span class="font-weight-bold bg-light">Age:  </span>
+                    <span>{{parentInfo['age_of_start_of_treatment'][0]}}  {{parentInfo['age_unit'][0]}}</span>
+            </div>
             <div class="row ">
-                    <p class="font-weight-bold">Common name:</p><br>
-                    <p>{{parentInfo['common_name'][0]}}</p>
+                    <span class="font-weight-bold bg-light">Administration route: </span>
+                    <span>{{parentInfo['normalised_administration_route'][0]}}</span>
             </div>
             <div class="row">
-                    <p class="font-weight-bold">Strain:</p><br>
-                    {{parentInfo['normalised_strain'][0]}}
+                    <span class="font-weight-bold bg-light">Vehicle: </span>
+                    <span>{{parentInfo['vehicle'][0]}}</span>
             </div>
             <div class="row">
-                    <p class="font-weight-bold">Specie:</p><br>
-                    {{parentInfo['normalised_species'][0]}}
+                    <span class="font-weight-bold bg-light">Year of Study: </span>
+                    <span>{{parentInfo['year_of_study'][0]}}</span>
             </div>
-            <div class="row">
-                    <p class="font-weight-bold">Administration route:</p><br>
-                    {{parentInfo['normalised_administration_route'][0]}}
-            </div>
-            <div class="row">
-                    <p class="font-weight-bold">Year of Study:</p><br>
-                    {{parentInfo['year_of_study'][0]}}
-            </div>
+            
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-12 pl-5"> 
                 <div class="row">
-                        {{parentInfo['study_quality_assesment'][0]}}
+                        <span class="font-weight-bold bg-light">Dosage:</span>
+                        <ul>
+                            <li *ngFor="let dose of parentInfo['dosage'][0].split(';')">
+                                    <span>{{dose}}</span>
+                            </li>   
+                        </ul>                  
+                </div>
+                
+                <div class="row">
+                        <span class="font-weight-bold bg-light">Exposure Period (days): </span>
+                        <span>{{parentInfo['exposure_period_days'][0]}}</span>
                 </div>
                 <div class="row">
-                        {{parentInfo['dosage'][0]}}
+                        <span class="font-weight-bold bg-light">Recovery period (days):   </span>
+                        <span>{{parentInfo['recovery_period_days'][0]}}</span>
+                </div>  
+                <div class="row">
+                        <span class="font-weight-bold bg-light">Quality assesment:  </span>
+                        <span>{{parentInfo['study_quality_assesment'][0]}}</span>
                 </div>
                 <div class="row">
-                        {{parentInfo['year_of_study'][0]}}
+                        <span class="font-weight-bold bg-light">Record status:</span>
+                        <span>{{parentInfo['record_status'][0]}}</span>
                 </div>
-                <div class="row">
-                        {{parentInfo['exposure_period_days'][0]}}
-                </div>
+            </div>
         </div>
     </div>
 </div>
-
-
-<!--
-smiles	[…]
-0	CC(C)C[C@H](N1C(=O)N(Cc2ccc(NC(=O)Nc3ccccc3C)cc2)C(C)(C)C1=O)C(=O)N[C@@H](CC(O)=O)c1ccccc1
-inchi	[…]
-0	InChI=1S/C35H41N5O6/c1-22(2)19-29(31(43)37-28(20-30(41)42)25-12-7-6-8-13-25)40-32(44)35(4,5)39(34(40)46)21-24-15-17-26(18-16-24)36-33(45)38-27-14-10-9-11-23(27)3/h6-18,22,28-29H,19-21H2,1-5H3,(H,37,43)(H,41,42)(H2,36,38,45)/t28-,29-/m0/s1
-cas_number	[…]
-0	-
-common_name	[…]
-0	-
-molecular_weight	[…]
-0	627.738
-pharmacological_action	[…]
-0	VLA-4 Antagonist
-molecular_formula	[…] -->
+    
+      
           
