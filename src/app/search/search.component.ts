@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
 
   objectKeys = Object.keys;
   search_form = {};
-  table_info = {}
+  table_info = {};
 
   organs = [];
   observations = [];
@@ -35,9 +35,10 @@ export class SearchComponent implements OnInit {
     
     /*this.findService.currentSearch.subscribe (search_form => this.search_form = search_form);
     this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-      this.findService.changeTable(this.table_info);
-      });
+
+    this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    
     this.showOrgans();
     this.showObservations();
     this.showSpecies();
@@ -74,9 +75,6 @@ export class SearchComponent implements OnInit {
       // If the key(field of search) is already inserted   
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted
-        if (event.target.id == "sex"){
-          this.search_form[event.target.id].pop()
-        }
         if (this.search_form[event.target.id].indexOf(event.target.value)==-1){   
           this.search_form[event.target.id].push(event.target.value);
         }
@@ -85,29 +83,10 @@ export class SearchComponent implements OnInit {
         this.search_form[event.target.id]=[event.target.value];
       }
       /*this.findService.changeSearch(this.search_form);*/
-      this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-          this.findService.changeTable(this.table_info);
-          });
+      this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+
+      event.target.selectedIndex = "0";
   } 
-
-  addSearchText(event: any){
-
-    if (event.key=="Enter"){ 
-      if (event.target.id in this.search_form){
-        // If the value(name to search) is already inserted
-        this.search_form[event.target.id].pop();  
-        this.search_form[event.target.id].push(event.target.value);
-      }
-      else{
-        this.search_form[event.target.id]=[event.target.value];
-      }
-
-    }
-   /* this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-      this.findService.changeTable(this.table_info);
-      });
-  }
 
   addSearchCheckBox(event: any){
  
@@ -134,11 +113,10 @@ export class SearchComponent implements OnInit {
       delete this.search_form[event.target.id];
     }
     /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-      this.findService.changeTable(this.table_info);
-      });
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
   }
+
   addSliderInfo($event){
 
     delete this.search_form['min_exposure'];
@@ -150,9 +128,7 @@ export class SearchComponent implements OnInit {
       this.search_form['max_exposure']=$event.to;
     }
     /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-      this.findService.changeTable(this.table_info);
-      });
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
   resetFilters(){    
@@ -163,9 +139,6 @@ export class SearchComponent implements OnInit {
     this.sliderElement.reset();
     this.relevant_form = false;
     /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => {this.table_info = table_info;
-      this.findService.changeTable(this.table_info);
-      });
-
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 }

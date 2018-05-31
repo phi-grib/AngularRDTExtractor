@@ -1,5 +1,5 @@
 
-<table class="table table-hover">
+<table class="table table-hover" ng-controller="myController">
   <thead>
     <tr class="text-center" bgcolor=lightgray>
       <th colspan="1" rowspan="2" style="border-right: 1px solid whitesmoke">ID</th>
@@ -10,11 +10,11 @@
         <th>Compound</th>
         <th>Species</th>
         <th>Route</th>
-        <th style="border-right: 1px solid whitesmoke">Exposure period (days)</th>
+        <th style="border-right: 1px solid whitesmoke">Exposure</th>
         <th>Organ</th>
         <th>Observation</th>
         <th>Sex</th>
-        <th>Treatment-related</th>
+        <th>Relevance</th>
     </tr>
   </thead>
   <tbody>
@@ -23,7 +23,7 @@
         <td class="align-middle"><canvas #cmp id="{{'canvas_'+i}}" width="100" height="100">{{row.smiles}}</canvas></td>
         <td class="align-middle">{{row.normalised_species}}</td>
         <td class="align-middle">{{row.normalised_administration_route}}</td>
-        <td class="text-right align-middle" style="border-right: 1px solid lightgray"> {{row.exposure_period_days}} </td>
+        <td class="text-right align-middle" style="border-right: 1px solid lightgray"> {{row.exposure_period_days}} days </td>
         <td class="align-middle">{{row.organ_normalised}}</td>
         <td class="align-middle">{{row.observation_normalised}}</td>
         <td class="align-middle">{{row.normalised_sex }}</td>
@@ -32,7 +32,7 @@
   </tbody>
 </table>
 <!--PAGINATION-->
-<nav aria-label="Page navigation example" class="nav justify-content-center" *ngIf="table_info.num_pages > 0">
+<nav class="nav justify-content-center" *ngIf="table_info.num_pages > 0">
   <ul class="pagination">
     <div *ngIf=" table_info.previous_page > 0;then previous else no_previous"></div>
     <ng-template #previous>
