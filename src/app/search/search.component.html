@@ -31,13 +31,7 @@
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'species'" ></app-panel>
-            Strain:
-            <div class="form-inline">
-                <select class="form-control" id="strain" (change)="addSearchSelect($event)" disabled>
-                    <option disabled selected value> -- select -- </option>
-                </select>
-            </div>
-            <app-panel [searchFormPanel] = search_form [key]= "'strain'" ></app-panel>
+            <br>
             Route:
             <div class="form-inline">
                 <select class="form-control" id="routes" (change)="addSearchSelect($event)">
@@ -46,6 +40,7 @@
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'routes'" ></app-panel>
+            <br>
             Exposure period (days):
             <!-- <span><input id="minRange" value="" style="width: 40px" onchange="addSliderInfoMin(this.value)"> - <input id="maxRange" value="" style="width: 40px"></span>
             <br> -->
@@ -68,6 +63,7 @@
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
+            <br>
             Observation:
             <div class="form-inline">
                 <select class="form-control" id="observations" (change)="addSearchSelect($event)">
@@ -80,7 +76,7 @@
             Sex:
             <div class="form-inline">
                 <label *ngFor="let value of sex">
-                &nbsp;&nbsp;<input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}
+                <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}&nbsp;&nbsp;
                 </label>
             </div>
             <br>
