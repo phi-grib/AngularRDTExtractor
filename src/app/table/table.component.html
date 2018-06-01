@@ -20,7 +20,7 @@
   <tbody>
       <tr *ngFor="let row of table_info.data; let i = index" [ngClass]="{'not-relevant':row.relevance != 'treatment related'}">
         <td class="align-middle" style="border-right: 1px solid lightgray" ><button type="button" class="btn btn-link" (click)="openCustomModal(row.study_id)" >{{row.study_id}}</button></td>
-        <td class="align-middle"><canvas #cmp id="{{'canvas_'+i}}" width="100" height="100" value="CC(=O)OC1=CC=CC=C1C(=O)O"></canvas></td>
+        <td class="align-middle"><canvas #cmp id="{{'canvas_'+i}}" width="100" height="100">{{row.smiles}}</canvas></td>
         <td class="align-middle">{{row.normalised_species}}</td>
         <td class="align-middle">{{row.normalised_administration_route}}</td>
         <td class="text-right align-middle" style="border-right: 1px solid lightgray"> {{row.exposure_period_days}} days </td>
