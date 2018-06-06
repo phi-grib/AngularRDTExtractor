@@ -5,3 +5,4 @@ npm install ng2-ion-range-slider --save
 npm install smiles-drawer --save
 npm install ngx-modal-dialog --save
 npm i ngx-tooltip --save
+npm install --save font-awesome angular-font-awesome

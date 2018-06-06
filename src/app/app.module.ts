@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -23,7 +24,9 @@ import { QuantitativeTableComponent } from './quantitative-table/quantitative-ta
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { CustomModalComponent } from './dialog/dialog.component';
 import {TooltipModule} from "ngx-tooltip";
-
+import { TreeviewModule } from 'ngx-treeview';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,8 @@ import {TooltipModule} from "ngx-tooltip";
     BrowseComponent,
     QualitativeTableComponent,
     QuantitativeTableComponent,
-    CustomModalComponent
+    CustomModalComponent,
+    DisabledOnSelectorDirective
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import {TooltipModule} from "ngx-tooltip";
     IonRangeSliderModule,
     Ng4LoadingSpinnerModule,
     ModalDialogModule.forRoot(),
-    TooltipModule
+    TooltipModule,
+    TreeviewModule.forRoot(),
+    AngularFontAwesomeModule
   ],
   providers: [FindingsService],
   entryComponents: [CustomModalComponent],
