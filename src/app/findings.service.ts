@@ -24,20 +24,11 @@ export class FindingsService {
     this.table_form.next(table);
   }
   
-  getOrgans():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/findings/organs');
-  }
-  getObservations():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/findings/observations');
-  }
-  getRoutes():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/findings/routes');
-  }
-  getSpecies():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/findings/species');
-  }
-  getSex():Observable<string[]>{
-    return this.http.get<string[]>(this.apiRoot+'/findings/sex');
+  initFinding(): Observable<any>{
+    let url: string = this.apiRoot+"/initFindings";
+    let params = new HttpParams();
+    params = params.set('page','1')
+    return this.http.get(url, {params: params})    
   }
 
   searchFinding(search_filter,page): Observable<any>{
@@ -45,7 +36,6 @@ export class FindingsService {
     let params = new HttpParams({ fromObject: search_filter });
     params = params.set('page',page.toString())
     return this.http.get(url, {params: params})
-    
   }
 
   getStudy(study_id): Observable<any>{
@@ -54,4 +44,3 @@ export class FindingsService {
     return this.http.get(this.apiRoot+'/study', {params: params})
   }
 }
-
