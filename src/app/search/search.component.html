@@ -27,7 +27,7 @@
             <div class="form-inline">
                 <select class="form-control" id="species" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let specie of species">{{specie}}</option>   
+                    <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'species'" ></app-panel>
@@ -36,7 +36,7 @@
             <div class="form-inline">
                 <select class="form-control" id="routes" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let route of routes">{{route}}</option>         
+                    <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'routes'" ></app-panel>
@@ -59,7 +59,7 @@
             <div class="form-inline">
                 <select class="form-control" id="organs" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let organ of organs">{{organ}}</option>
+                    <option *ngFor="let organ of table_info['allOptions']['organs']">{{organ}}</option>
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
@@ -68,7 +68,7 @@
             <div class="form-inline">
                 <select class="form-control" id="observations" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let observation of observations">{{observation}}</option>
+                    <option *ngFor="let observation of table_info['allOptions']['observations']">{{observation}}</option>
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>

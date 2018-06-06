@@ -12,63 +12,27 @@ export class SearchComponent implements OnInit {
 
   @ViewChild('sliderElement') sliderElement: IonRangeSliderComponent;
 
-  relevant_form : boolean;
-  F:boolean=false;
-  M:boolean=false;
+  relevant_form: boolean;
+  F: boolean=false;
+  M: boolean=false;
   BOTH:boolean=false;
-  min_exposure: number =1;
-  max_exposure: number =100;
+  min_exposure: number=1;
+  max_exposure: number=100;
 
   objectKeys = Object.keys;
   search_form = {};
   table_info = {};
 
-  organs = [];
-  observations = [];
-  species = [];
   sex = [];
-  routes = [];
 
   constructor(private httpClient: HttpClient, private findService : FindingsService) {}
 
-  ngOnInit(){ 
-    
-    /*this.findService.currentSearch.subscribe (search_form => this.search_form = search_form);
-    this.findService.changeSearch(this.search_form);*/
-
+  ngOnInit(){
     this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
-    
-    this.showOrgans();
-    this.showObservations();
-    this.showSpecies();
-    this.showRoutes();
-    this.showSex();
-  }
-
-  showOrgans(): void {
-    this.findService.getOrgans()
-      .subscribe(res => this.organs = res['organs']);
-  }
-
-  showObservations(): void {
-    this.findService.getObservations()
-      .subscribe(res => this.observations = res['observations']);
-  }
-
-  showSpecies(): void {
-    this.findService.getSpecies()
-      .subscribe(res => this.species = res['species']);
-  }
-
-  showRoutes(): void {
-    this.findService.getRoutes()
-      .subscribe(res => this.routes = res['route']);
-  }
-
-  showSex(): void {
-    this.findService.getSex()
-      .subscribe(res => this.sex = res['sex']);
+    this.findService.initFinding().subscribe(table_info => {
+      this.sex = table_info['allOptions']['sex'];
+      this.findService.changeTable(table_info)}
+    );
   }
 
   addSearchSelect(event: any){
@@ -113,7 +77,7 @@ export class SearchComponent implements OnInit {
       delete this.search_form[event.target.id];
     }
     /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
 
   }
 
@@ -133,12 +97,12 @@ export class SearchComponent implements OnInit {
 
   resetFilters(){    
     this.search_form={}
+    this.relevant_form = false;
     this.BOTH = false;
     this.F = false;
     this.M = false;
     this.sliderElement.reset();
-    this.relevant_form = false;
     /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.initFinding().subscribe(table_info => this.findService.changeTable(table_info));
   }
 }
