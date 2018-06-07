@@ -1,7 +1,7 @@
-import { Component, OnInit, PipeTransform, Pipe ,ViewChild} from '@angular/core';
+import { Component, OnInit, PipeTransform, Pipe, ViewChild} from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
-import {IonRangeSliderComponent} from "ng2-ion-range-slider";
+import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 
 @Component({
   selector: 'app-search',
@@ -15,9 +15,9 @@ export class SearchComponent implements OnInit {
   relevant_form: boolean;
   F: boolean=false;
   M: boolean=false;
-  BOTH:boolean=false;
-  min_exposure: number=1;
-  max_exposure: number=100;
+  BOTH: boolean=false;
+  min_exposure: number;
+  max_exposure: number;
 
   objectKeys = Object.keys;
   search_form = {};
@@ -31,6 +31,8 @@ export class SearchComponent implements OnInit {
     this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
     this.findService.initFinding().subscribe(table_info => {
       this.sex = table_info['allOptions']['sex'];
+      this.min_exposure = table_info['allOptions']['exposure_min'];
+      this.max_exposure = table_info['allOptions']['exposure_max'];
       this.findService.changeTable(table_info)}
     );
   }
@@ -82,16 +84,8 @@ export class SearchComponent implements OnInit {
   }
 
   addSliderInfo($event){
-
-    delete this.search_form['min_exposure'];
-    delete this.search_form['max_exposure'];
-    if (this.min_exposure!=$event.from){
-      this.search_form['min_exposure']=$event.from;
-    }
-    if (this.max_exposure!=$event.to){
-      this.search_form['max_exposure']=$event.to;
-    }
-    /*this.findService.changeSearch(this.search_form);*/
+    this.search_form['min_exposure']=$event.from;
+    this.search_form['max_exposure']=$event.to;
     this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
@@ -102,7 +96,6 @@ export class SearchComponent implements OnInit {
     this.F = false;
     this.M = false;
     this.sliderElement.reset();
-    /*this.findService.changeSearch(this.search_form);*/
     this.findService.initFinding().subscribe(table_info => this.findService.changeTable(table_info));
   }
 }

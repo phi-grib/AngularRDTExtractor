@@ -47,10 +47,10 @@
             <div>
                 <ion-range-slider #sliderElement
                     type="double"
-                    min="1" 
-                    max="100"
-                    from="1"
-                    to="100"
+                    [min]="table_info['allOptions']['exposure_min']"
+                    [max]="table_info['allOptions']['exposure_max']"
+                    [from]="table_info['allOptions']['exposure_min']"
+                    [to]="table_info['allOptions']['exposure_max']"
                     (onFinish)="addSliderInfo($event)"></ion-range-slider>
             </div> 
             <hr>
