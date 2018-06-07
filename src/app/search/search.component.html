@@ -14,10 +14,11 @@
             <br>
             <h5>Finding category</h5>
             <div class="form-inline">
-                <select class="form-control" id="category" (change)="addSearchSelect($event)">
-                    <option selected>Histopathological</option>
-                    <option disabled>Clinical signs</option>
-                    <option disabled>Gross necropsy</option>
+                <select class="form-control" id="category" (change)="selectCategory($event)">
+                    <option disabled selected>-- select --</option>
+                    <option>Histopathological</option>
+                    <option>Clinical signs</option>
+                    <option>Gross necropsy</option>
                     <!-- <option *ngFor="let specie of species">{{specie}}</option>    -->
                 </select>
             </div>
@@ -25,7 +26,7 @@
             <h5>Study-level filters</h5>
             Species:
             <div class="form-inline">
-                <select class="form-control" id="species" (change)="addSearchSelect($event)">
+                <select class="form-control" id="species" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
                 </select>
@@ -34,7 +35,7 @@
             <br>
             Route:
             <div class="form-inline">
-                <select class="form-control" id="routes" (change)="addSearchSelect($event)">
+                <select class="form-control" id="routes" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
                 </select>
@@ -51,13 +52,15 @@
                     [max]="table_info['allOptions']['exposure_max']"
                     [from]="table_info['allOptions']['exposure_min']"
                     [to]="table_info['allOptions']['exposure_max']"
-                    (onFinish)="addSliderInfo($event)"></ion-range-slider>
+                    [disable]="!hasCategory"
+                    (onFinish)="addSliderInfo($event)"
+                    ></ion-range-slider>
             </div> 
             <hr>
             <h5>Finding-level filters</h5>       
             Organ:
             <div class="form-inline">
-                <select class="form-control" id="organs" (change)="addSearchSelect($event)">
+                <select class="form-control" id="organs" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let organ of table_info['allOptions']['organs']">{{organ}}</option>
                 </select>
@@ -66,7 +69,7 @@
             <br>
             Observation:
             <div class="form-inline">
-                <select class="form-control" id="observations" (change)="addSearchSelect($event)">
+                <select class="form-control" id="observations" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let observation of table_info['allOptions']['observations']">{{observation}}</option>
                 </select>
@@ -76,13 +79,13 @@
             Sex:
             <div class="form-inline">
                 <label *ngFor="let value of sex">
-                <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}&nbsp;&nbsp;
+                <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]" [disabled]="!hasCategory">&nbsp;{{ value }}&nbsp;&nbsp;
                 </label>
             </div>
             <br>
             <div class="form-inline">
                 <br>
-                <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
+                <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form [disabled]="!hasCategory">
                 &nbsp;Treatment-related only
             </div>
             <hr>

@@ -12,6 +12,8 @@ export class SearchComponent implements OnInit {
 
   @ViewChild('sliderElement') sliderElement: IonRangeSliderComponent;
 
+  hasCategory: boolean=false;
+
   relevant_form: boolean;
   F: boolean=false;
   M: boolean=false;
@@ -33,6 +35,10 @@ export class SearchComponent implements OnInit {
       this.sex = table_info['allOptions']['sex'];
       this.findService.changeTable(table_info)}
     );
+  }
+
+  selectCategory(event: any){
+    this.hasCategory = true;
   }
 
   addSearchSelect(event: any){
