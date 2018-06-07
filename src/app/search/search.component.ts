@@ -31,8 +31,6 @@ export class SearchComponent implements OnInit {
     this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
     this.findService.initFinding().subscribe(table_info => {
       this.sex = table_info['allOptions']['sex'];
-      this.min_exposure = table_info['allOptions']['exposure_min'];
-      this.max_exposure = table_info['allOptions']['exposure_max'];
       this.findService.changeTable(table_info)}
     );
   }
