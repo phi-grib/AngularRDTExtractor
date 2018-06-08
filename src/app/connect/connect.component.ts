@@ -25,7 +25,7 @@ export class ConnectComponent implements OnInit {
   checkConnection(){
     if (this.host && this.port && this.sid && this.user && this.password) {
       // this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
-      this.connectionStatus = "Trying...";
+      this.connectionStatus = "Connecting...";
     }
     else {
       this.connectionStatus = "Missing data!";
