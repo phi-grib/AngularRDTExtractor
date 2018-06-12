@@ -36,4 +36,20 @@ export class PanelComponent implements OnInit {
     } 
     this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
   }  
+
+  notThis(key: string, value: string){
+    // Set as 'not_key' filtering criterion
+    key = 'not_'+key
+    if (key in this.searchFormPanel){
+      // If the value(name to search) is already inserted
+      if (this.searchFormPanel[key].indexOf(value)==-1){
+        this.searchFormPanel[key].push(value);
+      }
+    }
+    else{
+      this.searchFormPanel[key]=[value];
+    }
+
+    this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
+  }  
 }

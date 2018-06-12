@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let row of table_info.data; let i = index" [ngClass]="{'not-relevant':row.relevance != 'treatment related'}">
+      <tr *ngFor="let row of table_info.data; let i = index" [ngClass]="{'not-relevant':row.relevance != 'Treatment related'}">
         <td class="align-middle" style="border-right: 1px solid lightgray" ><button type="button" class="btn btn-link" (click)="openCustomModal(row.study_id)" >{{row.study_id}}</button></td>
         <td class="align-middle"><canvas #cmp id="{{'canvas_'+i}}" width="100" height="100">{{row.smiles}}</canvas></td>
         <td class="align-middle">{{row.normalised_species}}</td>

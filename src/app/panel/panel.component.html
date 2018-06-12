@@ -1,8 +1,11 @@
 <ul *ngIf="searchFormPanel[key]">
-        <li *ngFor="let value of searchFormPanel[key]">
-            <span>
-                <button class = "close" (click)="removeThis(key,value)">x</button>
-                &nbsp;{{ value }}
-            </span> 
-        </li>
+    <li *ngFor="let value of searchFormPanel[key]">
+        <span>
+            <button class = "close" (click)="removeThis(key,value)">x</button>
+            &nbsp;{{ value }}
+            <button type="button" class="btn btn-sm btn-toggle" data-toggle="button" (click)="notThis(key,value)">
+                <div class="handle"></div>
+              </button>
+        </span> 
+    </li>
 </ul>
