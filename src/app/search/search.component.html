@@ -12,21 +12,10 @@
     <div class="row">
         <div class="col-md-2" style="background-color:lightgray;">
             <br>
-            <h5>Finding category</h5>
-            <div class="form-inline">
-                <select class="form-control" id="category" (change)="selectCategory($event)">
-                    <option disabled selected>-- select --</option>
-                    <option>Histopathological</option>
-                    <option>Clinical signs</option>
-                    <option>Gross necropsy</option>
-                    <!-- <option *ngFor="let specie of species">{{specie}}</option>    -->
-                </select>
-            </div>
-            <hr>
             <h5>Study-level filters</h5>
             Species:
             <div class="form-inline">
-                <select class="form-control" id="species" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
+                <select class="form-control" id="species" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
                 </select>
@@ -35,7 +24,7 @@
             <br>
             Route:
             <div class="form-inline">
-                <select class="form-control" id="routes" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
+                <select class="form-control" id="routes" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
                 </select>
@@ -52,12 +41,33 @@
                     [max]="table_info['allOptions']['exposure_max']"
                     [from]="table_info['allOptions']['exposure_min']"
                     [to]="table_info['allOptions']['exposure_max']"
-                    [disable]="!hasCategory"
                     (onFinish)="addSliderInfo($event)"
                     ></ion-range-slider>
             </div> 
             <hr>
-            <h5>Finding-level filters</h5>       
+            <h5>Finding-level filters</h5>
+            Sex:
+            <div class="form-inline">
+                <label *ngFor="let value of sex">
+                <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}&nbsp;&nbsp;
+                </label>
+            </div>
+            <br>
+            <div class="form-inline">
+                <br>
+                <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
+                &nbsp;Treatment-related only
+            </div>
+            <hr>
+            Category:
+            <div class="form-inline">
+                <select class="form-control" id="category" (change)="selectCategory($event)">
+                    <option disabled selected>-- select --</option>
+                    <option>Histopathological</option>
+                    <option>Clinical signs</option>
+                    <option>Gross necropsy</option>
+                </select>
+            </div>
             Organ:
             <div class="form-inline">
                 <select class="form-control" id="organs" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
@@ -66,7 +76,6 @@
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
-            <br>
             Observation:
             <div class="form-inline">
                 <select class="form-control" id="observations" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
@@ -75,19 +84,14 @@
                 </select>
             </div>
             <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
-            <br>
-            Sex:
+            Grade:
             <div class="form-inline">
-                <label *ngFor="let value of sex">
-                <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]" [disabled]="!hasCategory">&nbsp;{{ value }}&nbsp;&nbsp;
-                </label>
+                <select class="form-control" id="grade" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
+                    <option disabled selected value> -- select -- </option>
+                    <option *ngFor="let grade of table_info['allOptions']['grde']">{{grade}}</option>
+                </select>
             </div>
-            <br>
-            <div class="form-inline">
-                <br>
-                <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form [disabled]="!hasCategory">
-                &nbsp;Treatment-related only
-            </div>
+            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
             <hr>
             <div align="center">
                 <button type="button" class="btn" (click)="resetFilters()"> Reset Filters </button>
