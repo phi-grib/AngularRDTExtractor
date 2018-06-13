@@ -20,11 +20,6 @@ export class PanelComponent implements OnInit {
   }  
 
   removeThis(key: string,value: string){
-    if (key=="relevantOnly"){
-      delete this.searchFormPanel[key];
-      this.relevantClose.emit(false);
-    }
-
     if (value===undefined){
       delete this.searchFormPanel[key];
     }
@@ -38,18 +33,16 @@ export class PanelComponent implements OnInit {
   }  
 
   notThis(key: string, value: string){
-    // Set as 'not_key' filtering criterion
-    key = 'not_'+key
+    // If the key(field of search) is already inserted   
     if (key in this.searchFormPanel){
       // If the value(name to search) is already inserted
-      if (this.searchFormPanel[key].indexOf(value)==-1){
+      if (this.searchFormPanel[key].indexOf(value)==-1){   
         this.searchFormPanel[key].push(value);
       }
     }
     else{
       this.searchFormPanel[key]=[value];
     }
-
     this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
   }  
 }
