@@ -31,8 +31,22 @@ export class QuantitativeTableComponent{
   constructor() { }
 
   ngOnInit() {
-    let organs ={"hola":{},"adios":{},"liver":{"liver1":{"liver11":{},"liver12":{"liver121":{},"liver122":{}}},"liver2":{}},
-             "lunge":{}}
+    let organs ={'organ system': {'endocrine system': {'endocrine gland': {'adrenal gland': {'adrenal gland medulla': {}}}},
+    'visceral organ system': {'reproductive system': {'female reproductive system': {'vagina': {},
+       'female reproductive gland/organ': {'vagina': {}}}}},
+    'integumental system': {'skin': {'skin mucocutaneous zone': {'vagina': {}}}},
+    'cardiovascular system': {'vascular system': {'blood vessel': {'arterial blood vessel': {'aorta': {}},
+       'trunk blood vessel': {'thoracic segment blood vessel': {'thoracic cavity blood vessel': {'thoracic cavity artery': {'aorta': {}}}}}},
+      'arterial system': {'arterial blood vessel': {'aorta': {}}}}}},
+   'anatomic region': {'trunk': {'abdominal segment of trunk': {'abdomen': {'abdomen organ': {'adrenal gland': {'adrenal gland medulla': {}}}},
+      'abdominal segment organ': {'abdomen organ': {'adrenal gland': {'adrenal gland medulla': {}}},
+       'pelvis organ': {'female reproductive gland/organ': {'vagina': {}}}},
+      'pelvis': {'pelvis organ': {'female reproductive gland/organ': {'vagina': {}}}}},
+     'trunk organ': {'abdominal segment organ': {'abdomen organ': {'adrenal gland': {'adrenal gland medulla': {}}},
+       'pelvis organ': {'female reproductive gland/organ': {'vagina': {}}}}},
+     'thoracic segment of trunk': {'thoracic segment blood vessel': {'thoracic cavity blood vessel': {'thoracic cavity artery': {'aorta': {}}}},
+      'thoracic cavity': {'thoracic cavity blood vessel': {'thoracic cavity artery': {'aorta': {}}}}},
+     'trunk blood vessel': {'thoracic segment blood vessel': {'thoracic cavity blood vessel': {'thoracic cavity artery': {'aorta': {}}}}}}}}
      this.items=this.createTreeview(organs);   
  }
  
