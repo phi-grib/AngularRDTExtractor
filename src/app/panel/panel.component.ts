@@ -30,9 +30,12 @@ export class PanelComponent implements OnInit {
       if (this.searchFormPanel[key].length==0){
         delete this.searchFormPanel[key];
       }
-      this.searchFormPanel[not_key].splice(value, 1);
-      if (this.searchFormPanel[not_key].length==0){
-        delete this.searchFormPanel[not_key];
+
+      if (this.searchFormPanel[not_key].indexOf(value)>-1){
+        this.searchFormPanel[not_key].splice(value, 1);
+        if (this.searchFormPanel[not_key].length==0){
+          delete this.searchFormPanel[not_key];
+        }
       }
     } 
     this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
