@@ -34,7 +34,7 @@ export class FindingsService {
   searchFinding(search_filter,page): Observable<any>{
     let url: string = this.apiRoot+"/findings";
     let params = new HttpParams({ fromObject: search_filter });
-    params = params.set('page',page.toString())
+    params = params.set('page',page.toString());
     return this.http.get(url, {params: params})
   }
 

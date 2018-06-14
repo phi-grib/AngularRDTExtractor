@@ -20,36 +20,45 @@ export class PanelComponent implements OnInit {
   }  
 
   removeThis(key: string,value: string){
-    if (key=="relevantOnly"){
-      delete this.searchFormPanel[key];
-      this.relevantClose.emit(false);
-    }
-
+    let not_key:string = 'not_'+key;
     if (value===undefined){
       delete this.searchFormPanel[key];
+      delete this.searchFormPanel[not_key];
     }
     else{
       this.searchFormPanel[key].splice(value, 1);
       if (this.searchFormPanel[key].length==0){
         delete this.searchFormPanel[key];
       }
+
+      if (this.searchFormPanel[not_key].indexOf(value)>-1){
+        this.searchFormPanel[not_key].splice(value, 1);
+        if (this.searchFormPanel[not_key].length==0){
+          delete this.searchFormPanel[not_key];
+        }
+      }
     } 
     this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
   }  
 
-  notThis(key: string, value: string){
-    // Set as 'not_key' filtering criterion
-    key = 'not_'+key
-    if (key in this.searchFormPanel){
-      // If the value(name to search) is already inserted
-      if (this.searchFormPanel[key].indexOf(value)==-1){
-        this.searchFormPanel[key].push(value);
-      }
+  notThis(event:any, key: string, value: string){
+    let not_key:string = 'not_'+key;
+    if (not_key in this.searchFormPanel && this.searchFormPanel[not_key].indexOf(value)!=-1) {
+      // Remove from the 'NOT filter' list
+      delete this.searchFormPanel[not_key];
     }
     else{
-      this.searchFormPanel[key]=[value];
-    }
-
+      // And add to the 'NOT filter' list
+      if (not_key in this.searchFormPanel){
+        // Check the value isn't already inserted
+        if (this.searchFormPanel[not_key].indexOf(value)==-1){   
+          this.searchFormPanel[not_key].push(value);
+        }
+      }
+      else{
+        this.searchFormPanel[not_key]=[value];
+      }
+    }   
     this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
-  }  
+  }
 }
