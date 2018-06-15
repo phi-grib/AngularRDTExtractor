@@ -88,10 +88,10 @@
             <div class="form-inline">
                 <select class="form-control" id="grade" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let grade of table_info['allOptions']['grde']">{{grade}}</option>
+                    <option *ngFor="let grade of table_info['allOptions']['grade']">{{grade}}</option>
                 </select>
             </div>
-            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
+            <app-panel [searchFormPanel] = search_form [key]= "'grade'" ></app-panel>
             <hr>
             <div align="center">
                 <button type="button" class="btn" (click)="resetFilters()"> Reset Filters </button>

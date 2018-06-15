@@ -20,12 +20,11 @@ export class SearchComponent implements OnInit {
   BOTH: boolean=false;
   min_exposure: number;
   max_exposure: number;
+  sex = [];
 
   objectKeys = Object.keys;
   search_form = {};
   table_info = {};
-
-  sex = [];
 
   constructor(private httpClient: HttpClient, private findService : FindingsService) {}
 
@@ -41,6 +40,20 @@ export class SearchComponent implements OnInit {
     this.hasCategory = true;
   }
 
+  isCategoryFiltered(category: string){
+    if (category in this.categories_search_form){
+      if (this.categories_search_form[category] == undefined) {
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+    else{
+      return false;
+    }
+  }
+
   addSearchSelect(event: any){
       // If the key(field of search) is already inserted   
       if (event.target.id in this.search_form){
@@ -52,11 +65,10 @@ export class SearchComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      /*this.findService.changeSearch(this.search_form);*/
       this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
-  } 
+  }
 
   addSearchCheckBox(event: any){
  

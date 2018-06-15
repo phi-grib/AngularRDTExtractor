@@ -5,3 +5,14 @@
 .form-control {
     width: 100%;
 }
+
+.card-header {
+    padding: 0px;
+}
+
+.card-body {
+    padding: 0px;
+    text-align: left;
+    overflow-wrap: normal;
+    margin-right: 10px;
+}

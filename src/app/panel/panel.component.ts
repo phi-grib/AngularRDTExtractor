@@ -39,26 +39,5 @@ export class PanelComponent implements OnInit {
       }
     } 
     this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
-  }  
-
-  notThis(event:any, key: string, value: string){
-    let not_key:string = 'not_'+key;
-    if (not_key in this.searchFormPanel && this.searchFormPanel[not_key].indexOf(value)!=-1) {
-      // Remove from the 'NOT filter' list
-      delete this.searchFormPanel[not_key];
-    }
-    else{
-      // And add to the 'NOT filter' list
-      if (not_key in this.searchFormPanel){
-        // Check the value isn't already inserted
-        if (this.searchFormPanel[not_key].indexOf(value)==-1){   
-          this.searchFormPanel[not_key].push(value);
-        }
-      }
-      else{
-        this.searchFormPanel[not_key]=[value];
-      }
-    }   
-    this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 }
