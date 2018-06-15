@@ -16,10 +16,6 @@ export class FindingsService {
 
   constructor(private http: HttpClient) { }
 
-  /*changeSearch(search){
-    this.search_form.next(search);
-  }*/
-
   changeTable(table){
     this.table_form.next(table);
   }
