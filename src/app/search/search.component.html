@@ -1,21 +1,14 @@
 <div class="container-fluid">
-    <div class ="row">
-        <div class="col-md-2">     
-        </div>
-        <div class="col-md-10">
-            <div align="center" style="font: italic bold 20px/50px Georgia, serif">
-                <span style="color:red">{{ table_info.num_studies }}</span><span > studies and </span>
-                <span style="color:red">{{ table_info.num_structures}}</span><span > structures </span>                
-            </div>
-        </div>
+    <div class="row">
+        <br>
     </div>
     <div class="row">
-        <div class="col-md-2" style="background-color:lightgray;">
+        <div class="col-md-2" style="background-color:whitesmoke;">
             <br>
             <h5>Study-level filters</h5>
             Species:
             <div class="form-inline">
-                <select class="form-control" id="species" (change)="addSearchSelect($event)">
+                <select class="form-control-sm" id="species" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
                 </select>
@@ -24,7 +17,7 @@
             <br>
             Route:
             <div class="form-inline">
-                <select class="form-control" id="routes" (change)="addSearchSelect($event)">
+                <select class="form-control-sm" id="routes" (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
                 </select>
@@ -41,8 +34,8 @@
                     [max]="table_info['allOptions']['exposure_max']"
                     [from]="table_info['allOptions']['exposure_min']"
                     [to]="table_info['allOptions']['exposure_max']"
-                    (onFinish)="addSliderInfo($event)"
-                    ></ion-range-slider>
+                    (onFinish)="addSliderInfo($event)">
+                </ion-range-slider>
             </div> 
             <hr>
             <h5>Finding-level filters</h5>
@@ -58,10 +51,10 @@
                 <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
                 &nbsp;Treatment-related only
             </div>
-            <hr>
+            <br>
             Category:
             <div class="form-inline">
-                <select class="form-control" id="category" (change)="selectCategory($event)">
+                <select class="form-control-sm" id="category" (change)="selectCategory($event)">
                     <option disabled selected>-- select --</option>
                     <option>Histopathological</option>
                     <option>Clinical signs</option>
@@ -70,35 +63,92 @@
             </div>
             Organ:
             <div class="form-inline">
-                <select class="form-control" id="organs" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
+                <select class="form-control-sm" id="organs" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let organ of table_info['allOptions']['organs']">{{organ}}</option>
                 </select>
             </div>
-            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
             Observation:
             <div class="form-inline">
-                <select class="form-control" id="observations" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
+                <select class="form-control-sm" id="observations" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let observation of table_info['allOptions']['observations']">{{observation}}</option>
                 </select>
             </div>
-            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
             Grade:
             <div class="form-inline">
-                <select class="form-control" id="grade" (change)="addSearchSelect($event)" [disabled]="!hasCategory">
+                <select class="form-control-sm" id="grade" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let grade of table_info['allOptions']['grde']">{{grade}}</option>
                 </select>
             </div>
-            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
-            <hr>
-            <div align="center">
-                <button type="button" class="btn" (click)="resetFilters()"> Reset Filters </button>
+            <br>
+            <div id="accordion">
+                <div class="card" [hidden]="!isCategoryFiltered('Histopathological')">
+                    <div class="card-header" id="HistopathologicalHeading">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#Histopathological" aria-expanded="true" aria-controls="Histopathological">
+                            Histopathological
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="Histopathological" class="collapse show" aria-labelledby="HistopathologicalHeading" data-parent="#accordion">
+                        <div class="card-body">
+                            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
+                            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
+                            <app-panel [searchFormPanel] = search_form [key]= "'grade'" ></app-panel>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" [hidden]="!isCategoryFiltered('Clinical signs')">
+                    <div class="card-header" id="ClinicalSignsHeading">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#ClinicalSigns" aria-expanded="true" aria-controls="ClinicalSigns">
+                                Clinical signs
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="ClinicalSigns" class="collapse show" aria-labelledby="ClinicalSignsHeading" data-parent="#accordion">
+                        <div class="card-body">
+                            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
+                            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
+                            <app-panel [searchFormPanel] = search_form [key]= "'grade'" ></app-panel>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" [hidden]="!isCategoryFiltered('Gross necropsy')">
+                    <div class="card-header" id="GrossNecropsyHeading">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#GrossNecropsy" aria-expanded="true" aria-controls="GrossNecropsy">
+                                    Gross necropsy
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="GrossNecropsy" class="collapse show" aria-labelledby="GrossNecropsyHeading" data-parent="#accordion">
+                        <div class="card-body">
+                            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
+                            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
+                            <app-panel [searchFormPanel] = search_form [key]= "'grade'" ></app-panel>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <div align="center"><font color="red">{{ table_info.num_studies }}</font> studies</div>
+                    <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100"></progress>
+                    <div align="center"><font color="red">{{ table_info.num_structures }} </font> structures</div>
+                    <progress id="structuresProgress" [value]="table_info['num_structures']*100/totalStructures" max="100"></progress>
+                </div>
             </div>
             <br>
             <div align="center">
-                <button type="button" class="btn" (click)="download()"> Export </button>
+                <button type="button" class="btn" (click)="resetFilters()" style="background-color: lightgray"> Reset Filters </button>
+            </div>
+            <br>
+            <div align="center">
+                <button type="button" class="btn" (click)="download()" style="background-color: lightgray"> Export </button>
             </div>
             <br>
         </div>
@@ -117,19 +167,15 @@
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane fade in active show" id="info">
-                   <app-table [searchFormTable] = search_form></app-table>
-                   
+                   <app-table [searchFormTable] = search_form></app-table>                   
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="qualitative">
                     <app-qualitative-table></app-qualitative-table>
-                    
                 </div>
                 <div role="tabpanel" class="tab-pane fade" id="quantitative">
                   <app-quantitative-table></app-quantitative-table>
-                  
                 </div>
              </div>
-            <!--  -->
         </div>
     </div>
 </div>

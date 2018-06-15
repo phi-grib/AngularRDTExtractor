@@ -20,12 +20,19 @@ export class SearchComponent implements OnInit {
   BOTH: boolean=false;
   min_exposure: number;
   max_exposure: number;
+  sex = [];
+  category: string;
 
   objectKeys = Object.keys;
   search_form = {};
   table_info = {};
 
-  sex = [];
+  categories_search_form = {};
+
+  // Set this value on init to store the total number of studies and structures
+  // so that we can calculate the current fraction selected
+  totalStudies: number;   
+  totalStructures: number;
 
   constructor(private httpClient: HttpClient, private findService : FindingsService) {}
 
@@ -33,12 +40,32 @@ export class SearchComponent implements OnInit {
     this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
     this.findService.initFinding().subscribe(table_info => {
       this.sex = table_info['allOptions']['sex'];
+      this.totalStructures = table_info['num_structures'];
+      this.totalStudies = table_info['num_studies'];
       this.findService.changeTable(table_info)}
-    );
+    );    
   }
 
   selectCategory(event: any){
     this.hasCategory = true;
+    this.category = event.target.value;
+    if (!(event.target.value in this.categories_search_form)) {
+      this.categories_search_form[event.target.value] = null;
+    }    
+  }
+
+  isCategoryFiltered(category: string){
+    if (category in this.categories_search_form){
+      if (this.categories_search_form[category] == undefined) {
+        return false;
+      }
+      else{
+        return true;
+      }
+    }
+    else{
+      return false;
+    }
   }
 
   addSearchSelect(event: any){
@@ -52,11 +79,28 @@ export class SearchComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      /*this.findService.changeSearch(this.search_form);*/
       this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
-  } 
+  }
+
+  addCategorySearch(event: any){
+    if (this.categories_search_form[this.category] == undefined) {
+      this.categories_search_form[this.category] = {};
+      this.categories_search_form[this.category][event.target.id]=[event.target.value];
+    } else if (event.target.id in this.categories_search_form[this.category]){
+      // If the value(name to search) is already inserted
+      if (this.categories_search_form[this.category][event.target.id].indexOf(event.target.value)==-1){   
+        this.categories_search_form[this.category][event.target.id].push(event.target.value);
+      }
+    }
+    else{
+      this.categories_search_form[this.category][event.target.id]=[event.target.value];
+    }
+    // this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+
+    event.target.selectedIndex = "0";
+  }
 
   addSearchCheckBox(event: any){
  
@@ -101,5 +145,8 @@ export class SearchComponent implements OnInit {
     this.M = false;
     this.sliderElement.reset();
     this.findService.initFinding().subscribe(table_info => this.findService.changeTable(table_info));
+    this.hasCategory = false;
+    this.categories_search_form = {};
+    document.getElementById('category').selectedIndex = "0";
   }
 }
