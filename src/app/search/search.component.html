@@ -29,8 +29,6 @@
             [key]= "'routes'" ></app-panel>
             <br>
             Exposure period (days):
-            <!-- <span><input id="minRange" value="" style="width: 40px" onchange="addSliderInfoMin(this.value)"> - <input id="maxRange" value="" style="width: 40px"></span>
-            <br> -->
             <div>
                 <ion-range-slider #sliderElement
                     type="double"
@@ -68,55 +66,47 @@
             
             <div id="accordion">
                 <div class="card border-light mb-3">
-                    <div class="card-header" id="headingOne">                      
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">               <i class="fa" aria-hidden="true"></i>
-                        Organs
+                    <div class="card-header" id="headingOne">
+                        <button class="btn btn-link collapsed" 
+                        data-toggle="collapse" data-target="#collapseOne" 
+                        aria-expanded="true" aria-controls="collapseOne" 
+                        [disabled]="!hasCategory">               
+                            <i class="fa" aria-hidden="true"></i>
+                            Organs
                         </button>
                     </div>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" 
+                    data-parent="#accordion">
                         <div class="card-body">
-                            <ngx-treeview [config]="config" [items]="items_organs" (selectedChange)="onFilterChange($event)">
+                            <ngx-treeview [config]="config" [items]="items_organs" (selectedChange)="TreeFilterChange($event, 'organs')">
                             </ngx-treeview>
                         </div>
                     </div>
                 </div>
                 <div class="card border-light mb-3">
                     <div class="card-header" id="headingTwo">        
-                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="fa" aria-hidden="true"></i>
-                                Observations
-                            </button>
+                        <button class="btn btn-link collapsed" data-toggle="collapse" 
+                        data-target="#collapseTwo" aria-expanded="false" 
+                        aria-controls="collapseTwo" [disabled]="!hasCategory">
+                            <i class="fa" aria-hidden="true"></i>
+                            Observations
+                        </button>
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
-                                <ngx-treeview [config]="config" [items]="items_observations" (selectedChange)="onFilterChange($event)">
-                                    </ngx-treeview>
+                            <ngx-treeview [config]="config" [items]="items_observations" (selectedChange)="TreeFilterChange($event, 'observations')">
+                            </ngx-treeview>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--Organ:
-            <div class="form-inline">
-                <select class="form-control-sm" id="organs" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
-                    <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let organ of table_info['allOptions']['organs']">{{organ}}</option>
-                </select>
-            </div>
-            Observation:
-            <div class="form-inline">
-                <select class="form-control-sm" id="observations" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
-                    <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let observation of table_info['allOptions']['observations']">{{observation}}</option>
-                </select>
-            </div>-->
-            Grade:
+            <!-- Grade:
             <div class="form-inline">
                 <select class="form-control-sm" id="grade" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let grade of table_info['allOptions']['grde']">{{grade}}</option>
                 </select>
-            </div>
-            <br>
+            </div> -->
             <div id="accordion">
                 <div class="card" [hidden]="!isCategoryFiltered('Histopathological')">
                     <div class="card-header" id="HistopathologicalHeading">
@@ -214,29 +204,7 @@
             <br>
         </div>
         <div class="col-md-10">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#info" role="tab" data-toggle="tab"> Info </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#qualitative" role="tab" data-toggle="tab"> Qualitative </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#quantitative" role="tab" data-toggle="tab"> Quantitative </a>
-                </li>
-            </ul>
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active show" id="info">
-                   <app-table [searchFormTable] = search_form></app-table>                   
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="qualitative">
-                    <app-qualitative-table></app-qualitative-table>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="quantitative">
-                  <app-quantitative-table></app-quantitative-table>
-                </div>
-             </div>
+            <app-table [searchFormTable] = search_form></app-table>
         </div>
     </div>
 </div>

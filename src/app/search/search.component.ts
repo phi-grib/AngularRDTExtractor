@@ -2,8 +2,7 @@ import { Component, OnInit, PipeTransform, Pipe, ViewChild} from '@angular/core'
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
-import {
-  TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
+import { TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
 TreeviewEventParser, DownlineTreeviewEventParser, DownlineTreeviewItem} from 'ngx-treeview';
 import { isNull } from 'util';
 
@@ -27,7 +26,6 @@ export class SearchComponent implements OnInit {
 
   buttonClass = 'btn-outline-secondary';
   rows={}
-
 
   hasCategory: boolean=false;
 
@@ -110,25 +108,6 @@ export class SearchComponent implements OnInit {
       event.target.selectedIndex = "0";
   }
 
-  addCategorySearch(event: any){
-    if (this.categories_search_form[this.selectedCategory] == undefined) {
-      this.categories_search_form[this.selectedCategory] = {};
-      this.categories_search_form[this.selectedCategory][event.target.id]=[event.target.value];
-    } else if (event.target.id in this.categories_search_form[this.selectedCategory]){
-      // If the value(name to search) is already inserted
-      if (this.categories_search_form[this.selectedCategory][event.target.id].indexOf(event.target.value)==-1){   
-        this.categories_search_form[this.selectedCategory][event.target.id].push(event.target.value);
-      }
-    }
-    else{
-      this.categories_search_form[this.selectedCategory][event.target.id]=[event.target.value];
-    }
-
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
-
-    event.target.selectedIndex = "0";
-  }
-
   addSearchCheckBox(event: any){
     if (this.sex.indexOf(event.target.value)!=-1){  
       if (event.target.checked){
@@ -180,34 +159,50 @@ export class SearchComponent implements OnInit {
   }
 
   /*Recursive function*/ 
- createTreeview (organs:{}):TreeviewItem[]{
-    
-  let items: TreeviewItem[] = [];
-  let item
-  for (var key in organs) {   
-      if (Object.keys(organs[key]).length>0){    
-          this.createTreeview(organs[key])
-          item = new TreeviewItem({ text:key, value:key, collapsed: true, checked: false,children: this.createTreeview(organs[key])})
-          items.push(item);
-      }
-      else{
-          item = new TreeviewItem({ text:key, value:key, collapsed: true,checked: false})
-          items.push(item);
-      }      
-  }  
- return items;
-}
+  createTreeview (organs:{}):TreeviewItem[]{
+    let items: TreeviewItem[] = [];
+    let item
+    for (var key in organs) {   
+        if (Object.keys(organs[key]).length>0){    
+            this.createTreeview(organs[key])
+            item = new TreeviewItem({ text:key, value:key, collapsed: true, checked: false,children: this.createTreeview(organs[key])})
+            items.push(item);
+        }
+        else{
+            item = new TreeviewItem({ text:key, value:key, collapsed: true,checked: false})
+            items.push(item);
+        }      
+    }  
+    return items;
+  }
 
-onFilterChange(downlineItems: DownlineTreeviewItem[]) {
-  this.rows = {};
-      downlineItems.forEach(downlineItem => {   
-          const item = downlineItem.item;
-          this.rows[item.text]=true;
-          let parent = downlineItem.parent;
-         while (!isNull(parent) && parent.item.checked) {
-              this.rows[parent.item.text]=true;
-              parent = parent.parent;
-          }
-      });  
+  addCategorySearch(key:string, value:string){
+    if (this.categories_search_form[this.selectedCategory] == undefined) {
+      this.categories_search_form[this.selectedCategory] = {};
+      this.categories_search_form[this.selectedCategory][key]=[value];
+    } else if (key in this.categories_search_form[this.selectedCategory]){
+      // If the value(name to search) is already inserted
+      if (this.categories_search_form[this.selectedCategory][key].indexOf(value)==-1){   
+        this.categories_search_form[this.selectedCategory][key].push(value);
+      }
+    }
+    else{
+      this.categories_search_form[this.selectedCategory][key]=[value];
+    }
+  }
+
+  TreeFilterChange(downlineItems: DownlineTreeviewItem[], key:string) {
+    // this.rows = {};
+    downlineItems.forEach(downlineItem => {   
+      const item = downlineItem.item;
+      this.rows[item.text]=true;
+      let parent = downlineItem.parent;
+      while (!isNull(parent) && parent.item.checked) {
+        // this.rows[parent.item.text]=true;
+        this.addCategorySearch(key, parent.item.text);
+        parent = parent.parent;
+      }
+    });
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 }

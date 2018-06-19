@@ -11,15 +11,13 @@ import { CapitalizePipe } from './capitalize.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { TableComponent } from './table/table.component';
 import { FindingsService } from './findings.service';
-import { AppRoutingModule } from './/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { TabsComponent } from './tabs/tabs.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import { QualitativeTableComponent } from './qualitative-table/qualitative-table.component';
-import { QuantitativeTableComponent } from './quantitative-table/quantitative-table.component';
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { CustomModalComponent } from './dialog/dialog.component';
 import { TooltipModule } from "ngx-tooltip";
@@ -38,8 +36,6 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
     ExploreComponent,
     ConnectComponent,
     BrowseComponent,
-    QualitativeTableComponent,
-    QuantitativeTableComponent,
     CustomModalComponent,
     DisabledOnSelectorDirective
   ],
