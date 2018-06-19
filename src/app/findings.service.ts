@@ -46,7 +46,7 @@ export class FindingsService {
               grade_list.push(new_value);
             }
           }
-        }       
+        }
       });
     });
     if (organ_list.length > 0) {

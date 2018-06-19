@@ -78,7 +78,9 @@
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" 
                     data-parent="#accordion">
                         <div class="card-body">
-                            <ngx-treeview [config]="config" [items]="items_organs" (selectedChange)="TreeFilterChange($event, 'organs')">
+                            <ngx-treeview [config]="config" 
+                            [items]="items_organs" 
+                            (selectedChange)="TreeFilterChange($event, 'organs')">
                             </ngx-treeview>
                         </div>
                     </div>
@@ -94,7 +96,9 @@
                     </div>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                         <div class="card-body">
-                            <ngx-treeview [config]="config" [items]="items_observations" (selectedChange)="TreeFilterChange($event, 'observations')">
+                            <ngx-treeview [config]="config" 
+                            [items]="items_observations" 
+                            (selectedChange)="TreeFilterChange($event, 'observations')">
                             </ngx-treeview>
                         </div>
                     </div>

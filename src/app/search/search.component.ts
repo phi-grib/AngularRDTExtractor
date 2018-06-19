@@ -11,6 +11,7 @@ import { isNull } from 'util';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
+
 export class SearchComponent implements OnInit {
 
   @ViewChild('sliderElement') sliderElement: IonRangeSliderComponent;
@@ -52,7 +53,6 @@ export class SearchComponent implements OnInit {
   constructor(private httpClient: HttpClient, private findService : FindingsService) {}
 
   ngOnInit(){
-   
     this.findService.currentTable.subscribe(table_info => {
       this.table_info = table_info
       if (this.table_info['allOptions']!== undefined){
@@ -62,8 +62,6 @@ export class SearchComponent implements OnInit {
           this.totalStructures = table_info['num_structures'];
           this.totalStudies = table_info['num_studies'];
       }
-      
-    
     });
     this.findService.initFinding().subscribe(table_info => {
       this.findService.changeTable(table_info)}
@@ -176,33 +174,30 @@ export class SearchComponent implements OnInit {
     return items;
   }
 
-  addCategorySearch(key:string, value:string){
-    if (this.categories_search_form[this.selectedCategory] == undefined) {
-      this.categories_search_form[this.selectedCategory] = {};
-      this.categories_search_form[this.selectedCategory][key]=[value];
-    } else if (key in this.categories_search_form[this.selectedCategory]){
-      // If the value(name to search) is already inserted
-      if (this.categories_search_form[this.selectedCategory][key].indexOf(value)==-1){   
-        this.categories_search_form[this.selectedCategory][key].push(value);
-      }
-    }
-    else{
-      this.categories_search_form[this.selectedCategory][key]=[value];
-    }
-  }
-
   TreeFilterChange(downlineItems: DownlineTreeviewItem[], key:string) {
     // this.rows = {};
+    console.log('test');
+
+    if (this.categories_search_form[this.selectedCategory] == undefined) {
+      this.categories_search_form[this.selectedCategory] = {};
+    } 
+    this.categories_search_form[this.selectedCategory][key]=[];
+
     downlineItems.forEach(downlineItem => {   
       const item = downlineItem.item;
-      this.rows[item.text]=true;
+      // this.rows[item.text]=true;
+      if (this.categories_search_form[this.selectedCategory][key].indexOf(item.text)==-1){
+        this.categories_search_form[this.selectedCategory][key].push(item.text);
+      }
       let parent = downlineItem.parent;
       while (!isNull(parent) && parent.item.checked) {
         // this.rows[parent.item.text]=true;
-        this.addCategorySearch(key, parent.item.text);
+        if (this.categories_search_form[this.selectedCategory][key].indexOf(parent.item.text)==-1){
+          this.categories_search_form[this.selectedCategory][key].push(parent.item.text);
+        }
         parent = parent.parent;
       }
     });
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    // this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 }
