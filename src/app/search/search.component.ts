@@ -2,6 +2,10 @@ import { Component, OnInit, PipeTransform, Pipe, ViewChild} from '@angular/core'
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
+import {
+  TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
+TreeviewEventParser, DownlineTreeviewEventParser, DownlineTreeviewItem} from 'ngx-treeview';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-search',
@@ -11,6 +15,19 @@ import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 export class SearchComponent implements OnInit {
 
   @ViewChild('sliderElement') sliderElement: IonRangeSliderComponent;
+
+  items_organs: TreeviewItem[];
+  items_observations: TreeviewItem[];
+  values: number[];
+  config = TreeviewConfig.create({
+     hasAllCheckBox: false,
+      hasFilter: true,
+      maxHeight: 400   
+  });
+
+  buttonClass = 'btn-outline-secondary';
+  rows={}
+
 
   hasCategory: boolean=false;
 
@@ -37,11 +54,20 @@ export class SearchComponent implements OnInit {
   constructor(private httpClient: HttpClient, private findService : FindingsService) {}
 
   ngOnInit(){
-    this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
+   
+    this.findService.currentTable.subscribe(table_info => {
+      this.table_info = table_info
+      if (this.table_info['allOptions']!== undefined){
+          this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
+          this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
+          this.sex = table_info['allOptions']['sex'];
+          this.totalStructures = table_info['num_structures'];
+          this.totalStudies = table_info['num_studies'];
+      }
+      
+    
+    });
     this.findService.initFinding().subscribe(table_info => {
-      this.sex = table_info['allOptions']['sex'];
-      this.totalStructures = table_info['num_structures'];
-      this.totalStudies = table_info['num_studies'];
       this.findService.changeTable(table_info)}
     );    
   }
@@ -79,7 +105,11 @@ export class SearchComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+      this.findService.searchFinding(this.search_form,1).subscribe(table_info =>{ 
+        this.findService.changeTable(table_info);
+        //this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
+        //this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
+      });
 
       event.target.selectedIndex = "0";
   }
@@ -127,14 +157,22 @@ export class SearchComponent implements OnInit {
       delete this.search_form[event.target.id];
     }
     /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info =>{ 
+      this.findService.changeTable(table_info);
+      //this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
+      //this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
+    });
 
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.searchFinding(this.search_form,1).subscribe(table_info =>{ 
+      this.findService.changeTable(table_info);
+      //this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
+      //this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
+    });
   }
 
   resetFilters(){    
@@ -144,9 +182,45 @@ export class SearchComponent implements OnInit {
     this.F = false;
     this.M = false;
     this.sliderElement.reset();
-    this.findService.initFinding().subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.initFinding().subscribe(table_info =>{ 
+      this.findService.changeTable(table_info);
+      this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
+      this.items_observations=this.createTreeview(table_info['allOptions']['observations']);
+    });
     this.hasCategory = false;
     this.categories_search_form = {};
-    document.getElementById('category').selectedIndex = "0";
+    //document.getElementById('category').selectedIndex = "0";
+  }
+
+  /*Recursive function*/ 
+ createTreeview (organs:{}):TreeviewItem[]{
+    
+  let items: TreeviewItem[] = [];
+  let item
+  for (var key in organs) {   
+      if (Object.keys(organs[key]).length>0){    
+          this.createTreeview(organs[key])
+          item = new TreeviewItem({ text:key, value:key, collapsed: true, checked: false,children: this.createTreeview(organs[key])})
+          items.push(item);
+      }
+      else{
+          item = new TreeviewItem({ text:key, value:key, collapsed: true,checked: false})
+          items.push(item);
+      }      
+  }  
+ return items;
+}
+
+onFilterChange(downlineItems: DownlineTreeviewItem[]) {
+  this.rows = {};
+      downlineItems.forEach(downlineItem => {   
+          const item = downlineItem.item;
+          this.rows[item.text]=true;
+          let parent = downlineItem.parent;
+         while (!isNull(parent) && parent.item.checked) {
+              this.rows[parent.item.text]=true;
+              parent = parent.parent;
+          }
+      });  
   }
 }

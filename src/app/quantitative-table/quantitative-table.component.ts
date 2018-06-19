@@ -15,9 +15,13 @@ import { isNull } from 'util';
 ]
 })
 export class QuantitativeTableComponent{
+    constructor() { }
 
+    ngOnInit() {
   
-  items: TreeviewItem[];
+    }
+  
+  /*items: TreeviewItem[];
   values: number[];
   config = TreeviewConfig.create({
      hasAllCheckBox: false,
@@ -48,11 +52,11 @@ export class QuantitativeTableComponent{
       'thoracic cavity': {'thoracic cavity blood vessel': {'thoracic cavity artery': {'aorta': {}}}}},
      'trunk blood vessel': {'thoracic segment blood vessel': {'thoracic cavity blood vessel': {'thoracic cavity artery': {'aorta': {}}}}}}}}
      this.items=this.createTreeview(organs);   
- }
+ }*/
  
 
  /*Recursive function*/ 
- createTreeview (organs:{}):TreeviewItem[]{
+/* createTreeview (organs:{}):TreeviewItem[]{
     
     let items: TreeviewItem[] = [];
     let item
@@ -73,7 +77,6 @@ export class QuantitativeTableComponent{
 
 
   onFilterChange(downlineItems: DownlineTreeviewItem[]) {
-
     this.rows = {};
         downlineItems.forEach(downlineItem => {   
             const item = downlineItem.item;
@@ -86,5 +89,5 @@ export class QuantitativeTableComponent{
         });
         
     
-    }
+  }*/
 }

@@ -23,7 +23,7 @@ export class PanelComponent implements OnInit {
     let not_key:string = 'not_'+key;
     if (value===undefined){
       delete this.searchFormPanel[key];
-      delete this.searchFormPanel[not_key];
+      //delete this.searchFormPanel[not_key];
     }
     else{
       this.searchFormPanel[key].splice(value, 1);
@@ -31,12 +31,12 @@ export class PanelComponent implements OnInit {
         delete this.searchFormPanel[key];
       }
 
-      if (this.searchFormPanel[not_key].indexOf(value)>-1){
+      /*if (this.searchFormPanel[not_key].indexOf(value)>-1){
         this.searchFormPanel[not_key].splice(value, 1);
         if (this.searchFormPanel[not_key].length==0){
           delete this.searchFormPanel[not_key];
         }
-      }
+      }*/
     } 
     this.findService.searchFinding(this.searchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
   }

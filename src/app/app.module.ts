@@ -11,7 +11,6 @@ import { CapitalizePipe } from './capitalize.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { TableComponent } from './table/table.component';
 import { FindingsService } from './findings.service';
-import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './/app-routing.module';
 import { TabsComponent } from './tabs/tabs.component';
 import { ExploreComponent } from './explore/explore.component';
@@ -23,7 +22,7 @@ import { QualitativeTableComponent } from './qualitative-table/qualitative-table
 import { QuantitativeTableComponent } from './quantitative-table/quantitative-table.component';
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { CustomModalComponent } from './dialog/dialog.component';
-import {TooltipModule} from "ngx-tooltip";
+import { TooltipModule } from "ngx-tooltip";
 import { TreeviewModule } from 'ngx-treeview';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
@@ -48,7 +47,6 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    DataTablesModule,
     AppRoutingModule,
     IonRangeSliderModule,
     Ng4LoadingSpinnerModule,

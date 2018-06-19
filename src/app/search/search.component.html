@@ -61,7 +61,37 @@
                     <option>Gross necropsy</option>
                 </select>
             </div>
-            Organ:
+            
+            <div id="accordion">
+                <div class="card border-light mb-3">
+                    <div class="card-header" id="headingOne">                      
+                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">               <i class="fa" aria-hidden="true"></i>
+                        Organs
+                        </button>
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <ngx-treeview [config]="config" [items]="items_organs" (selectedChange)="onFilterChange($event)">
+                            </ngx-treeview>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-light mb-3">
+                    <div class="card-header" id="headingTwo">        
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="fa" aria-hidden="true"></i>
+                                Observations
+                            </button>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+                                <ngx-treeview [config]="config" [items]="items_observations" (selectedChange)="onFilterChange($event)">
+                                    </ngx-treeview>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Organ:
             <div class="form-inline">
                 <select class="form-control-sm" id="organs" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
@@ -74,7 +104,7 @@
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let observation of table_info['allOptions']['observations']">{{observation}}</option>
                 </select>
-            </div>
+            </div>-->
             Grade:
             <div class="form-inline">
                 <select class="form-control-sm" id="grade" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
