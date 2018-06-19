@@ -79,7 +79,7 @@ export class SearchComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+      this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
   }
@@ -97,13 +97,13 @@ export class SearchComponent implements OnInit {
     else{
       this.categories_search_form[this.selectedCategory][event.target.id]=[event.target.value];
     }
-    // this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
     event.target.selectedIndex = "0";
   }
 
   addSearchCheckBox(event: any){
- 
     if (this.sex.indexOf(event.target.value)!=-1){  
       if (event.target.checked){
           if (event.target.value=="F"){
@@ -126,15 +126,14 @@ export class SearchComponent implements OnInit {
     else{   
       delete this.search_form[event.target.id];
     }
-    /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
 
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
   resetFilters(){    
