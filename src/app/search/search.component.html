@@ -13,7 +13,9 @@
                     <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
                 </select>
             </div>
-            <app-panel [searchFormPanel] = search_form [key]= "'species'" ></app-panel>
+            <app-panel [searchFormPanel]=search_form 
+            [CategorySearchFormPanel]=categories_search_form
+            [key]= "'species'" ></app-panel>
             <br>
             Route:
             <div class="form-inline">
@@ -22,7 +24,9 @@
                     <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
                 </select>
             </div>
-            <app-panel [searchFormPanel] = search_form [key]= "'routes'" ></app-panel>
+            <app-panel [searchFormPanel]=search_form 
+            [CategorySearchFormPanel]=categories_search_form 
+            [key]= "'routes'" ></app-panel>
             <br>
             Exposure period (days):
             <!-- <span><input id="minRange" value="" style="width: 40px" onchange="addSliderInfoMin(this.value)"> - <input id="maxRange" value="" style="width: 40px"></span>
@@ -124,9 +128,18 @@
                     </div>
                     <div id="Histopathological" class="collapse show" aria-labelledby="HistopathologicalHeading" data-parent="#accordion">
                         <div class="card-body">
-                            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
-                            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
-                            <app-panel [searchFormPanel] = search_form [key]= "'grade'" ></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'organs'" 
+                            [category]="selectedCategory"></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'observations'"
+                            [category]="selectedCategory" ></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'grade'" 
+                            [category]="selectedCategory"></app-panel>
                         </div>
                     </div>
                 </div>
@@ -140,9 +153,18 @@
                     </div>
                     <div id="ClinicalSigns" class="collapse show" aria-labelledby="ClinicalSignsHeading" data-parent="#accordion">
                         <div class="card-body">
-                            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
-                            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
-                            <app-panel [searchFormPanel] = search_form [key]= "'grade'" ></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'organs'" 
+                            [category]="selectedCategory"></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'observations'" 
+                            [category]="selectedCategory"></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'grade'" 
+                            [category]="selectedCategory"></app-panel>
                         </div>
                     </div>
                 </div>
@@ -156,9 +178,18 @@
                     </div>
                     <div id="GrossNecropsy" class="collapse show" aria-labelledby="GrossNecropsyHeading" data-parent="#accordion">
                         <div class="card-body">
-                            <app-panel [searchFormPanel] = search_form [key]= "'organs'" ></app-panel>
-                            <app-panel [searchFormPanel] = search_form [key]= "'observations'" ></app-panel>
-                            <app-panel [searchFormPanel] = search_form [key]= "'grade'" ></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'organs'" 
+                            [category]="selectedCategory"></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'observations'" 
+                            [category]="selectedCategory"></app-panel>
+                            <app-panel [searchFormPanel]=search_form 
+                            [CategorySearchFormPanel]=categories_search_form 
+                            [key]= "'grade'" 
+                            [category]="selectedCategory"></app-panel>
                         </div>
                     </div>
                 </div>
@@ -167,9 +198,9 @@
             <div class="card">
                 <div class="card-body">
                     <div align="center"><font color="red">{{ table_info.num_studies }}</font> studies</div>
-                    <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100"></progress>
+                    <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100" style="width: 100%"></progress>
                     <div align="center"><font color="red">{{ table_info.num_structures }} </font> structures</div>
-                    <progress id="structuresProgress" [value]="table_info['num_structures']*100/totalStructures" max="100"></progress>
+                    <progress id="structuresProgress" [value]="table_info['num_structures']*100/totalStructures" max="100" style="width: 100%"></progress>
                 </div>
             </div>
             <br>

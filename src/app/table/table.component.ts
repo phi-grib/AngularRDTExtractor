@@ -13,9 +13,6 @@ import { CustomModalComponent } from '../dialog/dialog.component';
 })
 export class TableComponent implements OnInit,AfterViewInit {
 
-  objectKeys = Object.keys;
-  relevant_form : boolean;
-
   table_info = {};
   @Input() searchFormTable = {};
   @ViewChildren('cmp') components:QueryList<ElementRef>;
@@ -62,9 +59,9 @@ export class TableComponent implements OnInit,AfterViewInit {
     });
 
   }
-  Page(page:number){
-    this.findService.searchFinding(this.searchFormTable,page).subscribe(res => this.table_info = res); 
-  }
+  // Page(page:number){
+  //   this.findService.searchFinding(this.searchFormTable,page).subscribe(res => this.table_info = res); 
+  // }
 
  
 

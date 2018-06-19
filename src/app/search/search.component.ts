@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
   min_exposure: number;
   max_exposure: number;
   sex = [];
-  category: string;
+  selectedCategory: string;
 
   objectKeys = Object.keys;
   search_form = {};
@@ -74,7 +74,7 @@ export class SearchComponent implements OnInit {
 
   selectCategory(event: any){
     this.hasCategory = true;
-    this.category = event.target.value;
+    this.selectedCategory = event.target.value;
     if (!(event.target.value in this.categories_search_form)) {
       this.categories_search_form[event.target.value] = null;
     }    
@@ -105,35 +105,31 @@ export class SearchComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      this.findService.searchFinding(this.search_form,1).subscribe(table_info =>{ 
-        this.findService.changeTable(table_info);
-        //this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
-        //this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
-      });
+      this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
   }
 
   addCategorySearch(event: any){
-    if (this.categories_search_form[this.category] == undefined) {
-      this.categories_search_form[this.category] = {};
-      this.categories_search_form[this.category][event.target.id]=[event.target.value];
-    } else if (event.target.id in this.categories_search_form[this.category]){
+    if (this.categories_search_form[this.selectedCategory] == undefined) {
+      this.categories_search_form[this.selectedCategory] = {};
+      this.categories_search_form[this.selectedCategory][event.target.id]=[event.target.value];
+    } else if (event.target.id in this.categories_search_form[this.selectedCategory]){
       // If the value(name to search) is already inserted
-      if (this.categories_search_form[this.category][event.target.id].indexOf(event.target.value)==-1){   
-        this.categories_search_form[this.category][event.target.id].push(event.target.value);
+      if (this.categories_search_form[this.selectedCategory][event.target.id].indexOf(event.target.value)==-1){   
+        this.categories_search_form[this.selectedCategory][event.target.id].push(event.target.value);
       }
     }
     else{
-      this.categories_search_form[this.category][event.target.id]=[event.target.value];
+      this.categories_search_form[this.selectedCategory][event.target.id]=[event.target.value];
     }
-    // this.findService.searchFinding(this.search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
     event.target.selectedIndex = "0";
   }
 
   addSearchCheckBox(event: any){
- 
     if (this.sex.indexOf(event.target.value)!=-1){  
       if (event.target.checked){
           if (event.target.value=="F"){
@@ -156,23 +152,14 @@ export class SearchComponent implements OnInit {
     else{   
       delete this.search_form[event.target.id];
     }
-    /*this.findService.changeSearch(this.search_form);*/
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info =>{ 
-      this.findService.changeTable(table_info);
-      //this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
-      //this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
-    });
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
 
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
-    this.findService.searchFinding(this.search_form,1).subscribe(table_info =>{ 
-      this.findService.changeTable(table_info);
-      //this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
-      //this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
-    });
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
   resetFilters(){    
