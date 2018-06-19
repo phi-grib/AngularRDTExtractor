@@ -58,12 +58,12 @@ export class SearchComponent implements OnInit {
       if (this.table_info['allOptions']!== undefined){
           this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
           this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
-          this.sex = table_info['allOptions']['sex'];
-          this.totalStructures = table_info['num_structures'];
-          this.totalStudies = table_info['num_studies'];
       }
     });
     this.findService.initFinding().subscribe(table_info => {
+      this.totalStructures = table_info['num_structures'];
+      this.totalStudies = table_info['num_studies'];
+      this.sex = table_info['allOptions']['sex'];
       this.findService.changeTable(table_info)}
     );    
   }
@@ -153,10 +153,10 @@ export class SearchComponent implements OnInit {
     });
     this.hasCategory = false;
     this.categories_search_form = {};
-    //document.getElementById('category').selectedIndex = "0";
+    document.getElementById('category').selectedIndex = "0";
   }
 
-  /*Recursive function*/ 
+  /* Recursive function */ 
   createTreeview (organs:{}):TreeviewItem[]{
     let items: TreeviewItem[] = [];
     let item
@@ -178,17 +178,23 @@ export class SearchComponent implements OnInit {
     // this.rows = {};
     console.log('test');
 
+    // Initialize the search filter, removing all previous criteria
+    // for this category / key pair
     if (this.categories_search_form[this.selectedCategory] == undefined) {
       this.categories_search_form[this.selectedCategory] = {};
     } 
     this.categories_search_form[this.selectedCategory][key]=[];
 
+    // Walk through the tree and add the selected items and their parents 
+    // to the filtering dictionary
     downlineItems.forEach(downlineItem => {   
       const item = downlineItem.item;
+
       // this.rows[item.text]=true;
       if (this.categories_search_form[this.selectedCategory][key].indexOf(item.text)==-1){
         this.categories_search_form[this.selectedCategory][key].push(item.text);
       }
+      
       let parent = downlineItem.parent;
       while (!isNull(parent) && parent.item.checked) {
         // this.rows[parent.item.text]=true;
