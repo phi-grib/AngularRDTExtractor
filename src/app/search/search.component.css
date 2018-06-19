@@ -1,7 +1,15 @@
-.btn {
-    background-color: whitesmoke;
+.form-control-sm {
+    width: 100%;
+    border: 0px;
+}
+.form-control-sm:disabled {
+    background-color: lightgray;
 }
 
-.form-control {
-    width: 100%;
+.card-header {
+    padding: 0px;
+}
+
+.card-body {
+    padding: 5px;
 }
