@@ -8,7 +8,8 @@
             <h5>Study-level filters</h5>
             Species:
             <div class="form-inline">
-                <select class="form-control-sm" id="species" (change)="addSearchSelect($event)">
+                <select class="form-control-sm" data-style="btn btn-mini" id="species" 
+                (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
                 </select>
@@ -19,7 +20,8 @@
             <br>
             Route:
             <div class="form-inline">
-                <select class="form-control-sm" id="routes" (change)="addSearchSelect($event)">
+                <select class="form-control-sm" data-style="btn btn-mini" id="routes" 
+                (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
                 </select>
@@ -56,7 +58,8 @@
             <br>
             Category:
             <div class="form-inline">
-                <select class="form-control-sm" id="category" (change)="selectCategory($event)">
+                <select class="form-control-sm" data-style="btn btn-mini" id="category" 
+                (change)="selectCategory($event)">
                     <option disabled selected>-- select --</option>
                     <option>Histopathological</option>
                     <option>Clinical signs</option>
