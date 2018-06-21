@@ -8,7 +8,7 @@
             <h5>Study-level filters</h5>
             Species:
             <div class="form-inline">
-                <select class="form-control-sm" data-style="btn btn-mini" id="species" 
+                <select class="form-control-sm" id="species" 
                 (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
@@ -20,7 +20,7 @@
             <br>
             Route:
             <div class="form-inline">
-                <select class="form-control-sm" data-style="btn btn-mini" id="routes" 
+                <select class="form-control-sm" id="routes" 
                 (change)="addSearchSelect($event)">
                     <option disabled selected value> -- select -- </option>
                     <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
@@ -58,12 +58,13 @@
             <br>
             Category:
             <div class="form-inline">
-                <select class="form-control-sm" data-style="btn btn-mini" id="category" 
+                <select class="form-control-sm" id="category" 
                 (change)="selectCategory($event)">
                     <option disabled selected>-- select --</option>
-                    <option>Histopathological</option>
+                    <option *ngFor="let source of sources">{{source}}</option>
+                    <!-- <option>Histopathological</option>
                     <option>Clinical signs</option>
-                    <option>Gross necropsy</option>
+                    <option>Gross necropsy</option> -->
                 </select>
             </div>
             
@@ -111,7 +112,7 @@
             <div class="form-inline">
                 <select class="form-control-sm" id="grade" (change)="addCategorySearch($event)" [disabled]="!hasCategory">
                     <option disabled selected value> -- select -- </option>
-                    <option *ngFor="let grade of table_info['allOptions']['grde']">{{grade}}</option>
+                    <option *ngFor="let grade of table_info['allOptions']['grades']">{{grade}}</option>
                 </select>
             </div> -->
             <div id="accordion">

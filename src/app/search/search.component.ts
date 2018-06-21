@@ -20,15 +20,12 @@ export class SearchComponent implements OnInit {
   items_observations: TreeviewItem[];
   values: number[];
   config = TreeviewConfig.create({
-     hasAllCheckBox: false,
+      hasAllCheckBox: false,
       hasFilter: true,
-      maxHeight: 400   
+      maxHeight: 400
   });
 
   buttonClass = 'btn-outline-secondary';
-  rows={}
-
-  hasCategory: boolean=false;
 
   relevant_form: boolean;
   F: boolean=false;
@@ -37,13 +34,14 @@ export class SearchComponent implements OnInit {
   min_exposure: number;
   max_exposure: number;
   sex = [];
+  sources = [];
   selectedCategory: string;
+  hasCategory: boolean=false;
 
   objectKeys = Object.keys;
   search_form = {};
-  table_info = {};
-
   categories_search_form = {};
+  table_info = {};
 
   // Set this value on init to store the total number of studies and structures
   // so that we can calculate the current fraction selected
@@ -55,22 +53,21 @@ export class SearchComponent implements OnInit {
   ngOnInit(){
     this.findService.currentTable.subscribe(table_info => {
       this.table_info = table_info
-      if (this.table_info['allOptions']!== undefined){
-          this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
-          this.items_observations=this.createTreeview( table_info['allOptions']['observations']);
-      }
     });
     this.findService.initFinding().subscribe(table_info => {
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
+      this.sources = table_info['allOptions']['sources'];
       this.findService.changeTable(table_info)}
-    );    
+    );
   }
 
   selectCategory(event: any){
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
+    this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
+    this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
     if (!(event.target.value in this.categories_search_form)) {
       this.categories_search_form[event.target.value] = null;
     }    
@@ -148,8 +145,8 @@ export class SearchComponent implements OnInit {
     this.sliderElement.reset();
     this.findService.initFinding().subscribe(table_info =>{ 
       this.findService.changeTable(table_info);
-      this.items_organs=this.createTreeview( table_info['allOptions']['organs']);
-      this.items_observations=this.createTreeview(table_info['allOptions']['observations']);
+      // this.items_organs=this.createTreeview(table_info['allOptions']['organs']);
+      // this.items_observations=this.createTreeview(table_info['allOptions']['observations']);
     });
     this.hasCategory = false;
     this.categories_search_form = {};
