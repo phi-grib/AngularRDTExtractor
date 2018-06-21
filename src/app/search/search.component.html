@@ -70,7 +70,7 @@
             
             <div id="accordion">
                 <div class="card border-light mb-3">
-                    <div class="card-header" id="headingOne">
+                    <div class="card-header" id="organsHeading">
                         <button class="btn btn-link collapsed" 
                         data-toggle="collapse" data-target="#collapseOne" 
                         aria-expanded="true" aria-controls="collapseOne" 
@@ -79,7 +79,7 @@
                             Organs
                         </button>
                     </div>
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" 
+                    <div id="collapseOne" class="collapse" aria-labelledby="organsHeading" 
                     data-parent="#accordion">
                         <div class="card-body">
                             <ngx-treeview [config]="config" 
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="card border-light mb-3">
-                    <div class="card-header" id="headingTwo">        
+                    <div class="card-header" id="observationsHeading">        
                         <button class="btn btn-link collapsed" data-toggle="collapse" 
                         data-target="#collapseTwo" aria-expanded="false" 
                         aria-controls="collapseTwo" [disabled]="!hasCategory">
@@ -98,7 +98,7 @@
                             Observations
                         </button>
                     </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div id="collapseTwo" class="collapse" aria-labelledby="observationsHeading" data-parent="#accordion">
                         <div class="card-body">
                             <ngx-treeview [config]="config" 
                             [items]="items_observations" 

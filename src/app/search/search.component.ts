@@ -145,8 +145,6 @@ export class SearchComponent implements OnInit {
     this.sliderElement.reset();
     this.findService.initFinding().subscribe(table_info =>{ 
       this.findService.changeTable(table_info);
-      // this.items_organs=this.createTreeview(table_info['allOptions']['organs']);
-      // this.items_observations=this.createTreeview(table_info['allOptions']['observations']);
     });
     this.hasCategory = false;
     this.categories_search_form = {};
