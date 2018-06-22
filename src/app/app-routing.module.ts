@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
-import { SearchComponent } from './search/search.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { TableComponent } from './table/table.component';
 import { ConnectComponent } from './connect/connect.component';
 import { ExploreComponent } from './explore/explore.component';
 import { BrowseComponent } from './browse/browse.component';
@@ -12,8 +13,12 @@ const routes : Routes = [
     component: ConnectComponent
   },
   {
-    path:'search',
-    component: SearchComponent
+    path:'sidebar',
+    component: SidebarComponent
+  },
+  {
+    path:'table',
+    component: TableComponent
   },
   {
     path:'explore',

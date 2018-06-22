@@ -1,15 +1,12 @@
-<ul class="nav nav-tabs" role="tablist">
-  <li class="nav-item" >
-    <a class="nav-link active" href="#connect" role="tab" data-toggle="tab" routerLink="connect"> Connect </a>
-  </li>
-  <li class="nav-item" >
-    <a class="nav-link" href="#search" role="tab" data-toggle="tab" routerLink="search"> Search </a>
-  </li>
-  <li class="nav-item" >
-      <a class="nav-link" href="#explore" role="tab" data-toggle="tab" routerLink="explore"> Explore </a>
-  </li>
-  <li class="nav-item" >
-      <a class="nav-link" href="#browse" role="tab" data-toggle="tab" routerLink="browse"> Browse </a>
-  </li>
-</ul>
-<router-outlet></router-outlet>
+<div>
+  <span>
+    <a class="button"><span (click)="toggleNav()">&#9776; Filters</span></a>
+    <a class="button" href="#connect" routerLink="connect"> Connect </a>
+    <a class="button" href="#table" routerLink="table"> Table </a>
+    <a class="button" href="#explore" routerLink="explore"> Explore </a>
+    <a class="button" href="#browse" routerLink="browse"> Browse </a>
+    <br>
+    <br>
+    <router-outlet></router-outlet>
+  </span>
+</div>
