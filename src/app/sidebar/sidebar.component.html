@@ -1,0 +1,224 @@
+<a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+<br>
+<div id="FilterAccordion">
+    <div class="card">
+        <div class="card-header" id="CompoundHeading">            
+            <button class="btn btn-link" data-toggle="collapse" data-target="#CompoundCard" aria-expanded="true" aria-controls="CompoundCard">
+                <h5>Compound</h5>
+            </button>            
+        </div>
+        <div id="CompoundCard" class="collapse show" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
+            <div class="card-body">
+            </div>
+        </div>
+        <div class="card-header" id="StudyHeading">            
+            <button class="btn btn-link" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
+                <h5>Study</h5>
+            </button>            
+        </div>
+        <div id="StudyCard" class="collapse show" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
+            <div class="card-body">
+                Species:
+                <div class="form-inline">
+                    <select class="form-control-sm" id="species" 
+                    (change)="addSearchSelect($event)">
+                        <option disabled selected value> -- select -- </option>
+                        <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
+                    </select>
+                </div>
+                <app-panel [searchFormPanel]=search_form 
+                [CategorySearchFormPanel]=categories_search_form
+                [key]= "'species'" ></app-panel>
+                <br>
+                Route:
+                <div class="form-inline">
+                    <select class="form-control-sm" id="routes" 
+                    (change)="addSearchSelect($event)">
+                        <option disabled selected value> -- select -- </option>
+                        <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
+                    </select>
+                </div>
+                <app-panel [searchFormPanel]=search_form 
+                [CategorySearchFormPanel]=categories_search_form 
+                [key]= "'routes'" ></app-panel>
+                <br>
+                Exposure period (days):
+                <div>
+                    <ion-range-slider #sliderElement
+                        type="double"
+                        [min]="table_info['allOptions']['exposure_min']"
+                        [max]="table_info['allOptions']['exposure_max']"
+                        [from]="table_info['allOptions']['exposure_min']"
+                        [to]="table_info['allOptions']['exposure_max']"
+                        (onFinish)="addSliderInfo($event)">
+                    </ion-range-slider>
+                </div> 
+            </div>
+        </div>
+        <div class="card-header" id="FindingHeading">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#FindingCard" aria-expanded="true" aria-controls="FindingCard">
+                <h5>Finding</h5>
+            </button>
+        </div>
+        <div id="FindingCard" class="collapse show" aria-labelledby="FindingHeading" data-parent="#FilterAccordion">
+            <div class="card-body">
+                Sex:
+                <div class="form-inline">
+                    <label *ngFor="let value of sex">
+                    <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}&nbsp;&nbsp;
+                    </label>
+                </div>
+                <br>
+                <div class="form-inline">
+                    <br>
+                    <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
+                    &nbsp;Treatment-related only
+                </div>
+                <br>
+                Category:
+                <div class="form-inline">
+                    <select class="form-control-sm" id="category" 
+                    (change)="selectCategory($event)">
+                        <option disabled selected>-- select --</option>
+                        <option *ngFor="let source of sources">{{source}}</option>
+                    </select>
+                </div>
+                <br>
+                <div id="TreeAccordion">
+                    <div class="card border-light mb-3">
+                        <div class="card-header" id="organsHeading">
+                            <button class="btn btn-link collapsed" 
+                            data-toggle="collapse" data-target="#collapseOne" 
+                            aria-expanded="true" aria-controls="collapseOne" 
+                            [disabled]="!hasCategory">               
+                                <i class="fa" aria-hidden="true"></i>
+                                Organs
+                            </button>
+                        </div>
+                        <div id="collapseOne" class="collapse" aria-labelledby="organsHeading" 
+                        data-parent="#TreeAccordion">
+                            <div class="card-body">
+                                <ngx-treeview [config]="config" 
+                                [items]="items_organs" 
+                                (selectedChange)="TreeFilterChange($event, 'organs')">
+                                </ngx-treeview>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card border-light mb-3">
+                        <div class="card-header" id="observationsHeading">        
+                            <button class="btn btn-link collapsed" data-toggle="collapse" 
+                            data-target="#collapseTwo" aria-expanded="false" 
+                            aria-controls="collapseTwo" [disabled]="!hasCategory">
+                                <i class="fa" aria-hidden="true"></i>
+                                Observations
+                            </button>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="observationsHeading" data-parent="#TreeAccordion">
+                            <div class="card-body">
+                                <ngx-treeview [config]="config" 
+                                [items]="items_observations" 
+                                (selectedChange)="TreeFilterChange($event, 'observations')">
+                                </ngx-treeview>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="ShowFiltersAccordion">
+                    <div class="card" [hidden]="!isCategoryFiltered('Histopathological')">
+                        <div class="card-header" id="HistopathologicalHeading">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#Histopathological" aria-expanded="true" aria-controls="Histopathological">
+                                Histopathological
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="Histopathological" class="collapse show" aria-labelledby="HistopathologicalHeading" data-parent="#ShowFiltersAccordion">
+                            <div class="card-body">
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'organs'" 
+                                [category]="selectedCategory"></app-panel>
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'observations'"
+                                [category]="selectedCategory" ></app-panel>
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'grade'" 
+                                [category]="selectedCategory"></app-panel>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" [hidden]="!isCategoryFiltered('Clinical signs')">
+                        <div class="card-header" id="ClinicalSignsHeading">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#ClinicalSigns" aria-expanded="true" aria-controls="ClinicalSigns">
+                                    Clinical signs
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="ClinicalSigns" class="collapse show" aria-labelledby="ClinicalSignsHeading" data-parent="#ShowFiltersAccordion">
+                            <div class="card-body">
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'organs'" 
+                                [category]="selectedCategory"></app-panel>
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'observations'" 
+                                [category]="selectedCategory"></app-panel>
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'grade'" 
+                                [category]="selectedCategory"></app-panel>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" [hidden]="!isCategoryFiltered('Gross necropsy')">
+                        <div class="card-header" id="GrossNecropsyHeading">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#GrossNecropsy" aria-expanded="true" aria-controls="GrossNecropsy">
+                                        Gross necropsy
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="GrossNecropsy" class="collapse show" aria-labelledby="GrossNecropsyHeading" data-parent="#ShowFiltersAccordion">
+                            <div class="card-body">
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'organs'" 
+                                [category]="selectedCategory"></app-panel>
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'observations'" 
+                                [category]="selectedCategory"></app-panel>
+                                <app-panel [searchFormPanel]=search_form 
+                                [CategorySearchFormPanel]=categories_search_form 
+                                [key]= "'grade'" 
+                                [category]="selectedCategory"></app-panel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="card">
+    <div class="card-body">
+        <div align="center"><font color="red">{{ table_info.num_studies }}</font> studies</div>
+        <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100" style="width: 100%"></progress>
+        <div align="center"><font color="red">{{ table_info.num_structures }} </font> structures</div>
+        <progress id="structuresProgress" [value]="table_info['num_structures']*100/totalStructures" max="100" style="width: 100%"></progress>
+    </div>
+</div>
+<br>
+<div align="center">
+    <button type="button" class="btn" (click)="resetFilters()" style="background-color: lightgray"> Reset Filters </button>
+</div>
+<br>
+<div align="center">
+    <button type="button" class="btn" (click)="download()" style="background-color: lightgray"> Export </button>
+</div>
