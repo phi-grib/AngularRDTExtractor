@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { SearchComponent } from './search/search.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { PanelComponent } from './panel/panel.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,7 +28,7 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
   declarations: [
     AppComponent,
     HomeComponent,
-    SearchComponent,
+    SidebarComponent,
     PanelComponent,
     CapitalizePipe,
     TableComponent,

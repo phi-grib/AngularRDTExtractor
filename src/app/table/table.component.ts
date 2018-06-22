@@ -25,7 +25,6 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.findService.currentTable.subscribe (table_info => this.table_info = table_info);
   }
 
-
   openCustomModal(id:string) {
 
     this.modalDialogService.openDialog(this.viewContainer, {
