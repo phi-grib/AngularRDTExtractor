@@ -6,13 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { TabsComponent } from './tabs/tabs.component';
+import { TableComponent } from './table/table.component';
+import { PlotComponent } from './plot/plot.component';
 import { PanelComponent } from './panel/panel.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { HttpClientModule } from '@angular/common/http';
-import { TableComponent } from './table/table.component';
 import { FindingsService } from './findings.service';
 import { AppRoutingModule } from './app-routing.module';
-import { TabsComponent } from './tabs/tabs.component';
 import { ExploreComponent } from './explore/explore.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
@@ -29,10 +30,11 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
     AppComponent,
     HomeComponent,
     SidebarComponent,
+    TabsComponent,
+    TableComponent,
+    PlotComponent,
     PanelComponent,
     CapitalizePipe,
-    TableComponent,
-    TabsComponent,
     ExploreComponent,
     ConnectComponent,
     BrowseComponent,
