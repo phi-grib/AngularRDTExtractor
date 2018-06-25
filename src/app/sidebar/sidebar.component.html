@@ -11,6 +11,27 @@
             <div class="card-body">
             </div>
         </div>
+        <div class="card-header" id="PharmacologyHeading">            
+            <button class="btn btn-link" data-toggle="collapse" data-target="#PharmacologyCard" aria-expanded="true" aria-controls="PharmacologyCard">
+                <h5>Pharmacology</h5>
+            </button>            
+        </div>
+        <div id="PharmacologyCard" class="collapse show" aria-labelledby="PharmacologyHeading" data-parent="#FilterAccordion">
+            <div class="card-body">
+                Pharmacological action:
+                <div class="form-inline">
+                    <select class="form-control-sm" id="pharmacological_action" 
+                    (change)="addSearchSelect($event)">
+                        <option disabled selected value> -- select -- </option>
+                        <option *ngFor="let action of table_info['allOptions']['pharmacological_action']">{{action}}</option>   
+                    </select>
+                </div>
+                <app-panel [searchFormPanel]=search_form 
+                [CategorySearchFormPanel]=categories_search_form
+                [key]= "'pharmacological_action'" ></app-panel>
+                <br>
+            </div>
+        </div>
         <div class="card-header" id="StudyHeading">            
             <button class="btn btn-link" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
                 <h5>Study</h5>
