@@ -9,6 +9,32 @@
         </div>
         <div id="CompoundCard" class="collapse show" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
             <div class="card-body">
+                <button type="button" class="btn btn-link" (click)="openCustomModal()">Sketch</button>
+                <br>
+                Name:
+                <div class="form-inline">
+                    <select class="form-control-sm" id="compound_name" 
+                    (change)="addSearchSelect($event)">
+                        <option disabled selected value> -- select -- </option>
+                        <option *ngFor="let name of table_info['allOptions']['compound_name']">{{name}}</option>   
+                    </select>
+                </div>
+                <app-panel [searchFormPanel]=search_form 
+                [CategorySearchFormPanel]=categories_search_form
+                [key]= "'compound_name'" ></app-panel>
+                <br>
+                CAS number:
+                <div class="form-inline">
+                    <select class="form-control-sm" id="cas_number" 
+                    (change)="addSearchSelect($event)">
+                        <option disabled selected value> -- select -- </option>
+                        <option *ngFor="let cas of table_info['allOptions']['cas_number']">{{cas}}</option>   
+                    </select>
+                </div>
+                <app-panel [searchFormPanel]=search_form 
+                [CategorySearchFormPanel]=categories_search_form
+                [key]= "'cas_number'" ></app-panel>
+                <br>
             </div>
         </div>
         <div class="card-header" id="PharmacologyHeading">            

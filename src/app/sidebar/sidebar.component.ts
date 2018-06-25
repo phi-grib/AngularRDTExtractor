@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
 DownlineTreeviewItem} from 'ngx-treeview';
+import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import { CustomModalComponent } from '../sketch/sketch.component';
 import { isNull } from 'util';
 
 @Component({
@@ -48,7 +50,10 @@ export class SidebarComponent implements OnInit {
   totalStudies: number;   
   totalStructures: number;
 
-  constructor(private httpClient: HttpClient, private findService : FindingsService) {}
+  constructor(private httpClient: HttpClient, 
+              private modalDialogService: ModalDialogService, 
+              private viewContainer: ViewContainerRef,
+              private findService : FindingsService) {}
 
   ngOnInit(){
     this.findService.currentTable.subscribe(table_info => {
@@ -200,6 +205,18 @@ export class SidebarComponent implements OnInit {
       }
     });
     // this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+  }
+
+  openCustomModal() {
+    this.modalDialogService.openDialog(this.viewContainer, {
+      title: 'Compound seach',
+      childComponent: CustomModalComponent,
+      settings: {
+        closeButtonClass: 'close theme-icon-close',
+        modalDialogClass: "modal-dialog modal-dialog-centered modal-lg"
+      },
+      data: "Test"
+    });
   }
 
   closeNav() {
