@@ -14,15 +14,17 @@ import { CustomModalComponent } from '../dialog/dialog.component';
 export class TableComponent implements OnInit,AfterViewInit {
 
   table_info = {};
-  @Input() searchFormTable = {};
+  search_form = {};
+  categories_search_form = {};
   @ViewChildren('cmp') components:QueryList<ElementRef>;
   
-
   constructor(private findService : FindingsService, private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef,
               private renderer: Renderer2) {}
 
   ngOnInit() {
     this.findService.currentTable.subscribe (table_info => this.table_info = table_info);
+    this.findService.currentSearchFormTable.subscribe (searchFormTable => this.search_form = searchFormTable);
+    this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
   }
 
   openCustomModal(id:string) {
@@ -58,9 +60,11 @@ export class TableComponent implements OnInit,AfterViewInit {
     });
 
   }
-  // Page(page:number){
-  //   this.findService.searchFinding(this.searchFormTable,page).subscribe(res => this.table_info = res); 
-  // }
+ Page(page:number){
+   console.log(this.search_form);
+   console.log(this.categories_search_form);
+     this.findService.searchFinding(this.search_form,this.categories_search_form,page).subscribe(res => this.table_info = res); 
+  }
 
  
 

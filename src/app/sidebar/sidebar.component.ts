@@ -3,15 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
-DownlineTreeviewItem} from 'ngx-treeview';
+DownlineTreeviewItem,TreeviewEventParser,DownlineTreeviewEventParser} from 'ngx-treeview';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
-import { CustomModalComponent } from '../sketch/sketch.component';
+import { CustomModalComponent } from '../dialog/dialog.component';
 import { isNull } from 'util';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
+  providers: [
+    { provide: TreeviewEventParser, useClass: DownlineTreeviewEventParser }
+]
 })
 
 export class SidebarComponent implements OnInit {
@@ -56,9 +59,11 @@ export class SidebarComponent implements OnInit {
               private findService : FindingsService) {}
 
   ngOnInit(){
-    this.findService.currentTable.subscribe(table_info => {
-      this.table_info = table_info
-    });
+    
+    this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
+    this.findService.currentSearchFormTable.subscribe (searchFormTable => this.search_form = searchFormTable);
+    this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
+
     this.findService.initFinding().subscribe(table_info => {
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
@@ -76,6 +81,7 @@ export class SidebarComponent implements OnInit {
     if (!(event.target.value in this.categories_search_form)) {
       this.categories_search_form[event.target.value] = null;
     }
+    this.findService.changeCategoriesSearchForm(this.categories_search_form);
   }
 
   isCategoryFiltered(category: string){
@@ -103,7 +109,15 @@ export class SidebarComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+
+      this.findService.changeSearchFormTable(this.search_form);
+      this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
+        this.findService.changeTable(table_info);
+        alert("Search");
+        this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
+        this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
+      
+      });
 
       event.target.selectedIndex = "0";
   }
@@ -131,29 +145,48 @@ export class SidebarComponent implements OnInit {
     else{   
       delete this.search_form[event.target.id];
     }
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
+    this.findService.changeSearchFormTable(this.search_form);
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
+      this.findService.changeTable(table_info);
+      alert("SearchCheck");
+      this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
+      this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
+    
+    });
 
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
+      this.findService.changeTable(table_info);
+      alert("SearchSlider");
+      this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
+      this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
+    
+    });
   }
 
   resetFilters(){    
     this.search_form={}
+    this.categories_search_form = {};
     this.relevant_form = false;
     this.BOTH = false;
     this.F = false;
     this.M = false;
     this.sliderElement.reset();
-    this.findService.initFinding().subscribe(table_info =>{ 
+    this.findService.changeSearchFormTable(this.search_form);
+    this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
       this.findService.changeTable(table_info);
+      alert("Reset");
+      this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
+      this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
+    
     });
     this.hasCategory = false;
-    this.categories_search_form = {};
-    document.getElementById('category').selectedIndex = "0";
+    //document.getElementById('category').selectedIndex = "0";
   }
 
   /* Recursive function */ 
@@ -204,7 +237,8 @@ export class SidebarComponent implements OnInit {
         parent = parent.parent;
       }
     });
-    // this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
   openCustomModal() {

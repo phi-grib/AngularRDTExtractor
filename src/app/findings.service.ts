@@ -8,12 +8,26 @@ export class FindingsService {
   private table_form = new BehaviorSubject<any>({});
   currentTable = this.table_form.asObservable();
 
+  private searchFormTable = new BehaviorSubject<any>({});
+  currentSearchFormTable = this.searchFormTable.asObservable();
+
+  private categoriesSearchForm = new BehaviorSubject<any>({});
+  currentCategoriesSearchForm= this.categoriesSearchForm.asObservable();
+
   apiRoot = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
 
   changeTable(table){
     this.table_form.next(table);
+  }
+
+  changeSearchFormTable(table){
+    this.searchFormTable.next(table);
+  }
+
+  changeCategoriesSearchForm(table){
+    this.categoriesSearchForm.next(table);
   }
   
   initFinding(): Observable<any>{

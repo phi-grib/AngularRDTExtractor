@@ -8,5 +8,7 @@ npm i ngx-tooltip --save
 npm install --save font-awesome angular-font-awesome
 npm install ngx-treeview --save
 npm i rxjs-compat --save
-npm install plotly --save
 npm install bootstrap-select --save
+npm install plotly.js --save
+npm install @types/plotly.js --save
+
