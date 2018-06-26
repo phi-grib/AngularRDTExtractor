@@ -15,9 +15,11 @@ export class TabsComponent implements OnInit {
   toggleNav() {
     if (document.getElementById("mySidenav").style.width === "250px") {
       document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft= "0";
+      document.getElementById("mySidenav").style.overflow = "hidden";
+      document.getElementById("main").style.marginLeft= "25px";
     } else {
       document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("mySidenav").style.overflow = "auto";
       document.getElementById("main").style.marginLeft = "250px";
     }
   }

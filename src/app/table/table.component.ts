@@ -1,8 +1,8 @@
-import { Component, OnInit, Input,ViewChildren,QueryList,ElementRef,AfterViewInit ,ViewContainerRef, Renderer2} from '@angular/core';
-import { HttpClient,HttpParams } from '@angular/common/http';
+import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterViewInit, 
+        ViewContainerRef, Renderer2} from '@angular/core';
 import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
-import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import { ModalDialogService } from 'ngx-modal-dialog';
 import { CustomModalComponent } from '../dialog/dialog.component';
 
 
@@ -18,7 +18,10 @@ export class TableComponent implements OnInit,AfterViewInit {
   categories_search_form = {};
   @ViewChildren('cmp') components:QueryList<ElementRef>;
   
-  constructor(private findService : FindingsService, private modalDialogService: ModalDialogService, private viewContainer: ViewContainerRef,
+
+  constructor(private findService : FindingsService, 
+              private modalDialogService: ModalDialogService, 
+              private viewContainer: ViewContainerRef,
               private renderer: Renderer2) {}
 
   ngOnInit() {

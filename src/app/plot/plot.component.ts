@@ -32,6 +32,10 @@ export class PlotComponent implements OnInit {
 
     const element = this.el.nativeElement
 
+    this.table_info["data"].array.forEach(row => {
+      row
+    });
+
     const data = [{
       values: [19, 26, 55],
       labels: ['Residential', 'Non-Residential', 'Utility'],
@@ -43,6 +47,6 @@ export class PlotComponent implements OnInit {
       width: 500
     };
 
-    Plotly.newPlot( element, data, layout )
+    Plotly.newPlot( element,data, layout )
   }
 }
