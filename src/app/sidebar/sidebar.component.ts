@@ -68,6 +68,31 @@ export class SidebarComponent implements OnInit {
     );
   }
 
+  myFunction() {
+    document.getElementById("compoundDropdown").classList.toggle("show");
+  }
+
+  filterFunction(id: string) {
+    var input, filter, ul, li, a, i;
+    filter = event.value.toUpperCase();
+    div = document.getElementById(id);
+    // a = div.getElementsByTagName("option");
+    for (i = 0; i < div.length; i++) {
+        if (div[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            div[i].style.display = "";
+        } else {
+            div[i].style.display = "none";
+        }
+    }
+  }
+
+ liveSearch(event: any) {
+      var value = event.val().toLowerCase();
+      $(".dropdown-menu li").filter(function() {
+        event.toggle(event.text().toLowerCase().indexOf(value) > -1)
+      });
+  });
+
   selectCategory(event: any){
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
@@ -223,5 +248,16 @@ export class SidebarComponent implements OnInit {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("mySidenav").style.overflow = "hidden";
     document.getElementById("main").style.marginLeft = "25px";
+  }
+
+  getfolder(event) {
+    var files = event.target.files;
+    var path = files[0].webkitRelativePath;
+    var Folder = path.split("/");
+    alert(Folder[0]);
+  }
+
+  download() {
+
   }
 }
