@@ -11,4 +11,4 @@ npm i rxjs-compat --save
 npm install bootstrap-select --save
 npm install plotly.js --save
 npm install @types/plotly.js --save
-
+npm i ngx-drag-drop --save 

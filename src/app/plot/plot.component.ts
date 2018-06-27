@@ -6,6 +6,7 @@ import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { CustomModalComponent } from '../dialog/dialog.component';
 import * as Plotly from 'plotly.js';
 import {Config, Data, Layout} from 'plotly.js';
+import { DndDropEvent, DropEffect } from "ngx-drag-drop";
 
 
 @Component({
@@ -16,29 +17,52 @@ import {Config, Data, Layout} from 'plotly.js';
 export class PlotComponent implements OnInit {
 
   @ViewChild('chart') el: ElementRef;
-  table_info = {};
+  @ViewChild('chart2') el2: ElementRef;
+  search_form = {};
+  categories_search_form = {};
+  draggable = {
+    // note that data is handled with JSON.stringify/JSON.parse
+    // only set simple data or POJO's as methods will be lost 
+    data: "myDragData",
+    effectAllowed: "all",
+    disable: false,
+    handle: false
+  };
 
   constructor( private findService : FindingsService) { }
 
   ngOnInit() {
-    this.findService.currentTable.subscribe(table_info => {
-      this.table_info = table_info
+    this.findService.currentSearchFormTable.subscribe (searchFormTable => {
+      this.search_form = searchFormTable;
+      this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+        this.basicChart(info['x'],info['y']);
+        this.basicChart2(info['x'],info['y']);
+      });
     });
-    this.basicChart()
+    this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
+      this.categories_search_form = categoriesSearchForm;
+      this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+          
+        this.basicChart(info['x'],info['y']);
+        this.basicChart2(info['x'],info['y']);
+      });
+    });
+    
+    this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+          
+      this.basicChart(info['x'],info['y']);
+      this.basicChart2(info['x'],info['y']);
+    });
+    
   }
 
 
-  basicChart() {
+  basicChart(x,y) {
 
     const element = this.el.nativeElement
 
-    this.table_info["data"].array.forEach(row => {
-      row
-    });
-
     const data = [{
-      values: [19, 26, 55],
-      labels: ['Residential', 'Non-Residential', 'Utility'],
+      labels: x,
       type: 'pie'
     }];
 
@@ -49,4 +73,66 @@ export class PlotComponent implements OnInit {
 
     Plotly.newPlot( element,data, layout )
   }
+
+  basicChart2(x,y){
+
+    const element = this.el2.nativeElement
+
+    var trace = [{
+      type: 'histogram',
+      x: x,
+    }]
+    var layout = {
+      height: 400,
+      width: 500
+    };
+    var data = [trace];
+
+  Plotly.plot( element,data , layout)
+  }
+
+  
+
+  
+  
+  onDragStart(event:DragEvent) {
+
+    console.log("drag started", JSON.stringify(event, null, 2));
+  }
+  
+  onDragEnd(event:DragEvent) {
+    
+    console.log("drag ended", JSON.stringify(event, null, 2));
+  }
+  
+  onDraggableCopied(event:DragEvent) {
+    
+    console.log("draggable copied", JSON.stringify(event, null, 2));
+  }
+  
+  onDraggableLinked(event:DragEvent) {
+      
+    console.log("draggable linked", JSON.stringify(event, null, 2));
+  }
+    
+  onDraggableMoved(event:DragEvent) {
+    
+    console.log("draggable moved", JSON.stringify(event, null, 2));
+  }
+      
+  onDragCanceled(event:DragEvent) {
+    
+    console.log("drag cancelled", JSON.stringify(event, null, 2));
+  }
+  
+  onDragover(event:DragEvent) {
+    
+    console.log("dragover", JSON.stringify(event, null, 2));
+  }
+  
+  onDrop(event:DndDropEvent) {
+  
+    console.log("dropped", JSON.stringify(event, null, 2));
+  }
+
 }
