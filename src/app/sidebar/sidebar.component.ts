@@ -128,7 +128,7 @@ export class SidebarComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+      this.findService.updateFilters(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
   }
@@ -156,14 +156,14 @@ export class SidebarComponent implements OnInit {
     else{   
       delete this.search_form[event.target.id];
     }
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
+    this.findService.updateFilters(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
 
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.updateFilters(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
   resetFilters(){    
@@ -229,7 +229,7 @@ export class SidebarComponent implements OnInit {
         parent = parent.parent;
       }
     });
-    // this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    // this.findService.updateFilters(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
   openCustomModal() {

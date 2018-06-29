@@ -61,7 +61,7 @@ export class TableComponent implements OnInit,AfterViewInit {
 
   }
   // Page(page:number){
-  //   this.findService.searchFinding(this.searchFormTable,page).subscribe(res => this.table_info = res); 
+  //   this.findService.updateTable(this.searchFormTable,page).subscribe(res => this.table_info = res); 
   // }
 
  

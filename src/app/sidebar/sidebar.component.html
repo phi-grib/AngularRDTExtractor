@@ -12,24 +12,13 @@
                 <button type="button" class="btn btn-link" (click)="openCustomModal()">Sketch</button>
                 <br>
                 Name:
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Name
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <input class="form-control" id="myInput" type="text" placeholder="Search.." (keyup)="liveSearch($event)">
-                        <li *ngFor="let name of table_info['allOptions']['compound_name']">
-                            {{ name }}
-                        </li>
-                    </ul>
-                </div>
-                <!-- <div class="form-inline">
-                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction('compound_name')">
+                <div class="form-inline">
                     <select class="form-control-sm" id="compound_name" 
                     (change)="addSearchSelect($event)">
                         <option disabled selected value> -- select -- </option>
                         <option *ngFor="let name of table_info['allOptions']['compound_name']">{{name}}</option>
                     </select>
-                </div> -->
+                </div>
                 <app-panel [searchFormPanel]=search_form 
                 [CategorySearchFormPanel]=categories_search_form
                 [key]= "'compound_name'" ></app-panel>
