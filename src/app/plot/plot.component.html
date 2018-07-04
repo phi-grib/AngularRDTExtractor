@@ -1,45 +1,26 @@
-<div #chart>
-    <!-- Chart will appear here -->
+<div class="row">
+<div class="col-md-6" style="width: 30%;">
+<canvas baseChart 
+[data]="lineChartData"
+[labels]="lineChartLabels"
+[options]="lineChartOptions"
+[chartType]="lineChartType"
+(chartHover)="chartHovered($event)"
+(chartClick)="chartClicked($event)"></canvas>
 </div>
-<div #chart2>
-    <!-- Chart will appear here -->
+<div class="col-md-6" style="width: 30%;">
+        <canvas baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [options]="options"
+        [chartType]="pieChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
 </div>
+</div>
+<div class="row">
 
-<div [dndDraggable]="draggable.data"
-     [dndEffectAllowed]="draggable.effectAllowed"
-     [dndDisableIf]="draggable.disable"
-     (dndStart)="onDragStart($event)"
-     (dndCopied)="onDraggableCopied($event)"
-     (dndLinked)="onDraggableLinked($event)"
-     (dndMoved)="onDraggableMoved($event)"
-     (dndCanceled)="onDragCanceled($event)"
-     (dndEnd)="onDragEnd($event)">
-      
-    <!--if [dndHandle] is used inside dndDraggable drag can only start from the handle-->
-    <div *ngIf="draggable.handle"
-         dndHandle>HANDLE
+    <div class="col-md-12 text-center" style="margin-top: 10px;height: 50%">
+        <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
     </div>
-    
-    draggable ({{draggable.effectAllowed}}) <span [hidden]="!draggable.disable">DISABLED</span>
-    
-    <!--optionally select a child element as drag image-->
-    <div dndDragImageRef>DRAG_IMAGE</div>
-    
 </div>
-
-<!--a dropzone-->
-<!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
-<section dndDropzone
-         (dndDragover)="onDragover($event)"
-         (dndDrop)="onDrop($event)">
-      
-    dropzone 
-    
-    <!--optional placeholder element for dropzone-->
-    <!--will be removed from DOM on init-->
-    <div style="border: 1px orangered solid; border-radius: 5px; padding: 15px;"
-         dndPlaceholderRef>
-        placeholder
-    </div>
-
-</section>

@@ -26,6 +26,8 @@ import { TreeviewModule } from 'ngx-treeview';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
 import { DndModule } from 'ngx-drag-drop';
+import { ChartsModule } from 'ng2-charts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +55,8 @@ import { DndModule } from 'ngx-drag-drop';
     TooltipModule,
     TreeviewModule.forRoot(),
     AngularFontAwesomeModule,
-    DndModule
+    DndModule,
+    ChartsModule
   ],
   providers: [FindingsService],
   entryComponents: [CustomModalComponent],

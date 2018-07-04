@@ -35,7 +35,8 @@
               "node_modules/bootstrap/dist/js/bootstrap.js",
               "node_modules/jquery/dist/jquery.min.js", 
               "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
-              "node_modules/smiles-drawer/dist/smiles-drawer.min.js"
+              "node_modules/smiles-drawer/dist/smiles-drawer.min.js",
+              "node_modules/chart.js/dist/Chart.min.js"
 
 
             ]
