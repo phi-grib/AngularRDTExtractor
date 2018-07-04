@@ -5,7 +5,7 @@ import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
 DownlineTreeviewItem} from 'ngx-treeview';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
-import { CustomModalComponent } from '../sketch/sketch.component';
+// import { CustomModalComponent } from '../sketch/sketch.component';
 import { isNull } from 'util';
 
 @Component({
@@ -68,31 +68,6 @@ export class SidebarComponent implements OnInit {
     );
   }
 
-  myFunction() {
-    document.getElementById("compoundDropdown").classList.toggle("show");
-  }
-
-  filterFunction(id: string) {
-    var input, filter, ul, li, a, i;
-    filter = event.value.toUpperCase();
-    div = document.getElementById(id);
-    // a = div.getElementsByTagName("option");
-    for (i = 0; i < div.length; i++) {
-        if (div[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
-            div[i].style.display = "";
-        } else {
-            div[i].style.display = "none";
-        }
-    }
-  }
-
- liveSearch(event: any) {
-      var value = event.val().toLowerCase();
-      $(".dropdown-menu li").filter(function() {
-        event.toggle(event.text().toLowerCase().indexOf(value) > -1)
-      });
-  });
-
   selectCategory(event: any){
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
@@ -128,7 +103,7 @@ export class SidebarComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-      this.findService.updateFilters(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+      this.findService.updateTable(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
   }
@@ -156,14 +131,14 @@ export class SidebarComponent implements OnInit {
     else{   
       delete this.search_form[event.target.id];
     }
-    this.findService.updateFilters(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
+    this.findService.updateTable(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
 
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
-    this.findService.updateFilters(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.updateTable(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
   resetFilters(){    

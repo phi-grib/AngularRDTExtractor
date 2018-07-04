@@ -37,6 +37,6 @@ export class PanelComponent implements OnInit {
       }
     }
     
-    this.findService.searchFinding(this.searchFormPanel,this.CategorySearchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
+    this.findService.updateTable(this.searchFormPanel,this.CategorySearchFormPanel,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 }

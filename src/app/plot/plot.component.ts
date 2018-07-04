@@ -11,7 +11,7 @@ import { CustomModalComponent } from '../dialog/dialog.component';
   templateUrl: './plot.component.html',
   styleUrls: ['./plot.component.css']
 })
-export class PlotComponent implements OnInit,AfterViewInit {
+export class PlotComponent implements OnInit {
 
   table_info = {};
   @Input() searchFormTable = {};
