@@ -7,6 +7,7 @@ DownlineTreeviewItem,TreeviewEventParser,DownlineTreeviewEventParser} from 'ngx-
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 import { CustomModalComponent } from '../dialog/dialog.component';
 import { isNull } from 'util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,6 +21,7 @@ import { isNull } from 'util';
 export class SidebarComponent implements OnInit {
 
   @ViewChild('sliderElement') sliderElement: IonRangeSliderComponent;
+  @ViewChild('organs') organs: TreeviewItem[];
 
   items_organs: TreeviewItem[];
   items_observations: TreeviewItem[];
@@ -29,7 +31,10 @@ export class SidebarComponent implements OnInit {
       hasFilter: true,
       maxHeight: 400
   });
+  last_sizeTree={};
 
+  selectedChange=null;
+  //
   buttonClass = 'btn-outline-secondary';
 
   relevant_form: boolean;
@@ -42,11 +47,15 @@ export class SidebarComponent implements OnInit {
   sources = [];
   selectedCategory: string;
   hasCategory: boolean=false;
+  firstTimeSearch:boolean=false;
+  firstTimeCategorySearch:boolean=false;
+  request:any;
 
   objectKeys = Object.keys;
   search_form = {};
   categories_search_form = {};
   table_info = {};
+  router;
 
   // Set this value on init to store the total number of studies and structures
   // so that we can calculate the current fraction selected
@@ -56,32 +65,61 @@ export class SidebarComponent implements OnInit {
   constructor(private httpClient: HttpClient, 
               private modalDialogService: ModalDialogService, 
               private viewContainer: ViewContainerRef,
-              private findService : FindingsService) {}
+              private findService : FindingsService,
+              private _router: Router ) {
+                this.router = _router;
+              }
 
   ngOnInit(){
     
-    this.findService.currentTable.subscribe(table_info => this.table_info = table_info);
-    this.findService.currentSearchFormTable.subscribe (searchFormTable => this.search_form = searchFormTable);
-    this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
+   // this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory]);
+   //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory]);
+    this.last_sizeTree['organs']=0;
+    this.last_sizeTree['observations']=0;
+    this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
+    this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
+
+    this.findService.currentSearchFormTable.subscribe (searchFormTable =>{
+      this.search_form = searchFormTable;
+      if (this.firstTimeSearch){
+        if (this.request){
+            this.request.unsubscribe();
+        }
+        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
+          this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+          this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
+          this.findService.changeTable(table_info);
+         
+        });
+      }
+      this.firstTimeSearch=true;
+    });
+
+   
 
     this.findService.initFinding().subscribe(table_info => {
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];
-      this.findService.changeTable(table_info)}
-    );
+      for (let source of this.sources){  
+        this.categories_search_form[source]=[];
+        this.categories_search_form[source]=[];
+      }
+      this.findService.changeTable(table_info);
+   
+    });
   }
 
   selectCategory(event: any){
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
-    this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
-    this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
+    this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+    this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
     if (!(event.target.value in this.categories_search_form)) {
       this.categories_search_form[event.target.value] = null;
     }
-    this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    //this.findService.changeCategoriesSearchForm(this.categories_search_form);
   }
 
   isCategoryFiltered(category: string){
@@ -100,6 +138,7 @@ export class SidebarComponent implements OnInit {
 
   addSearchSelect(event: any){
       // If the key(field of search) is already inserted   
+      //alert(this.router.url)
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted
         if (this.search_form[event.target.id].indexOf(event.target.value)==-1){   
@@ -111,13 +150,7 @@ export class SidebarComponent implements OnInit {
       }
 
       this.findService.changeSearchFormTable(this.search_form);
-      this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
-        this.findService.changeTable(table_info);
-        alert("Search");
-        this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
-        this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
-      
-      });
+      //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
   }
@@ -146,88 +179,81 @@ export class SidebarComponent implements OnInit {
       delete this.search_form[event.target.id];
     }
     this.findService.changeSearchFormTable(this.search_form);
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
-      this.findService.changeTable(table_info);
-      alert("SearchCheck");
-      this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
-      this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
-    
-    });
+    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
 
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
-      this.findService.changeTable(table_info);
-      alert("SearchSlider");
-      this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
-      this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
-    
-    });
+    this.findService.changeSearchFormTable(this.search_form);
+    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
   }
 
   resetFilters(){    
     this.search_form={}
-    this.categories_search_form = {};
+    for (let source of this.sources){  
+      this.categories_search_form[source]=[];
+      this.categories_search_form[source]=[];
+    }
     this.relevant_form = false;
     this.BOTH = false;
     this.F = false;
     this.M = false;
     this.sliderElement.reset();
-    this.findService.changeSearchFormTable(this.search_form);
+    //this.hasCategory = false;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {
-      this.findService.changeTable(table_info);
-      alert("Reset");
-      this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory]);
-      this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory]);
-    
-    });
-    this.hasCategory = false;
+    this.findService.changeSearchFormTable(this.search_form);
+    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
     //document.getElementById('category').selectedIndex = "0";
   }
 
   /* Recursive function */ 
-  createTreeview (organs:{}):TreeviewItem[]{
+  createTreeview (fields:{},source:string,type:string):TreeviewItem[]{
     let items: TreeviewItem[] = [];
     let item
-    for (var key in organs) {   
-        if (Object.keys(organs[key]).length>0){    
-            this.createTreeview(organs[key])
-            item = new TreeviewItem({ text:key, value:key, collapsed: true, checked: false,children: this.createTreeview(organs[key])})
-            items.push(item);
+    let checked=false;
+    for (var key in fields) {   
+        if (Object.keys(fields[key]).length>0){   
+          this.createTreeview(fields[key],source,type)
+          checked=false;
+          if (this.categories_search_form[source][type]!=undefined && this.categories_search_form[source][type].indexOf(key) > -1){
+            checked=true;
+          }
+          item = new TreeviewItem({ text:key, value:key, collapsed: true, checked: checked,children: this.createTreeview(fields[key],source,type)})
+          items.push(item);
         }
         else{
-            item = new TreeviewItem({ text:key, value:key, collapsed: true,checked: false})
-            items.push(item);
+          checked=false;
+          if (this.categories_search_form[source][type]!=undefined && this.categories_search_form[source][type].indexOf(key) > -1){
+            checked=true;
+          }
+          item = new TreeviewItem({ text:key, value:key, collapsed: true,checked: checked})
+          items.push(item);
         }      
     }  
     return items;
   }
 
   TreeFilterChange(downlineItems: DownlineTreeviewItem[], key:string) {
-    // this.rows = {};
-    console.log('test');
-
     // Initialize the search filter, removing all previous criteria
     // for this category / key pair
+    alert("Holaaa");
+    console.log(downlineItems);
     if (this.categories_search_form[this.selectedCategory] == undefined) {
       this.categories_search_form[this.selectedCategory] = {};
     } 
     this.categories_search_form[this.selectedCategory][key]=[];
-
     // Walk through the tree and add the selected items and their parents 
     // to the filtering dictionary
-    downlineItems.forEach(downlineItem => {   
+    //console.log(downlineItems);
+    
+    downlineItems.forEach(downlineItem => {  
       const item = downlineItem.item;
-
       // this.rows[item.text]=true;
       if (this.categories_search_form[this.selectedCategory][key].indexOf(item.text)==-1){
         this.categories_search_form[this.selectedCategory][key].push(item.text);
       }
-      
       let parent = downlineItem.parent;
       while (!isNull(parent) && parent.item.checked) {
         // this.rows[parent.item.text]=true;
@@ -237,8 +263,14 @@ export class SidebarComponent implements OnInit {
         parent = parent.parent;
       }
     });
-    this.findService.changeCategoriesSearchForm(this.categories_search_form);
-    this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+
+    if (downlineItems.length > 0 || this.last_sizeTree[key]!=0){
+      this.last_sizeTree[key]=downlineItems.length;
+      this.findService.changeCategoriesSearchForm(this.categories_search_form);
+      this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
+    }
+    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
+   
   }
 
   openCustomModal() {

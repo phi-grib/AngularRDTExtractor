@@ -20,39 +20,54 @@ export class PlotComponent implements OnInit {
   @ViewChild('chart2') el2: ElementRef;
   search_form = {};
   categories_search_form = {};
-  draggable = {
-    // note that data is handled with JSON.stringify/JSON.parse
-    // only set simple data or POJO's as methods will be lost 
-    data: "myDragData",
-    effectAllowed: "all",
-    disable: false,
-    handle: false
-  };
+ 
+  public fruits:string[] = [
+    "apple",
+    "apple",
+    "banana",
+    "apple",
+    "banana",
+    "banana",
+    "apple",
+    "banana",
+    "apple",
+  ];
+
+  public apples:string[] = [
+    "apple",
+    "apple"
+  ];
+
+  public bananas:string[] = [
+    "banana",
+    "banana"
+  ];
+
 
   constructor( private findService : FindingsService) { }
 
   ngOnInit() {
     this.findService.currentSearchFormTable.subscribe (searchFormTable => {
       this.search_form = searchFormTable;
-      this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
-        this.basicChart(info['x'],info['y']);
-        this.basicChart2(info['x'],info['y']);
-      });
+     // this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+        //this.basicChart(info['x'],info['y']);
+       // this.basicChart2(info['x'],info['y']);
+     // });
     });
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
       this.categories_search_form = categoriesSearchForm;
-      this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+     // this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
           
-        this.basicChart(info['x'],info['y']);
-        this.basicChart2(info['x'],info['y']);
-      });
+        //this.basicChart(info['x'],info['y']);
+        //this.basicChart2(info['x'],info['y']);
+     // });
     });
     
-    this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+   // this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
           
-      this.basicChart(info['x'],info['y']);
-      this.basicChart2(info['x'],info['y']);
-    });
+      //this.basicChart(info['x'],info['y']);
+      //this.basicChart2(info['x'],info['y']);
+    //});
     
   }
 
@@ -67,8 +82,8 @@ export class PlotComponent implements OnInit {
     }];
 
     var layout = {
-      height: 400,
-      width: 500
+      height: 800,
+      width: 1000
     };
 
     Plotly.newPlot( element,data, layout )
@@ -91,48 +106,23 @@ export class PlotComponent implements OnInit {
   Plotly.plot( element,data , layout)
   }
 
-  
 
-  
-  
-  onDragStart(event:DragEvent) {
+  onDragged( item:any, list:any[] ) {
 
-    console.log("drag started", JSON.stringify(event, null, 2));
+    const index = list.indexOf( item );
+    list.splice( index, 1 );
   }
-  
-  onDragEnd(event:DragEvent) {
-    
-    console.log("drag ended", JSON.stringify(event, null, 2));
-  }
-  
-  onDraggableCopied(event:DragEvent) {
-    
-    console.log("draggable copied", JSON.stringify(event, null, 2));
-  }
-  
-  onDraggableLinked(event:DragEvent) {
-      
-    console.log("draggable linked", JSON.stringify(event, null, 2));
-  }
-    
-  onDraggableMoved(event:DragEvent) {
-    
-    console.log("draggable moved", JSON.stringify(event, null, 2));
-  }
-      
-  onDragCanceled(event:DragEvent) {
-    
-    console.log("drag cancelled", JSON.stringify(event, null, 2));
-  }
-  
-  onDragover(event:DragEvent) {
-    
-    console.log("dragover", JSON.stringify(event, null, 2));
-  }
-  
-  onDrop(event:DndDropEvent) {
-  
-    console.log("dropped", JSON.stringify(event, null, 2));
-  }
+
+  onDrop( event:DndDropEvent, list:any[] ) {
+
+    let index = event.index;
+
+    if( typeof index === "undefined" ) {
+
+      index = list.length;
+    }
+
+    list.splice( index, 0, event.data );
+}
 
 }

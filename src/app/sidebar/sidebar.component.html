@@ -1,3 +1,6 @@
+<ul *ngFor="let specie of search_form['species']">
+    <li>{{specie}}</li>
+</ul>
 <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 <br>
 <div id="FilterAccordion">
@@ -19,9 +22,7 @@
                         <option *ngFor="let name of table_info['allOptions']['compound_name']">{{name}}</option>   
                     </select>
                 </div>
-                <app-panel [searchFormPanel]=search_form 
-                [CategorySearchFormPanel]=categories_search_form
-                [key]= "'compound_name'" ></app-panel>
+                <app-panel [key]= "'compound_name'" ></app-panel>
                 <br>
                 CAS number:
                 <div class="form-inline">
@@ -31,9 +32,7 @@
                         <option *ngFor="let cas of table_info['allOptions']['cas_number']">{{cas}}</option>   
                     </select>
                 </div>
-                <app-panel [searchFormPanel]=search_form 
-                [CategorySearchFormPanel]=categories_search_form
-                [key]= "'cas_number'" ></app-panel>
+                <app-panel [key]= "'cas_number'" ></app-panel>
                 <br>
             </div>
         </div>
@@ -52,9 +51,7 @@
                         <option *ngFor="let action of table_info['allOptions']['pharmacological_action']">{{action}}</option>   
                     </select>
                 </div>
-                <app-panel [searchFormPanel]=search_form 
-                [CategorySearchFormPanel]=categories_search_form
-                [key]= "'pharmacological_action'" ></app-panel>
+                <app-panel [key]= "'pharmacological_action'" ></app-panel>
                 <br>
             </div>
         </div>
@@ -73,9 +70,7 @@
                         <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
                     </select>
                 </div>
-                <app-panel [searchFormPanel]=search_form 
-                [CategorySearchFormPanel]=categories_search_form
-                [key]= "'species'" ></app-panel>
+                <app-panel [key]= "'species'" ></app-panel>
                 <br>
                 Route:
                 <div class="form-inline">
@@ -85,8 +80,8 @@
                         <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
                     </select>
                 </div>
-                <app-panel [searchFormPanel]=search_form 
-                [CategorySearchFormPanel]=categories_search_form 
+                <app-panel 
+                 
                 [key]= "'routes'" ></app-panel>
                 <br>
                 Exposure period (days):
@@ -146,8 +141,8 @@
                         data-parent="#TreeAccordion">
                             <div class="card-body">
                                 <ngx-treeview [config]="config" 
-                                [items]="items_organs" 
-                                (selectedChange)="TreeFilterChange($event, 'organs')">
+                                [items]="items_organs"
+                                (selectedChange)="TreeFilterChange($event, 'organs');">
                                 </ngx-treeview>
                             </div>
                         </div>
@@ -165,7 +160,7 @@
                             <div class="card-body">
                                 <ngx-treeview [config]="config" 
                                 [items]="items_observations" 
-                                (selectedChange)="TreeFilterChange($event, 'observations')">
+                                (selectedChange)="TreeFilterChange($event, 'observations');">
                                 </ngx-treeview>
                             </div>
                         </div>
@@ -182,18 +177,9 @@
                         </div>
                         <div id="Histopathological" class="collapse show" aria-labelledby="HistopathologicalHeading" data-parent="#ShowFiltersAccordion">
                             <div class="card-body">
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
-                                [key]= "'organs'" 
-                                [category]="selectedCategory"></app-panel>
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
-                                [key]= "'observations'"
-                                [category]="selectedCategory" ></app-panel>
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
-                                [key]= "'grade'" 
-                                [category]="selectedCategory"></app-panel>
+                                <app-panel [key]= "'organs'" [category]="selectedCategory"></app-panel>
+                                <app-panel [key]= "'observations'" [category]="selectedCategory" ></app-panel>
+                                <app-panel [key]= "'grade'" [category]="selectedCategory"></app-panel>
                             </div>
                         </div>
                     </div>
@@ -207,18 +193,9 @@
                         </div>
                         <div id="ClinicalSigns" class="collapse show" aria-labelledby="ClinicalSignsHeading" data-parent="#ShowFiltersAccordion">
                             <div class="card-body">
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
-                                [key]= "'organs'" 
-                                [category]="selectedCategory"></app-panel>
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
-                                [key]= "'observations'" 
-                                [category]="selectedCategory"></app-panel>
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
-                                [key]= "'grade'" 
-                                [category]="selectedCategory"></app-panel>
+                                <app-panel [key]= "'organs'" [category]="selectedCategory"></app-panel>
+                                <app-panel [key]= "'observations'" [category]="selectedCategory"></app-panel>
+                                <app-panel [key]= "'grade'" [category]="selectedCategory"></app-panel>
                             </div>
                         </div>
                     </div>
@@ -232,16 +209,13 @@
                         </div>
                         <div id="GrossNecropsy" class="collapse show" aria-labelledby="GrossNecropsyHeading" data-parent="#ShowFiltersAccordion">
                             <div class="card-body">
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
-                                [key]= "'organs'" 
-                                [category]="selectedCategory"></app-panel>
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
+                                <app-panel [key]= "'organs'" [category]="selectedCategory"></app-panel>
+                                <app-panel 
+                                 
                                 [key]= "'observations'" 
                                 [category]="selectedCategory"></app-panel>
-                                <app-panel [searchFormPanel]=search_form 
-                                [CategorySearchFormPanel]=categories_search_form 
+                                <app-panel 
+                                 
                                 [key]= "'grade'" 
                                 [category]="selectedCategory"></app-panel>
                             </div>

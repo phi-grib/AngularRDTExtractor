@@ -1,45 +1,71 @@
 <div #chart>
     <!-- Chart will appear here -->
 </div>
-<div #chart2>
-    <!-- Chart will appear here -->
-</div>
+<!--<div #chart2>
+    Chart will appear here
+</div>-->
+<div class="row">
 
-<div [dndDraggable]="draggable.data"
-     [dndEffectAllowed]="draggable.effectAllowed"
-     [dndDisableIf]="draggable.disable"
-     (dndStart)="onDragStart($event)"
-     (dndCopied)="onDraggableCopied($event)"
-     (dndLinked)="onDraggableLinked($event)"
-     (dndMoved)="onDraggableMoved($event)"
-     (dndCanceled)="onDragCanceled($event)"
-     (dndEnd)="onDragEnd($event)">
+  <div class="col-lg card">
+
+        <!--<div class="card">
+                <div class="card-header">Header</div>
+                <div class="card-body">Content</div> 
+              </div>-->
+    <div class="card-header">Fruits</div>
+
+    <div class="card-body" dndDropzone
+    dndEffectAllowed="move"
+    (dndDrop)="onDrop($event, fruits)">
       
-    <!--if [dndHandle] is used inside dndDraggable drag can only start from the handle-->
-    <div *ngIf="draggable.handle"
-         dndHandle>HANDLE
+        <span class="badge badge-pill badge-primary" *ngFor="let fruit of fruits"
+                        [dndDraggable]="fruit"
+                        [dndType]="fruit"
+                        dndEffectAllowed="move"
+                        (dndMoved)="onDragged(fruit, fruits)">
+            {{fruit}}
+        </span>
+    </div> 
+
+  </div>
+
+  <div class="col-lg card">
+
+    <div class="card-header">Apples</div>
+
+    <div class="card-body" [dndDropzone]="['apple']"
+              dndEffectAllowed="move"
+              (dndDrop)="onDrop($event, apples)"
+              >
+
+      <span class="badge badge-pill badge-primary" *ngFor="let apple of apples"
+                     [dndDraggable]="apple"
+                     [dndType]="apple"
+                     dndEffectAllowed="move"
+                     (dndMoved)="onDragged(apple, apples)">
+        {{apple}}
+        </span>
+
     </div>
-    
-    draggable ({{draggable.effectAllowed}}) <span [hidden]="!draggable.disable">DISABLED</span>
-    
-    <!--optionally select a child element as drag image-->
-    <div dndDragImageRef>DRAG_IMAGE</div>
-    
+
+  </div>
+
+  <div class="col-lg card">
+
+    <div class="card-header">Bananas</div>
+
+    <div class="card-body" [dndDropzone]="['banana']"
+              dndEffectAllowed="move"
+              (dndDrop)="onDrop($event, bananas)">
+
+        <span class="badge badge-pill badge-primary" *ngFor="let banana of bananas"
+                     [dndDraggable]="banana"
+                     [dndType]="banana"
+                     dndEffectAllowed="move"
+                     (dndMoved)="onDragged(banana, bananas)">
+            {{banana}}
+         </span>
+    </div>
+  </div>
+
 </div>
-
-<!--a dropzone-->
-<!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
-<section dndDropzone
-         (dndDragover)="onDragover($event)"
-         (dndDrop)="onDrop($event)">
-      
-    dropzone 
-    
-    <!--optional placeholder element for dropzone-->
-    <!--will be removed from DOM on init-->
-    <div style="border: 1px orangered solid; border-radius: 5px; padding: 15px;"
-         dndPlaceholderRef>
-        placeholder
-    </div>
-
-</section>
