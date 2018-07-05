@@ -238,8 +238,6 @@ export class SidebarComponent implements OnInit {
   TreeFilterChange(downlineItems: DownlineTreeviewItem[], key:string) {
     // Initialize the search filter, removing all previous criteria
     // for this category / key pair
-    alert("Holaaa");
-    console.log(downlineItems);
     if (this.categories_search_form[this.selectedCategory] == undefined) {
       this.categories_search_form[this.selectedCategory] = {};
     } 

@@ -1,71 +1,82 @@
-<div #chart>
-    <!-- Chart will appear here -->
+<div class="row">
+    <div class="col-lg card">
+        <div class="card-header">Fruits</div>
+        <div class="card-body" dndDropzone
+        dndEffectAllowed="move"
+        (dndDrop)="onDrop($event, fruits)">
+        
+            <span class="badge badge-pill badge-primary" *ngFor="let fruit of fruits"
+                            [dndDraggable]="fruit"
+                            [dndType]="fruit"
+                            dndEffectAllowed="move"
+                            (dndMoved)="onDragged(fruit, fruits)">
+                {{fruit}}
+            </span>
+        </div>  
+    </div>
+      
+    <div class="col-lg card">
+        <div class="card-header">Apples</div>
+        <div class="card-body" [dndDropzone]="['apple']"
+                dndEffectAllowed="move"
+                (dndDrop)="onDrop($event, apples)"
+                >
+    
+        <span class="badge badge-pill badge-primary" *ngFor="let apple of apples"
+                        [dndDraggable]="apple"
+                        [dndType]="apple"
+                        dndEffectAllowed="move"
+                        (dndMoved)="onDragged(apple, apples)">
+            {{apple}}
+            </span>
+    
+        </div>
+    
+    </div>
+      
+    <div class="col-lg card">
+    
+        <div class="card-header">Bananas</div>
+    
+        <div class="card-body" [dndDropzone]="['banana']"
+                dndEffectAllowed="move"
+                (dndDrop)="onDrop($event, bananas)">
+    
+            <span class="badge badge-pill badge-primary" *ngFor="let banana of bananas"
+                        [dndDraggable]="banana"
+                        [dndType]="banana"
+                        dndEffectAllowed="move"
+                        (dndMoved)="onDragged(banana, bananas)">
+                {{banana}}
+            </span>
+        </div>
+    </div>
 </div>
-<!--<div #chart2>
-    Chart will appear here
-</div>-->
+<div class="row">
+    <div class="col-md-6" style="width: 30%;">
+        <canvas baseChart 
+        [data]="lineChartData"
+        [labels]="lineChartLabels"
+        [options]="lineChartOptions"
+        [chartType]="lineChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
+    </div>
+
+
+    <div class="col-md-6" style="width: 30%;">
+        <canvas baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [options]="options"
+        [chartType]="pieChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
+    </div>
+</div>
 <div class="row">
 
-  <div class="col-lg card">
-
-        <!--<div class="card">
-                <div class="card-header">Header</div>
-                <div class="card-body">Content</div> 
-              </div>-->
-    <div class="card-header">Fruits</div>
-
-    <div class="card-body" dndDropzone
-    dndEffectAllowed="move"
-    (dndDrop)="onDrop($event, fruits)">
-      
-        <span class="badge badge-pill badge-primary" *ngFor="let fruit of fruits"
-                        [dndDraggable]="fruit"
-                        [dndType]="fruit"
-                        dndEffectAllowed="move"
-                        (dndMoved)="onDragged(fruit, fruits)">
-            {{fruit}}
-        </span>
-    </div> 
-
-  </div>
-
-  <div class="col-lg card">
-
-    <div class="card-header">Apples</div>
-
-    <div class="card-body" [dndDropzone]="['apple']"
-              dndEffectAllowed="move"
-              (dndDrop)="onDrop($event, apples)"
-              >
-
-      <span class="badge badge-pill badge-primary" *ngFor="let apple of apples"
-                     [dndDraggable]="apple"
-                     [dndType]="apple"
-                     dndEffectAllowed="move"
-                     (dndMoved)="onDragged(apple, apples)">
-        {{apple}}
-        </span>
-
+    <div class="col-md-12 text-center" style="margin-top: 10px;height: 50%">
+        <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
     </div>
-
-  </div>
-
-  <div class="col-lg card">
-
-    <div class="card-header">Bananas</div>
-
-    <div class="card-body" [dndDropzone]="['banana']"
-              dndEffectAllowed="move"
-              (dndDrop)="onDrop($event, bananas)">
-
-        <span class="badge badge-pill badge-primary" *ngFor="let banana of bananas"
-                     [dndDraggable]="banana"
-                     [dndType]="banana"
-                     dndEffectAllowed="move"
-                     (dndMoved)="onDragged(banana, bananas)">
-            {{banana}}
-         </span>
-    </div>
-  </div>
-
 </div>
