@@ -5,8 +5,9 @@ import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
 DownlineTreeviewItem,TreeviewEventParser,DownlineTreeviewEventParser} from 'ngx-treeview';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
-import { CustomModalComponent } from '../dialog/dialog.component';
+import { SketchModalComponent } from '../sketch/sketch.component';
 import { isNull } from 'util';
+import * as JSME from "../../../lib/JSME/jsme/jsme.nocache.js"
 
 @Component({
   selector: 'app-sidebar',
@@ -241,10 +242,10 @@ export class SidebarComponent implements OnInit {
     this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
-  openCustomModal() {
+  openSketchModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
       title: 'Compound seach',
-      childComponent: CustomModalComponent,
+      childComponent: SketchModalComponent,
       settings: {
         closeButtonClass: 'close theme-icon-close',
         modalDialogClass: "modal-dialog modal-dialog-centered modal-lg"
@@ -258,4 +259,26 @@ export class SidebarComponent implements OnInit {
     document.getElementById("mySidenav").style.overflow = "hidden";
     document.getElementById("main").style.marginLeft = "25px";
   }
+
+  // getSmiles() {
+  //   jme = document.getElementById("jme")
+  //   var drawing = jme.smiles();
+  //   document.form.smi.value = drawing;
+  // }
+
+  // submitSmiles() {
+  //   var smiles = document.jme.smiles();
+  //   var jme = document.jme.jmeFile();
+  //   if (smiles == "") {
+  //     alert("Nothing to submit");
+  //   }
+  //   else {
+  //     opener.fromEditor(smiles,jme);
+  //     window.close();
+  //   }
+  // }
+
+  // openHelpWindow() {
+  //   window.open("http://www.molinspiration.com/jme/help/jme2008hints.html","jmehelp","toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width=510,height=675,left=400,top=20");
+  // }
 }

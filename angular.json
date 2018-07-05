@@ -27,8 +27,7 @@
               "src/styles.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.skinNice.css",
-              "node_modules/font-awesome/css/font-awesome.css"
-                            
+              "node_modules/font-awesome/css/font-awesome.css"                            
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
@@ -36,8 +35,6 @@
               "node_modules/jquery/dist/jquery.min.js", 
               "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
               "node_modules/smiles-drawer/dist/smiles-drawer.min.js"
-
-
             ]
           },
           "configurations": {
