@@ -20,11 +20,8 @@ export class PlotComponent implements AfterContentInit {
  
 
   // lineChart
-  lineChartData:Array<any> = [
-    [65, 59, 80, 81, 56, 55, 40],
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
-  lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  lineChartData:string[]; 
+  lineChartLabels: number[];
   lineChartType:string = 'line';
   
  
@@ -69,8 +66,10 @@ export class PlotComponent implements AfterContentInit {
       this.search_form = searchFormTable;
       this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
         this.pieChartLabels=info['x'];
+        this.lineChartLabels=info['x'];
         setTimeout(() => {
           this.pieChartData=info['y'];
+          this.lineChartData=info['y'];
         }, 50);
       });
     });
@@ -78,13 +77,19 @@ export class PlotComponent implements AfterContentInit {
       this.categories_search_form = categoriesSearchForm;
       this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
         this.pieChartLabels=info['x'];
-        this.pieChartData=info['y'];     
+        this.lineChartLabels=info['x']; 
+        setTimeout(() => {
+          this.pieChartData=info['y'];
+          this.lineChartData=info['y'];
+        }, 50);    
       });
     });
     
     this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
       this.pieChartLabels=info['x'];
-      this.pieChartData=info['y'];     
+      this.pieChartData=info['y']; 
+      this.lineChartLabels=info['x']; 
+      this.lineChartData=info['y'];     
     });
     
   }
