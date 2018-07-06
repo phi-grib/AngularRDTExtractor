@@ -7,6 +7,7 @@ import { CustomModalComponent } from '../dialog/dialog.component';
 import * as Plotly from 'plotly.js';
 import {Config, Data, Layout} from 'plotly.js';
 import { DndDropEvent, DropEffect } from "ngx-drag-drop";
+import { Router } from '@angular/router';
 
 
 
@@ -19,6 +20,7 @@ import { DndDropEvent, DropEffect } from "ngx-drag-drop";
 export class PlotComponent implements AfterContentInit {
  
 
+  router;
   // lineChart
   lineChartData:string[]; 
   lineChartLabels: number[];
@@ -59,30 +61,38 @@ export class PlotComponent implements AfterContentInit {
   ];
 
 
-  constructor( private findService : FindingsService) { }
+  constructor( private findService : FindingsService,  private _router: Router ) {
+
+    this.router = _router;
+
+   }
 
   ngAfterContentInit() {
     this.findService.currentSearchFormTable.subscribe (searchFormTable => {
       this.search_form = searchFormTable;
-      this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
-        this.pieChartLabels=info['x'];
-        this.lineChartLabels=info['x'];
-        setTimeout(() => {
-          this.pieChartData=info['y'];
-          this.lineChartData=info['y'];
-        }, 50);
-      });
+      if(this.router.url=="/plot") {
+        this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+          this.pieChartLabels=info['x'];
+          this.lineChartLabels=info['x'];
+          setTimeout(() => {
+            this.pieChartData=info['y'];
+            this.lineChartData=info['y'];
+          }, 50);
+        });
+      }
     });
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
       this.categories_search_form = categoriesSearchForm;
-      this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
-        this.pieChartLabels=info['x'];
-        this.lineChartLabels=info['x']; 
-        setTimeout(() => {
-          this.pieChartData=info['y'];
-          this.lineChartData=info['y'];
-        }, 50);    
-      });
+      if(this.router.url=="/plot") {
+        this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+          this.pieChartLabels=info['x'];
+          this.lineChartLabels=info['x']; 
+          setTimeout(() => {
+            this.pieChartData=info['y'];
+            this.lineChartData=info['y'];
+          }, 50);    
+        });
+      }
     });
     
     this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {

@@ -77,21 +77,29 @@ export class SidebarComponent implements OnInit {
    // this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory]);
    //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory]);
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
+
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
       this.categories_search_form = categoriesSearchForm;
       if (this.firstTimeCategorySearch){
         if (this.request){
             this.request.unsubscribe();
         }
-        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
-          this.findService.changeTable(table_info); 
-          if (this.treeClicked=='observations'){
-            this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
-          }
-          else{
-            this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
-          }   
-        });
+        if (this.router.url=="/table") {
+          alert("Table Categorie Seaarch change");
+          this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
+            this.findService.changeTable(table_info); 
+            alert("Hola");
+            if (this.treeClicked=='observations'){
+              this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+            }
+            else{
+              this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
+            } 
+          });
+        }
+        else{
+          alert("Plot Seaarch change");
+        }
       }
       this.firstTimeCategorySearch=true;   
     });
@@ -102,11 +110,20 @@ export class SidebarComponent implements OnInit {
         if (this.request){
             this.request.unsubscribe();
         }
-        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
-          this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
-          this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');   
-          this.findService.changeTable(table_info);     
-        });
+         /*Case TABLE*/
+         if (this.router.url=="/table") {
+          alert("Table Seaarch change");
+          this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
+            this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+            this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');   
+            this.findService.changeTable(table_info);  
+          });
+        }
+        /*Case PLOT*/
+        else{
+
+            alert("Plot Seaarch change");
+        }
       }
       this.firstTimeSearch=true;
     });
