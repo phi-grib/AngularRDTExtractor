@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,ViewChild,QueryList,ElementRef,AfterViewInit ,ViewContainerRef, Renderer2} from '@angular/core';
+import { Component, OnInit, Input,ViewChild,QueryList,ElementRef,AfterContentInit ,ViewContainerRef, Renderer2} from '@angular/core';
 import { HttpClient,HttpParams } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
@@ -9,130 +9,120 @@ import {Config, Data, Layout} from 'plotly.js';
 import { DndDropEvent, DropEffect } from "ngx-drag-drop";
 
 
+
+
 @Component({
   selector: 'app-plot',
   templateUrl: './plot.component.html',
   styleUrls: ['./plot.component.css']
 })
-export class PlotComponent implements OnInit {
+export class PlotComponent implements AfterContentInit {
+ 
 
-  @ViewChild('chart') el: ElementRef;
-  @ViewChild('chart2') el2: ElementRef;
+  // lineChart
+  lineChartData:string[]; 
+  lineChartLabels: number[];
+  lineChartType:string = 'line';
+  
+ 
+  // Pie
+  pieChartLabels:string[]; 
+  pieChartData:number[];
+  pieChartType:string = 'pie';
+  options: {
+    responsive: true
+  }
+ 
   search_form = {};
   categories_search_form = {};
-  draggable = {
-    // note that data is handled with JSON.stringify/JSON.parse
-    // only set simple data or POJO's as methods will be lost 
-    data: "myDragData",
-    effectAllowed: "all",
-    disable: false,
-    handle: false
-  };
+ 
+  public fruits:string[] = [
+    "apple",
+    "apple",
+    "banana",
+    "apple",
+    "banana",
+    "banana",
+    "apple",
+    "banana",
+    "apple",
+  ];
+
+  public apples:string[] = [
+    "apple",
+    "apple"
+  ];
+
+  public bananas:string[] = [
+    "banana",
+    "banana"
+  ];
+
 
   constructor( private findService : FindingsService) { }
 
-  ngOnInit() {
+  ngAfterContentInit() {
     this.findService.currentSearchFormTable.subscribe (searchFormTable => {
       this.search_form = searchFormTable;
       this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
-        this.basicChart(info['x'],info['y']);
-        this.basicChart2(info['x'],info['y']);
+        this.pieChartLabels=info['x'];
+        this.lineChartLabels=info['x'];
+        setTimeout(() => {
+          this.pieChartData=info['y'];
+          this.lineChartData=info['y'];
+        }, 50);
       });
     });
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
       this.categories_search_form = categoriesSearchForm;
       this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
-          
-        this.basicChart(info['x'],info['y']);
-        this.basicChart2(info['x'],info['y']);
+        this.pieChartLabels=info['x'];
+        this.lineChartLabels=info['x']; 
+        setTimeout(() => {
+          this.pieChartData=info['y'];
+          this.lineChartData=info['y'];
+        }, 50);    
       });
     });
     
     this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
-          
-      this.basicChart(info['x'],info['y']);
-      this.basicChart2(info['x'],info['y']);
+      this.pieChartLabels=info['x'];
+      this.pieChartData=info['y']; 
+      this.lineChartLabels=info['x']; 
+      this.lineChartData=info['y'];     
     });
     
   }
+ 
+  onDragged( item:any, list:any[] ) {
 
-
-  basicChart(x,y) {
-
-    const element = this.el.nativeElement
-
-    const data = [{
-      labels: x,
-      type: 'pie'
-    }];
-
-    var layout = {
-      height: 400,
-      width: 500
-    };
-
-    Plotly.newPlot( element,data, layout )
+    const index = list.indexOf( item );
+    list.splice( index, 1 );
   }
 
-  basicChart2(x,y){
+  onDrop( event:DndDropEvent, list:any[] ) {
 
-    const element = this.el2.nativeElement
+    let index = event.index;
 
-    var trace = [{
-      type: 'histogram',
-      x: x,
-    }]
-    var layout = {
-      height: 400,
-      width: 500
-    };
-    var data = [trace];
+    if( typeof index === "undefined" ) {
 
-  Plotly.plot( element,data , layout)
-  }
+      index = list.length;
+    }
+
+    list.splice( index, 0, event.data );
+}
 
   
-
-  
-  
-  onDragStart(event:DragEvent) {
-
-    console.log("drag started", JSON.stringify(event, null, 2));
+  public randomizeType():void {
+    this.lineChartType = this.lineChartType === 'line' ? 'bar' : 'line';
+    this.pieChartType = this.pieChartType === 'doughnut' ? 'pie' : 'doughnut';
   }
-  
-  onDragEnd(event:DragEvent) {
-    
-    console.log("drag ended", JSON.stringify(event, null, 2));
+ 
+  public chartClicked(e:any):void {
+    console.log(e);
   }
-  
-  onDraggableCopied(event:DragEvent) {
-    
-    console.log("draggable copied", JSON.stringify(event, null, 2));
+ 
+  public chartHovered(e:any):void {
+    console.log(e);
   }
-  
-  onDraggableLinked(event:DragEvent) {
-      
-    console.log("draggable linked", JSON.stringify(event, null, 2));
-  }
-    
-  onDraggableMoved(event:DragEvent) {
-    
-    console.log("draggable moved", JSON.stringify(event, null, 2));
-  }
-      
-  onDragCanceled(event:DragEvent) {
-    
-    console.log("drag cancelled", JSON.stringify(event, null, 2));
-  }
-  
-  onDragover(event:DragEvent) {
-    
-    console.log("dragover", JSON.stringify(event, null, 2));
-  }
-  
-  onDrop(event:DndDropEvent) {
-  
-    console.log("dropped", JSON.stringify(event, null, 2));
-  }
-
 }
