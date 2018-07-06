@@ -31,6 +31,7 @@ export class PanelComponent implements OnInit {
       this.search_form[key].splice(value, 1);
       if (this.search_form[key].length==0){
         delete this.search_form[key]; 
+        alert("Delete this.search_form")
         this.findService.changeSearchFormTable(this.search_form);
       }  
     } else {
@@ -41,6 +42,7 @@ export class PanelComponent implements OnInit {
           this.categories_search_form[category] = null;
         }
       }
+      alert("Delete this.categories_search_form")
       this.findService.changeCategoriesSearchForm(this.categories_search_form);
     }
     //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
