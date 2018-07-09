@@ -309,26 +309,4 @@ export class SidebarComponent implements OnInit {
     document.getElementById("mySidenav").style.overflow = "hidden";
     document.getElementById("main").style.marginLeft = "25px";
   }
-
-  // getSmiles() {
-  //   jme = document.getElementById("jme")
-  //   var drawing = jme.smiles();
-  //   document.form.smi.value = drawing;
-  // }
-
-  // submitSmiles() {
-  //   var smiles = document.jme.smiles();
-  //   var jme = document.jme.jmeFile();
-  //   if (smiles == "") {
-  //     alert("Nothing to submit");
-  //   }
-  //   else {
-  //     opener.fromEditor(smiles,jme);
-  //     window.close();
-  //   }
-  // }
-
-  // openHelpWindow() {
-  //   window.open("http://www.molinspiration.com/jme/help/jme2008hints.html","jmehelp","toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width=510,height=675,left=400,top=20");
-  // }
 }
