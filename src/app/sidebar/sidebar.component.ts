@@ -5,7 +5,7 @@ import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
 DownlineTreeviewItem,TreeviewEventParser,DownlineTreeviewEventParser} from 'ngx-treeview';
 import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
-import { SketchModalComponent } from '../sketch/sketch.component';
+//import { SketchModalComponent } from '../sketch/sketch.component';
 import { isNull } from 'util';
 import { Router } from '@angular/router';
 
@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
   items_observations: TreeviewItem[];
   values: number[];
   config = TreeviewConfig.create({
-    decoupleChildFromParent: false,
+    decoupleChildFromParent: true,
     hasAllCheckBox: false,
     hasFilter: true,
     maxHeight: 400
@@ -76,6 +76,7 @@ export class SidebarComponent implements OnInit {
     
    // this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory]);
    //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory]);
+    this.findService.currentAxis.subscribe();
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
 
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
@@ -84,11 +85,11 @@ export class SidebarComponent implements OnInit {
         if (this.request){
             this.request.unsubscribe();
         }
+        /*Case TABLE*/
         if (this.router.url=="/table") {
           alert("Table Categorie Seaarch change");
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
             this.findService.changeTable(table_info); 
-            alert("Hola");
             if (this.treeClicked=='observations'){
               this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
             }
@@ -97,6 +98,7 @@ export class SidebarComponent implements OnInit {
             } 
           });
         }
+          /*Case PLOT*/
         else{
           alert("Plot Seaarch change");
         }
@@ -111,8 +113,7 @@ export class SidebarComponent implements OnInit {
             this.request.unsubscribe();
         }
          /*Case TABLE*/
-         if (this.router.url=="/table") {
-          alert("Table Seaarch change");
+        if (this.router.url=="/table") {
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
             this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
             this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');   
@@ -121,8 +122,12 @@ export class SidebarComponent implements OnInit {
         }
         /*Case PLOT*/
         else{
-
-            alert("Plot Seaarch change");
+          this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
+           this.table_info['allOptions']=info['allOptions'];
+           this.table_info['num_structures']=info['num_structures'];
+           this.table_info['num_studies']=info['num_studies'];
+           this.findService.changeAxis([info['x'],info['y']])
+          });
         }
       }
       this.firstTimeSearch=true;
@@ -143,6 +148,7 @@ export class SidebarComponent implements OnInit {
         this.last_sizeTree[source]['observations']=0;
       }
       this.findService.changeTable(table_info);
+      this.findService.changeAxis([table_info['x'],table_info['y']])
    
     });
   }
@@ -309,7 +315,7 @@ export class SidebarComponent implements OnInit {
    
   }
 
-  openSketchModal() {
+ /* openSketchModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
       title: 'Compound seach',
       childComponent: SketchModalComponent,
@@ -319,7 +325,7 @@ export class SidebarComponent implements OnInit {
       },
       data: "Test"
     });
-  }
+  }*/
 
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";

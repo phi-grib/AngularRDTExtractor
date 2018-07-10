@@ -27,6 +27,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
 import { DndModule } from 'ngx-drag-drop';
 import { ChartsModule } from 'ng2-charts';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ChartsModule } from 'ng2-charts';
     ModalDialogModule.forRoot(),
     TooltipModule,
     TreeviewModule.forRoot(),
+    NgbModule.forRoot(),
     AngularFontAwesomeModule,
     DndModule,
     ChartsModule
