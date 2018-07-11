@@ -10,4 +10,5 @@ npm install ngx-treeview --save
 npm i rxjs-compat --save
 npm install bootstrap-select --save
 npm i ngx-drag-drop --save
-npm install ng2-charts chart.js --save 
+npm install ng2-charts chart.js --save
+npm install ngx-select-dropdown 
