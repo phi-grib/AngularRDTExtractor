@@ -28,6 +28,7 @@ import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
 import { DndModule } from 'ngx-drag-drop';
 import { ChartsModule } from 'ng2-charts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SelectDropDownModule} from 'ngx-select-dropdown';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     NgbModule.forRoot(),
     AngularFontAwesomeModule,
     DndModule,
-    ChartsModule
+    ChartsModule,
+    SelectDropDownModule
   ],
   providers: [FindingsService],
   entryComponents: [CustomModalComponent],

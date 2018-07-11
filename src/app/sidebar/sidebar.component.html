@@ -140,10 +140,9 @@
                         <div id="collapseOne" class="collapse" aria-labelledby="organsHeading" 
                         data-parent="#TreeAccordion">
                             <div class="card-body">
-                                <ngx-treeview [config]="config" 
-                                [items]="items_organs"
-                                (selectedChange)="TreeFilterChange($event, 'organs');">
-                                </ngx-treeview>
+                                <div class="col s12 l6">
+                                    <ngx-select-dropdown (change)="changeValue($event)" [multiple]="true" [(value)]="multiSelect" [config]="config_select" [options]="options"></ngx-select-dropdown>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -158,10 +157,9 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="observationsHeading" data-parent="#TreeAccordion">
                             <div class="card-body">
-                                <ngx-treeview [config]="config" 
-                                [items]="items_observations" 
-                                (selectedChange)="TreeFilterChange($event, 'observations');">
-                                </ngx-treeview>
+                                <div class="col s12 l6">
+                                    <ngx-select-dropdown (change)="changeValue($event)" [multiple]="true" [(value)]="multiSelect" [config]="config_select" [options]="options"></ngx-select-dropdown>
+                                </div>
                             </div>
                         </div>
                     </div>

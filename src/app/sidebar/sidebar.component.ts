@@ -23,22 +23,6 @@ export class SidebarComponent implements OnInit {
   @ViewChild('sliderElement') sliderElement: IonRangeSliderComponent;
   @ViewChild('organs') organs: TreeviewItem[];
 
-  items_organs: TreeviewItem[];
-  items_observations: TreeviewItem[];
-  values: number[];
-  config = TreeviewConfig.create({
-    decoupleChildFromParent: true,
-    hasAllCheckBox: false,
-    hasFilter: true,
-    maxHeight: 400
-  });
-  last_sizeTree={};
-  treeClicked=null;
-
-  selectedChange=null;
-  //
-  buttonClass = 'btn-outline-secondary';
-
   relevant_form: boolean;
   F: boolean=false;
   M: boolean=false;
@@ -63,6 +47,21 @@ export class SidebarComponent implements OnInit {
   // so that we can calculate the current fraction selected
   totalStudies: number;   
   totalStructures: number;
+
+  categoryOptionsSelected ={};
+  categoryOptions = {}
+
+  multiSelect: any=["Amie Franklin"];
+
+  options = [
+      "Burns Dalton","Mcintyre Lawson","Amie Franklin","Jocelyn Horton","Fischer Erickson", "Medina Underwood","Goldie Barber"
+  ]
+
+  config_select = {
+    //displayKey:"name", //if objects array passed which key to be displayed defaults to description
+    search:true,
+  };
+
 
   constructor(private httpClient: HttpClient, 
               private modalDialogService: ModalDialogService, 
@@ -90,11 +89,11 @@ export class SidebarComponent implements OnInit {
           alert("Table Categorie Seaarch change");
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
             this.findService.changeTable(table_info); 
-            if (this.treeClicked=='observations'){
-              this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+            if (true){
+              //this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
             }
             else{
-              this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
+              //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
             } 
           });
         }
@@ -115,8 +114,8 @@ export class SidebarComponent implements OnInit {
          /*Case TABLE*/
         if (this.router.url=="/table") {
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
-            this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
-            this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');   
+            //this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+            //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');   
             this.findService.changeTable(table_info);  
           });
         }
@@ -140,12 +139,19 @@ export class SidebarComponent implements OnInit {
       this.totalStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];
-      for (let source of this.sources){  
-        this.categories_search_form[source]=[];
-        this.categories_search_form[source]=[];
-        this.last_sizeTree[source]={}
-        this.last_sizeTree[source]['organs']=0;
-        this.last_sizeTree[source]['observations']=0;
+      for (let source of this.sources){ 
+
+        this.categories_search_form[source] = {}
+        this.categories_search_form[source]['organs']=[]
+        this.categories_search_form[source]['observations']=[]
+       
+        //this.categoryOptions[source] = {}
+        //this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+        //this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+
+        //this.categoryOptionsSelected[source] = {}
+        //this.categoryOptionsSelected[source]['organs']=[]
+        //this.categoryOptionsSelected[source]['observations']=[]
       }
       this.findService.changeTable(table_info);
       this.findService.changeAxis([table_info['x'],table_info['y']])
@@ -156,12 +162,13 @@ export class SidebarComponent implements OnInit {
   selectCategory(event: any){
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
-    this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
-    this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
+
+    //this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+    //this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
     if (!(event.target.value in this.categories_search_form)) {
       this.categories_search_form[event.target.value] = null;
     }
-    //this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    
   }
 
   isCategoryFiltered(category: string){
@@ -250,70 +257,6 @@ export class SidebarComponent implements OnInit {
     //document.getElementById('category').selectedIndex = "0";
   }
 
-  /* Recursive function */ 
-  createTreeview (fields:{},source:string,type:string):TreeviewItem[]{
-    let items: TreeviewItem[] = [];
-    let item
-    let checked=false;
-    for (var key in fields) {   
-        if (Object.keys(fields[key]).length>0){   
-          this.createTreeview(fields[key],source,type)
-          checked=false;
-          if (this.categories_search_form[source][type]!=undefined && this.categories_search_form[source][type].indexOf(key) > -1){
-            checked=true;
-          }
-          item = new TreeviewItem({ text:key, value:key, collapsed: true, checked: checked,children: this.createTreeview(fields[key],source,type)})
-          items.push(item);
-        }
-        else{
-          checked=false;
-          if (this.categories_search_form[source][type]!=undefined && this.categories_search_form[source][type].indexOf(key) > -1){
-            checked=true;
-          }
-          item = new TreeviewItem({ text:key, value:key, collapsed: true,checked: checked})
-          items.push(item);
-        }      
-    }  
-    return items;
-  }
-
-  TreeFilterChange(downlineItems: DownlineTreeviewItem[], key:string) {
-    // Initialize the search filter, removing all previous criteria
-    // for this category / key pair
-    if (this.categories_search_form[this.selectedCategory] == undefined) {
-      this.categories_search_form[this.selectedCategory] = {};
-    } 
-    this.categories_search_form[this.selectedCategory][key]=[];
-    // Walk through the tree and add the selected items and their parents 
-    // to the filtering dictionary
-    //console.log(downlineItems);
-    
-    downlineItems.forEach(downlineItem => {  
-      const item = downlineItem.item;
-      // this.rows[item.text]=true;
-      if (this.categories_search_form[this.selectedCategory][key].indexOf(item.text)==-1){
-        this.categories_search_form[this.selectedCategory][key].push(item.text);
-      }
-      let parent = downlineItem.parent;
-      while (!isNull(parent) && parent.item.checked) {
-        // this.rows[parent.item.text]=true;
-        if (this.categories_search_form[this.selectedCategory][key].indexOf(parent.item.text)==-1){
-          this.categories_search_form[this.selectedCategory][key].push(parent.item.text);
-        }
-        parent = parent.parent;
-      }
-    });
-
-    if (this.last_sizeTree[this.selectedCategory][key]!=downlineItems.length){
-      this.treeClicked=key;
-
-     
-      this.last_sizeTree[this.selectedCategory][key]=downlineItems.length;
-      this.findService.changeCategoriesSearchForm(this.categories_search_form);
-    }
-    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
-   
-  }
 
  /* openSketchModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
@@ -331,6 +274,10 @@ export class SidebarComponent implements OnInit {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("mySidenav").style.overflow = "hidden";
     document.getElementById("main").style.marginLeft = "25px";
+  }
+
+  changeValue($event: any){
+    console.log($event);
   }
 
   // getSmiles() {
