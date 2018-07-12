@@ -16,8 +16,9 @@ export class TableComponent implements OnInit,AfterViewInit {
   table_info = {};
   search_form = {};
   categories_search_form = {};
-  @ViewChildren('cmp') components:QueryList<ElementRef>;
-  
+  currentSubstance = '';
+  rowIndex = 0;
+  @ViewChildren('cmp') components:QueryList<ElementRef>;  
 
   constructor(private findService : FindingsService, 
               private modalDialogService: ModalDialogService, 
@@ -28,6 +29,18 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.findService.currentTable.subscribe (table_info => this.table_info = table_info);
     this.findService.currentSearchFormTable.subscribe (searchFormTable => this.search_form = searchFormTable);
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
+  }
+
+  hideStructure(id:string) {
+    if (id != this.currentSubstance) {
+      this.currentSubstance = id;
+      this.rowIndex = 0;
+      return true;
+    }
+    else {
+      this.rowIndex += 1;
+      return false;
+    }
   }
 
   openCustomModal(id:string) {
