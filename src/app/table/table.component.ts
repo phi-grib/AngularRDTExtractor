@@ -18,6 +18,7 @@ export class TableComponent implements OnInit,AfterViewInit {
   categories_search_form = {};
   currentSubstance = '';
   rowIndex = 0;
+  splitRow = {};
   @ViewChildren('cmp') components:QueryList<ElementRef>;  
 
   constructor(private findService : FindingsService, 
@@ -31,20 +32,12 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
   }
 
-  hideStructure(id:string) {
-    if (id != this.currentSubstance) {
-      this.currentSubstance = id;
-      this.rowIndex = 0;
-      return true;
-    }
-    else {
-      this.rowIndex += 1;
-      return false;
-    }
+  showCounts(line:str) {
+    var newLine = line.replace(/(?:\r\n|\r|\n)/g, ' ');
+    return newLine;
   }
 
   openCustomModal(id:string) {
-
     this.modalDialogService.openDialog(this.viewContainer, {
       title: 'Study Information',
       childComponent: CustomModalComponent,
@@ -57,7 +50,6 @@ export class TableComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit() {
-
     this.components.changes.subscribe((component) => { 
       
       if (this.components !== undefined){
@@ -74,14 +66,11 @@ export class TableComponent implements OnInit,AfterViewInit {
         });
       }
     });
-
-  }
- Page(page:number){
-   console.log(this.search_form);
-   console.log(this.categories_search_form);
-     this.findService.searchFinding(this.search_form,this.categories_search_form,page).subscribe(res => this.table_info = res); 
   }
 
- 
-
+  Page(page:number){
+    console.log(this.search_form);
+    console.log(this.categories_search_form);
+      this.findService.searchFinding(this.search_form,this.categories_search_form,page).subscribe(res => this.table_info = res); 
+  }
 }
