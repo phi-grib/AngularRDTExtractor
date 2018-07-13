@@ -32,9 +32,10 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
   }
 
-  showCounts(line:str) {
-    var newLine = line.replace(/(?:\r\n|\r|\n)/g, ' ');
-    return newLine;
+  splitText(line:string) {
+    var linesplit = line.split(', ');
+    var httpText = linesplit.join('<br>');
+    return httpText;
   }
 
   openCustomModal(id:string) {
