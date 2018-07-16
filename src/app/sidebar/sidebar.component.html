@@ -4,14 +4,14 @@
 <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 <br>
 
+
+
 <div id="FilterAccordion" role="tablist">
     <div class="card">
         <div class="card-header" role="tab" id="CompoundHeading">
-            <h5 class="mb-0">
-                <a data-toggle="collapse" href="#CompoundCard" aria-expanded="true" aria-controls="CompoundCard">
-                    Compound
-                </a>
-            </h5>          
+            <button class="btn btn-link" data-toggle="collapse" data-target="#CompoundCard" aria-expanded="true" aria-controls="CompoundCard">
+                Compound
+            </button>          
         </div>
         <div id="CompoundCard" class="collapse show" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
             <div class="card-body">
@@ -45,10 +45,10 @@
 
 
 
-        <div class="card-header" id="PharmacologyHeading">            
+        <div class="card-header" role="tab" id="PharmacologyHeading"> 
             <button class="btn btn-link" data-toggle="collapse" data-target="#PharmacologyCard" aria-expanded="true" aria-controls="PharmacologyCard">
-                <h5>Pharmacology</h5>
-            </button>            
+                Pharmacology
+            </button>   
         </div>
         <div id="PharmacologyCard" class="collapse show" aria-labelledby="PharmacologyHeading" data-parent="#FilterAccordion">
             <div class="card-body">
@@ -66,10 +66,12 @@
         </div>
 
 
-        <div class="card-header" id="StudyHeading">            
+
+
+        <div class="card-header" role="tab" id="StudyHeading">            
             <button class="btn btn-link" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
-                <h5>Study</h5>
-            </button>            
+                Pharmacology
+            </button>             
         </div>
         <div id="StudyCard" class="collapse show" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
             <div class="card-body">
@@ -110,10 +112,11 @@
         </div>
 
 
+     
         
-        <div class="card-header" id="FindingHeading">
+        <div class="card-header" role="tab" id="FindingHeading">
             <button class="btn btn-link" data-toggle="collapse" data-target="#FindingCard" aria-expanded="true" aria-controls="FindingCard">
-                <h5>Finding</h5>
+                    Finding
             </button>
         </div>
         <div id="FindingCard" class="collapse show" aria-labelledby="FindingHeading" data-parent="#FilterAccordion">
@@ -156,7 +159,7 @@
                 <div id="ShowFiltersAccordion">
                     <div class="card" [hidden]="!isCategoryFiltered('Histopathological')">
                         <div class="card-header" id="HistopathologicalHeading">
-                            <h5 class="mb-0">
+                            <h5>
                                 <button class="btn btn-link" data-toggle="collapse" data-target="#Histopathological" aria-expanded="true" aria-controls="Histopathological">
                                 Histopathological
                                 </button>

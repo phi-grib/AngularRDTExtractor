@@ -1,3 +1,11 @@
+<!--<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  loadingText="Loading..."
+  type="ball-scale-multiple">
+</ngx-spinner>-->
+
 <table class="table table-hover" ng-controller="myController">
     <thead>
       <tr class="text-left" bgcolor=lightgray>
@@ -9,7 +17,10 @@
         <th>Studies per species</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="globals.showSpinner">
+      <tr class="justify-content-center"><td colspan="5" align="center"><app-loading-spinner></app-loading-spinner></td></tr>
+    </tbody>
+    <tbody *ngIf="!globals.showSpinner">
         <tr *ngFor="let row of table_info.data; let i = index"  class="text-left">
           <td class="align-middle text-center" style="border-right: 1px solid lightgray">
             <canvas #cmp id="{{'canvas_'+i}}" width="100" height="100">{{row.smiles}}</canvas>

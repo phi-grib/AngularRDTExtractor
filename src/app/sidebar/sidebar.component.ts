@@ -8,6 +8,7 @@ import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 //import { SketchModalComponent } from '../sketch/sketch.component';
 import { isNull } from 'util';
 import { Router } from '@angular/router';
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-sidebar',
@@ -62,12 +63,13 @@ export class SidebarComponent implements OnInit {
               private modalDialogService: ModalDialogService, 
               private viewContainer: ViewContainerRef,
               private findService : FindingsService,
-              private _router: Router ) {
+              private _router: Router,
+              private globals: Globals ) {
                 this.router = _router;
               }
 
   ngOnInit(){
-    
+    this.globals.showSpinner = true;
    // this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory]);
    //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory]);
     this.findService.currentAxis.subscribe();
@@ -81,6 +83,7 @@ export class SidebarComponent implements OnInit {
         }
         /*Case TABLE*/
         if (this.router.url=="/table") {
+          this.globals.showSpinner = true;
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
             this.findService.changeTable(table_info); 
             for (let source of this.sources){ 
@@ -89,6 +92,7 @@ export class SidebarComponent implements OnInit {
               this.categoryOptionsSelected[source]['organs'] =  this.categories_search_form[source]['organs']
               this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
             }
+            this.globals.showSpinner = false;
           });
         }
           /*Case PLOT*/
@@ -107,12 +111,14 @@ export class SidebarComponent implements OnInit {
         }
          /*Case TABLE*/
         if (this.router.url=="/table") {
+          this.globals.showSpinner = true;
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
             for (let source of this.sources){ 
               this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
               this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
             }
             this.findService.changeTable(table_info);  
+            this.globals.showSpinner = false;
           });
         }
         /*Case PLOT*/
@@ -131,6 +137,7 @@ export class SidebarComponent implements OnInit {
    
 
     this.findService.initFinding().subscribe(table_info => {
+      
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
@@ -152,6 +159,7 @@ export class SidebarComponent implements OnInit {
       }
       this.findService.changeTable(table_info);
       this.findService.changeAxis([table_info['x'],table_info['y']])
+      this.globals.showSpinner = false;
     });
   }
 
