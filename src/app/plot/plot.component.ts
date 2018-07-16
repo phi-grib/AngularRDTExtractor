@@ -45,17 +45,30 @@ export class PlotComponent implements AfterViewInit {
   firstTime=false;
  
   public fruits:string[] = [
-    "apple",
-    "apple",
-    "banana",
-    "apple"
+    "Molecules",
+    "Studies",
+    "Species",
+    "Routes",
+    "Sources",
+    "Pharmacological action",
+    "Category",
+    "Sex",
+    "Treatment Related",
+    "Organs",
+    "Observations"
   ];
 
   public apples:string[] = [
+    "apple",
+    "apple"
   ];
 
   public bananas:string[] = [
+    "banana",
+    "banana"
   ];
+
+  o
   constructor( private findService : FindingsService,  private _router: Router ) { }
 
    ngAfterViewInit() {
@@ -73,13 +86,19 @@ export class PlotComponent implements AfterViewInit {
 
  
   onDragged( item:any, list:any[] ) {
-
+    console.log("---nDragged-----");
+    console.log(item);
+    console.log(list);
     const index = list.indexOf( item );
     list.splice( index, 1 );
+    console.log(list);
+    console.log("#####nDragged####");
   }
 
   onDrop( event:DndDropEvent, list:any[] ) {
-
+    console.log("---OnDrop-----");
+    console.log(event.data);
+    console.log(list);
     let index = event.index;
 
     if( typeof index === "undefined" ) {
@@ -88,13 +107,8 @@ export class PlotComponent implements AfterViewInit {
     }
 
     list.splice( index, 0, event.data );
-}
- 
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
+    console.log(list);
+    console.log("#####OnDrop####");
   }
 }
+

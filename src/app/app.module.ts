@@ -29,6 +29,7 @@ import { DndModule } from 'ngx-drag-drop';
 import { ChartsModule } from 'ng2-charts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
+import { MonoPlotComponent } from './mono-plot/mono-plot.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {SelectDropDownModule} from 'ngx-select-dropdown';
     ConnectComponent,
     BrowseComponent,
     CustomModalComponent,
-    DisabledOnSelectorDirective
+    DisabledOnSelectorDirective,
+    MonoPlotComponent
   ],
   imports: [
     BrowserModule,

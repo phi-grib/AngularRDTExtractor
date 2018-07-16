@@ -1,79 +1,23 @@
 
-{{chartType}}
-<div class="row align-items-center">
-    <div class="col-1">
-        <select class="custom-select" [(ngModel)]="chartType">
-            <option *ngFor="let chart of charts" [value]="chart.id">{{chart.name}}</option>
-        </select>
+<div class="container-fluid">
+    <div class="row align-items-center">
+        <div class="col-2 card">
+            <div class="card-header">Fruits</div>
+            <div class="card-body" dndDropzone
+            dndEffectAllowed="move"
+            (dndDrop)="onDrop($event, fruits)">
+            
+                <span class="badge badge-pill badge-primary" *ngFor="let fruit of fruits"
+                                [dndDraggable]="fruit"
+                                
+                                dndEffectAllowed="move"
+                                (dndMoved)="onDragged(fruit, fruits)">
+                    {{fruit}}
+                </span>
+            </div>  
+        </div>
     </div>
 </div>
-    
 
-<div class="row align-items-center">
-    <div class="col-1 card">
-        <div class="card-header">Fruits</div>
-        <div class="card-body" dndDropzone
-        dndEffectAllowed="move"
-        (dndDrop)="onDrop($event, fruits)">
-        
-            <span class="badge badge-pill badge-primary" *ngFor="let fruit of fruits"
-                            [dndDraggable]="fruit"
-                            [dndType]="fruit"
-                            dndEffectAllowed="move"
-                            (dndMoved)="onDragged(fruit, fruits)">
-                {{fruit}}
-            </span>
-        </div>  
-    </div>
-    <div class="col-1 card">
-        
-            <div class="card-body" dndDropzone
-                    dndEffectAllowed="move"
-                    (dndDrop)="onDrop($event, apples)">
-        
-            <span class="badge badge-pill badge-primary" *ngFor="let apple of apples"
-                            [dndDraggable]="apple"
-                            [dndType]="apple"
-                            dndEffectAllowed="move"
-                            (dndMoved)="onDragged(apple, apples)">
-                {{apple}}<br>
-                </span>
-        
-            </div>
-        
-        </div>
-        <div class="col-8" style="width: 30%;">
-                <canvas baseChart #chart 
-                [data]="chartData"
-                [labels]="chartLabels"
-                [options]="chartOptions"
-                [chartType]="chartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
-            </div>
-</div>
-<div class="row align-items-center">
-    <div class="col-1 card offset-5">    
-            <div class="card-body" dndDropzone
-                    dndEffectAllowed="move"
-                    (dndDrop)="onDrop($event, bananas)">
-        
-                <span class="badge badge-pill badge-primary" *ngFor="let banana of bananas"
-                            [dndDraggable]="banana"
-                            [dndType]="banana"
-                            dndEffectAllowed="move"
-                            (dndMoved)="onDragged(banana, bananas)">
-                    {{banana}}
-                </span>
-            </div>
-        </div>
-</div>
- <!-- <div class="col-md-6" style="width: 30%;">
-            <canvas baseChart
-            [data]="pieChartData"
-            [labels]="pieChartLabels"
-            [options]="options"
-            [chartType]="pieChartType"
-            (chartHover)="chartHovered($event)"
-            (chartClick)="chartClicked($event)"></canvas>
-        </div>-->
+
+<app-mono-plot></app-mono-plot>

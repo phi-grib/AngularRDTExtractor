@@ -1,0 +1,55 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+          <div class="row align-items-start">
+              <div class="col">
+                  <select class="custom-select" [(ngModel)]="chartType">
+                      <option *ngFor="let chart of charts" [value]="chart.id">{{chart.name}}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row align-items-center">
+              <div class="col">
+                  <div class="card-body" dndDropzone
+                  dndEffectAllowed="move"
+                  (dndDrop)="onDrop($event, apples)">
+      
+                    <span class="badge badge-pill badge-primary" *ngFor="let apple of apples"
+                                    [dndDraggable]="apple"
+                                    dndEffectAllowed="move"
+                                    (dndMoved)="onDragged(apple, apples)">
+                        {{apple}}<br>
+                        </span>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-8" style="width: 30%;">
+                <canvas baseChart #chart 
+                [data]="data"
+                [labels]="labels"
+                [options]="options"
+                [chartType]="chartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1 card offset-5">    
+            <div class="card-body" dndDropzone
+                    dndEffectAllowed="move"
+                    (dndDrop)="onDrop($event, bananas)">
+        
+                <span class="badge badge-pill badge-primary" *ngFor="let banana of bananas"
+                            [dndDraggable]="banana"
+                            [dndType]="banana"
+                            dndEffectAllowed="move"
+                            (dndMoved)="onDragged(banana, bananas)">
+                    {{banana}}
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</div>
