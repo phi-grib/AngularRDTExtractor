@@ -10,6 +10,7 @@ import { TabsComponent } from './tabs/tabs.component';
 import { TableComponent } from './table/table.component';
 import { PlotComponent } from './plot/plot.component';
 import { PanelComponent } from './panel/panel.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { FindingsService } from './findings.service';
@@ -18,7 +19,6 @@ import { ExploreComponent } from './explore/explore.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { CustomModalComponent } from './dialog/dialog.component';
 import { TooltipModule } from "ngx-tooltip";
@@ -30,8 +30,6 @@ import { ChartsModule } from 'ng2-charts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
 import { MonoPlotComponent } from './mono-plot/mono-plot.component';
-import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { Globals } from './globals'
 
 @NgModule({
@@ -43,16 +41,14 @@ import { Globals } from './globals'
     TableComponent,
     PlotComponent,
     PanelComponent,
+    LoadingSpinnerComponent,
     CapitalizePipe,
     ExploreComponent,
     ConnectComponent,
     BrowseComponent,
     CustomModalComponent,
     DisabledOnSelectorDirective,
-    MonoPlotComponent,
-    LoadingSpinnerComponent,
-
-    
+    MonoPlotComponent    
   ],
   imports: [
     BrowserModule,
@@ -60,7 +56,6 @@ import { Globals } from './globals'
     HttpClientModule,
     AppRoutingModule,
     IonRangeSliderModule,
-    Ng4LoadingSpinnerModule,
     ModalDialogModule.forRoot(),
     TooltipModule,
     TreeviewModule.forRoot(),
@@ -68,8 +63,7 @@ import { Globals } from './globals'
     AngularFontAwesomeModule,
     DndModule,
     ChartsModule,
-    SelectDropDownModule,
-    NgxSpinnerModule
+    SelectDropDownModule
   ],
   providers: [FindingsService,Globals],
   entryComponents: [CustomModalComponent],

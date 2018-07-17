@@ -4,7 +4,6 @@ import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
 import { ModalDialogService } from 'ngx-modal-dialog';
 import { CustomModalComponent } from '../dialog/dialog.component';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Globals } from '../globals';
 
 
@@ -29,7 +28,6 @@ export class TableComponent implements OnInit,AfterViewInit {
               private modalDialogService: ModalDialogService, 
               private viewContainer: ViewContainerRef,
               private renderer: Renderer2,
-              private spinner: NgxSpinnerService,
               private globals: Globals) {}
 
   ngOnInit() {
