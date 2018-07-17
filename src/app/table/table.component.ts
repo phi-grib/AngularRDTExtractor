@@ -38,7 +38,7 @@ export class TableComponent implements OnInit,AfterViewInit {
 
   openCustomModal(id:string) {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Compound Information',
+      title: id,
       childComponent: SubstanceModalComponent,
       settings: {
         closeButtonClass: 'close theme-icon-close',
