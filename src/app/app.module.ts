@@ -19,15 +19,15 @@ import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { ModalDialogModule } from 'ngx-modal-dialog';
-import { CustomModalComponent } from './dialog/dialog.component';
+import { CustomModalComponent } from './dialog/dialog.component';import { SubstanceModalComponent } from './substance-modal/substance-modal.component';
 import { TooltipModule } from "ngx-tooltip";
 import { TreeviewModule } from 'ngx-treeview';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { DisabledOnSelectorDirective } from './disabled-on-selector.directive';
 import { DndModule } from 'ngx-drag-drop';
 import { ChartsModule } from 'ng2-charts';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {SelectDropDownModule} from 'ngx-select-dropdown';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { MonoPlotComponent } from './mono-plot/mono-plot.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { Globals } from './globals'
@@ -47,6 +47,7 @@ import { Globals } from './globals'
     ConnectComponent,
     BrowseComponent,
     CustomModalComponent,
+    SubstanceModalComponent,
     DisabledOnSelectorDirective,
     MonoPlotComponent    
   ],
@@ -66,7 +67,7 @@ import { Globals } from './globals'
     SelectDropDownModule
   ],
   providers: [FindingsService,Globals],
-  entryComponents: [CustomModalComponent],
+  entryComponents: [CustomModalComponent,SubstanceModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

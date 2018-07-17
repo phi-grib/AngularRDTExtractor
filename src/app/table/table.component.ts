@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterVie
 import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
 import { ModalDialogService } from 'ngx-modal-dialog';
-import { CustomModalComponent } from '../dialog/dialog.component';
+import { SubstanceModalComponent } from '../substance-modal/substance-modal.component';
 import { Globals } from '../globals';
 
 
@@ -36,16 +36,10 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
   }
 
-  splitText(line:string) {
-    var linesplit = line.split(', ');
-    var httpText = linesplit.join('<br>');
-    return httpText;
-  }
-
   openCustomModal(id:string) {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Study Information',
-      childComponent: CustomModalComponent,
+      title: 'Compound Information',
+      childComponent: SubstanceModalComponent,
       settings: {
         closeButtonClass: 'close theme-icon-close',
         modalDialogClass: "modal-dialog modal-dialog-centered modal-lg"
@@ -67,7 +61,7 @@ export class TableComponent implements OnInit,AfterViewInit {
             }, function (err) {
               console.log(err);
             });
-            this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal("aux");});
+            this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal(child.nativeElement.id);});
         });
       }
     });
