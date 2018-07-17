@@ -18,7 +18,6 @@ import { ExploreComponent } from './explore/explore.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { CustomModalComponent } from './dialog/dialog.component';
 import { TooltipModule } from "ngx-tooltip";
@@ -42,16 +41,14 @@ import { Globals } from './globals'
     TableComponent,
     PlotComponent,
     PanelComponent,
+    LoadingSpinnerComponent,
     CapitalizePipe,
     ExploreComponent,
     ConnectComponent,
     BrowseComponent,
     CustomModalComponent,
     DisabledOnSelectorDirective,
-    MonoPlotComponent,
-    LoadingSpinnerComponent,
-
-    
+    MonoPlotComponent    
   ],
   imports: [
     BrowserModule,
@@ -59,7 +56,6 @@ import { Globals } from './globals'
     HttpClientModule,
     AppRoutingModule,
     IonRangeSliderModule,
-    Ng4LoadingSpinnerModule,
     ModalDialogModule.forRoot(),
     TooltipModule,
     TreeviewModule.forRoot(),
