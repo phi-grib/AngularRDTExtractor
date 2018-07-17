@@ -3,18 +3,21 @@
 </ul>
 <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 <br>
-<div id="FilterAccordion">
+
+
+
+<div id="FilterAccordion" role="tablist">
     <div class="card">
-        <div class="card-header" id="CompoundHeading">            
+        <div class="card-header" role="tab" id="CompoundHeading">
             <button class="btn btn-link" data-toggle="collapse" data-target="#CompoundCard" aria-expanded="true" aria-controls="CompoundCard">
-                <h5>Compound</h5>
-            </button>            
+                Compound
+            </button>          
         </div>
         <div id="CompoundCard" class="collapse show" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
             <div class="card-body">
                 <button type="button" class="btn btn-link" (click)="openSketchModal()">Sketch</button>
                 <br>
-                Name:
+                <p class="font-weight-bold">Name:</p>
                 <div class="form-inline">
                     <select class="form-control-sm" id="compound_name" 
                     (change)="addSearchSelect($event)">
@@ -24,7 +27,7 @@
                 </div>
                 <app-panel [key]= "'compound_name'" ></app-panel>
                 <br>
-                CAS number:
+                <p class="font-weight-bold">CAS number:</p>
                 <div class="form-inline">
                     <select class="form-control-sm" id="cas_number" 
                     (change)="addSearchSelect($event)">
@@ -36,14 +39,20 @@
                 <br>
             </div>
         </div>
-        <div class="card-header" id="PharmacologyHeading">            
+
+
+
+
+
+
+        <div class="card-header" role="tab" id="PharmacologyHeading"> 
             <button class="btn btn-link" data-toggle="collapse" data-target="#PharmacologyCard" aria-expanded="true" aria-controls="PharmacologyCard">
-                <h5>Pharmacology</h5>
-            </button>            
+                Pharmacology
+            </button>   
         </div>
         <div id="PharmacologyCard" class="collapse show" aria-labelledby="PharmacologyHeading" data-parent="#FilterAccordion">
             <div class="card-body">
-                Pharmacological action:
+                <p class="font-weight-bold">Pharmacological action:</p>
                 <div class="form-inline">
                     <select class="form-control-sm" id="pharmacological_action" 
                     (change)="addSearchSelect($event)">
@@ -55,14 +64,18 @@
                 <br>
             </div>
         </div>
-        <div class="card-header" id="StudyHeading">            
+
+
+
+
+        <div class="card-header" role="tab" id="StudyHeading">            
             <button class="btn btn-link" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
-                <h5>Study</h5>
-            </button>            
+                Pharmacology
+            </button>             
         </div>
         <div id="StudyCard" class="collapse show" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
             <div class="card-body">
-                Species:
+                <p class="font-weight-bold">Species:</p>
                 <div class="form-inline">
                     <select class="form-control-sm" id="species" 
                     (change)="addSearchSelect($event)">
@@ -72,7 +85,7 @@
                 </div>
                 <app-panel [key]= "'species'" ></app-panel>
                 <br>
-                Route:
+                <p class="font-weight-bold">Route:</p>
                 <div class="form-inline">
                     <select class="form-control-sm" id="routes" 
                     (change)="addSearchSelect($event)">
@@ -84,7 +97,7 @@
                  
                 [key]= "'routes'" ></app-panel>
                 <br>
-                Exposure period (days):
+                <p class="font-weight-bold">Exposure period (days):</p>
                 <div>
                     <ion-range-slider #sliderElement
                         type="double"
@@ -97,14 +110,18 @@
                 </div> 
             </div>
         </div>
-        <div class="card-header" id="FindingHeading">
+
+
+     
+        
+        <div class="card-header" role="tab" id="FindingHeading">
             <button class="btn btn-link" data-toggle="collapse" data-target="#FindingCard" aria-expanded="true" aria-controls="FindingCard">
-                <h5>Finding</h5>
+                    Finding
             </button>
         </div>
         <div id="FindingCard" class="collapse show" aria-labelledby="FindingHeading" data-parent="#FilterAccordion">
             <div class="card-body">
-                Sex:
+                <p class="font-weight-bold">Sex:</p>
                 <div class="form-inline">
                     <label *ngFor="let value of sex">
                     <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}&nbsp;&nbsp;
@@ -117,57 +134,32 @@
                     &nbsp;Treatment-related only
                 </div>
                 <br>
-                Category:
+                <p class="font-weight-bold">Category:</p>
                 <div class="form-inline">
-                    <select class="form-control-sm" id="category" 
+                    <select class="custom-select" id="category" 
                     (change)="selectCategory($event)">
                         <option disabled selected>-- select --</option>
                         <option *ngFor="let source of sources">{{source}}</option>
                     </select>
                 </div>
                 <br>
-                <div id="TreeAccordion">
-                    <div class="card border-light mb-3">
-                        <div class="card-header" id="organsHeading">
-                            <button class="btn btn-link collapsed" 
-                            data-toggle="collapse" data-target="#collapseOne" 
-                            aria-expanded="true" aria-controls="collapseOne" 
-                            [disabled]="!hasCategory">               
-                                <i class="fa" aria-hidden="true"></i>
-                                Organs
-                            </button>
-                        </div>
-                        <div id="collapseOne" class="collapse" aria-labelledby="organsHeading" 
-                        data-parent="#TreeAccordion">
-                            <div class="card-body">
-                                <div class="col s12 l6">
-                                    <ngx-select-dropdown (change)="changeValue($event)" [multiple]="true" [(value)]="multiSelect" [config]="config_select" [options]="options"></ngx-select-dropdown>
-                                </div>
-                            </div>
-                        </div>
+                <p class="font-weight-bold">Organs:</p>
+                <div class="row">
+                    <div class="col s12 l6">
+                    <ngx-select-dropdown (change)="addCategory($event,'organs')" [multiple]="true" [(value)]="this.categoryOptionsSelected[selectedCategory]['organs']" [config]="config_select" [options]="categoryOptions[selectedCategory]['organs']" disable></ngx-select-dropdown>
                     </div>
-                    <div class="card border-light mb-3">
-                        <div class="card-header" id="observationsHeading">        
-                            <button class="btn btn-link collapsed" data-toggle="collapse" 
-                            data-target="#collapseTwo" aria-expanded="false" 
-                            aria-controls="collapseTwo" [disabled]="!hasCategory">
-                                <i class="fa" aria-hidden="true"></i>
-                                Observations
-                            </button>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="observationsHeading" data-parent="#TreeAccordion">
-                            <div class="card-body">
-                                <div class="col s12 l6">
-                                    <ngx-select-dropdown (change)="changeValue($event)" [multiple]="true" [(value)]="multiSelect" [config]="config_select" [options]="options"></ngx-select-dropdown>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <br>
+                <p class="font-weight-bold">Observations:</p>
+                <div class="row">
+                    <div class="col s12 l6">
+                    <ngx-select-dropdown (change)="addCategory($event,'observations')" [multiple]="true" [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" [config]="config_select" [options]="categoryOptions[selectedCategory]['observations']"></ngx-select-dropdown>
                     </div>
                 </div>
                 <div id="ShowFiltersAccordion">
                     <div class="card" [hidden]="!isCategoryFiltered('Histopathological')">
                         <div class="card-header" id="HistopathologicalHeading">
-                            <h5 class="mb-0">
+                            <h5>
                                 <button class="btn btn-link" data-toggle="collapse" data-target="#Histopathological" aria-expanded="true" aria-controls="Histopathological">
                                 Histopathological
                                 </button>

@@ -8,6 +8,7 @@ import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
 //import { SketchModalComponent } from '../sketch/sketch.component';
 import { isNull } from 'util';
 import { Router } from '@angular/router';
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-sidebar',
@@ -51,15 +52,10 @@ export class SidebarComponent implements OnInit {
   categoryOptionsSelected ={};
   categoryOptions = {}
 
-  multiSelect: any=["Amie Franklin"];
-
-  options = [
-      "Burns Dalton","Mcintyre Lawson","Amie Franklin","Jocelyn Horton","Fischer Erickson", "Medina Underwood","Goldie Barber"
-  ]
-
   config_select = {
     //displayKey:"name", //if objects array passed which key to be displayed defaults to description
     search:true,
+    height: '300px'
   };
 
 
@@ -67,12 +63,13 @@ export class SidebarComponent implements OnInit {
               private modalDialogService: ModalDialogService, 
               private viewContainer: ViewContainerRef,
               private findService : FindingsService,
-              private _router: Router ) {
+              private _router: Router,
+              private globals: Globals ) {
                 this.router = _router;
               }
 
   ngOnInit(){
-    
+    this.globals.showSpinner = true;
    // this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory]);
    //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory]);
     this.findService.currentAxis.subscribe();
@@ -86,20 +83,21 @@ export class SidebarComponent implements OnInit {
         }
         /*Case TABLE*/
         if (this.router.url=="/table") {
-          alert("Table Categorie Seaarch change");
+          this.globals.showSpinner = true;
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
             this.findService.changeTable(table_info); 
-            if (true){
-              //this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+            for (let source of this.sources){ 
+              this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+              this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+              this.categoryOptionsSelected[source]['organs'] =  this.categories_search_form[source]['organs']
+              this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
             }
-            else{
-              //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
-            } 
+            this.globals.showSpinner = false;
           });
         }
           /*Case PLOT*/
-        else{
-          alert("Plot Seaarch change");
+        else if (this.router.url=="/plot"){
+         
         }
       }
       this.firstTimeCategorySearch=true;   
@@ -113,14 +111,18 @@ export class SidebarComponent implements OnInit {
         }
          /*Case TABLE*/
         if (this.router.url=="/table") {
-          this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
-            //this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
-            //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');   
+          this.globals.showSpinner = true;
+          this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
+            for (let source of this.sources){ 
+              this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+              this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+            }
             this.findService.changeTable(table_info);  
+            this.globals.showSpinner = false;
           });
         }
         /*Case PLOT*/
-        else{
+        else if (this.router.url=="/plot"){
           this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
            this.table_info['allOptions']=info['allOptions'];
            this.table_info['num_structures']=info['num_structures'];
@@ -135,27 +137,29 @@ export class SidebarComponent implements OnInit {
    
 
     this.findService.initFinding().subscribe(table_info => {
+      
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];
       for (let source of this.sources){ 
 
+        this.selectedCategory=source
         this.categories_search_form[source] = {}
         this.categories_search_form[source]['organs']=[]
         this.categories_search_form[source]['observations']=[]
        
-        //this.categoryOptions[source] = {}
-        //this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
-        //this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+        this.categoryOptions[source] = {}
+        this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+        this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
 
-        //this.categoryOptionsSelected[source] = {}
-        //this.categoryOptionsSelected[source]['organs']=[]
-        //this.categoryOptionsSelected[source]['observations']=[]
+        this.categoryOptionsSelected[source] = {}
+        this.categoryOptionsSelected[source]['organs']=[]
+        this.categoryOptionsSelected[source]['observations']=[]
       }
       this.findService.changeTable(table_info);
       this.findService.changeAxis([table_info['x'],table_info['y']])
-   
+      this.globals.showSpinner = false;
     });
   }
 
@@ -186,8 +190,8 @@ export class SidebarComponent implements OnInit {
   }
 
   addSearchSelect(event: any){
+
       // If the key(field of search) is already inserted   
-      //alert(this.router.url)
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted
         if (this.search_form[event.target.id].indexOf(event.target.value)==-1){   
@@ -202,6 +206,7 @@ export class SidebarComponent implements OnInit {
       //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
       event.target.selectedIndex = "0";
+
   }
 
   addSearchCheckBox(event: any){
@@ -276,8 +281,9 @@ export class SidebarComponent implements OnInit {
     document.getElementById("main").style.marginLeft = "25px";
   }
 
-  changeValue($event: any){
-    console.log($event);
+  addCategory($event: any,type){
+    this.categories_search_form[this.selectedCategory][type] = $event.value;
+    this.findService.changeCategoriesSearchForm(this.categories_search_form);
   }
 
   // getSmiles() {

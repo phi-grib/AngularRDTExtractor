@@ -29,6 +29,10 @@ import { DndModule } from 'ngx-drag-drop';
 import { ChartsModule } from 'ng2-charts';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SelectDropDownModule} from 'ngx-select-dropdown';
+import { MonoPlotComponent } from './mono-plot/mono-plot.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { Globals } from './globals'
 
 @NgModule({
   declarations: [
@@ -44,7 +48,11 @@ import {SelectDropDownModule} from 'ngx-select-dropdown';
     ConnectComponent,
     BrowseComponent,
     CustomModalComponent,
-    DisabledOnSelectorDirective
+    DisabledOnSelectorDirective,
+    MonoPlotComponent,
+    LoadingSpinnerComponent,
+
+    
   ],
   imports: [
     BrowserModule,
@@ -60,9 +68,10 @@ import {SelectDropDownModule} from 'ngx-select-dropdown';
     AngularFontAwesomeModule,
     DndModule,
     ChartsModule,
-    SelectDropDownModule
+    SelectDropDownModule,
+    NgxSpinnerModule
   ],
-  providers: [FindingsService],
+  providers: [FindingsService,Globals],
   entryComponents: [CustomModalComponent],
   bootstrap: [AppComponent]
 })
