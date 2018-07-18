@@ -52,16 +52,16 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.components.changes.subscribe((component) => { 
       
       if (this.components !== undefined){
-        this.components.forEach((child) => { 
-         
-          let options = {'width':75, 'height':50};
+        this.components.forEach((child) => {         
+          let options = {'width':100, 'height':100};
           let smilesDrawer = new SmilesDrawer.Drawer(options);
+          console.log(child);
           SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
             smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
             }, function (err) {
               console.log(err);
             });
-            this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal(child.nativeElement.id);});
+            // this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal(child.nativeElement.id);});
         });
       }
     });

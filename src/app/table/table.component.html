@@ -21,10 +21,15 @@
       <tr class="justify-content-center"><td colspan="5" align="center"><app-loading-spinner></app-loading-spinner></td></tr>
     </tbody>
     <tbody *ngIf="!globals.showSpinner">
-        <tr *ngFor="let row of table_info.data; let i = index"  class="text-left">
+        <tr *ngFor="let row of table_info.data" class="text-left">
+          <ng-template #tooltipContent>
+              <canvas #cmp id="{{row.subst_id}}" width="250" height="250">{{row.smiles}}</canvas>
+          </ng-template>
           <td class="align-middle text-center" style="border-right: 1px solid lightgray">
-            <canvas #cmp id="{{row.subst_id}}" width="100" height="100">{{row.smiles}}</canvas>
-            <br>{{row.subst_id}}
+            <div [ngbTooltip]="tooltipContent" placement="bottom">
+              <canvas #cmp id="{{row.subst_id}}">{{row.smiles}}</canvas>
+              <br>{{row.subst_id}}
+            </div>
           </td>
           <!-- <td class="align-middle" rowspan=row.study_id_count>{{row.subst_id}}</td> -->
           <td class="align-middle"><pre>{{row.common_name}}</pre></td>
