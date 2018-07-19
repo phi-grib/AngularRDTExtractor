@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterVie
 import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
 import { ModalDialogService } from 'ngx-modal-dialog';
-import { CustomModalComponent } from '../dialog/dialog.component';
+import { SubstanceModalComponent } from '../substance-modal/substance-modal.component';
 import { Globals } from '../globals';
 
 
@@ -36,16 +36,10 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => this.categories_search_form = categoriesSearchForm);
   }
 
-  splitText(line:string) {
-    var linesplit = line.split(', ');
-    var httpText = linesplit.join('<br>');
-    return httpText;
-  }
-
   openCustomModal(id:string) {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Study Information',
-      childComponent: CustomModalComponent,
+      title: id,
+      childComponent: SubstanceModalComponent,
       settings: {
         closeButtonClass: 'close theme-icon-close',
         modalDialogClass: "modal-dialog modal-dialog-centered modal-lg"
@@ -58,16 +52,16 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.components.changes.subscribe((component) => { 
       
       if (this.components !== undefined){
-        this.components.forEach((child) => { 
-         
-          let options = {'width':75, 'height':50};
+        this.components.forEach((child) => {         
+          let options = {'width':100, 'height':100};
           let smilesDrawer = new SmilesDrawer.Drawer(options);
+          console.log(child);
           SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
             smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
             }, function (err) {
               console.log(err);
             });
-            this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal("aux");});
+            // this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal(child.nativeElement.id);});
         });
       }
     });

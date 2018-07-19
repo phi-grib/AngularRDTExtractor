@@ -89,6 +89,12 @@ export class FindingsService {
     return this.http.get(this.apiRoot+'/study', {params: params})
   }
 
+  getSubstance(substance_id): Observable<any>{
+    let params = new HttpParams();
+    params = params.set('id',substance_id.toString())
+    return this.http.get(this.apiRoot+'/substance', {params: params})
+  }
+
   getplot(search_filter,categories_search_filter){
     let url: string = this.apiRoot+"/plot";
     let params = new HttpParams({ fromObject: search_filter });
