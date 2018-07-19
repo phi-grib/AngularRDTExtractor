@@ -3,8 +3,9 @@ import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterVie
 import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
 import { ModalDialogService } from 'ngx-modal-dialog';
-import { SubstanceModalComponent } from '../substance-modal/substance-modal.component';
+import { CustomModalComponent } from '../dialog/dialog.component';
 import { Globals } from '../globals';
+import {TooltipModule} from "ngx-tooltip";
 
 
 @Component({
@@ -23,6 +24,7 @@ export class TableComponent implements OnInit,AfterViewInit {
  
 
   @ViewChildren('cmp') components:QueryList<ElementRef>;  
+  @ViewChildren('cmpTooltip') componentsTooltip:QueryList<ElementRef>;  
 
   constructor(private findService : FindingsService, 
               private modalDialogService: ModalDialogService, 
@@ -39,7 +41,7 @@ export class TableComponent implements OnInit,AfterViewInit {
   openCustomModal(id:string) {
     this.modalDialogService.openDialog(this.viewContainer, {
       title: id,
-      childComponent: SubstanceModalComponent,
+      childComponent: CustomModalComponent,
       settings: {
         closeButtonClass: 'close theme-icon-close',
         modalDialogClass: "modal-dialog modal-dialog-centered modal-lg"
@@ -49,13 +51,11 @@ export class TableComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.components.changes.subscribe((component) => { 
-      
+    this.components.changes.subscribe((component) => {  
       if (this.components !== undefined){
         this.components.forEach((child) => {         
-          let options = {'width':100, 'height':100};
+          let options = {'width':75, 'height':75};
           let smilesDrawer = new SmilesDrawer.Drawer(options);
-          console.log(child);
           SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
             smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
             }, function (err) {

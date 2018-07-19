@@ -1,10 +1,6 @@
-<!--<ngx-spinner
-  bdColor="rgba(51,51,51,0.8)"
-  size="medium"
-  color="#fff"
-  loadingText="Loading..."
-  type="ball-scale-multiple">
-</ngx-spinner>-->
+<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>-->
 
 <table class="table table-hover" ng-controller="myController">
     <thead>
@@ -22,15 +18,32 @@
     </tbody>
     <tbody *ngIf="!globals.showSpinner">
         <tr *ngFor="let row of table_info.data" class="text-left">
-          <ng-template #tooltipContent>
-              <canvas #cmp id="{{row.subst_id}}" width="250" height="250">{{row.smiles}}</canvas>
-          </ng-template>
           <td class="align-middle text-center" style="border-right: 1px solid lightgray">
-            <div [ngbTooltip]="tooltipContent" placement="bottom">
-              <canvas #cmp id="{{row.subst_id}}">{{row.smiles}}</canvas>
+              
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <canvas #cmpTooltip id="{{row.subst_id}}" data-toggle="modal" data-target="#exampleModal" >{{row.smiles}}</canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--END modal-->
+  
+            <div>
+              <canvas #cmp id="{{row.subst_id}}" data-toggle="modal" data-target="#exampleModal" >{{row.smiles}}</canvas>
               <br>{{row.subst_id}}
             </div>
           </td>
+          
           <!-- <td class="align-middle" rowspan=row.study_id_count>{{row.subst_id}}</td> -->
           <td class="align-middle"><pre>{{row.common_name}}</pre></td>
           <td class="align-middle"><pre>{{row.cas_number}}</pre></td>

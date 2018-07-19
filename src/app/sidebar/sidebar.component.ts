@@ -290,7 +290,6 @@ export class SidebarComponent implements OnInit {
 
   addSearchForm($event: any,type){
     this.search_form[type] = $event.value;
-    alert(this.search_form[type])
     this.findService.changeSearchFormTable(this.search_form);
   }
 

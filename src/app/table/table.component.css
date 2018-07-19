@@ -12,6 +12,7 @@
 }
 
 ::ng-deep .tooltip-inner {
-    background-color: #00acd6;
-    color: #fff;
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+    border-color: darkgray;
 }
