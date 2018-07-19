@@ -1,7 +1,6 @@
-
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
+        <div class="col-3">
           <div class="row align-items-start">
               <div class="col">
                   <select class="custom-select" [(ngModel)]="chartType">
@@ -13,19 +12,19 @@
               <div class="col">
                   <div class="card-body" dndDropzone
                   dndEffectAllowed="move"
-                  (dndDrop)="onDrop($event, apples)">
+                  (dndDrop)="onDrop($event, xAxis)">
       
-                    <span class="badge badge-pill badge-primary" *ngFor="let apple of apples"
-                                    [dndDraggable]="apple"
+                    <span class="badge badge-pill badge-primary" *ngFor="let x of xAxis"
+                                    [dndDraggable]="x"
                                     dndEffectAllowed="move"
-                                    (dndMoved)="onDragged(apple, apples)">
-                        {{apple}}<br>
+                                    (dndMoved)="onDragged(x, xAxis)">
+                        {{x}}<br>
                         </span>
                   </div>
               </div>
           </div>
         </div>
-        <div class="col-8" style="width: 30%;">
+        <div class="col-9" style="width: 30%;">
                 <canvas baseChart #chart 
                 [data]="data"
                 [labels]="labels"
@@ -36,17 +35,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-1 card offset-5">    
+        <div class="col-4 card offset-5">    
             <div class="card-body" dndDropzone
                     dndEffectAllowed="move"
-                    (dndDrop)="onDrop($event, bananas)">
+                    (dndDrop)="onDrop($event, yAxis)">
         
-                <span class="badge badge-pill badge-primary" *ngFor="let banana of bananas"
-                            [dndDraggable]="banana"
-                            [dndType]="banana"
+                <span class="badge badge-pill badge-primary" *ngFor="let y of yAxis"
+                            [dndDraggable]="y"
                             dndEffectAllowed="move"
-                            (dndMoved)="onDragged(banana, bananas)">
-                    {{banana}}
+                            (dndMoved)="onDragged(y, yAxis)">
+                    {{y}}
                 </span>
             </div>
         </div>

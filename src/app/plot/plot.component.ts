@@ -7,6 +7,7 @@ import { CustomModalComponent } from '../dialog/dialog.component';
 import { DndDropEvent, DropEffect } from "ngx-drag-drop";
 import { Router } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { Plot } from '../plot';
 
 
 
@@ -16,30 +17,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './plot.component.html',
   styleUrls: ['./plot.component.css']
 })
-export class PlotComponent implements AfterViewInit {
- 
-  
-  router;
-  charts = [
-    {id: 'line', name: "Line"},
-    {id: 'pie', name: "Pie"},
-    {id: 'doughnut', name: "Doughnut"},
-    {id: 'horizontalBar', name: "Horizontal Bar"},
-    {id: 'bar', name: "Verical Bar"}
-  ];
-  chartType:string = 'line';
+export class PlotComponent implements OnInit, AfterViewInit {
 
-  xAxis:Array<any>[];
-  yAxis:Array<any>[];
+  plots:Array<Plot>;
 
-  // lineChart
-  chartData:string[]; 
-  chartLabels: number[];
 
-  options: {
-    responsive: true
-  }
- 
+  plotID:number;
   search_form = {};
   categories_search_form = {};
   firstTime=false;
@@ -58,57 +41,58 @@ export class PlotComponent implements AfterViewInit {
     "Observations"
   ];
 
-  public apples:string[] = [
-    "apple",
-    "apple"
-  ];
-
-  public bananas:string[] = [
-    "banana",
-    "banana"
-  ];
-
-  o
   constructor( private findService : FindingsService,  private _router: Router ) { }
+
+  ngOnInit(){
+
+    this.plots=[]
+    this.plotID=1;
+   
+  }
 
    ngAfterViewInit() {
 
+    alert("InitPlot")
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>this.search_form = searchFormTable);
     this.findService.currentAxis.subscribe(info=>{
       console.log(info);
-      this.chartLabels=info[0];
-        setTimeout(() => {
-          this.chartData=info[1];
-        }, 50);  
     });
+    var a = new Plot();
+    a.id=this.plotID;
+    this.plotID++;
+    a.data = [350, 450, 100]
+    a.labels =  ['Download Sales', 'In-Store Sales', 'Mail-Order Sales']
+    a.chartType = 'line'
+
+    this.plots.push(a)
+
+    var b = new Plot();
+    b.id=this.plotID;
+    this.plotID++;
+    b.data = [350, 450, 100, 45, 1259, 12, 856, 150]
+    b.labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    b.chartType = 'pie'
+    
+    this.plots.push(b)
+   
+    console.log(this.plots);
+
   }
 
  
-  onDragged( item:any, list:any[] ) {
-    console.log("---nDragged-----");
-    console.log(item);
-    console.log(list);
-    const index = list.indexOf( item );
-    list.splice( index, 1 );
-    console.log(list);
-    console.log("#####nDragged####");
+  onDragged( item:any, list:any[] ) { 
+    //const index = list.indexOf( item );
+    //list.splice( index, 1 );
   }
 
   onDrop( event:DndDropEvent, list:any[] ) {
-    console.log("---OnDrop-----");
-    console.log(event.data);
-    console.log(list);
-    let index = event.index;
-
+    /*let index = event.index;
     if( typeof index === "undefined" ) {
-
       index = list.length;
     }
 
-    list.splice( index, 0, event.data );
-    console.log(list);
-    console.log("#####OnDrop####");
+    list.splice( index, 0, event.data );*/
   }
 }
 

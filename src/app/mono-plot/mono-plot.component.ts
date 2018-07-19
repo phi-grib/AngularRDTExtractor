@@ -21,37 +21,40 @@ export class MonoPlotComponent implements OnInit {
     {id: 'pie', name: "Pie"},
     {id: 'doughnut', name: "Doughnut"},
     {id: 'horizontalBar', name: "Horizontal Bar"},
-    {id: 'bar', name: "Verical Bar"}
+    {id: 'bar', name: "Verical Bar"},
+    {id: 'radar', name: "Radar"},
   ];
-  public apples:string[] = [
+  
+  public xAxis:string[] = [
   ];
 
-  public bananas:string[] = [
+  public yAxis:string[] = [
   ];
 
   constructor() { }
 
   ngOnInit() {
 
-    this.labels=['Download Sales', 'In-Store Sales', 'Mail-Order Sales']
-    this.data=[350, 450, 100]
+    //this.labels=['Download Sales', 'In-Store Sales', 'Mail-Order Sales']
+    //this.data=[350, 450, 100]
 
   }
 
   onDrop( event:DndDropEvent, list:any[] ) {
 
     let index = event.index;
-
     if( typeof index === "undefined" ) {
-
       index = list.length;
     }
-
     list.splice( index, 0, event.data );
+    if (this.xAxis.length>0 && this.yAxis.length>0){
+      alert("Both")
+    }
 }
 onDragged( item:any, list:any[] ) {
   const index = list.indexOf( item );
   list.splice( index, 1 );
+ 
 }
  
   public chartClicked(e:any):void {

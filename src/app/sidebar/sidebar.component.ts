@@ -191,6 +191,7 @@ export class SidebarComponent implements OnInit {
 
   addSearchSelect(event: any){
 
+      console.log(event);
       // If the key(field of search) is already inserted   
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted
@@ -209,7 +210,8 @@ export class SidebarComponent implements OnInit {
 
   }
 
-  addSearchCheckBox(event: any){
+  addSearchCheckBox(event: any,id:string){
+
     if (this.sex.indexOf(event.target.value)!=-1){  
       if (event.target.checked){
           if (event.target.value=="F"){
@@ -227,10 +229,10 @@ export class SidebarComponent implements OnInit {
       }
     }
     if (event.target.checked){   
-      this.search_form[event.target.id]=[event.target.value];   
+      this.search_form[id]=[event.target.value];   
     }
     else{   
-      delete this.search_form[event.target.id];
+      delete this.search_form[id];
     }
     this.findService.changeSearchFormTable(this.search_form);
     //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
@@ -284,6 +286,12 @@ export class SidebarComponent implements OnInit {
   addCategory($event: any,type){
     this.categories_search_form[this.selectedCategory][type] = $event.value;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
+  }
+
+  addSearchForm($event: any,type){
+    this.search_form[type] = $event.value;
+    alert(this.search_form[type])
+    this.findService.changeSearchFormTable(this.search_form);
   }
 
   // getSmiles() {

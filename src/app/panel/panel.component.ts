@@ -15,8 +15,8 @@ export class PanelComponent implements OnInit {
   //@Input() searchFormPanel = {};
   //@Input() CategorySearchFormPanel = {};
   @Input() key:string;
-  @Input() category:string;
-  @Output() relevantClose: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() categoryForm:boolean;
+  //@Output() relevantClose: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private findService : FindingsService) { }
 

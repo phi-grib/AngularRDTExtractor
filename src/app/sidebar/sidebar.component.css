@@ -28,7 +28,8 @@
     margin-left: 50px;
 }
 
-a {
+
+#filterContainer {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
@@ -36,6 +37,7 @@ a {
     display: block;
     transition: 0.3s;
 }
+
 
 [data-toggle="collapse"]:after {
     display: inline-block;
@@ -47,6 +49,7 @@ a {
     content: "\f054";
     transform: rotate(90deg) ;
     transition: all linear 0.25s;
+
 }   
 [data-toggle="collapse"].collapsed:after {
     transform: rotate(0deg) ;

@@ -1,7 +1,7 @@
 <ul *ngFor="let specie of search_form['species']">
     <li>{{specie}}</li>
 </ul>
-<a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+<a id="filterContainer" href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 <br>
 
 
@@ -18,18 +18,20 @@
                 <button type="button" class="btn btn-link" (click)="openSketchModal()">Sketch</button>
                 <br>
                 <p class="font-weight-bold">Name:</p>
-                <div class="form-inline">
-                    <select class="form-control-sm" id="compound_name" 
+                <div>
+                    <ngx-select-dropdown (change)="addSearchForm($event,'compound_name')" [multiple]="true" [(value)]="this.search_form['compound_name']" [config]="config_select" [options]="table_info['allOptions']['compound_name']"></ngx-select-dropdown>
+
+                    <!--<select class="custom-select" id="compound_name" 
                     (change)="addSearchSelect($event)">
                         <option disabled selected value> -- select -- </option>
                         <option *ngFor="let name of table_info['allOptions']['compound_name']">{{name}}</option>   
-                    </select>
+                    </select>-->
                 </div>
                 <app-panel [key]= "'compound_name'" ></app-panel>
                 <br>
                 <p class="font-weight-bold">CAS number:</p>
                 <div class="form-inline">
-                    <select class="form-control-sm" id="cas_number" 
+                    <select class="custom-select" id="cas_number" 
                     (change)="addSearchSelect($event)">
                         <option disabled selected value> -- select -- </option>
                         <option *ngFor="let cas of table_info['allOptions']['cas_number']">{{cas}}</option>   
@@ -39,12 +41,6 @@
                 <br>
             </div>
         </div>
-
-
-
-
-
-
         <div class="card-header" role="tab" id="PharmacologyHeading"> 
             <button class="btn btn-link" data-toggle="collapse" data-target="#PharmacologyCard" aria-expanded="true" aria-controls="PharmacologyCard">
                 Pharmacology
@@ -54,7 +50,7 @@
             <div class="card-body">
                 <p class="font-weight-bold">Pharmacological action:</p>
                 <div class="form-inline">
-                    <select class="form-control-sm" id="pharmacological_action" 
+                    <select class="custom-select" id="pharmacological_action" 
                     (change)="addSearchSelect($event)">
                         <option disabled selected value> -- select -- </option>
                         <option *ngFor="let action of table_info['allOptions']['pharmacological_action']">{{action}}</option>   
@@ -70,14 +66,14 @@
 
         <div class="card-header" role="tab" id="StudyHeading">            
             <button class="btn btn-link" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
-                Pharmacology
+                Study
             </button>             
         </div>
         <div id="StudyCard" class="collapse show" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
             <div class="card-body">
                 <p class="font-weight-bold">Species:</p>
                 <div class="form-inline">
-                    <select class="form-control-sm" id="species" 
+                    <select class="custom-select" id="species" 
                     (change)="addSearchSelect($event)">
                         <option disabled selected value> -- select -- </option>
                         <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
@@ -87,7 +83,8 @@
                 <br>
                 <p class="font-weight-bold">Route:</p>
                 <div class="form-inline">
-                    <select class="form-control-sm" id="routes" 
+                        
+                    <select class="custom-select" id="routes" 
                     (change)="addSearchSelect($event)">
                         <option disabled selected value> -- select -- </option>
                         <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
@@ -107,7 +104,7 @@
                         [to]="table_info['allOptions']['exposure_max']"
                         (onFinish)="addSliderInfo($event)">
                     </ion-range-slider>
-                </div> 
+                </div>
             </div>
         </div>
 
@@ -119,19 +116,24 @@
                     Finding
             </button>
         </div>
+
         <div id="FindingCard" class="collapse show" aria-labelledby="FindingHeading" data-parent="#FilterAccordion">
             <div class="card-body">
                 <p class="font-weight-bold">Sex:</p>
                 <div class="form-inline">
-                    <label *ngFor="let value of sex">
-                    <input  type="checkbox" id="sex" (change)="addSearchCheckBox($event)" value={{value}}  [(ngModel)]="this[value]">&nbsp;{{ value }}&nbsp;&nbsp;
-                    </label>
+                    <div class="custom-control custom-checkbox" *ngFor="let value of sex">
+                        <input type="checkbox" class="custom-control-input" name="sex" id="{{value}}" (change)="addSearchCheckBox($event,'sex')" value={{value}}  [(ngModel)]="this[value]">
+                        <label class="custom-control-label" for="{{value}}">&nbsp;{{ value }}&nbsp;&nbsp;</label>
+                    </div>
                 </div>
                 <br>
                 <div class="form-inline">
                     <br>
-                    <input type="checkbox" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event)" [(ngModel)]=relevant_form>
-                    &nbsp;Treatment-related only
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event,'treatmentRelated')" [(ngModel)]=relevant_form>
+                        <label class="custom-control-label" for="treatmentRelated">&nbsp;Treatment-related only</label>
+                    </div>
+                   
                 </div>
                 <br>
                 <p class="font-weight-bold">Category:</p>
@@ -150,13 +152,17 @@
                     </div>
                 </div>
                 <br>
+                <app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>
+
                 <p class="font-weight-bold">Observations:</p>
                 <div class="row">
                     <div class="col s12 l6">
                     <ngx-select-dropdown (change)="addCategory($event,'observations')" [multiple]="true" [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" [config]="config_select" [options]="categoryOptions[selectedCategory]['observations']"></ngx-select-dropdown>
                     </div>
                 </div>
-                <div id="ShowFiltersAccordion">
+                 <br>
+                <app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>
+               <!-- <div id="ShowFiltersAccordion">
                     <div class="card" [hidden]="!isCategoryFiltered('Histopathological')">
                         <div class="card-header" id="HistopathologicalHeading">
                             <h5>
@@ -211,7 +217,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

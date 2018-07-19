@@ -16,9 +16,13 @@
                 </span>
             </div>  
         </div>
+        <div class="col-10">
+            <div class="row">
+                <div class="col" *ngFor="let plot of plots">
+                    {{plot.chartType}}
+                    <app-mono-plot [data]=plot.data [labels]=plot.labels [chartType]=plot.chartType></app-mono-plot>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
-<app-mono-plot></app-mono-plot>
-<app-mono-plot></app-mono-plot>
