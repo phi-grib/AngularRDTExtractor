@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DndDropEvent, DropEffect } from "ngx-drag-drop";
+import { DndDropEvent } from "ngx-drag-drop";
 
 @Component({
   selector: 'app-mono-plot',
@@ -50,12 +50,12 @@ export class MonoPlotComponent implements OnInit {
     if (this.xAxis.length>0 && this.yAxis.length>0){
       alert("Both")
     }
-}
-onDragged( item:any, list:any[] ) {
-  const index = list.indexOf( item );
-  list.splice( index, 1 );
- 
-}
+  }
+
+  onDragged( item:any, list:any[] ) {
+    const index = list.indexOf( item );
+    list.splice( index, 1 );
+  }
  
   public chartClicked(e:any):void {
     console.log(e);
