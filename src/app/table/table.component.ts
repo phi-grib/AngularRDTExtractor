@@ -24,7 +24,7 @@ export class TableComponent implements OnInit,AfterViewInit {
  
 
   @ViewChildren('cmp') components:QueryList<ElementRef>;  
-  @ViewChildren('cmpTooltip') componentsTooltip:QueryList<ElementRef>;  
+  @ViewChildren('cmpTooltip') componentsTooltips:QueryList<ElementRef>;  
 
   constructor(private findService : FindingsService, 
               private modalDialogService: ModalDialogService, 
@@ -40,7 +40,7 @@ export class TableComponent implements OnInit,AfterViewInit {
 
   openCustomModal(id:string) {
     this.modalDialogService.openDialog(this.viewContainer, {
-      title: id,
+      //title: "Molecule",
       childComponent: CustomModalComponent,
       settings: {
         closeButtonClass: 'close theme-icon-close',
@@ -51,17 +51,31 @@ export class TableComponent implements OnInit,AfterViewInit {
   }
 
   ngAfterViewInit() {
+
+    if (this.components !== undefined){
+      this.components.forEach((child) => {         
+        let options = {'width':150, 'height':150};
+        let smilesDrawer = new SmilesDrawer.Drawer(options);
+        SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
+          smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
+          }, function (err) {
+            console.log(err);
+          });
+          
+      });
+    }
+  
     this.components.changes.subscribe((component) => {  
       if (this.components !== undefined){
         this.components.forEach((child) => {         
-          let options = {'width':75, 'height':75};
+          let options = {'width':150, 'height':150};
           let smilesDrawer = new SmilesDrawer.Drawer(options);
           SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
             smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
             }, function (err) {
               console.log(err);
             });
-            // this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal(child.nativeElement.id);});
+            
         });
       }
     });

@@ -147,7 +147,7 @@
                 <br>
                 <p class="font-weight-bold">Organs:</p>
                 <div class="row">
-                    <div class="col s12 l6">
+                    <div class="col s12 l6" disabled="true" >
                     <ngx-select-dropdown (change)="addCategory($event,'organs')" [multiple]="true" [(value)]="this.categoryOptionsSelected[selectedCategory]['organs']" [config]="config_select" [options]="categoryOptions[selectedCategory]['organs']" disable></ngx-select-dropdown>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
 
                 <p class="font-weight-bold">Observations:</p>
                 <div class="row">
-                    <div class="col s12 l6">
+                    <div class="col s12 l6" disabled="true">
                     <ngx-select-dropdown (change)="addCategory($event,'observations')" [multiple]="true" [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" [config]="config_select" [options]="categoryOptions[selectedCategory]['observations']"></ngx-select-dropdown>
                     </div>
                 </div>
