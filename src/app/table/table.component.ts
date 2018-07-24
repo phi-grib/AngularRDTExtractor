@@ -22,9 +22,12 @@ export class TableComponent implements OnInit,AfterViewInit {
   rowIndex = 0;
   splitRow = {};
  
-
   @ViewChildren('cmp') components:QueryList<ElementRef>;  
+<<<<<<< HEAD
   @ViewChildren('cmpTooltip') componentsTooltips:QueryList<ElementRef>;  
+=======
+  @ViewChildren('cmpTooltip') componentsTooltip:QueryList<ElementRef>;
+>>>>>>> dcfadeb749419d877ba2e9e3771f2aec332c2a19
 
   constructor(private findService : FindingsService, 
               private modalDialogService: ModalDialogService, 
