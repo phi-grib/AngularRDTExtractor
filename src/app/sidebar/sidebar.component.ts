@@ -2,11 +2,9 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
-import { TreeviewI18n, TreeviewItem, TreeviewConfig, TreeviewHelper, TreeviewComponent,
-DownlineTreeviewItem,TreeviewEventParser,DownlineTreeviewEventParser} from 'ngx-treeview';
-import { ModalDialogService, SimpleModalComponent } from 'ngx-modal-dialog';
+import { TreeviewItem, TreeviewEventParser, DownlineTreeviewEventParser} from 'ngx-treeview';
+import { ModalDialogService } from 'ngx-modal-dialog';
 //import { SketchModalComponent } from '../sketch/sketch.component';
-import { isNull } from 'util';
 import { Router } from '@angular/router';
 import { Globals } from '../globals';
 
@@ -16,7 +14,7 @@ import { Globals } from '../globals';
   styleUrls: ['./sidebar.component.css'],
   providers: [
     { provide: TreeviewEventParser, useClass: DownlineTreeviewEventParser }
-]
+  ]
 })
 
 export class SidebarComponent implements OnInit {
@@ -54,10 +52,10 @@ export class SidebarComponent implements OnInit {
 
   config_select = {
     //displayKey:"name", //if objects array passed which key to be displayed defaults to description
-    search:true,
-    height: '300px'
+    search: true,
+    height: '300px',
+    placeholder: 'select'
   };
-
 
   constructor(private httpClient: HttpClient, 
               private modalDialogService: ModalDialogService, 
@@ -65,8 +63,8 @@ export class SidebarComponent implements OnInit {
               private findService : FindingsService,
               private _router: Router,
               private globals: Globals ) {
-                this.router = _router;
-              }
+    this.router = _router;
+  }
 
   ngOnInit(){
     this.globals.showSpinner = true;
@@ -134,10 +132,7 @@ export class SidebarComponent implements OnInit {
       this.firstTimeSearch=true;
     });
 
-   
-
     this.findService.initFinding().subscribe(table_info => {
-      
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
