@@ -20,9 +20,9 @@
         <tr *ngFor="let row of table_info.data" class="text-left">
           <td class="align-middle text-center" style="border-right: 1px solid lightgray">
               
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog" role="document">
+            <!-- Modal -->
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+              <!-- <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -35,7 +35,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!--END modal-->
   
             <div>
@@ -47,7 +47,7 @@
           <!-- <td class="align-middle" rowspan=row.study_id_count>{{row.subst_id}}</td> -->
           <td class="align-middle"><pre>{{row.common_name}}</pre></td>
           <td class="align-middle"><pre>{{row.cas_number}}</pre></td>
-          <td class="align-middle"><pre>{{row.pharmacological_action}}</pre></td>
+          <td class="align-middle"><pre>{{row.targetActionList}}</pre></td>
           <!-- <td class="align-middle">{{row.targetAction}}</td> -->
           <td class="align-middle"><pre>{{row.count}}</pre></td>
         </tr>
