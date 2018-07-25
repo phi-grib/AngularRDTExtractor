@@ -9,10 +9,10 @@ import { ExploreComponent } from './explore/explore.component';
 import { BrowseComponent } from './browse/browse.component';
 
 const routes : Routes = [
-  {
-    path:'connect',
-    component: ConnectComponent
-  },
+  // {
+  //   path:'connect',
+  //   component: ConnectComponent
+  // },
   {
     path:'sidebar',
     component: SidebarComponent
