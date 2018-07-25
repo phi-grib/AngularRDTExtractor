@@ -32,7 +32,7 @@ import { MonoPlotComponent } from './mono-plot/mono-plot.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { Globals } from './globals'
 import {TooltipModule} from "ngx-tooltip";
-import { ModalMoleculeComponent } from './modal-molecule/modal-molecule.component';
+// import { ModalMoleculeComponent } from './modal-molecule/modal-molecule.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import { ModalMoleculeComponent } from './modal-molecule/modal-molecule.componen
     //SubstanceModalComponent,
     DisabledOnSelectorDirective,
     MonoPlotComponent,
-    ModalMoleculeComponent    
+    // ModalMoleculeComponent    
   ],
   imports: [
     BrowserModule,
