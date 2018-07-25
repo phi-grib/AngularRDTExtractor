@@ -4,8 +4,6 @@
 <a id="filterContainer" href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
 <br>
 
-
-
 <div id="FilterAccordion" role="tablist">
     <div class="card">
         <div class="card-header" role="tab" id="CompoundHeading">
@@ -19,23 +17,25 @@
                 <br>
                 <p class="font-weight-bold">Name:</p>
                 <div>
-                    <ngx-select-dropdown (change)="addSearchForm($event,'compound_name')" [multiple]="true" [(value)]="this.search_form['compound_name']" [config]="config_select" [options]="table_info['allOptions']['compound_name']"></ngx-select-dropdown>
-
-                    <!--<select class="custom-select" id="compound_name" 
-                    (change)="addSearchSelect($event)">
-                        <option disabled selected value> -- select -- </option>
-                        <option *ngFor="let name of table_info['allOptions']['compound_name']">{{name}}</option>   
-                    </select>-->
+                    <ngx-select-dropdown 
+                        (change)="addSearchForm($event,'compound_name')" 
+                        [multiple]="true" 
+                        [(value)]="this.search_form['compound_name']" 
+                        [config]="config_select" 
+                        [options]="table_info['allOptions']['compound_name']">
+                    </ngx-select-dropdown>
                 </div>
                 <app-panel [key]= "'compound_name'" ></app-panel>
                 <br>
                 <p class="font-weight-bold">CAS number:</p>
-                <div class="form-inline">
-                    <select class="custom-select" id="cas_number" 
-                    (change)="addSearchSelect($event)">
-                        <option disabled selected value> -- select -- </option>
-                        <option *ngFor="let cas of table_info['allOptions']['cas_number']">{{cas}}</option>   
-                    </select>
+                <div>
+                    <ngx-select-dropdown 
+                        (change)="addSearchForm($event,'cas_number')" 
+                        [multiple]="true" 
+                        [(value)]="this.search_form['cas_number']" 
+                        [config]="config_select" 
+                        [options]="table_info['allOptions']['cas_number']">
+                    </ngx-select-dropdown>
                 </div>
                 <app-panel [key]= "'cas_number'" ></app-panel>
                 <br>
@@ -49,21 +49,19 @@
         <div id="PharmacologyCard" class="collapse show" aria-labelledby="PharmacologyHeading" data-parent="#FilterAccordion">
             <div class="card-body">
                 <p class="font-weight-bold">Pharmacological action:</p>
-                <div class="form-inline">
-                    <select class="custom-select" id="pharmacological_action" 
-                    (change)="addSearchSelect($event)">
-                        <option disabled selected value> -- select -- </option>
-                        <option *ngFor="let action of table_info['allOptions']['pharmacological_action']">{{action}}</option>   
-                    </select>
+                <div>
+                    <ngx-select-dropdown 
+                        (change)="addSearchForm($event,'pharmacological_action')" 
+                        [multiple]="true" 
+                        [(value)]="this.search_form['pharmacological_action']" 
+                        [config]="config_select" 
+                        [options]="table_info['allOptions']['pharmacological_action']">
+                    </ngx-select-dropdown>
                 </div>
                 <app-panel [key]= "'pharmacological_action'" ></app-panel>
                 <br>
             </div>
         </div>
-
-
-
-
         <div class="card-header" role="tab" id="StudyHeading">            
             <button class="btn btn-link" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
                 Study
@@ -72,27 +70,28 @@
         <div id="StudyCard" class="collapse show" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
             <div class="card-body">
                 <p class="font-weight-bold">Species:</p>
-                <div class="form-inline">
-                    <select class="custom-select" id="species" 
-                    (change)="addSearchSelect($event)">
-                        <option disabled selected value> -- select -- </option>
-                        <option *ngFor="let species of table_info['allOptions']['species']">{{species}}</option>   
-                    </select>
+                <div>
+                    <ngx-select-dropdown 
+                        (change)="addSearchForm($event,'species')" 
+                        [multiple]="true" 
+                        [(value)]="this.search_form['species']" 
+                        [config]="config_select" 
+                        [options]="table_info['allOptions']['species']">
+                    </ngx-select-dropdown>
                 </div>
                 <app-panel [key]= "'species'" ></app-panel>
                 <br>
                 <p class="font-weight-bold">Route:</p>
-                <div class="form-inline">
-                        
-                    <select class="custom-select" id="routes" 
-                    (change)="addSearchSelect($event)">
-                        <option disabled selected value> -- select -- </option>
-                        <option *ngFor="let route of table_info['allOptions']['routes']">{{route}}</option>         
-                    </select>
+                <div>
+                    <ngx-select-dropdown 
+                        (change)="addSearchForm($event,'routes')" 
+                        [multiple]="true" 
+                        [(value)]="this.search_form['routes']" 
+                        [config]="config_select" 
+                        [options]="table_info['allOptions']['routes']">
+                    </ngx-select-dropdown>
                 </div>
-                <app-panel 
-                 
-                [key]= "'routes'" ></app-panel>
+                <app-panel [key]= "'routes'" ></app-panel>
                 <br>
                 <p class="font-weight-bold">Exposure period (days):</p>
                 <div>
@@ -107,117 +106,76 @@
                 </div>
             </div>
         </div>
-
-
-     
-        
         <div class="card-header" role="tab" id="FindingHeading">
             <button class="btn btn-link" data-toggle="collapse" data-target="#FindingCard" aria-expanded="true" aria-controls="FindingCard">
-                    Finding
+                Finding
             </button>
         </div>
-
         <div id="FindingCard" class="collapse show" aria-labelledby="FindingHeading" data-parent="#FilterAccordion">
             <div class="card-body">
                 <p class="font-weight-bold">Sex:</p>
                 <div class="form-inline">
                     <div class="custom-control custom-checkbox" *ngFor="let value of sex">
-                        <input type="checkbox" class="custom-control-input" name="sex" id="{{value}}" (change)="addSearchCheckBox($event,'sex')" value={{value}}  [(ngModel)]="this[value]">
-                        <label class="custom-control-label" for="{{value}}">&nbsp;{{ value }}&nbsp;&nbsp;</label>
+                        <input type="checkbox" class="custom-control-input" name="sex" 
+                        id="{{value}}" (change)="addSearchCheckBox($event,'sex')" 
+                        value={{value}}  [(ngModel)]="this[value]">
+                        <label class="custom-control-label" for="{{value}}">
+                            {{ value }}&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
                     </div>
                 </div>
                 <br>
                 <div class="form-inline">
                     <br>
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="treatmentRelated"  value="relevant" (click)="addSearchCheckBox($event,'treatmentRelated')" [(ngModel)]=relevant_form>
-                        <label class="custom-control-label" for="treatmentRelated">&nbsp;Treatment-related only</label>
-                    </div>
-                   
+                        <input type="checkbox" class="custom-control-input" 
+                        id="treatmentRelated"  value="relevant" 
+                        (click)="addSearchCheckBox($event,'treatmentRelated')" 
+                        [(ngModel)]=relevant_form>
+                        <label class="custom-control-label" for="treatmentRelated">
+                            &nbsp;Treatment-related only
+                        </label>
+                    </div>                   
                 </div>
                 <br>
                 <p class="font-weight-bold">Category:</p>
                 <div class="form-inline">
-                    <select class="custom-select" id="category" 
-                    (change)="selectCategory($event)">
+                    <select class="custom-select" id="category" (change)="selectCategory($event)">
                         <option disabled selected>-- select --</option>
                         <option *ngFor="let source of sources">{{source}}</option>
                     </select>
                 </div>
                 <br>
-                <p class="font-weight-bold">Organs:</p>
+                <p class="font-weight-bold">Parameter:</p>
                 <div class="row">
                     <div class="col s12 l6">
-                    <ngx-select-dropdown (change)="addCategory($event,'organs')" [multiple]="true" [(value)]="this.categoryOptionsSelected[selectedCategory]['organs']" [config]="config_select" [options]="categoryOptions[selectedCategory]['organs']" disable></ngx-select-dropdown>
+                    <ngx-select-dropdown 
+                        (change)="addCategory($event,'organs')" 
+                        [multiple]="true" 
+                        [(value)]="this.categoryOptionsSelected[selectedCategory]['organs']" 
+                        [config]="config_select" 
+                        [options]="categoryOptions[selectedCategory]['organs']" 
+                        disable>
+                    </ngx-select-dropdown>
                     </div>
                 </div>
                 <br>
                 <app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>
 
-                <p class="font-weight-bold">Observations:</p>
+                <p class="font-weight-bold">Observation:</p>
                 <div class="row">
                     <div class="col s12 l6">
-                    <ngx-select-dropdown (change)="addCategory($event,'observations')" [multiple]="true" [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" [config]="config_select" [options]="categoryOptions[selectedCategory]['observations']"></ngx-select-dropdown>
+                    <ngx-select-dropdown 
+                        (change)="addCategory($event,'observations')" 
+                        [multiple]="true" 
+                        [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" 
+                        [config]="config_select" 
+                        [options]="categoryOptions[selectedCategory]['observations']">
+                    </ngx-select-dropdown>
                     </div>
                 </div>
                  <br>
-                <app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>
-               <!-- <div id="ShowFiltersAccordion">
-                    <div class="card" [hidden]="!isCategoryFiltered('Histopathological')">
-                        <div class="card-header" id="HistopathologicalHeading">
-                            <h5>
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#Histopathological" aria-expanded="true" aria-controls="Histopathological">
-                                Histopathological
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="Histopathological" class="collapse show" aria-labelledby="HistopathologicalHeading" data-parent="#ShowFiltersAccordion">
-                            <div class="card-body">
-                                <app-panel [key]= "'organs'" [category]="selectedCategory"></app-panel>
-                                <app-panel [key]= "'observations'" [category]="selectedCategory" ></app-panel>
-                                <app-panel [key]= "'grade'" [category]="selectedCategory"></app-panel>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" [hidden]="!isCategoryFiltered('Clinical signs')">
-                        <div class="card-header" id="ClinicalSignsHeading">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#ClinicalSigns" aria-expanded="true" aria-controls="ClinicalSigns">
-                                    Clinical signs
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="ClinicalSigns" class="collapse show" aria-labelledby="ClinicalSignsHeading" data-parent="#ShowFiltersAccordion">
-                            <div class="card-body">
-                                <app-panel [key]= "'organs'" [category]="selectedCategory"></app-panel>
-                                <app-panel [key]= "'observations'" [category]="selectedCategory"></app-panel>
-                                <app-panel [key]= "'grade'" [category]="selectedCategory"></app-panel>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" [hidden]="!isCategoryFiltered('Gross necropsy')">
-                        <div class="card-header" id="GrossNecropsyHeading">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link" data-toggle="collapse" data-target="#GrossNecropsy" aria-expanded="true" aria-controls="GrossNecropsy">
-                                        Gross necropsy
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="GrossNecropsy" class="collapse show" aria-labelledby="GrossNecropsyHeading" data-parent="#ShowFiltersAccordion">
-                            <div class="card-body">
-                                <app-panel [key]= "'organs'" [category]="selectedCategory"></app-panel>
-                                <app-panel 
-                                 
-                                [key]= "'observations'" 
-                                [category]="selectedCategory"></app-panel>
-                                <app-panel 
-                                 
-                                [key]= "'grade'" 
-                                [category]="selectedCategory"></app-panel>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
+                <app-panel [key]= "'observations'" [categoryForm]="true"></app-panel>
             </div>
         </div>
     </div>
