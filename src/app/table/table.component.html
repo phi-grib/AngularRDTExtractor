@@ -14,10 +14,12 @@
     <tbody *ngIf="!globals.showSpinner">
         <tr *ngFor="let row of table_info.data; let i = index" class="text-left">
           <td class="align-middle text-center" style="border-right: 1px solid lightgray">
-            <div (click)="openCustomModal(row.smiles)">
+
+            <img *ngIf="row.smiles==='-'" src="assets/img//No_Image_Available.png" width="200" height="200" class="mx-auto d-block"> 
+            <div *ngIf="row.smiles!=='-'"  (click)="openCustomModal(row.smiles)">
                 <canvas #cmp id="{{row.subst_id}}">{{row.smiles}}</canvas>
-              <br>{{row.subst_id}}
             </div>
+            <br>{{row.subst_id}}
           </td>
           
           <td class="align-middle"><pre>{{row.common_name}}</pre></td>

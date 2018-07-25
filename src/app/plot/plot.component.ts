@@ -47,17 +47,6 @@ export class PlotComponent implements OnInit, AfterViewInit {
 
     this.plots=[]
     this.plotID=1;
-   
-  }
-
-   ngAfterViewInit() {
-
-    alert("InitPlot")
-    this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
-    this.findService.currentSearchFormTable.subscribe (searchFormTable =>this.search_form = searchFormTable);
-    this.findService.currentAxis.subscribe(info=>{
-      console.log(info);
-    });
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
@@ -77,6 +66,17 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.plots.push(b)
    
     console.log(this.plots);
+   
+  }
+
+   ngAfterViewInit() {
+
+    this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
+    this.findService.currentSearchFormTable.subscribe (searchFormTable =>this.search_form = searchFormTable);
+    this.findService.currentAxis.subscribe(info=>{
+      console.log(info);
+    });
+   
 
   }
 
