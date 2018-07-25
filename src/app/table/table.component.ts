@@ -3,8 +3,9 @@ import { Component, OnInit, Input, ViewChildren, QueryList, ElementRef, AfterVie
 import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
 import { ModalDialogService } from 'ngx-modal-dialog';
-import { SubstanceModalComponent } from '../substance-modal/substance-modal.component';
+import { CustomModalComponent } from '../dialog/dialog.component';
 import { Globals } from '../globals';
+import {TooltipModule} from "ngx-tooltip";
 
 
 @Component({
@@ -21,8 +22,8 @@ currentSubstance = '';
 rowIndex = 0;
 splitRow = {};
 
-
 @ViewChildren('cmp') components:QueryList<ElementRef>;  
+@ViewChildren('cmpTooltip') componentsTooltip:QueryList<ElementRef>;
 
 constructor(private findService : FindingsService, 
         private modalDialogService: ModalDialogService, 
@@ -38,7 +39,8 @@ this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => 
 
 openCustomModal(id:string) {
 this.modalDialogService.openDialog(this.viewContainer, {
-title: id,
+//title: "Molecule",
+childComponent: CustomModalComponent,
 settings: {
   closeButtonClass: 'close theme-icon-close',
   modalDialogClass: "modal-dialog modal-dialog-centered modal-lg"
@@ -48,19 +50,31 @@ data: id
 }
 
 ngAfterViewInit() {
-this.components.changes.subscribe((component) => { 
 
 if (this.components !== undefined){
+this.components.forEach((child) => {         
+  let options = {'width':150, 'height':150};
+  let smilesDrawer = new SmilesDrawer.Drawer(options);
+  SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
+    smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
+    }, function (err) {
+      console.log(err);
+    });
+    
+});
+}
+
+this.components.changes.subscribe((component) => {  
+if (this.components !== undefined){
   this.components.forEach((child) => {         
-    let options = {'width':100, 'height':100};
+    let options = {'width':150, 'height':150};
     let smilesDrawer = new SmilesDrawer.Drawer(options);
-    console.log(child);
     SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
       smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
       }, function (err) {
         console.log(err);
       });
-      // this.renderer.listen( child.nativeElement, 'click', () => {this.openCustomModal(child.nativeElement.id);});
+      
   });
 }
 });

@@ -1,6 +1,7 @@
 export class Plot {
-    id:number
+    id: number;
     data:Array<any>
     labels:Array<any>
-    chartType:string
+    datasets:Array<any>
+    chartType:string 
   }

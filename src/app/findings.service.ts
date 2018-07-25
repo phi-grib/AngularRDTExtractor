@@ -58,7 +58,7 @@ export class FindingsService {
           for (var i = 0, len = categories_search_filter[category][key].length; i < len; i++) {
             var filter_value = categories_search_filter[category][key][i];
             new_value = category;
-            new_value = new_value.concat(' | ', filter_value);
+            new_value = new_value.concat('|', filter_value);
             if (key === "organs") {
               organ_list.push(new_value);
             } else if (key === "observations") {
@@ -71,13 +71,13 @@ export class FindingsService {
       });
     });
     if (organ_list.length > 0) {
-      params = params.set("organs", organ_list.join(', '));
+      params = params.set("organs", organ_list.join('@'));
     }
     if (observation_list.length > 0) {
-      params = params.set("observations", observation_list.join(', '));
+      params = params.set("observations", observation_list.join('@'));
     }
     if (grade_list.length > 0) {
-      params = params.set("grades", grade_list.join(', '));
+      params = params.set("grades", grade_list.join('@'));
     }
     params = params.set('page',page.toString());
     return this.http.get(url, {params: params})

@@ -9,22 +9,22 @@ import * as SmilesDrawer from 'smiles-drawer';
   styleUrls: ['./dialog.component.css']
 })
 export class CustomModalComponent implements IModalDialog {
-  parentInfo: {};
+  smiles:string;
 
   constructor(private findService : FindingsService) {}
 
   dialogInit(reference: ComponentRef<IModalDialog>, options: Partial<IModalDialogOptions<string>>) {
 
-    this.findService.getStudy(options.data).subscribe(study => {this.parentInfo=study.study});
-
+    //this.findService.getStudy(options.data).subscribe(study => {this.parentInfo=study.study});
+    this.smiles=options.data
   }
 
   ngAfterViewInit() {
 
-    let options = {'width':250, 'height':250};
+    let options = {'width':500, 'height':500};
     let smilesDrawer = new SmilesDrawer.Drawer(options);
 
-    SmilesDrawer.parse(this.parentInfo['smiles'][0], function (tree) {
+    SmilesDrawer.parse(this.smiles, function (tree) {
       smilesDrawer.draw(tree,"canvas",'light', false);
       }, function (err) {
         console.log(err);
