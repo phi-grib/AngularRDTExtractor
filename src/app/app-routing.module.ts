@@ -25,14 +25,14 @@ const routes : Routes = [
     path:'table',
     component: TableComponent
   },
-  {
-    path:'explore',
-    component: ExploreComponent
-  },
-  {
-    path:'browse',
-    component: BrowseComponent
-  },
+  // {
+  //   path:'explore',
+  //   component: ExploreComponent
+  // },
+  // {
+  //   path:'browse',
+  //   component: BrowseComponent
+  // },
   {
     path:'',
     redirectTo: '/connect', 
