@@ -26,8 +26,6 @@ export class SidebarComponent implements OnInit {
   F: boolean=false;
   M: boolean=false;
   BOTH: boolean=false;
-  min_exposure: number;
-  max_exposure: number;
   sex = [];
   sources = [];
   selectedCategory: string;
@@ -46,6 +44,9 @@ export class SidebarComponent implements OnInit {
   // so that we can calculate the current fraction selected
   totalStudies: number;   
   totalStructures: number;
+  // Store global minimum and maximum exposure values
+  minExposure: number;
+  maxExposure: number;
 
   categoryOptionsSelected ={};
   categoryOptions = {}
@@ -145,7 +146,7 @@ export class SidebarComponent implements OnInit {
         this.categories_search_form[source] = {}
         this.categories_search_form[source]['organs']=[]
         this.categories_search_form[source]['observations']=[]
-       
+        
         this.categoryOptions[source] = {}
         this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
         this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
@@ -202,8 +203,6 @@ export class SidebarComponent implements OnInit {
       this.findService.changeSearchFormTable(this.search_form);
       //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
-      event.target.selectedIndex = "0";
-
   }
 
   addSearchCheckBox(event: any,id:string){
@@ -253,13 +252,13 @@ export class SidebarComponent implements OnInit {
     this.F = false;
     this.M = false;
     this.sliderElement.reset();
-    //this.hasCategory = false;
+    this.hasCategory = false;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
     this.findService.changeSearchFormTable(this.search_form);
+    // document.getElementsByTagName("ngx-select-dropdown")[0].reset( );
     //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
     //document.getElementById('category').selectedIndex = "0";
   }
-
 
  /* openSketchModal() {
     this.modalDialogService.openDialog(this.viewContainer, {
@@ -279,12 +278,12 @@ export class SidebarComponent implements OnInit {
     document.getElementById("main").style.marginLeft = "25px";
   }
 
-  addCategory($event: any,type){
+  addCategory($event: any, type){
     this.categories_search_form[this.selectedCategory][type] = $event.value;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
   }
 
-  addSearchForm($event: any,type){
+  addSearchForm($event: any, type){
     this.search_form[type] = $event.value;
     this.findService.changeSearchFormTable(this.search_form);
   }

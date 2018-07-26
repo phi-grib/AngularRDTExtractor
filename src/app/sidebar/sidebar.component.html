@@ -25,7 +25,7 @@
                         [options]="table_info['allOptions']['compound_name']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'compound_name'" ></app-panel>
+                <!-- <app-panel [key]= "'compound_name'" ></app-panel> -->
                 <br>
                 <p class="font-weight-bold">CAS number:</p>
                 <div>
@@ -37,7 +37,7 @@
                         [options]="table_info['allOptions']['cas_number']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'cas_number'" ></app-panel>
+                <!-- <app-panel [key]= "'cas_number'" ></app-panel> -->
                 <br>
             </div>
         </div>
@@ -58,7 +58,7 @@
                         [options]="table_info['allOptions']['pharmacological_action']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'pharmacological_action'" ></app-panel>
+                <!-- <app-panel [key]= "'pharmacological_action'" ></app-panel> -->
                 <br>
             </div>
         </div>
@@ -79,7 +79,7 @@
                         [options]="table_info['allOptions']['species']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'species'" ></app-panel>
+                <!-- <app-panel [key]= "'species'" ></app-panel> -->
                 <br>
                 <p class="font-weight-bold">Route:</p>
                 <div>
@@ -91,16 +91,14 @@
                         [options]="table_info['allOptions']['routes']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'routes'" ></app-panel>
+                <!-- <app-panel [key]= "'routes'" ></app-panel> -->
                 <br>
                 <p class="font-weight-bold">Exposure period (days):</p>
                 <div>
                     <ion-range-slider #sliderElement
                         type="double"
-                        [min]="table_info['allOptions']['exposure_min']"
-                        [max]="table_info['allOptions']['exposure_max']"
-                        [from]="table_info['allOptions']['exposure_min']"
-                        [to]="table_info['allOptions']['exposure_max']"
+                        [min]="minExposure"
+                        [max]="maxExposure"
                         (onFinish)="addSliderInfo($event)">
                     </ion-range-slider>
                 </div>
@@ -140,13 +138,16 @@
                 <br>
                 <p class="font-weight-bold">Category:</p>
                 <div class="form-inline">
-                    <select class="custom-select" id="category" (change)="selectCategory($event)">
+                    <select class="custom-select" id="category" style="width:100%" 
+                        (change)="selectCategory($event)">
                         <option disabled selected>-- select --</option>
                         <option *ngFor="let source of sources">{{source}}</option>
                     </select>
                 </div>
                 <br>
-                <p class="font-weight-bold">Parameter:</p>
+                <p class="font-weight-bold" [hidden]="!hasCategory || 
+                    this.categoryOptionsSelected[selectedCategory]['organs'].length > 1">
+                    Parameter:</p>
                 <div class="row">
                     <div class="col s12 l6">
                     <ngx-select-dropdown 
@@ -154,15 +155,15 @@
                         [multiple]="true" 
                         [(value)]="this.categoryOptionsSelected[selectedCategory]['organs']" 
                         [config]="config_select" 
-                        [options]="categoryOptions[selectedCategory]['organs']" 
-                        disable>
+                        [options]="categoryOptions[selectedCategory]['organs']"
+                        [hidden]="!hasCategory">
                     </ngx-select-dropdown>
                     </div>
                 </div>
                 <br>
                 <app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>
 
-                <p class="font-weight-bold">Observation:</p>
+                <p class="font-weight-bold" [hidden]="!hasCategory">Observation:</p>
                 <div class="row">
                     <div class="col s12 l6">
                     <ngx-select-dropdown 
@@ -170,7 +171,8 @@
                         [multiple]="true" 
                         [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" 
                         [config]="config_select" 
-                        [options]="categoryOptions[selectedCategory]['observations']">
+                        [options]="categoryOptions[selectedCategory]['observations']"
+                        [hidden]="!hasCategory">
                     </ngx-select-dropdown>
                     </div>
                 </div>
