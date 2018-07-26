@@ -53,7 +53,7 @@ ngAfterViewInit() {
 
 if (this.components !== undefined){
 this.components.forEach((child) => {         
-  let options = {'width':150, 'height':150};
+  let options = {'width':100, 'height':100};
   let smilesDrawer = new SmilesDrawer.Drawer(options);
   SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
     smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
@@ -67,7 +67,7 @@ this.components.forEach((child) => {
 this.components.changes.subscribe((component) => {  
 if (this.components !== undefined){
   this.components.forEach((child) => {         
-    let options = {'width':150, 'height':150};
+    let options = {'width':100, 'height':100};
     let smilesDrawer = new SmilesDrawer.Drawer(options);
     SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
       smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
