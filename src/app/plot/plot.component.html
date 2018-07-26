@@ -17,8 +17,10 @@
             </div>  
         </div>-->
         <div class="col-10">
-            <div class="row" *ngFor="let plot of plots">
-                    <app-mono-plot [data]=plot.data [labels]=plot.labels [chartType]=plot.chartType></app-mono-plot>
+            <div class="row" *ngFor="let plot of objectKeys(plots)" >
+                
+                    <app-mono-plot [data]=plots[plot].data [labels]=plots[plot].labels [chartType]=plots[plot].chartType></app-mono-plot>
+        
             </div>
         </div>
     <!--</div>-->

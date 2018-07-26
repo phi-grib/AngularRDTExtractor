@@ -24,6 +24,8 @@ export class MonoPlotComponent implements OnInit {
     {id: 'bar', name: "Verical Bar"},
     {id: 'radar', name: "Radar"},
   ];
+
+ 
   
   public xAxis:string[] = [
   ];
@@ -34,6 +36,10 @@ export class MonoPlotComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    this.options={
+      responsive: true
+    };
 
     //this.labels=['Download Sales', 'In-Store Sales', 'Mail-Order Sales']
     //this.data=[350, 450, 100]

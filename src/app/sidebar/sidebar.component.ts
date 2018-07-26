@@ -70,7 +70,6 @@ export class SidebarComponent implements OnInit {
     this.globals.showSpinner = true;
    // this.items_organs=this.createTreeview(table_info['allOptions']['organs'][this.selectedCategory]);
    //this.items_observations=this.createTreeview(table_info['allOptions']['observations'][this.selectedCategory]);
-    this.findService.currentAxis.subscribe();
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
 
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
@@ -80,23 +79,20 @@ export class SidebarComponent implements OnInit {
             this.request.unsubscribe();
         }
         /*Case TABLE*/
-        if (this.router.url=="/table") {
-          this.globals.showSpinner = true;
-          this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
-            this.findService.changeTable(table_info); 
-            for (let source of this.sources){ 
-              this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
-              this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
-              this.categoryOptionsSelected[source]['organs'] =  this.categories_search_form[source]['organs']
-              this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
-            }
-            this.globals.showSpinner = false;
-          });
-        }
-          /*Case PLOT*/
-        else if (this.router.url=="/plot"){
-         
-        }
+        this.globals.showSpinner = true;
+        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
+          this.findService.changeTable(table_info);
+          this.globals.actualStructures=table_info['num_structures'];
+          this.globals.actualStudies=table_info['num_studies']; 
+          for (let source of this.sources){ 
+            this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+            this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+            this.categoryOptionsSelected[source]['organs'] =  this.categories_search_form[source]['organs']
+            this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
+          }
+          this.globals.showSpinner = false;
+        });
+ 
       }
       this.firstTimeCategorySearch=true;   
     });
@@ -107,27 +103,29 @@ export class SidebarComponent implements OnInit {
         if (this.request){
             this.request.unsubscribe();
         }
-         /*Case TABLE*/
-        if (this.router.url=="/table") {
-          this.globals.showSpinner = true;
-          this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
-            for (let source of this.sources){ 
-              this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
-              this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
-            }
-            this.findService.changeTable(table_info);  
-            this.globals.showSpinner = false;
-          });
-        }
+      
+        this.globals.showSpinner = true;
+        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
+          this.globals.actualStructures=table_info['num_structures'];
+          this.globals.actualStudies=table_info['num_studies']; 
+          for (let source of this.sources){ 
+            this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+            this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+          }
+          this.findService.changeTable(table_info);  
+          this.globals.showSpinner = false;
+        });
+        
         /*Case PLOT*/
-        else if (this.router.url=="/plot"){
+       /* else if (this.router.url=="/plot"){
           this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
            this.table_info['allOptions']=info['allOptions'];
            this.table_info['num_structures']=info['num_structures'];
            this.table_info['num_studies']=info['num_studies'];
-           this.findService.changeAxis([info['x'],info['y']])
+           this.globals.actualStructures=info['num_structures'];
+           this.globals.actualStudies=info['num_studies'];
           });
-        }
+        }*/
       }
       this.firstTimeSearch=true;
     });
@@ -135,6 +133,10 @@ export class SidebarComponent implements OnInit {
     this.findService.initFinding().subscribe(table_info => {
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
+      this.globals.totalStructures = table_info['num_structures'];
+      this.globals.totalStudies = table_info['num_studies'];
+      this.globals.actualStructures = table_info['num_structures'];
+      this.globals.actualStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];
       for (let source of this.sources){ 
@@ -153,7 +155,6 @@ export class SidebarComponent implements OnInit {
         this.categoryOptionsSelected[source]['observations']=[]
       }
       this.findService.changeTable(table_info);
-      this.findService.changeAxis([table_info['x'],table_info['y']])
       this.globals.showSpinner = false;
     });
   }

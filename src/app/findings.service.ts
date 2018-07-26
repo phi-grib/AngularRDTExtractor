@@ -14,8 +14,7 @@ export class FindingsService {
   private categoriesSearchForm = new BehaviorSubject<any>({});
   currentCategoriesSearchForm= this.categoriesSearchForm.asObservable();
 
-  private axis = new BehaviorSubject<any>([]);
-  currentAxis = this.axis.asObservable();
+
 
   apiRoot = 'http://localhost:8000/api';
 
@@ -24,7 +23,6 @@ export class FindingsService {
   changeTable(table){
     this.table_form.next(table);
   }
-
   changeSearchFormTable(table){
     this.searchFormTable.next(table);
   }
@@ -33,10 +31,6 @@ export class FindingsService {
     this.categoriesSearchForm.next(table);
   }
 
-  changeAxis(axis){
-    this.axis.next(axis);
-  }
-  
   initFinding(): Observable<any>{
     let url: string = this.apiRoot+"/initFindings";
     let params = new HttpParams();
