@@ -99,8 +99,6 @@
                         type="double"
                         [min]="minExposure"
                         [max]="maxExposure"
-                        [from]="table_info['allOptions']['exposure_min']"
-                        [to]="table_info['allOptions']['exposure_max']"
                         (onFinish)="addSliderInfo($event)">
                     </ion-range-slider>
                 </div>
@@ -140,13 +138,16 @@
                 <br>
                 <p class="font-weight-bold">Category:</p>
                 <div class="form-inline">
-                    <select class="custom-select" id="category" (change)="selectCategory($event)">
+                    <select class="custom-select" id="category" style="width:100%" 
+                        (change)="selectCategory($event)">
                         <option disabled selected>-- select --</option>
                         <option *ngFor="let source of sources">{{source}}</option>
                     </select>
                 </div>
                 <br>
-                <p class="font-weight-bold">Parameter:</p>
+                <p class="font-weight-bold" [hidden]="!hasCategory || 
+                    this.categoryOptionsSelected[selectedCategory]['organs'].length > 1">
+                    Parameter:</p>
                 <div class="row">
                     <div class="col s12 l6">
                     <ngx-select-dropdown 
@@ -154,15 +155,15 @@
                         [multiple]="true" 
                         [(value)]="this.categoryOptionsSelected[selectedCategory]['organs']" 
                         [config]="config_select" 
-                        [options]="categoryOptions[selectedCategory]['organs']" 
-                        disable>
+                        [options]="categoryOptions[selectedCategory]['organs']"
+                        [hidden]="!hasCategory">
                     </ngx-select-dropdown>
                     </div>
                 </div>
                 <br>
                 <app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>
 
-                <p class="font-weight-bold">Observation:</p>
+                <p class="font-weight-bold" [hidden]="!hasCategory">Observation:</p>
                 <div class="row">
                     <div class="col s12 l6">
                     <ngx-select-dropdown 
@@ -170,7 +171,8 @@
                         [multiple]="true" 
                         [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" 
                         [config]="config_select" 
-                        [options]="categoryOptions[selectedCategory]['observations']">
+                        [options]="categoryOptions[selectedCategory]['observations']"
+                        [hidden]="!hasCategory">
                     </ngx-select-dropdown>
                     </div>
                 </div>
