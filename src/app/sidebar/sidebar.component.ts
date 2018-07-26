@@ -26,8 +26,6 @@ export class SidebarComponent implements OnInit {
   F: boolean=false;
   M: boolean=false;
   BOTH: boolean=false;
-  min_exposure: number;
-  max_exposure: number;
   sex = [];
   sources = [];
   selectedCategory: string;
@@ -46,6 +44,9 @@ export class SidebarComponent implements OnInit {
   // so that we can calculate the current fraction selected
   totalStudies: number;   
   totalStructures: number;
+  // Store global minimum and maximum exposure values
+  minExposure: number;
+  maxExposure: number;
 
   categoryOptionsSelected ={};
   categoryOptions = {}
@@ -135,6 +136,8 @@ export class SidebarComponent implements OnInit {
     this.findService.initFinding().subscribe(table_info => {
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
+      this.minExposure = table_info['allOptions']['exposure_min'];
+      this.maxExposure = table_info['allOptions']['exposure_max'];
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];
       for (let source of this.sources){ 
@@ -143,7 +146,7 @@ export class SidebarComponent implements OnInit {
         this.categories_search_form[source] = {}
         this.categories_search_form[source]['organs']=[]
         this.categories_search_form[source]['observations']=[]
-       
+        
         this.categoryOptions[source] = {}
         this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
         this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
@@ -201,8 +204,6 @@ export class SidebarComponent implements OnInit {
       this.findService.changeSearchFormTable(this.search_form);
       //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
 
-      event.target.selectedIndex = "0";
-
   }
 
   addSearchCheckBox(event: any,id:string){
@@ -255,6 +256,7 @@ export class SidebarComponent implements OnInit {
     //this.hasCategory = false;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
     this.findService.changeSearchFormTable(this.search_form);
+    // document.getElementsByTagName("ngx-select-dropdown")[0].reset( );
     //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
     //document.getElementById('category').selectedIndex = "0";
   }

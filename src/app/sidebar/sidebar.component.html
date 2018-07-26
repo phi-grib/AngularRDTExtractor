@@ -25,7 +25,7 @@
                         [options]="table_info['allOptions']['compound_name']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'compound_name'" ></app-panel>
+                <!-- <app-panel [key]= "'compound_name'" ></app-panel> -->
                 <br>
                 <p class="font-weight-bold">CAS number:</p>
                 <div>
@@ -37,7 +37,7 @@
                         [options]="table_info['allOptions']['cas_number']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'cas_number'" ></app-panel>
+                <!-- <app-panel [key]= "'cas_number'" ></app-panel> -->
                 <br>
             </div>
         </div>
@@ -58,7 +58,7 @@
                         [options]="table_info['allOptions']['pharmacological_action']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'pharmacological_action'" ></app-panel>
+                <!-- <app-panel [key]= "'pharmacological_action'" ></app-panel> -->
                 <br>
             </div>
         </div>
@@ -79,7 +79,7 @@
                         [options]="table_info['allOptions']['species']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'species'" ></app-panel>
+                <!-- <app-panel [key]= "'species'" ></app-panel> -->
                 <br>
                 <p class="font-weight-bold">Route:</p>
                 <div>
@@ -91,14 +91,14 @@
                         [options]="table_info['allOptions']['routes']">
                     </ngx-select-dropdown>
                 </div>
-                <app-panel [key]= "'routes'" ></app-panel>
+                <!-- <app-panel [key]= "'routes'" ></app-panel> -->
                 <br>
                 <p class="font-weight-bold">Exposure period (days):</p>
                 <div>
                     <ion-range-slider #sliderElement
                         type="double"
-                        [min]="table_info['allOptions']['exposure_min']"
-                        [max]="table_info['allOptions']['exposure_max']"
+                        [min]="minExposure"
+                        [max]="maxExposure"
                         [from]="table_info['allOptions']['exposure_min']"
                         [to]="table_info['allOptions']['exposure_max']"
                         (onFinish)="addSliderInfo($event)">
