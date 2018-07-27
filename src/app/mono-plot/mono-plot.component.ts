@@ -1,12 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { DndDropEvent } from "ngx-drag-drop";
+import 'chart.piecelabel.js';
 
 @Component({
   selector: 'app-mono-plot',
   templateUrl: './mono-plot.component.html',
   styleUrls: ['./mono-plot.component.css']
 })
-export class MonoPlotComponent implements OnInit {
+export class MonoPlotComponent implements AfterViewInit {
 
 
   @Input() data:any[]
@@ -17,12 +18,12 @@ export class MonoPlotComponent implements OnInit {
   @Input() options : any 
   
   charts = [
-    {id: 'line', name: "Line"},
+    //{id: 'line', name: "Line"},
     {id: 'pie', name: "Pie"},
     {id: 'doughnut', name: "Doughnut"},
-    {id: 'horizontalBar', name: "Horizontal Bar"},
+    //{id: 'horizontalBar', name: "Horizontal Bar"},
     {id: 'bar', name: "Verical Bar"},
-    {id: 'radar', name: "Radar"},
+    //{id: 'radar', name: "Radar"},
   ];
 
  
@@ -35,11 +36,22 @@ export class MonoPlotComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+ ngAfterViewInit() {
 
     this.options={
-      responsive: true
-    };
+      responsive: true,
+      pieceLabel: {
+        render: function (args) {
+          const label = args.label,
+                value = args.value;
+          return label + ': ' + value;
+        },
+       arc: true,
+       fontColor: '#000',
+       position: 'outside',
+       showZero:true
+    }
+  };
 
     //this.labels=['Download Sales', 'In-Store Sales', 'Mail-Order Sales']
     //this.data=[350, 450, 100]
