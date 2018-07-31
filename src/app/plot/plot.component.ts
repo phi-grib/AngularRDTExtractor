@@ -22,7 +22,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
 
   objectKeys = Object.keys;
   plots:{};
-  table_info={}
+  plot_info={}
 
 
   plotID:number;
@@ -49,6 +49,24 @@ export class PlotComponent implements OnInit, AfterViewInit {
 
   ngOnInit(){
 
+    this.findService.currentTable.subscribe(plot_info =>{
+      alert("Change")
+      this.plot_info = plot_info['plotInfo']
+      console.log(this.plot_info);
+      this.plots['studies'].labels=['Studies', 'Studies Selected']
+      this.plots['structures'].labels=['Structures', 'Structures Selected']
+      this.plots['species'].labels= plot_info['plotInfo']['normalised_species'][0]
+      setTimeout(() => {
+        this.plots['studies'].data=[this.globals.totalStudies - plot_info['num_studies'],plot_info['num_studies']]
+        this.plots['structures'].data=[this.globals.totalStructures - plot_info['num_structures'],plot_info['num_structures']]
+        this.plots['species'].data= plot_info['plotInfo']['normalised_species'][1]
+
+        console.log(this.plots)
+      }, 50);
+      
+    });
+    console.log(this.plots);
+
     this.plots=[]
     this.plotID=1;
     var a = new Plot();
@@ -69,24 +87,21 @@ export class PlotComponent implements OnInit, AfterViewInit {
     
     this.plots['studies']=b
 
+    var c = new Plot();
+    c.id=this.plotID;
+    this.plotID++;
+    c.data = this.plot_info['normalised_species'][1]
+    c.labels = this.plot_info['normalised_species'][0]
+    c.chartType = 'pie'
+    this.plots['species']=c
+
    
   }
 
    ngAfterViewInit() {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>this.search_form = searchFormTable);
-    this.findService.currentTable.subscribe(table_info =>{
-      this.table_info = table_info
-      this.plots['studies'].labels=['Total Studies', 'Studies Selected']
-      this.plots['structures'].labels=['Total Structures', 'Structures Selected']
-      setTimeout(() => {
-        this.plots['studies'].data=[this.globals.totalStudies - table_info['num_studies'],table_info['num_studies']]
-        this.plots['structures'].data=[this.globals.totalStructures - table_info['num_structures'],table_info['num_structures']]
-
-        console.log(this.plots)
-      }, 50); 
-      
-    });
+   
   }
 
  

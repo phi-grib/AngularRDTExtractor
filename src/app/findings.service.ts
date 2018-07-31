@@ -8,6 +8,9 @@ export class FindingsService {
   private table_form = new BehaviorSubject<any>({});
   currentTable = this.table_form.asObservable();
 
+  private plot_info = new BehaviorSubject<any>({});
+  currentPlot = this.plot_info.asObservable();
+
   private searchFormTable = new BehaviorSubject<any>({});
   currentSearchFormTable = this.searchFormTable.asObservable();
 
@@ -22,6 +25,9 @@ export class FindingsService {
 
   changeTable(table){
     this.table_form.next(table);
+  }
+  changePlot(plot){
+    this.plot_info.next(plot);
   }
   changeSearchFormTable(table){
     this.searchFormTable.next(table);
