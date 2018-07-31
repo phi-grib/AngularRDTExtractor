@@ -144,6 +144,8 @@ export class SidebarComponent implements OnInit {
       alert("InitFinding")
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
+      this.minExposure = table_info['allOptions']['exposure_min'];
+      this.maxExposure = table_info['allOptions']['exposure_max'];
       this.globals.totalStructures = table_info['num_structures'];
       this.globals.totalStudies = table_info['num_studies'];
       this.sex = table_info['allOptions']['sex'];
@@ -295,6 +297,14 @@ export class SidebarComponent implements OnInit {
   addSearchForm($event: any, type){
     this.search_form[type] = $event.value;
     this.findService.changeSearchFormTable(this.search_form);
+  }
+
+  tof(x: any) {
+    var count = 0;
+    for(var i in x){
+      count++;
+    }
+    return count;
   }
 
   // getSmiles() {
