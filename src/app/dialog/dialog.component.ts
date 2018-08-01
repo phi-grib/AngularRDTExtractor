@@ -21,7 +21,7 @@ export class CustomModalComponent implements IModalDialog {
 
   ngAfterViewInit() {
 
-    let options = {'width':500, 'height':500};
+    let options = {'width':400, 'height':400};
     let smilesDrawer = new SmilesDrawer.Drawer(options);
 
     SmilesDrawer.parse(this.smiles, function (tree) {
