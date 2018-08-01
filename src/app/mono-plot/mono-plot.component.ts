@@ -16,6 +16,7 @@ export class MonoPlotComponent implements AfterViewInit {
   @Input() chartType:string = 'line'
   @Input() legend:boolean = true
   @Input() options : any 
+  @Input() title : string
   
   charts = [
     //{id: 'line', name: "Line"},
@@ -40,6 +41,11 @@ export class MonoPlotComponent implements AfterViewInit {
 
     this.options={
       responsive: true,
+      title: {
+        display: true,
+        text: this.title,
+        fontSize: 20
+      },
       pieceLabel: {
         render: function (args) {
           const label = args.label,
@@ -49,7 +55,13 @@ export class MonoPlotComponent implements AfterViewInit {
        arc: true,
        fontColor: '#000',
        position: 'outside',
-       showZero:true
+       showZero:true,
+       legend: {
+        display: false,
+        labels: {
+          fontColor: 'rgb(255, 99, 132)'
+        }
+      }
     }
   };
 
