@@ -145,7 +145,7 @@
                     </select>
                 </div>
                 <br>
-                
+
                 <p class="font-weight-bold" [hidden]="!(hasCategory && 
                 categoryOptions[selectedCategory]['organs'].length > 1)">Parameter:</p>
                 <div class="row" [hidden]="!(hasCategory && 
@@ -187,13 +187,13 @@
 <div class="card">
     <div class="card-body">
         <div align="center"><font color="red">
+            {{ table_info.num_structures }} of {{totalStructures}} </font> substances
+        </div>
+        <progress id="structuresProgress" [value]="table_info['num_structures']*100/totalStructures" max="100" style="width: 100%"></progress>
+        <div align="center"><font color="red">
             {{ table_info.num_studies }} of {{totalStudies}} </font> studies
         </div>
         <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100" style="width: 100%"></progress>
-        <div align="center"><font color="red">
-            {{ table_info.num_structures }} of {{totalStructures}} </font> structures
-        </div>
-        <progress id="structuresProgress" [value]="table_info['num_structures']*100/totalStructures" max="100" style="width: 100%"></progress>
     </div>
 </div>
 <br>
