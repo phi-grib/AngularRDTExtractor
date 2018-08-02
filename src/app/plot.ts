@@ -4,4 +4,5 @@ export class Plot {
     labels:Array<any>
     datasets:Array<any>
     chartType:string 
-}
+    title: string
+} 

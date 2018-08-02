@@ -83,8 +83,6 @@ export class SidebarComponent implements OnInit {
         this.globals.showSpinner = true;
         this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
           this.findService.changeTable(table_info);
-          this.globals.actualStructures=table_info['num_structures'];
-          this.globals.actualStudies=table_info['num_studies']; 
           for (let source of this.sources){ 
             this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
             this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
@@ -107,26 +105,13 @@ export class SidebarComponent implements OnInit {
       
         this.globals.showSpinner = true;
         this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
-          this.globals.actualStructures=table_info['num_structures'];
-          this.globals.actualStudies=table_info['num_studies']; 
           for (let source of this.sources){ 
             this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
             this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
           }
-          this.findService.changeTable(table_info);  
+          this.findService.changeTable(table_info); 
           this.globals.showSpinner = false;
         });
-        
-        /*Case PLOT*/
-       /* else if (this.router.url=="/plot"){
-          this.findService.getplot(this.search_form,this.categories_search_form).subscribe(info => {
-           this.table_info['allOptions']=info['allOptions'];
-           this.table_info['num_structures']=info['num_structures'];
-           this.table_info['num_studies']=info['num_studies'];
-           this.globals.actualStructures=info['num_structures'];
-           this.globals.actualStudies=info['num_studies'];
-          });
-        }*/
       }
       this.firstTimeSearch=true;
     });
@@ -136,10 +121,11 @@ export class SidebarComponent implements OnInit {
       this.totalStudies = table_info['num_studies'];
       this.minExposure = table_info['allOptions']['exposure_min'];
       this.maxExposure = table_info['allOptions']['exposure_max'];
+      
       this.globals.totalStructures = table_info['num_structures'];
       this.globals.totalStudies = table_info['num_studies'];
-      this.globals.actualStructures = table_info['num_structures'];
-      this.globals.actualStudies = table_info['num_studies'];
+      this.globals.totalFindings = table_info['num_findings']
+    
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];
       for (let source of this.sources){ 
