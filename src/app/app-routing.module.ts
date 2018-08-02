@@ -35,7 +35,7 @@ const routes : Routes = [
   // },
   {
     path:'',
-    redirectTo: '/connect', 
+    redirectTo: '/plot', 
     pathMatch: 'full'
   }
 ];
