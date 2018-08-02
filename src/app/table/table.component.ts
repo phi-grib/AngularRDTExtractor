@@ -50,7 +50,7 @@ export class TableComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     if (this.components !== undefined) {
       this.components.forEach((child) => {         
-        let options = {'width':150, 'height':100};
+        let options = {'width':100, 'height':75};
         let smilesDrawer = new SmilesDrawer.Drawer(options);
         SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
           smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
@@ -63,7 +63,7 @@ export class TableComponent implements OnInit,AfterViewInit {
     this.components.changes.subscribe((component) => {  
       if (this.components !== undefined){
         this.components.forEach((child) => {         
-          let options = {'width':150, 'height':100};
+          let options = {'width':100, 'height':75};
           let smilesDrawer = new SmilesDrawer.Drawer(options);
           SmilesDrawer.parse(child.nativeElement.textContent, function (tree) {
             smilesDrawer.draw(tree,child.nativeElement.id, 'light', false);
