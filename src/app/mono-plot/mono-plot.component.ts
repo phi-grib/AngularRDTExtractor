@@ -27,8 +27,6 @@ export class MonoPlotComponent implements AfterViewInit {
     //{id: 'radar', name: "Radar"},
   ];
 
- 
-  
   public xAxis:string[] = [
   ];
 
@@ -53,17 +51,20 @@ export class MonoPlotComponent implements AfterViewInit {
           return label + ': ' + value;
         },
       //  arc: true,
-       fontColor: '#000',
-       position: 'outside',
-       showZero:true,
-       legend: {
-        display: false,
-        labels: {
-          fontColor: 'rgb(255, 99, 132)'
+        fontColor: '#000',
+        position: 'outside',
+        showZero:true,
+        legend: {
+          display: false,
+          labels: {
+            fontColor: 'rgb(255, 99, 132)'
+          }
         }
+      },
+      legend: {
+        position: 'right'
       }
-    }
-  };
+    };
 
     //this.labels=['Download Sales', 'In-Store Sales', 'Mail-Order Sales']
     //this.data=[350, 450, 100]
