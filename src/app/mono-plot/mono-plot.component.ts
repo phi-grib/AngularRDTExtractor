@@ -52,7 +52,7 @@ export class MonoPlotComponent implements AfterViewInit {
                 value = args.value;
           return label + ': ' + value;
         },
-       arc: true,
+      //  arc: true,
        fontColor: '#000',
        position: 'outside',
        showZero:true,
