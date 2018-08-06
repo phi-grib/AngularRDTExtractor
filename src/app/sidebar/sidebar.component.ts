@@ -42,8 +42,9 @@ export class SidebarComponent implements OnInit {
 
   // Set this value on init to store the total number of studies and structures
   // so that we can calculate the current fraction selected
-  totalStudies: number;   
+  totalStudies: number;
   totalStructures: number;
+  totalFindings: number;
   // Store global minimum and maximum exposure values
   minExposure: number;
   maxExposure: number;
@@ -119,12 +120,13 @@ export class SidebarComponent implements OnInit {
      
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
+      this.totalFindings = table_info['num_findings'];
       this.minExposure = table_info['allOptions']['exposure_min'];
       this.maxExposure = table_info['allOptions']['exposure_max'];
       
       this.globals.totalStructures = table_info['num_structures'];
       this.globals.totalStudies = table_info['num_studies'];
-      this.globals.totalFindings = table_info['num_findings']
+      this.globals.totalFindings = table_info['num_findings'];
     
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];

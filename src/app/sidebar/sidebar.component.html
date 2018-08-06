@@ -194,6 +194,10 @@
             {{ table_info.num_studies }} of {{totalStudies}} </font> studies
         </div>
         <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100" style="width: 100%"></progress>
+        <div align="center"><font color="red">
+            {{ table_info.num_findings }} of {{totalFindings}} </font> studies
+        </div>
+        <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100" style="width: 100%"></progress>
     </div>
 </div>
 <br>
