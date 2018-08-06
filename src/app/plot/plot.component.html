@@ -25,12 +25,14 @@
                     <table class="table table-striped" style="font-size: 12px" align="center">
                         <thead>
                           <tr>
-                            <th scope="col" style="width:175px;">{{plot}}</th>
-                            <th scope="col" style="width:75px;">
-                                <span>#Num </span>
+                            <th scope="col" style="width:160px;">{{plot}}</th>
+                            <th scope="col" style="width:90px; text-align: right">
                                 <span *ngIf="plot=='Species'">
-                                    Species</span>
-                                <span *ngIf="plot=='Source' || plot=='Treatment'">Findings</span>
+                                    # Studies
+                                </span>
+                                <span *ngIf="plot=='Source' || plot=='Treatment'">
+                                    # Findings
+                                </span>
                             </th>
                           </tr>
                         </thead>

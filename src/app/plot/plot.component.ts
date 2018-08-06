@@ -52,9 +52,9 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.findService.currentTable.subscribe(table_info =>{
       this.plot_info = table_info['plotInfo']
       if (!this.firstTime){
-        this.plots['Studies'].labels = ['Selected', 'NO Selected']
-        this.plots['Structures'].labels = ['Selected', 'NO Selected']
-        this.plots['Findings'].labels =  ['Selected', 'NO Selected']
+        this.plots['Studies'].labels = ['Selected', 'Not Selected']
+        this.plots['Structures'].labels = ['Selected', 'Not Selected']
+        this.plots['Findings'].labels =  ['Selected', 'Not Selected']
         this.plots['Species'].labels = this.plot_info['normalised_species'][0]
         this.plots['Treatment'].labels = this.plot_info['relevance'][0]
         this.plots['Source'].labels = this.plot_info['source'][0]
@@ -77,7 +77,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     a.id=this.plotID;
     this.plotID++;
     a.data = [this.globals.totalStructures,0]
-    a.labels =  ['Selected', 'NO Selected']
+    a.labels =  ['Selected', 'Not Selected']
     a.chartType = 'pie'
     a.title= "Structures"
     this.plots['Structures']=a
@@ -86,7 +86,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     a.id=this.plotID;
     this.plotID++;
     a.data = [this.globals.totalStudies, 0]
-    a.labels = ['Selected', 'NO Selected']
+    a.labels = ['Selected', 'Not Selected']
     a.chartType = 'pie'
     a.title= "Studies"
     this.plots['Studies']=a
@@ -95,7 +95,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     a.id=this.plotID;
     this.plotID++;
     a.data = [this.globals.totalFindings, 0]
-    a.labels = ['Selected', 'NO Selected']
+    a.labels = ['Selected', 'Not Selected']
     a.chartType = 'pie'
     a.title= "Findings"
     this.plots['Findings']=a
