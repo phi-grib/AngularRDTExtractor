@@ -121,6 +121,11 @@ export class SidebarComponent implements OnInit {
       this.totalStructures = table_info['num_structures'];
       this.totalStudies = table_info['num_studies'];
       this.totalFindings = table_info['num_findings'];
+      
+      this.globals.totalStructures = table_info['num_structures']
+      this.globals.totalStudies = table_info['num_studies'];
+      this.globals.totalFindings = table_info['num_findings'];
+
       this.minExposure = table_info['allOptions']['exposure_min'];
       this.maxExposure = table_info['allOptions']['exposure_max'];
     

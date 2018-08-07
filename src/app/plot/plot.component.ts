@@ -8,6 +8,7 @@ import { DndDropEvent, DropEffect } from "ngx-drag-drop";
 import { Router } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Plot } from '../plot';
+import { Globals } from '../globals';
 
 
 
@@ -46,7 +47,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
     "Observations"
   ];
 
-  constructor( private findService : FindingsService,  private _router: Router) { }
+  constructor( private findService : FindingsService,  private _router: Router,
+    public globals: Globals) { }
 
   ngOnInit(){
 
@@ -60,27 +62,24 @@ export class PlotComponent implements OnInit, AfterViewInit {
         this.plots['Treatment'].labels = this.plot_info['plotInfo']['relevance'][0]
         this.plots['Source'].labels = this.plot_info['plotInfo']['source'][0]
         setTimeout(() => {
-          this.plots['Studies'].data=[this.num_studies - this.plot_info['num_studies'],this.plot_info['num_studies']]
-          this.plots['Structures'].data=[this.num_structures - this.plot_info['num_structures'],this.plot_info['num_structures']]
-          this.plots['Findings'].data=[this.num_findings - this.plot_info['num_findings'],this.plot_info['num_findings']]
-          this.plots['Species'].data=this.plot_info['plotInfo']['normalised_species'][1]
+          this.plots['Studies'].data = [this.plot_info['num_studies'], this.globals.totalStudies - this.plot_info['num_studies']]
+          this.plots['Structures'].data = [this.plot_info['num_structures'], this.globals.totalStructures - this.plot_info['num_structures']]
+          this.plots['Findings'].data= [this.plot_info['num_findings'], this.globals.totalFindings - this.plot_info['num_findings']]
+          this.plots['Species'].data = this.plot_info['plotInfo']['normalised_species'][1]
           this.plots['Treatment'].data = this.plot_info['plotInfo']['relevance'][1]
           this.plots['Source'].data = this.plot_info['plotInfo']['source'][1]
         }, 50); 
       }
       this.firstTime=false
     });
-
-    this.num_findings = this.plot_info['num_findings']
-    this.num_structures = this.plot_info['num_structures']
-    this.num_studies = this.plot_info['num_studies']
+   
     this.plots=[]
     this.plotID=1;
     
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = [this.num_structures,0]
+    a.data = [this.plot_info['num_structures'], this.globals.totalStructures - this.plot_info['num_structures']]
     a.labels =  ['Selected', 'Not Selected']
     a.chartType = 'doughnut'
     a.title= "Structures"
@@ -89,7 +88,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = [this.num_studies, 0]
+    a.data = [this.plot_info['num_studies'], this.globals.totalStudies - this.plot_info['num_studies']]
     a.labels = ['Selected', 'Not Selected']
     a.chartType = 'doughnut'
     a.title= "Studies"
@@ -98,7 +97,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = [this.num_findings, 0]
+    a.data = [this.plot_info['num_findings'], this.globals.totalFindings - this.plot_info['num_findings']]
     a.labels = ['Selected', 'Not Selected']
     a.chartType = 'doughnut'
     a.title= "Findings"
@@ -107,8 +106,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = this.plot_info['normalised_species'][1]
-    a.labels = this.plot_info['normalised_species'][0]
+    a.data = this.plot_info['plotInfo']['normalised_species'][1]
+    a.labels = this.plot_info['plotInfo']['normalised_species'][0]
     a.chartType = 'doughnut'
     a.title= "Species"
     this.plots['Species']=a
@@ -116,8 +115,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = this.plot_info['relevance'][1]
-    a.labels = this.plot_info['relevance'][0]
+    a.data = this.plot_info['plotInfo']['relevance'][1]
+    a.labels = this.plot_info['plotInfo']['relevance'][0]
     a.title= "Relevance"
     a.chartType = 'doughnut'
     this.plots['Treatment']=a
@@ -125,8 +124,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = this.plot_info['source'][1]
-    a.labels = this.plot_info['source'][0]
+    a.data = this.plot_info['plotInfo']['source'][1]
+    a.labels = this.plot_info['plotInfo']['source'][0]
     a.title= "Source"
     a.chartType = 'doughnut'
     this.plots['Source']=a
