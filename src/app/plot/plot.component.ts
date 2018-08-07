@@ -118,7 +118,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.plotID++;
     a.data = this.plot_info['relevance'][1]
     a.labels = this.plot_info['relevance'][0]
-    a.title= "Treatment related"
+    a.title= "Relevance"
     a.chartType = 'doughnut'
     this.plots['Treatment']=a
 
