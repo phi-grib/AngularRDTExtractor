@@ -21,18 +21,25 @@
                 <div class="col-lg-4" *ngFor="let plot of objectKeys(plots)" >
                 
                     <app-mono-plot [data]=plots[plot].data [labels]=plots[plot].labels [chartType]=plots[plot].chartType [title]=plots[plot].title></app-mono-plot>
-        
-                    <table class="table table-striped">
+                    <br>
+                    <table class="table table-striped" style="font-size: 12px" align="center">
                         <thead>
                           <tr>
-                            <th scope="col">{{plot}}</th>
-                            <th scope="col"><span>#Num </span><span *ngIf="plot=='Species'">Species</span><span *ngIf="plot=='Source' || plot=='Treatment'">Findings</span></th>
+                            <th scope="col" style="width:160px;">{{plot}}</th>
+                            <th scope="col" style="width:90px; text-align: right">
+                                <span *ngIf="plot=='Species'">
+                                    # Studies
+                                </span>
+                                <span *ngIf="plot=='Source' || plot=='Treatment'">
+                                    # Findings
+                                </span>
+                            </th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let data of plots[plot].data;let i=index ">
                             <td>{{plots[plot].labels[i]}}</td>
-                            <td>{{data}}</td>
+                            <td style="text-align: right">{{data}}</td>
                           </tr>
                         </tbody>
                     </table>

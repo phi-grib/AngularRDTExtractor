@@ -1,3 +1,8 @@
 .table-striped{
     font-size: 20px;
+    table-layout: fixed;
+    width: 250px; 
+    word-break: break-all;
   }
+
+/* .table-striped td { overflow: hidden; } */

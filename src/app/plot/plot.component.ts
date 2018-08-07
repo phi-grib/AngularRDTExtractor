@@ -81,17 +81,17 @@ export class PlotComponent implements OnInit, AfterViewInit {
     a.id=this.plotID;
     this.plotID++;
     a.data = [this.num_structures,0]
-    a.labels =  ['Selected', 'NO Selected']
-    a.chartType = 'pie'
+    a.labels =  ['Selected', 'Not Selected']
+    a.chartType = 'doughnut'
     a.title= "Structures"
     this.plots['Structures']=a
 
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = [ this.num_studies, 0]
-    a.labels = ['Selected', 'NO Selected']
-    a.chartType = 'pie'
+    a.data = [this.num_studies, 0]
+    a.labels = ['Selected', 'Not Selected']
+    a.chartType = 'doughnut'
     a.title= "Studies"
     this.plots['Studies']=a
 
@@ -99,8 +99,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
     a.id=this.plotID;
     this.plotID++;
     a.data = [this.num_findings, 0]
-    a.labels = ['Selected', 'NO Selected']
-    a.chartType = 'pie'
+    a.labels = ['Selected', 'Not Selected']
+    a.chartType = 'doughnut'
     a.title= "Findings"
     this.plots['Findings']=a
 
@@ -109,7 +109,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.plotID++;
     a.data = this.plot_info['normalised_species'][1]
     a.labels = this.plot_info['normalised_species'][0]
-    a.chartType = 'pie'
+    a.chartType = 'doughnut'
     a.title= "Species"
     this.plots['Species']=a
 
@@ -119,7 +119,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     a.data = this.plot_info['relevance'][1]
     a.labels = this.plot_info['relevance'][0]
     a.title= "Treatment related"
-    a.chartType = 'pie'
+    a.chartType = 'doughnut'
     this.plots['Treatment']=a
 
     var a = new Plot();
@@ -128,7 +128,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     a.data = this.plot_info['source'][1]
     a.labels = this.plot_info['source'][0]
     a.title= "Source"
-    a.chartType = 'pie'
+    a.chartType = 'doughnut'
     this.plots['Source']=a
 
 
