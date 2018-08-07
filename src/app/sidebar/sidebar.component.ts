@@ -35,9 +35,9 @@ export class SidebarComponent implements OnInit {
   request:any;
 
   objectKeys = Object.keys;
-  search_form = {};
-  categories_search_form = {};
-  table_info = {};
+  search_form = <any>{};
+  categories_search_form = <any>{};
+  table_info = <any>{};
   router;
 
   // Set this value on init to store the total number of studies and structures
@@ -63,7 +63,7 @@ export class SidebarComponent implements OnInit {
               private viewContainer: ViewContainerRef,
               private findService : FindingsService,
               private _router: Router,
-              private globals: Globals ) {
+              public globals: Globals ) {
     this.router = _router;
   }
 
@@ -121,10 +121,7 @@ export class SidebarComponent implements OnInit {
       this.totalStudies = table_info['num_studies'];
       this.minExposure = table_info['allOptions']['exposure_min'];
       this.maxExposure = table_info['allOptions']['exposure_max'];
-      
-      this.globals.totalStructures = table_info['num_structures'];
-      this.globals.totalStudies = table_info['num_studies'];
-      this.globals.totalFindings = table_info['num_findings']
+    
     
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];

@@ -15,9 +15,9 @@ import { Globals } from '../globals';
 
 export class TableComponent implements OnInit,AfterViewInit {
 
-  table_info = {};
-  search_form = {};
-  categories_search_form = {};
+  table_info = <any>{};
+  search_form = <any>{};
+  categories_search_form = <any>{};
   currentSubstance = '';
   rowIndex = 0;
   splitRow = {};
@@ -28,7 +28,7 @@ export class TableComponent implements OnInit,AfterViewInit {
   constructor(private findService : FindingsService, 
           private modalDialogService: ModalDialogService, 
           private viewContainer: ViewContainerRef,
-          private globals: Globals) {}
+          public globals: Globals) {}
 
   ngOnInit() {
     this.findService.currentTable.subscribe (table_info => this.table_info = table_info);

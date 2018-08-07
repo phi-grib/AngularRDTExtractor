@@ -8,7 +8,6 @@ import { DndDropEvent, DropEffect } from "ngx-drag-drop";
 import { Router } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Plot } from '../plot';
-import { Globals } from '../globals';
 
 
 
@@ -22,7 +21,10 @@ export class PlotComponent implements OnInit, AfterViewInit {
 
   objectKeys = Object.keys;
   plots:{};
-  plot_info={}
+  plot_info=<any>{}
+  num_studies:number=0
+  num_structures:number=0
+  num_findings:number=0
 
 
   plotID:number;
@@ -44,39 +46,41 @@ export class PlotComponent implements OnInit, AfterViewInit {
     "Observations"
   ];
 
-  constructor( private findService : FindingsService,  private _router: Router,
-    private globals: Globals ) { }
+  constructor( private findService : FindingsService,  private _router: Router) { }
 
   ngOnInit(){
 
     this.findService.currentTable.subscribe(table_info =>{
-      this.plot_info = table_info['plotInfo']
+      this.plot_info = table_info
       if (!this.firstTime){
         this.plots['Studies'].labels = ['Selected', 'NO Selected']
         this.plots['Structures'].labels = ['Selected', 'NO Selected']
         this.plots['Findings'].labels =  ['Selected', 'NO Selected']
-        this.plots['Species'].labels = this.plot_info['normalised_species'][0]
-        this.plots['Treatment'].labels = this.plot_info['relevance'][0]
-        this.plots['Source'].labels = this.plot_info['source'][0]
+        this.plots['Species'].labels = this.plot_info['plotInfo']['normalised_species'][0]
+        this.plots['Treatment'].labels = this.plot_info['plotInfo']['relevance'][0]
+        this.plots['Source'].labels = this.plot_info['plotInfo']['source'][0]
         setTimeout(() => {
-          this.plots['Studies'].data=[this.globals.totalStudies - table_info['num_studies'],table_info['num_studies']]
-          this.plots['Structures'].data=[this.globals.totalStructures - table_info['num_structures'],table_info['num_structures']]
-          this.plots['Findings'].data=[this.globals.totalFindings - table_info['num_findings'],table_info['num_findings']]
-          this.plots['Species'].data=this.plot_info['normalised_species'][1]
-          this.plots['Treatment'].data = this.plot_info['relevance'][1]
-          this.plots['Source'].data = this.plot_info['source'][1]
+          this.plots['Studies'].data=[this.num_studies - this.plot_info['num_studies'],this.plot_info['num_studies']]
+          this.plots['Structures'].data=[this.num_structures - this.plot_info['num_structures'],this.plot_info['num_structures']]
+          this.plots['Findings'].data=[this.num_findings - this.plot_info['num_findings'],this.plot_info['num_findings']]
+          this.plots['Species'].data=this.plot_info['plotInfo']['normalised_species'][1]
+          this.plots['Treatment'].data = this.plot_info['plotInfo']['relevance'][1]
+          this.plots['Source'].data = this.plot_info['plotInfo']['source'][1]
         }, 50); 
       }
       this.firstTime=false
     });
 
+    this.num_findings = this.plot_info['num_findings']
+    this.num_structures = this.plot_info['num_structures']
+    this.num_studies = this.plot_info['num_studies']
     this.plots=[]
     this.plotID=1;
     
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = [this.globals.totalStructures,0]
+    a.data = [this.num_structures,0]
     a.labels =  ['Selected', 'NO Selected']
     a.chartType = 'pie'
     a.title= "Structures"
@@ -85,7 +89,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = [this.globals.totalStudies, 0]
+    a.data = [ this.num_studies, 0]
     a.labels = ['Selected', 'NO Selected']
     a.chartType = 'pie'
     a.title= "Studies"
@@ -94,7 +98,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     var a = new Plot();
     a.id=this.plotID;
     this.plotID++;
-    a.data = [this.globals.totalFindings, 0]
+    a.data = [this.num_findings, 0]
     a.labels = ['Selected', 'NO Selected']
     a.chartType = 'pie'
     a.title= "Findings"
