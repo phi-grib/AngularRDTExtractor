@@ -16,35 +16,33 @@
                 </span>
             </div>  
         </div>-->
-        <div class="col-10">
-            <div class="row"  >
-                <div class="col-lg-4" *ngFor="let plot of objectKeys(plots)" >
-                
-                    <app-mono-plot [data]=plots[plot].data [labels]=plots[plot].labels [chartType]=plots[plot].chartType [title]=plots[plot].title></app-mono-plot>
-                    <br>
-                    <table class="table table-sm table-striped" style="font-size: 12px" align="center">
-                        <thead>
-                          <tr>
-                            <th scope="col" style="width:160px;">{{plot}}</th>
-                            <th scope="col" style="width:90px; text-align: right">
-                                <span *ngIf="plot=='Species'">
-                                    # Studies
-                                </span>
-                                <span *ngIf="plot=='Source' || plot=='Treatment'">
-                                    # Findings
-                                </span>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let data of plots[plot].data;let i=index ">
-                            <td>{{plots[plot].labels[i]}}</td>
-                            <td style="text-align: right">{{data}}</td>
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="row"  >
+        <div class="col-lg-4" *ngFor="let plot of objectKeys(plots)" >
+        
+            <app-mono-plot [data]=plots[plot].data [labels]=plots[plot].labels [chartType]=plots[plot].chartType [title]=plots[plot].title></app-mono-plot>
+            <br>
+            <table class="table table-sm table-striped" style="font-size: 12px" align="center">
+                <thead>
+                    <tr>
+                    <th scope="col" style="width:110px;">{{plot}}</th>
+                    <th scope="col" style="width:90px; text-align: right">
+                        <span *ngIf="plot=='Species'">
+                            # Studies
+                        </span>
+                        <span *ngIf="plot=='Source' || plot=='Treatment'">
+                            # Findings
+                        </span>
+                    </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of plots[plot].data;let i=index ">
+                    <td>{{plots[plot].labels[i]}}</td>
+                    <td style="text-align: right">{{data}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
     <!--</div>-->
 </div>
