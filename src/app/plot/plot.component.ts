@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { Plot } from '../plot';
 import { Globals } from '../globals';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 
 
@@ -48,13 +49,15 @@ export class PlotComponent implements OnInit, AfterViewInit {
   ];
 
   constructor( private findService : FindingsService,  private _router: Router,
-    public globals: Globals) { }
+    public globals: Globals,public spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit(){
 
     this.findService.currentTable.subscribe(table_info =>{
       this.plot_info = table_info
+     
       if (!this.firstTime){
+        this.spinnerService.show();
         this.plots['Studies'].labels = ['Selected', 'NO Selected']
         this.plots['Structures'].labels = ['Selected', 'NO Selected']
         this.plots['Findings'].labels =  ['Selected', 'NO Selected']
@@ -69,6 +72,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
           this.plots['Treatment'].data = this.plot_info['plotInfo']['relevance'][1]
           this.plots['Source'].data = this.plot_info['plotInfo']['source'][1]
         }, 50); 
+        this.spinnerService.hide();
       }
       this.firstTime=false
     });

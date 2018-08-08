@@ -16,3 +16,29 @@
     color: #FFFFFF;
     border-color: darkgray;
 }
+
+  
+table thead,
+table tbody {
+    display: table;
+    width: 100%;
+}
+  
+table.loading tbody {
+    position: relative;
+}
+  
+table.loading tbody:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-image: url(assets/img/Reload-1s-200px.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: darken;
+    background-size: 250px 250px;
+    content: "";
+}

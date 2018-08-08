@@ -33,6 +33,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { Globals } from './globals'
 import {TooltipModule} from "ngx-tooltip";
 // import { ModalMoleculeComponent } from './modal-molecule/modal-molecule.component';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import {TooltipModule} from "ngx-tooltip";
     DndModule,
     ChartsModule,
     SelectDropDownModule,
-    TooltipModule
+    TooltipModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [FindingsService,Globals],
   entryComponents: [CustomModalComponent,/*SubstanceModalComponent*/],
