@@ -9,7 +9,7 @@
 }
 
 .active, .button:hover {
-    background-color: #666;
+    background-color: lightgray;
     color: white;
 }
 
