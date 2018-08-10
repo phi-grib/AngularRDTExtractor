@@ -1,10 +1,10 @@
-<h5>Multi Select Dropdown</h5>
-    <div class="row">
-        <div class="col s12 l6">
-            <ngx-select-dropdown (change)="changeValue($event)" [multiple]="true" [(value)]="multiSelect" [config]="config" [options]="stringOptions"></ngx-select-dropdown>
+<div class="row">
+        <div class="col">
+<canvas baseChart
+    [chartType]="type"
+    [datasets]="datasets"
+    [labels]="labels"
+    [colors]="colors"></canvas>
         </div>
-        <div class="col s12 l6 flow-text" >
-          <p style="margin: 0;">Selected Options:-</p>
-          <p style="margin: 0;" *ngFor="let user of multiSelect"><strong>Name:</strong> {{user}}</p>
-        </div>
-    </div>
+
+</div>

@@ -1,6 +1,7 @@
 import {Component, ViewChild, OnInit, AfterViewInit} from '@angular/core';
 import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-declare var jQuery: any;
+import {ChartsModule, Color} from 'ng2-charts';
+
 
 @Component({
   selector: 'app-explore',
@@ -8,20 +9,25 @@ declare var jQuery: any;
   styleUrls: ['./explore.component.css']
 })
 export class ExploreComponent{
-
-  title = 'app';
-  tab=1;
-  multiSelect: any=["Amie Franklin"];
-
-  stringOptions = [
-      "Burns Dalton","Mcintyre Lawson","Amie Franklin","Jocelyn Horton","Fischer Erickson", "Medina Underwood","Goldie Barber"
-  ]
-  config = {
-    //displayKey:"name", //if objects array passed which key to be displayed defaults to description
-    search:true,
-  };
+  colors:Array<any> =
+  ["#A11E22",
+    "#E8A631",
+    "#E8C098",
+    "#E5E4DA",
+    "#BFB6B3",
+    "#FAAC77",
+    "#C9C980",
+    "#F8EFEE",
+    "#60686F",
+    "#333C3E"
+  ];
+  type:string = 'doughnut';
+  datasets: any[] = [
+    {
+      data: [350, 450, 100],
+      backgroundColor: this.colors.slice(0,3)
+    }];
+   labels:string[] = ['Download Sales', 'In-Store Sales', 'Mail-Order Sales'];
+ 
   
-  changeValue($event: any){
-    console.log($event);
-}
 }

@@ -26,14 +26,16 @@
         </div>
         <div class="col-12" style="width: 70%;">
                 <canvas baseChart #chart 
-                [data]="data"
+                [datasets]="datasets"
                 [labels]="labels"
                 [options]="options"
                 [chartType]="chartType"
+                [colors]="chartsColors"
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
         </div>
     </div>
+
     <!--<div class="row">
         <div class="col-4 card offset-5">    
             <div class="card-body" dndDropzone
