@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 import { DndDropEvent } from "ngx-drag-drop";
 import 'chart.piecelabel.js';
 
@@ -7,24 +7,24 @@ import 'chart.piecelabel.js';
   templateUrl: './mono-plot.component.html',
   styleUrls: ['./mono-plot.component.css']
 })
+
 export class MonoPlotComponent implements AfterViewInit {
 
-
-  @Input() data:any[]
-  @Input() labels:any[]
-  @Input() datasets:any[]
-  @Input() chartType:string = 'line'
-  @Input() legend:boolean = true
-  @Input() options : any 
-  @Input() title : string
+  @Input() data: any[]
+  @Input() labels: any[]
+  @Input() datasets: any[]
+  @Input() chartType: string = 'line'
+  @Input() legend: boolean = true
+  @Input() options: any 
+  @Input() title: string
   
   charts = [
-    //{id: 'line', name: "Line"},
     {id: 'pie', name: "Pie"},
     {id: 'doughnut', name: "Doughnut"},
-    //{id: 'horizontalBar', name: "Horizontal Bar"},
     {id: 'bar', name: "Verical Bar"},
+    //{id: 'line', name: "Line"},
     //{id: 'radar', name: "Radar"},
+    {id: 'horizontalBar', name: "Horizontal Bar"}
   ];
 
   public xAxis:string[] = [
@@ -35,7 +35,7 @@ export class MonoPlotComponent implements AfterViewInit {
 
   constructor() { }
 
- ngAfterViewInit() {
+  ngAfterViewInit() {
 
     this.options={
       responsive: true,
@@ -50,7 +50,6 @@ export class MonoPlotComponent implements AfterViewInit {
                 value = args.value;
           return label + ': ' + value;
         },
-      //  arc: true,
         fontColor: '#000',
         position: 'outside',
         showZero:true,
@@ -62,13 +61,10 @@ export class MonoPlotComponent implements AfterViewInit {
         }
       },
       legend: {
-        position: 'right'
+        position: 'right',
+        usePointStyle: true
       }
     };
-
-    //this.labels=['Download Sales', 'In-Store Sales', 'Mail-Order Sales']
-    //this.data=[350, 450, 100]
-
   }
 
   onDrop( event:DndDropEvent, list:any[] ) {
