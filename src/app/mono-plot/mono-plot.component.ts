@@ -1,6 +1,7 @@
-import { Component, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, ViewChild } from '@angular/core';
 import { DndDropEvent } from "ngx-drag-drop";
 import 'chart.piecelabel.js';
+import {ChartsModule, Color, BaseChartDirective} from 'ng2-charts';
 
 @Component({
   selector: 'app-mono-plot',
@@ -10,13 +11,30 @@ import 'chart.piecelabel.js';
 
 export class MonoPlotComponent implements AfterViewInit {
 
-  @Input() data: any[]
-  @Input() labels: any[]
-  @Input() datasets: any[]
-  @Input() chartType: string = 'line'
-  @Input() legend: boolean = true
-  @Input() options: any 
-  @Input() title: string
+  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
+
+  @Input() data:any[]
+  @Input() labels:any[]
+  @Input() datasets:any[]
+  @Input() chartType:string = 'line'
+  @Input() legend:boolean = true
+  @Input() options : any 
+  @Input() title : string
+
+  colors:Array<any> =
+  ["#A11E22",
+    "#E8A631",
+    "#E8C098",
+    "#E5E4DA",
+    "#BFB6B3",
+    "#FAAC77",
+    "#C9C980",
+    "#F8EFEE",
+    "#60686F",
+    "#333C3E"
+  ];
+  chartsColors: Array<Color> = [ { }];
+ 
   
   charts = [
     {id: 'pie', name: "Pie"},
@@ -36,6 +54,8 @@ export class MonoPlotComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
+
+  
 
     this.options={
       responsive: true,
@@ -66,6 +86,8 @@ export class MonoPlotComponent implements AfterViewInit {
       }
     };
   }
+
+  
 
   onDrop( event:DndDropEvent, list:any[] ) {
 

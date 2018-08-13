@@ -5,4 +5,23 @@
     word-break: break-all;
   }
 
+
+  
+div.loading {
+    position: relative;
+}
+  
+div.loading:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.1);
+    background-image: url(assets/img/Reload-1s-200px.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 250px 250px;
+    content: "";
+}
 /* .table-striped td { overflow: hidden; } */

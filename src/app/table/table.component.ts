@@ -78,8 +78,13 @@ export class TableComponent implements OnInit,AfterViewInit {
   Page(page:number){
     //this.spinner.show();
     this.globals.showSpinner = true;
-    this.findService.searchFinding(this.search_form, this.categories_search_form,page).subscribe(res => {
-      this.table_info = res;
+    this.findService.page(page).subscribe(res => {
+      this.table_info.data = res.data;
+      this.table_info.range_pages = res.range_pages
+      this.table_info.num_pages = res.num_pages	
+      this.table_info.page = res.page
+      this.table_info.previous_page = res.previous_page	
+      this.table_info.next_page = res.next_page
       //this.spinner.hide(); 
       this.globals.showSpinner = false
     });

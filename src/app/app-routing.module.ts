@@ -25,10 +25,10 @@ const routes : Routes = [
     path:'table',
     component: TableComponent
   },
-  // {
-  //   path:'explore',
-  //   component: ExploreComponent
-  // },
+ //   {
+  //    path:'explore',
+  //    component: ExploreComponent
+  //  },
   // {
   //   path:'browse',
   //   component: BrowseComponent

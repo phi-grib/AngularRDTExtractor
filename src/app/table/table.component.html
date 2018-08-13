@@ -1,4 +1,4 @@
-<table class="table table-hover" ng-controller="myController">
+<table class="table table-hover" [ngClass]="{ 'loading': globals.showSpinner}" ng-controller="myController">
     <thead>
       <tr class="text-left" bgcolor=lightgray>
         <th>Compound</th>
@@ -8,10 +8,10 @@
         <th>Studies per species</th>
       </tr>
     </thead>
-    <tbody *ngIf="globals.showSpinner">
+    <!--<tbody *ngIf="globals.showSpinner">
       <tr class="justify-content-center"><td colspan="5" align="center"><app-loading-spinner></app-loading-spinner></td></tr>
-    </tbody>
-    <tbody *ngIf="!globals.showSpinner">
+    </tbody>-->
+    <tbody>
         <tr *ngFor="let row of table_info.data; let i = index" class="text-left">
           <td class="align-middle text-center" style="border-right: 1px solid lightgray">
             <img *ngIf="row.smiles==='-'" src="assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
