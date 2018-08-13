@@ -3,8 +3,10 @@
         <div class="col-3">
           <div class="row align-items-start">
               <div class="col">
-                  <select class="custom-select" [(ngModel)]="chartType">
-                      <option *ngFor="let chart of charts" [value]="chart.id">{{chart.name}}</option>
+                  <select class="custom-select btn-mini" [(ngModel)]="chartType">
+                    <option *ngFor="let chart of charts" [value]="chart.id">
+                        {{chart.name}}
+                    </option>
                   </select>
               </div>
           </div>
@@ -25,13 +27,14 @@
           </div>-->
         </div>
         <div class="col-12" style="width: 70%;">
-                <canvas baseChart #chart 
+            <canvas baseChart #chart 
                 [data]="data"
                 [labels]="labels"
                 [options]="options"
                 [chartType]="chartType"
                 (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+                (chartClick)="chartClicked($event)">
+            </canvas>
         </div>
     </div>
     <!--<div class="row">
