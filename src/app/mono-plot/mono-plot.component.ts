@@ -16,7 +16,6 @@ export class MonoPlotComponent implements AfterViewInit {
   @Input() data: any[];
   @Input() labels: any[];
   @Input() datasets: any[];
-  // @Input() chartsColors: any[];
   @Input() chartType: string = 'line';
   @Input() legend: boolean = true;
   @Input() options: any;
@@ -35,7 +34,6 @@ export class MonoPlotComponent implements AfterViewInit {
     "#333C3E"
   ];
   chartsColors: Array<Color> = [ { }];
- 
   
   charts = [
     {id: 'pie', name: "Pie"},
