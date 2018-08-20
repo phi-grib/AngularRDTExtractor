@@ -10,21 +10,6 @@
                   </select>
               </div>
           </div>
-         <!-- <div class="row align-items-center">
-              <div class="col">
-                  <div class="card-body" dndDropzone
-                  dndEffectAllowed="move"
-                  (dndDrop)="onDrop($event, xAxis)">
-      
-                    <span class="badge badge-pill badge-primary" *ngFor="let x of xAxis"
-                                    [dndDraggable]="x"
-                                    dndEffectAllowed="move"
-                                    (dndMoved)="onDragged(x, xAxis)">
-                        {{x}}<br>
-                        </span>
-                  </div>
-              </div>
-          </div>-->
         </div>
         <div class="col-12" style="width: 70%;">
                 <canvas baseChart #chart 
@@ -38,21 +23,4 @@
             </canvas>
         </div>
     </div>
-
-    <!--<div class="row">
-        <div class="col-4 card offset-5">    
-            <div class="card-body" dndDropzone
-                    dndEffectAllowed="move"
-                    (dndDrop)="onDrop($event, yAxis)">
-        
-                <span class="badge badge-pill badge-primary" *ngFor="let y of yAxis"
-                            [dndDraggable]="y"
-                            dndEffectAllowed="move"
-                            (dndMoved)="onDragged(y, yAxis)">
-                    {{y}}
-                </span>
-            </div>
-        </div>
-        
-    </div>-->
 </div>

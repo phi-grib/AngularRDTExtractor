@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit,ViewChildren } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FindingsService } from '../findings.service';
 import { DndDropEvent } from "ngx-drag-drop";
 import { Router } from '@angular/router';
@@ -13,7 +13,6 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 })
 
 export class PlotComponent implements OnInit, AfterViewInit {
-
 
   objectKeys = Object.keys;
   plots: {};
@@ -39,10 +38,6 @@ export class PlotComponent implements OnInit, AfterViewInit {
     "#60686F",
     "#333C3E"
   ];
-
- 
-
-  
 
   constructor( private findService : FindingsService,  private _router: Router,
     public globals: Globals,public spinnerService: Ng4LoadingSpinnerService) { }
