@@ -65,6 +65,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
               data: [this.plot_info['num_studies'], this.globals.totalStudies - this.plot_info['num_studies']],
               backgroundColor: this.colors.slice(0,2)
             }];
+            
+            
           this.plots['Structures'].datasets = [
             {
               data: [this.plot_info['num_structures'], this.globals.totalStructures - this.plot_info['num_structures']],
@@ -80,7 +82,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
               data: this.plot_info['plotInfo']['normalised_species'][1],
               backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['normalised_species'][1].length)
             }];
-          
+         
           this.plots['Treatment'].datasets = [
             {
               data: this.plot_info['plotInfo']['relevance'][1],
@@ -92,7 +94,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
               data: this.plot_info['plotInfo']['source'][1],
               backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['source'][1].length)
             }];     
-        }, 50); 
+        }, 50);
+        
         this.spinnerService.hide();
       }
       this.firstTime=false

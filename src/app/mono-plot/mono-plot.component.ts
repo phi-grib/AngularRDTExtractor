@@ -11,8 +11,8 @@ import {ChartsModule, Color, BaseChartDirective} from 'ng2-charts';
 
 export class MonoPlotComponent implements AfterViewInit {
 
-  @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
-
+  @ViewChild(BaseChartDirective) private chart: BaseChartDirective;
+  
   @Input() data:any[]
   @Input() labels:any[]
   @Input() datasets:any[]
@@ -53,9 +53,9 @@ export class MonoPlotComponent implements AfterViewInit {
 
   constructor() { }
 
-  ngAfterViewInit() {
-
   
+ 
+  ngAfterViewInit() {
 
     this.options={
       responsive: true,
