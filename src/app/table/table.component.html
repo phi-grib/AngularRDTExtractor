@@ -1,62 +1,55 @@
 <table class="table table-hover" [ngClass]="{ 'loading': globals.showSpinner}" ng-controller="myController">
-    <thead>
-      <tr class="text-left" bgcolor=lightgray>
-        <th>Compound</th>
-        <th>Name</th>
-        <th>CAS no.</th>
-        <th>Pharmacological action</th>
-        <th>Studies per species</th>
-      </tr>
-    </thead>
-    <!--<tbody *ngIf="globals.showSpinner">
-      <tr class="justify-content-center"><td colspan="5" align="center"><app-loading-spinner></app-loading-spinner></td></tr>
-    </tbody>-->
-    <tbody>
-        <tr *ngFor="let row of table_info.data; let i = index" class="text-left">
-          <td class="align-middle text-center" style="border-right: 1px solid lightgray">
-            <img *ngIf="row.smiles==='-'" src="assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
-            <div *ngIf="row.smiles!=='-'" (click)="openCustomModal(row.smiles)">
-              <canvas #cmp id="{{row.subst_id}}">{{row.smiles}}</canvas>
-            </div>
-            <br>{{row.subst_id}}
-          </td>          
-          <td class="align-middle"><pre>{{row.common_name}}</pre></td>
-          <td class="align-middle"><pre>{{row.cas_number}}</pre></td>
-          <td class="align-middle"><pre>{{row.targetActionList}}</pre></td>
-          <td class="align-middle"><pre>{{row.count}}</pre></td>
-        </tr>
-    </tbody>
-  </table>
+  <tr class="text-left" bgcolor=lightgray>
+    <th>Compound</th>
+    <th>Name</th>
+    <th>CAS no.</th>
+    <th>Pharmacological action</th>
+    <th>Studies per species</th>
+  </tr>
+  <tr *ngFor="let row of table_info.data; let i = index" class="text-left">
+    <td class="align-middle text-center" style="border-right: 1px solid lightgray">
+      <img *ngIf="row.smiles==='-'" src="assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
+      <div *ngIf="row.smiles!=='-'" (click)="openCustomModal(row.smiles)">
+        <canvas #cmp id="{{row.subst_id}}">{{row.smiles}}</canvas>
+      </div>
+      <br>{{row.subst_id}}
+    </td>          
+    <td class="align-middle"><pre>{{row.common_name}}</pre></td>
+    <td class="align-middle"><pre>{{row.cas_number}}</pre></td>
+    <td class="align-middle"><pre>{{row.targetActionList}}</pre></td>
+    <td class="align-middle"><pre>{{row.count}}</pre></td>
+  </tr>
+</table>
 
-  <!--PAGINATION-->
-  <nav class="nav justify-content-center" *ngIf="table_info.num_pages > 0">
-    <ul class="pagination">
-      <div *ngIf=" table_info.previous_page > 0;then previous else no_previous"></div>
-      <ng-template #previous>
-        <li class="page-item"><a class="page-link" (click)= "Page(1)">First</a> </li>
-        <li class="page-item"><a class="page-link" (click)= "Page(table_info.previous_page)">&laquo;</a></li>
-      </ng-template>
-      <ng-template #no_previous>
-        <li class="page-item disabled"><a class="page-link"  tabindex="-1">First</a></li>
-        <li class="page-item disabled"><a class="page-link"  tabindex="-1">&laquo;</a></li>
-      </ng-template>       
-      <ng-container *ngFor="let i of table_info.range_pages">        
-        <li class="page-item active" *ngIf ="table_info.page == i" >
-            <a class="page-link">{{ i }} <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item" *ngIf="table_info.page != i">
-          <a class="page-link" (click)= "Page(i)"> {{i}} </a>
-        </li>
-      </ng-container>
-      <div *ngIf=" table_info.next_page > 0;then next else no_next"></div>
-      <ng-template #next>
-        <li class="page-item"><a class="page-link" (click)= "Page(table_info.next_page)">&raquo;</a></li>
-        <li class="page-item"><a class="page-link" (click)= "Page(table_info.num_pages)" >Last</a> </li>
-      </ng-template> 
-    
-      <ng-template #no_next>
-        <li class="page-item disabled"><a class="page-link"  tabindex="-1">&raquo;</a></li>
-        <li class="page-item disabled"><a class="page-link"  tabindex="-1">Last</a></li>
-      </ng-template>        
-    </ul>
-  </nav>
+<!--PAGINATION-->
+<nav class="nav justify-content-center" *ngIf="table_info.num_pages > 0">
+  <ul class="pagination">
+    <div *ngIf=" table_info.previous_page > 0;then previous else no_previous"></div>
+    <ng-template #previous>
+      <li class="page-item"><a class="page-link" (click)= "Page(1)">First</a> </li>
+      <li class="page-item"><a class="page-link" (click)= "Page(table_info.previous_page)">&laquo;</a></li>
+    </ng-template>
+    <ng-template #no_previous>
+      <li class="page-item disabled"><a class="page-link"  tabindex="-1">First</a></li>
+      <li class="page-item disabled"><a class="page-link"  tabindex="-1">&laquo;</a></li>
+    </ng-template>       
+    <ng-container *ngFor="let i of table_info.range_pages">        
+      <li class="page-item active" *ngIf ="table_info.page == i" >
+          <a class="page-link">{{ i }} <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="page-item" *ngIf="table_info.page != i">
+        <a class="page-link" (click)= "Page(i)"> {{i}} </a>
+      </li>
+    </ng-container>
+    <div *ngIf=" table_info.next_page > 0;then next else no_next"></div>
+    <ng-template #next>
+      <li class="page-item"><a class="page-link" (click)= "Page(table_info.next_page)">&raquo;</a></li>
+      <li class="page-item"><a class="page-link" (click)= "Page(table_info.num_pages)" >Last</a> </li>
+    </ng-template> 
+  
+    <ng-template #no_next>
+      <li class="page-item disabled"><a class="page-link"  tabindex="-1">&raquo;</a></li>
+      <li class="page-item disabled"><a class="page-link"  tabindex="-1">Last</a></li>
+    </ng-template>        
+  </ul>
+</nav>
