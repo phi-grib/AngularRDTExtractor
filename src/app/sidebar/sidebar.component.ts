@@ -64,7 +64,7 @@ export class SidebarComponent implements OnInit {
               private viewContainer: ViewContainerRef,
               private findService : FindingsService,
               private _router: Router,
-              public globals: Globals ) {
+              public globals: Globals) {
     this.router = _router;
   }
 
@@ -83,9 +83,9 @@ export class SidebarComponent implements OnInit {
         this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
           this.findService.changeTable(table_info);
           for (let source of this.sources){ 
-            this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+            this.categoryOptions[source]['parameters']=table_info['allOptions']['parameters'][source]
             this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
-            this.categoryOptionsSelected[source]['organs'] =  this.categories_search_form[source]['organs']
+            this.categoryOptionsSelected[source]['parameters'] =  this.categories_search_form[source]['parameters']
             this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
           }
           this.globals.showSpinner = false;
@@ -105,7 +105,7 @@ export class SidebarComponent implements OnInit {
         this.globals.showSpinner = true;
         this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
           for (let source of this.sources){ 
-            this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+            this.categoryOptions[source]['parameters']=table_info['allOptions']['parameters'][source]
             this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
           }
           this.findService.changeTable(table_info); 
@@ -135,15 +135,15 @@ export class SidebarComponent implements OnInit {
 
         this.selectedCategory=source
         this.categories_search_form[source] = {}
-        this.categories_search_form[source]['organs']=[]
+        this.categories_search_form[source]['parameters']=[]
         this.categories_search_form[source]['observations']=[]
         
         this.categoryOptions[source] = {}
-        this.categoryOptions[source]['organs']=table_info['allOptions']['organs'][source]
+        this.categoryOptions[source]['parameters']=table_info['allOptions']['parameters'][source]
         this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
 
         this.categoryOptionsSelected[source] = {}
-        this.categoryOptionsSelected[source]['organs']=[]
+        this.categoryOptionsSelected[source]['parameters']=[]
         this.categoryOptionsSelected[source]['observations']=[]
       }
       this.findService.changeTable(table_info);
@@ -156,7 +156,7 @@ export class SidebarComponent implements OnInit {
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
 
-    //this.items_organs=this.createTreeview(this.table_info['allOptions']['organs'][this.selectedCategory],this.selectedCategory,'organs');
+    //this.items_organs=this.createTreeview(this.table_info['allOptions']['parameters'][this.selectedCategory],this.selectedCategory,'organs');
     //this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
     if (!(event.target.value in this.categories_search_form)) {
       this.categories_search_form[event.target.value] = null;
