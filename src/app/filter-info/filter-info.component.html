@@ -1,0 +1,42 @@
+
+
+<div class="container-fluid row shadow p-4 bg-white rounded" style="padding: 10px;">
+  <div class="col-lg-2" *ngFor="let key of objectKeys(search_form)">
+    <div class="card">
+      <h5 class="card-header">
+          {{key|capitalize}} 
+          <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
+            <span aria-hidden="true">&times;</span>
+          </button>    
+      </h5>
+      <div class="card-body">
+        <span class="badge badge-info"  *ngFor="let value of search_form[key]">
+          <span class="closebtn" (click)="removeOne(key,value)">&times;</span>
+          {{ value }}
+        </span>
+      </div> 
+    </div>
+  </div>
+
+  <ng-container *ngFor="let type of this.types">
+    <div class="col-lg-4" *ngIf="this.hasTypeInfo[type]">
+      <div class="card">
+        <h5 class="card-header">
+            {{type|capitalize}} 
+            <button type="button" class="close" aria-label="Close" (click)="removeAll(type)">
+              <span aria-hidden="true">&times;</span>
+            </button>    
+        </h5>
+        <div class="card-body">
+          <ng-container *ngFor="let category of objectKeys(categories_search_form)">
+            <span class="badge badge-info"  *ngFor="let value of categories_search_form[category][type]">
+              <span class="closebtn" (click)="removeOne(type,value,category)">&times;</span>
+              {{category}} | {{ value }}
+            </span>
+          </ng-container>
+        </div> 
+      </div>
+    </div>
+  </ng-container>
+
+</div>

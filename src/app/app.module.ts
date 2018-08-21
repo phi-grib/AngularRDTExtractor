@@ -34,6 +34,7 @@ import { Globals } from './globals'
 import {TooltipModule} from "ngx-tooltip";
 // import { ModalMoleculeComponent } from './modal-molecule/modal-molecule.component';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { FilterInfoComponent } from './filter-info/filter-info.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
     //SubstanceModalComponent,
     DisabledOnSelectorDirective,
     MonoPlotComponent,
+    FilterInfoComponent,
     // ModalMoleculeComponent    
   ],
   imports: [

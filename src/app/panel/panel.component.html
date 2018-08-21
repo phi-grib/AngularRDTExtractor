@@ -3,7 +3,7 @@
     <div *ngFor="let category of objectKeys(categories_search_form)">
             <div *ngFor="let value of categories_search_form[category][key]">
                 <span>
-                    <!-- <button class = "close" (click)="removeThis(key,value,category)">x</button> -->
+                    <button class = "close" (click)="removeThis(key,value,category)">x</button>
                     &nbsp;{{category}} | {{ value }}
                 </span>       
         </div>
@@ -15,7 +15,7 @@
     <ul *ngIf="search_form[key]">
         <li *ngFor="let value of search_form[key]">
             <span>
-                <!-- <button class = "close" (click)="removeThis(key,value,category)">x</button> -->
+                <button class = "close" (click)="removeThis(key,value,category)">x</button>
                 &nbsp;{{ value }}
             </span> 
         </li>

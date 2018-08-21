@@ -1,0 +1,55 @@
+
+
+.close {
+    padding-left: 1px;
+    color: rgb(0, 0, 0);
+    float: right;
+    font-size: 125%;
+    cursor: pointer;
+}
+/*---------------------------*/
+divlabel {
+    float: center;
+    top: 5px;
+    right: 10px;
+    padding: 10px;
+    background: #fff;
+    font-size: 18px;
+  }
+  
+.x {
+    position: absolute;
+    background: grey;
+    color: black;
+    top: -10px;
+    right: -10px;
+}
+.chip {
+    display: inline-block;
+    padding: 0px 25px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 50px;
+    border-radius: 25px;
+    background-color: #f1f1f1;
+}
+.closebtn {
+    padding-left: 10px;
+    color: #888;
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+    cursor: pointer;
+}
+.closebtn:hover {
+    color: #000;
+}
+.badge {
+    font-size: 125%;
+    padding: 5px;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+.container-fluid{
+    margin-bottom: 15px;
+}

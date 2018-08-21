@@ -20,3 +20,8 @@
 	border-right: 25px solid transparent;
 	border-top: 50px solid #555;
 }
+
+p {
+    border-style: solid;
+    border-color: red;
+}
