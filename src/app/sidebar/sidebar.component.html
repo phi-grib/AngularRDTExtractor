@@ -147,16 +147,16 @@
                 <br>
 
                 <p class="font-weight-bold" [hidden]="!(hasCategory && 
-                categoryOptions[selectedCategory]['organs'].length > 1)">Parameter:</p>
+                categoryOptions[selectedCategory]['parameters'].length > 1)">Parameter:</p>
                 <div class="row" [hidden]="!(hasCategory && 
-                categoryOptions[selectedCategory]['organs'].length > 1)">
+                categoryOptions[selectedCategory]['parameters'].length > 1)">
                     <div class="col s12 l6">
                     <ngx-select-dropdown 
                         (change)="addCategory($event,'organs')" 
                         [multiple]="true" 
-                        [(value)]="this.categoryOptionsSelected[selectedCategory]['organs']" 
+                        [(value)]="this.categoryOptionsSelected[selectedCategory]['parameters']" 
                         [config]="config_select" 
-                        [options]="categoryOptions[selectedCategory]['organs']"
+                        [options]="categoryOptions[selectedCategory]['parameters']"
                         [hidden]="!hasCategory">
                     </ngx-select-dropdown>
                     </div>
