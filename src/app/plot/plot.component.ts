@@ -28,8 +28,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
 
   colors:Array<any> =
   [ "#E3464A",
-    "#F0EDDB",
     "#89BDAB",
+    "#F0EDDB",
     "#216F78",
     "#0E3D49",
     "#F12758",
