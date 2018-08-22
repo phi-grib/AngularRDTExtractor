@@ -1,4 +1,10 @@
+.card-header {
+    padding: 10px;
+}
 
+.card-body {
+    padding: 10px;
+}
 
 .close {
     padding-left: 1px;

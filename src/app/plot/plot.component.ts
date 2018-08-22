@@ -182,19 +182,5 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>this.search_form = searchFormTable); 
   }
- 
-  onDragged( item:any, list:any[] ) { 
-    //const index = list.indexOf( item );
-    //list.splice( index, 1 );
-  }
-
-  onDrop( event:DndDropEvent, list:any[] ) {
-    /*let index = event.index;
-    if( typeof index === "undefined" ) {
-      index = list.length;
-    }
-
-    list.splice( index, 0, event.data );*/
-  }
 }
 

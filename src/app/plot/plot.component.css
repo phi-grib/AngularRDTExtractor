@@ -5,8 +5,6 @@
     word-break: break-all;
   }
 
-
-  
 div.loading {
     position: relative;
 }
@@ -24,4 +22,3 @@ div.loading:after {
     background-size: 250px 250px;
     content: "";
 }
-/* .table-striped td { overflow: hidden; } */

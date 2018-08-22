@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject ,  Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
@@ -17,8 +17,6 @@ export class FindingsService {
   private categoriesSearchForm = new BehaviorSubject<any>({});
   currentCategoriesSearchForm= this.categoriesSearchForm.asObservable();
 
-
-
   apiRoot = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
@@ -26,9 +24,11 @@ export class FindingsService {
   changeTable(table){
     this.table_form.next(table);
   }
+
   changePlot(plot){
     this.plot_info.next(plot);
   }
+
   changeSearchFormTable(table){
     this.searchFormTable.next(table);
   }
@@ -70,6 +70,7 @@ export class FindingsService {
         }
       });
     });
+    
     if (organ_list.length > 0) {
       params = params.set("organs", organ_list.join('@'));
     }
