@@ -48,10 +48,10 @@ export class MonoPlotComponent implements AfterViewInit {
   charts = [
     {id: 'pie', name: "Pie"},
     {id: 'doughnut', name: "Doughnut"},
-    {id: 'bar', name: "Verical Bar"},
-    //{id: 'line', name: "Line"},
-    //{id: 'radar', name: "Radar"},
-    {id: 'horizontalBar', name: "Horizontal Bar"}
+    // {id: 'bar', name: "Verical Bar"},
+    // {id: 'line', name: "Line"},
+    // {id: 'radar', name: "Radar"},
+    // {id: 'horizontalBar', name: "Horizontal Bar"}
   ];
 
   public xAxis:string[] = [
