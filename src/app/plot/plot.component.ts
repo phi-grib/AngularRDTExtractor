@@ -31,7 +31,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
     "#89BDAB",
     "#F0EDDB",
     "#216F78",
-    "#0E3D49",
+    // "#0E3D49",
     "#F12758",
     "#9A794C",
     "#FEFBEF",
