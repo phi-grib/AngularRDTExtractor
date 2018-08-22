@@ -35,7 +35,7 @@ table.loading tbody:after {
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.1);
-    background-image: url(assets/img/Reload-1s-200px.svg);
+    background-image: url(../../assets/img/Reload-1s-200px.gif);
     background-position: center;
     background-repeat: no-repeat;
     background-blend-mode: darken;
