@@ -22,7 +22,17 @@ export class MonoPlotComponent implements AfterViewInit {
   @Input() title: string;
 
   colors:Array<any> =
-  ["#A11E22",
+  [ "#E3464A",
+    "#F0EDDB",
+    "#89BDAB",
+    "#216F78",
+    "#0E3D49",
+    "#F12758",
+    "#9A794C",
+    "#FEFBEF",
+    "#49C4D1",
+    "#253741",
+    "#A11E22",
     "#E8A631",
     "#E8C098",
     "#E5E4DA",
