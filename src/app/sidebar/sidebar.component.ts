@@ -51,6 +51,8 @@ export class SidebarComponent implements OnInit {
   categoryOptionsSelected ={};
   categoryOptions = {}
 
+  errorMsg:string;
+
   config_select = {
     search: true,
     height: '300px',
@@ -68,6 +70,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(){
     this.globals.showSpinner = true;
+    this.globals.showError = false;
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
 
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
@@ -78,16 +81,22 @@ export class SidebarComponent implements OnInit {
         }
         /*Case TABLE*/
         this.globals.showSpinner = true;
-        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
-          this.findService.changeTable(table_info);
+        console.log("1")
+        console.log(this.categories_search_form)
+        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
+          (data) => {  
+          this.findService.changeTable(data);
           for (let source of this.sources){ 
-            this.categoryOptions[source]['parameters']=table_info['allOptions']['parameters'][source]
-            this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+            this.categoryOptions[source]['parameters']=data['allOptions']['parameters'][source]
+            this.categoryOptions[source]['observations']=data['allOptions']['observations'][source]
             this.categoryOptionsSelected[source]['parameters'] =  this.categories_search_form[source]['parameters']
             this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
           }
           this.globals.showSpinner = false;
-        });
+        },(error)=>{
+          this.globals.errorMsg=error.message;
+          this.globals.showError = true;
+      });
  
       }
       this.firstTimeCategorySearch=true;   
@@ -101,14 +110,19 @@ export class SidebarComponent implements OnInit {
         }
       
         this.globals.showSpinner = true;
-        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
-          for (let source of this.sources){ 
-            this.categoryOptions[source]['parameters']=table_info['allOptions']['parameters'][source]
-            this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
-          }
-          this.findService.changeTable(table_info); 
-          this.globals.showSpinner = false;
+        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
+          (data)=> { 
+            for (let source of this.sources){ 
+              this.categoryOptions[source]['parameters']=data['allOptions']['parameters'][source]
+              this.categoryOptions[source]['observations']=data['allOptions']['observations'][source]
+            }
+            this.findService.changeTable(data); 
+            this.globals.showSpinner = false;
+          },(error)=>{
+            this.globals.errorMsg=error.message;
+            this.globals.showError = true;
         });
+  
       }
       this.firstTimeSearch=true;
     });
@@ -174,7 +188,6 @@ export class SidebarComponent implements OnInit {
   }
 
   addSearchSelect(event: any){
-      console.log(event);
       // If the key(field of search) is already inserted   
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted

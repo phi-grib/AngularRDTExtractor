@@ -52,11 +52,9 @@ import { FilterInfoComponent } from './filter-info/filter-info.component';
     ConnectComponent,
     BrowseComponent,
     CustomModalComponent,
-    //SubstanceModalComponent,
     DisabledOnSelectorDirective,
     MonoPlotComponent,
-    FilterInfoComponent,
-    // ModalMoleculeComponent    
+    FilterInfoComponent 
   ],
   imports: [
     BrowserModule,

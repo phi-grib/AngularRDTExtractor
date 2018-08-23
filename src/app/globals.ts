@@ -5,4 +5,6 @@ export class Globals {
   totalStudies: number = 0;
   totalStructures: number = 0;
   totalFindings: number = 0;
+  showError: boolean = false;
+  errorMsg: string;
 }

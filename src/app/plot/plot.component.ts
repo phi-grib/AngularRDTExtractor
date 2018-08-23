@@ -188,5 +188,9 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>this.search_form = searchFormTable); 
   }
+
+  closeError(){
+    this._router.navigate(['']);
+  }
 }
 

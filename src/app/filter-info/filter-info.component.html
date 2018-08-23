@@ -1,4 +1,4 @@
-<div class="container-fluid row shadow p-4 bg-white rounded">
+<div class="container-fluid row shadow p-4 bg-white rounded" *ngIf="objectKeys(search_form).length>0 || this.hasType">
   <div class="col-lg-2" *ngFor="let key of objectKeys(search_form)">
     <div class="card">
       <h6 class="card-header">
@@ -18,7 +18,7 @@
   </div>
 
   <ng-container *ngFor="let type of this.types">
-    <div class="col-lg-4" *ngIf="this.hasTypeInfo[type]">
+    <div class="col-lg" *ngIf="this.hasTypeInfo[type]">
       <div class="card">
         <h6 class="card-header">
             {{type|capitalize}} 
