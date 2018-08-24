@@ -4,6 +4,7 @@ import { FindingsService } from '../findings.service';
 import * as SmilesDrawer from 'smiles-drawer';
 import { ModalDialogService } from 'ngx-modal-dialog';
 import { CustomModalComponent } from '../dialog/dialog.component';
+import { Router } from '@angular/router';
 import { Globals } from '../globals';
 
 
@@ -28,6 +29,7 @@ export class TableComponent implements OnInit,AfterViewInit {
   constructor(private findService : FindingsService, 
           private modalDialogService: ModalDialogService, 
           private viewContainer: ViewContainerRef,
+          private _router: Router,
           public globals: Globals) {}
 
   ngOnInit() {
@@ -88,5 +90,8 @@ export class TableComponent implements OnInit,AfterViewInit {
       //this.spinner.hide(); 
       this.globals.showSpinner = false
     });
+  }
+  closeError(){
+    this._router.navigate(['/']);
   }
 }

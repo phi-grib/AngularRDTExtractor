@@ -9,19 +9,21 @@ import { FindingsService } from '../findings.service';
 export class FilterInfoComponent implements OnInit {
 
   objectKeys = Object.keys;
-  search_form={};
-  categories_search_form={};
-  hasTypeInfo={};
+  search_form=<any>{};
+  categories_search_form=<any>{};
+  hasTypeInfo=<any>{};
+  hasType:boolean=false;
   types: Array<string>;
 
   constructor(private findService : FindingsService) { }
 
   ngOnInit() {
-    this.types = ['organs','observations']
+    this.types = ['parameters','observations']
     this.findService.currentSearchFormTable.subscribe (searchFormTable => this.search_form = searchFormTable);
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => {
       this.categories_search_form = categoriesSearchForm;
       /*RESET hasTypeInfo*/
+      this.hasType=false;
       for (let type of this.types){
         this.hasTypeInfo[type]=false;
       }
@@ -30,6 +32,7 @@ export class FilterInfoComponent implements OnInit {
         for (let category of this.objectKeys(this.categories_search_form)){
           if (this.categories_search_form[category][type].length>0){
             this.hasTypeInfo[type]=true;
+            this.hasType=true;
           }
         }
       }

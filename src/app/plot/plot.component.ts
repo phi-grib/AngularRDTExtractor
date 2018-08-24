@@ -27,11 +27,17 @@ export class PlotComponent implements OnInit, AfterViewInit {
   firstTime = true;
 
   colors:Array<any> =
-  ["#A11E22",
-    "#E8A631",
+  [ "#E3464A",
+    "#89BDAB",
+    "#F0EDDB",
+    "#216F78",
     "#E8C098",
-    "#E5E4DA",
     "#BFB6B3",
+    "#E8A631",
+    "#49C4D1",
+    "#9A794C",
+    "#253741",
+    "#A11E22",
     "#FAAC77",
     "#C9C980",
     "#F8EFEE",
@@ -182,19 +188,9 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>this.categories_search_form = categoriesSearchForm);
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>this.search_form = searchFormTable); 
   }
- 
-  onDragged( item:any, list:any[] ) { 
-    //const index = list.indexOf( item );
-    //list.splice( index, 1 );
-  }
 
-  onDrop( event:DndDropEvent, list:any[] ) {
-    /*let index = event.index;
-    if( typeof index === "undefined" ) {
-      index = list.length;
-    }
-
-    list.splice( index, 0, event.data );*/
+  closeError(){
+    this._router.navigate(['']);
   }
 }
 

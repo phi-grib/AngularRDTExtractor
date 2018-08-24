@@ -149,7 +149,7 @@
                 categoryOptions[selectedCategory]['parameters'].length > 1)">
                     <div class="col s12 l6">
                     <ngx-select-dropdown 
-                        (change)="addCategory($event,'organs')" 
+                        (change)="addCategory($event,'parameters')" 
                         [multiple]="true" 
                         [(value)]="this.categoryOptionsSelected[selectedCategory]['parameters']" 
                         [config]="config_select" 
@@ -159,7 +159,7 @@
                     </div>
                 </div>
                 <br>
-                <app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>
+                <!--<app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>-->
 
                 <p class="font-weight-bold" [hidden]="!hasCategory">Observation:</p>
                 <div class="row">
@@ -175,7 +175,7 @@
                     </div>
                 </div>
                  <br>
-                <app-panel [key]= "'observations'" [categoryForm]="true"></app-panel>
+                <!--<app-panel [key]= "'observations'" [categoryForm]="true"></app-panel>-->
             </div>
         </div>
     </div>

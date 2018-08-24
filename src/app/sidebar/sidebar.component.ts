@@ -4,7 +4,6 @@ import { FindingsService } from '../findings.service';
 import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { TreeviewItem, TreeviewEventParser, DownlineTreeviewEventParser} from 'ngx-treeview';
 import { ModalDialogService } from 'ngx-modal-dialog';
-//import { SketchModalComponent } from '../sketch/sketch.component';
 import { Router } from '@angular/router';
 import { Globals } from '../globals';
 
@@ -52,10 +51,9 @@ export class SidebarComponent implements OnInit {
   categoryOptionsSelected ={};
   categoryOptions = {}
 
-  errorMsg:string=null;
+  errorMsg:string;
 
   config_select = {
-    //displayKey:"name", //if objects array passed which key to be displayed defaults to description
     search: true,
     height: '300px',
     placeholder: 'select'
@@ -73,7 +71,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(){
 
     this.globals.showSpinner = true;
-
+    this.globals.showError = false;
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
 
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
@@ -84,21 +82,20 @@ export class SidebarComponent implements OnInit {
         }
         /*Case TABLE*/
         this.globals.showSpinner = true;
-        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => {  
-          this.findService.changeTable(table_info);
+        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
+          (data) => {  
+          this.findService.changeTable(data);
           for (let source of this.sources){ 
-            this.categoryOptions[source]['parameters']=table_info['allOptions']['parameters'][source]
-            this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
+            this.categoryOptions[source]['parameters']=data['allOptions']['parameters'][source]
+            this.categoryOptions[source]['observations']=data['allOptions']['observations'][source]
             this.categoryOptionsSelected[source]['parameters'] =  this.categories_search_form[source]['parameters']
             this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
           }
           this.globals.showSpinner = false;
-        },
-        error=>{
-          this.errorMsg=error
-          alert(this.errorMsg);
-        }
-      );
+        },(error)=>{
+          this.globals.errorMsg=error.message;
+          this.globals.showError = true;
+      });
  
       }
       this.firstTimeCategorySearch=true;   
@@ -112,14 +109,19 @@ export class SidebarComponent implements OnInit {
         }
       
         this.globals.showSpinner = true;
-        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => { 
-          for (let source of this.sources){ 
-            this.categoryOptions[source]['parameters']=table_info['allOptions']['parameters'][source]
-            this.categoryOptions[source]['observations']=table_info['allOptions']['observations'][source]
-          }
-          this.findService.changeTable(table_info); 
-          this.globals.showSpinner = false;
+        this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
+          (data)=> { 
+            for (let source of this.sources){ 
+              this.categoryOptions[source]['parameters']=data['allOptions']['parameters'][source]
+              this.categoryOptions[source]['observations']=data['allOptions']['observations'][source]
+            }
+            this.findService.changeTable(data); 
+            this.globals.showSpinner = false;
+          },(error)=>{
+            this.globals.errorMsg=error.message;
+            this.globals.showError = true;
         });
+  
       }
       this.firstTimeSearch=true;
       },
@@ -170,12 +172,9 @@ export class SidebarComponent implements OnInit {
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
 
-    //this.items_organs=this.createTreeview(this.table_info['allOptions']['parameters'][this.selectedCategory],this.selectedCategory,'organs');
-    //this.items_observations=this.createTreeview(this.table_info['allOptions']['observations'][this.selectedCategory],this.selectedCategory,'observations');
     if (!(event.target.value in this.categories_search_form)) {
       this.categories_search_form[event.target.value] = null;
     }
-    
   }
 
   isCategoryFiltered(category: string){
@@ -193,8 +192,6 @@ export class SidebarComponent implements OnInit {
   }
 
   addSearchSelect(event: any){
-
-      console.log(event);
       // If the key(field of search) is already inserted   
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted
@@ -205,28 +202,25 @@ export class SidebarComponent implements OnInit {
       else{
         this.search_form[event.target.id]=[event.target.value];
       }
-
       this.findService.changeSearchFormTable(this.search_form);
-      //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
-
   }
 
   addSearchCheckBox(event: any,id:string){
 
     if (this.sex.indexOf(event.target.value)!=-1){  
       if (event.target.checked){
-          if (event.target.value=="F"){
-            this.M=false;
-            this.BOTH=false;
-          }
-          else if (event.target.value=="M"){
-            this.F=false;
-            this.BOTH=false;
-          }
-          else{
-            this.M=false;
-            this.F=false;
-          }
+        if (event.target.value=="F"){
+          this.M=false;
+          this.BOTH=false;
+        }
+        else if (event.target.value=="M"){
+          this.F=false;
+          this.BOTH=false;
+        }
+        else{
+          this.M=false;
+          this.F=false;
+        }
       }
     }
     if (event.target.checked){   
@@ -236,15 +230,12 @@ export class SidebarComponent implements OnInit {
       delete this.search_form[id];
     }
     this.findService.changeSearchFormTable(this.search_form);
-    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
-
   }
 
   addSliderInfo($event){
     this.search_form['min_exposure']=$event.from;
     this.search_form['max_exposure']=$event.to;
     this.findService.changeSearchFormTable(this.search_form);
-    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
   }
 
   resetFilters(){    
@@ -261,27 +252,6 @@ export class SidebarComponent implements OnInit {
     this.hasCategory = false;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
     this.findService.changeSearchFormTable(this.search_form);
-    // document.getElementsByTagName("ngx-select-dropdown")[0].reset( );
-    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info =>this.findService.changeTable(table_info));
-    //document.getElementById('category').selectedIndex = "0";
-  }
-
- /* openSketchModal() {
-    this.modalDialogService.openDialog(this.viewContainer, {
-      title: 'Compound seach',
-      childComponent: SketchModalComponent,
-      settings: {
-        closeButtonClass: 'close theme-icon-close',
-        modalDialogClass: "modal-dialog modal-dialog-centered modal-lg"
-      },
-      data: "Test"
-    });
-  }*/
-
-  closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("mySidenav").style.overflow = "hidden";
-    document.getElementById("main").style.marginLeft = "25px";
   }
 
   addCategory($event: any, type){
@@ -302,25 +272,10 @@ export class SidebarComponent implements OnInit {
     return count;
   }
 
-  // getSmiles() {
-  //   jme = document.getElementById("jme")
-  //   var drawing = jme.smiles();
-  //   document.form.smi.value = drawing;
-  // }
-
-  // submitSmiles() {
-  //   var smiles = document.jme.smiles();
-  //   var jme = document.jme.jmeFile();
-  //   if (smiles == "") {
-  //     alert("Nothing to submit");
-  //   }
-  //   else {
-  //     opener.fromEditor(smiles,jme);
-  //     window.close();
-  //   }
-  // }
-
-  // openHelpWindow() {
-  //   window.open("http://www.molinspiration.com/jme/help/jme2008hints.html","jmehelp","toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width=510,height=675,left=400,top=20");
-  // }
+  closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.overflow = "hidden";
+    document.getElementById("main").style.marginLeft = "25px";document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.width = "100%";
+  }
 }

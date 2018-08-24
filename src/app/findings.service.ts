@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
 import { BehaviorSubject ,  Observable } from 'rxjs';
+=======
+import { BehaviorSubject, Observable } from 'rxjs';
+>>>>>>> 9cece32aed1dd97fd24b8f9afe43008077a27f05
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
@@ -19,8 +23,6 @@ export class FindingsService {
   private categoriesSearchForm = new BehaviorSubject<any>({});
   currentCategoriesSearchForm= this.categoriesSearchForm.asObservable();
 
-
-
   apiRoot = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
@@ -28,9 +30,11 @@ export class FindingsService {
   changeTable(table){
     this.table_form.next(table);
   }
+
   changePlot(plot){
     this.plot_info.next(plot);
   }
+
   changeSearchFormTable(table){
     this.searchFormTable.next(table);
   }
@@ -61,7 +65,7 @@ export class FindingsService {
             var filter_value = categories_search_filter[category][key][i];
             new_value = category;
             new_value = new_value.concat('|', filter_value);
-            if (key === "organs") {
+            if (key === "parameters") {
               organ_list.push(new_value);
             } else if (key === "observations") {
               observation_list.push(new_value);
@@ -72,8 +76,9 @@ export class FindingsService {
         }
       });
     });
+    
     if (organ_list.length > 0) {
-      params = params.set("organs", organ_list.join('@'));
+      params = params.set("parameters", organ_list.join('@'));
     }
     if (observation_list.length > 0) {
       params = params.set("observations", observation_list.join('@'));
@@ -91,8 +96,7 @@ export class FindingsService {
     params = params.set('page',page.toString())
     return this.http.get(this.apiRoot+'/page', {params: params})
   }
-
-  errorHandler(error: HttpErrorResponse){
-      return Observable.throw(error.message || "Server Error")
+  errorHandler(error:HttpErrorResponse){
+    return Observable.throw(error || "Server Error")
   }
 }

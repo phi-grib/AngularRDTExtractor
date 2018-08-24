@@ -22,11 +22,17 @@ export class MonoPlotComponent implements AfterViewInit {
   @Input() title: string;
 
   colors:Array<any> =
-  ["#A11E22",
-    "#E8A631",
+  [ "#E3464A",
+    "#89BDAB",
+    "#F0EDDB",
+    "#216F78",
     "#E8C098",
-    "#E5E4DA",
     "#BFB6B3",
+    "#E8A631",
+    "#49C4D1",
+    "#9A794C",
+    "#253741",
+    "#A11E22",
     "#FAAC77",
     "#C9C980",
     "#F8EFEE",
@@ -38,10 +44,10 @@ export class MonoPlotComponent implements AfterViewInit {
   charts = [
     {id: 'pie', name: "Pie"},
     {id: 'doughnut', name: "Doughnut"},
-    {id: 'bar', name: "Verical Bar"},
-    //{id: 'line', name: "Line"},
-    //{id: 'radar', name: "Radar"},
-    {id: 'horizontalBar', name: "Horizontal Bar"}
+    // {id: 'bar', name: "Verical Bar"},
+    // {id: 'line', name: "Line"},
+    // {id: 'radar', name: "Radar"},
+    // {id: 'horizontalBar', name: "Horizontal Bar"}
   ];
 
   public xAxis:string[] = [
