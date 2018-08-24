@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject ,  Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class FindingsService {
@@ -81,11 +83,16 @@ export class FindingsService {
     }
     params = params.set('page',page.toString());
     return this.http.get(url, {params: params})
+                    .catch(this.errorHandler);
   }
 
   page(page): Observable<any>{
     let params = new HttpParams();
     params = params.set('page',page.toString())
     return this.http.get(this.apiRoot+'/page', {params: params})
+  }
+
+  errorHandler(error: HttpErrorResponse){
+      return Observable.throw(error.message || "Server Error")
   }
 }

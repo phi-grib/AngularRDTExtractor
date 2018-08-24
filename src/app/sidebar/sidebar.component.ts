@@ -52,6 +52,8 @@ export class SidebarComponent implements OnInit {
   categoryOptionsSelected ={};
   categoryOptions = {}
 
+  errorMsg:string=null;
+
   config_select = {
     //displayKey:"name", //if objects array passed which key to be displayed defaults to description
     search: true,
@@ -69,7 +71,9 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(){
+
     this.globals.showSpinner = true;
+
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
 
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
@@ -89,7 +93,12 @@ export class SidebarComponent implements OnInit {
             this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
           }
           this.globals.showSpinner = false;
-        });
+        },
+        error=>{
+          this.errorMsg=error
+          alert(this.errorMsg);
+        }
+      );
  
       }
       this.firstTimeCategorySearch=true;   
@@ -113,7 +122,12 @@ export class SidebarComponent implements OnInit {
         });
       }
       this.firstTimeSearch=true;
-    });
+      },
+      error=>{
+        this.errorMsg=error
+        alert(this.errorMsg);
+      }
+    );
 
     /*FIRST time*/
     this.findService.initFinding().subscribe(table_info => {
