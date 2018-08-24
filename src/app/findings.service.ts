@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
-import { BehaviorSubject ,  Observable } from 'rxjs';
-=======
 import { BehaviorSubject, Observable } from 'rxjs';
->>>>>>> 9cece32aed1dd97fd24b8f9afe43008077a27f05
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
