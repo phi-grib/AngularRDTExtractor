@@ -75,6 +75,7 @@ export class SidebarComponent implements OnInit {
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
 
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
+      this.globals.showError = false;
       this.categories_search_form = categoriesSearchForm;
       if (this.firstTimeCategorySearch){
         if (this.request){
@@ -102,6 +103,7 @@ export class SidebarComponent implements OnInit {
     });
 
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>{
+      this.globals.showError = false;
       this.search_form = searchFormTable;
       if (this.firstTimeSearch){
         if (this.request){
