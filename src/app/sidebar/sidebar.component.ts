@@ -271,6 +271,7 @@ export class SidebarComponent implements OnInit {
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("mySidenav").style.overflow = "hidden";
-    document.getElementById("main").style.marginLeft = "25px";
+    document.getElementById("main").style.marginLeft = "25px";document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.width = "100%";
   }
 }
