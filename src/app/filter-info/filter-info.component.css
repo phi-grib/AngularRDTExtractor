@@ -1,3 +1,8 @@
+#myContainer{
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+}
+
 .card-header {
     padding: 10px;
 }

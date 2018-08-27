@@ -1,8 +1,10 @@
-<div class="container-fluid row shadow p-4 bg-white rounded" *ngIf="objectKeys(search_form).length>0 || this.hasType">
+<div class="container-fluid row shadow p-4 bg-white rounded" 
+  id="myContainer"
+  *ngIf="objectKeys(search_form).length>0 || this.hasType">
   <div *ngFor="let key of objectKeys(search_form)">
     <div class="card">
       <h6 class="card-header">
-          {{key|capitalize}} 
+          {{ key | capitalize }} 
           <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
             <span aria-hidden="true">&times;</span>
           </button>    
