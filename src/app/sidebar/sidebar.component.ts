@@ -69,11 +69,13 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(){
+
     this.globals.showSpinner = true;
     this.globals.showError = false;
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
 
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
+      this.globals.showError = false;
       this.categories_search_form = categoriesSearchForm;
       if (this.firstTimeCategorySearch){
         if (this.request){
@@ -81,8 +83,6 @@ export class SidebarComponent implements OnInit {
         }
         /*Case TABLE*/
         this.globals.showSpinner = true;
-        console.log("1")
-        console.log(this.categories_search_form)
         this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
           (data) => {  
           this.findService.changeTable(data);
@@ -103,6 +103,7 @@ export class SidebarComponent implements OnInit {
     });
 
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>{
+      this.globals.showError = false;
       this.search_form = searchFormTable;
       if (this.firstTimeSearch){
         if (this.request){
@@ -125,7 +126,12 @@ export class SidebarComponent implements OnInit {
   
       }
       this.firstTimeSearch=true;
-    });
+      },
+      error=>{
+        this.errorMsg=error
+        alert(this.errorMsg);
+      }
+    );
 
     /*FIRST time*/
     this.findService.initFinding().subscribe(table_info => {
