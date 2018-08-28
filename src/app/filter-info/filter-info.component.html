@@ -16,11 +16,11 @@
           {{ value }}
         </span>
       </div> 
-    </div>
+    </div>    
   </div>
 
   <ng-container *ngFor="let type of this.types">
-    <div class="col-lg" *ngIf="this.hasTypeInfo[type]">
+    <div *ngIf="this.hasTypeInfo[type]">
       <div class="card">
         <h6 class="card-header">
             {{type|capitalize}} 
