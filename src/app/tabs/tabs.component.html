@@ -1,14 +1,11 @@
-<app-filter-info ></app-filter-info>
 <div>
   <span>
     <a class="button"><span (click)="toggleNav()">&#9776; Filters</span></a>
-    <!-- <a class="button" href="#connect" routerLink="connect"> Connect </a> -->
     <a class="button" href="#plot" routerLink="plot"> Plot </a>
     <a class="button" href="#table" routerLink="table"> Table </a>
-   <!-- <a class="button" href="#explore" routerLink="explore"> Explore </a>
-    < a class="button" href="#browse" routerLink="browse"> Browse </a> -->
     <br>
     <br>
+    <app-filter-info ></app-filter-info>
     <router-outlet></router-outlet>
   </span>
 </div>
