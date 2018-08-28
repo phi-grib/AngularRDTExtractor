@@ -14,7 +14,7 @@
       <th>Pharmacological action</th>
       <th>Studies per species</th>
     </tr>
-    <tr *ngFor="let row of table_info.data; let i = index" class="text-left">
+    <tr *ngFor="let row of table_info.data;" class="text-left">
       <td class="align-middle text-center" style="border-right: 1px solid lightgray">
         <img *ngIf="row.smiles==='-'" src="assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
         <div *ngIf="row.smiles!=='-'" (click)="openCustomModal(row.smiles)">
@@ -27,10 +27,16 @@
       <td class="align-middle"><pre>{{row.targetActionList}}</pre></td>
       <td class="align-middle"><pre>{{row.count}}</pre></td>
     </tr>
+    <tr *ngIf="table_info.data.length==0">
+        <td align="center" colspan="5">  
+          <img src="assets/img/empty_table.png" width="160" height="160" class="mx-auto d-block"> 
+        </td>
+    </tr>
   </table>
 
   <!--PAGINATION-->
-  <nav class="nav justify-content-center" *ngIf="table_info.num_pages > 0">
+  <!--*ngIf="table_info.num_pages > 0"-->
+  <nav class="nav justify-content-center" >
     <ul class="pagination">
       <div *ngIf=" table_info.previous_page > 0;then previous else no_previous"></div>
       <ng-template #previous>

@@ -86,12 +86,6 @@ export class SidebarComponent implements OnInit {
         this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
           (data) => {  
           this.findService.changeTable(data);
-          for (let source of this.sources){ 
-            this.categoryOptions[source]['parameters']=data['allOptions']['parameters'][source]
-            this.categoryOptions[source]['observations']=data['allOptions']['observations'][source]
-            this.categoryOptionsSelected[source]['parameters'] =  this.categories_search_form[source]['parameters']
-            this.categoryOptionsSelected[source]['observations'] =   this.categories_search_form[source]['observations']
-          }
           this.globals.showSpinner = false;
         },(error)=>{
           this.globals.errorMsg=error.message;
@@ -113,10 +107,6 @@ export class SidebarComponent implements OnInit {
         this.globals.showSpinner = true;
         this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
           (data)=> { 
-            for (let source of this.sources){ 
-              this.categoryOptions[source]['parameters']=data['allOptions']['parameters'][source]
-              this.categoryOptions[source]['observations']=data['allOptions']['observations'][source]
-            }
             this.findService.changeTable(data); 
             this.globals.showSpinner = false;
           },(error)=>{
@@ -257,13 +247,17 @@ export class SidebarComponent implements OnInit {
   }
 
   addCategory($event: any, type){
-    this.categories_search_form[this.selectedCategory][type] = $event.value;
-    this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    if ($event.value!==undefined){
+      this.categories_search_form[this.selectedCategory][type] = $event.value;
+      this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    }
   }
 
   addSearchForm($event: any, type){
-    this.search_form[type] = $event.value;
-    this.findService.changeSearchFormTable(this.search_form);
+    if ($event.value!==undefined){
+      this.search_form[type] = $event.value;
+      this.findService.changeSearchFormTable(this.search_form);
+    }
   }
 
   tof(x: any) {

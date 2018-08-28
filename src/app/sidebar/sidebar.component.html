@@ -151,7 +151,7 @@
                     <ngx-select-dropdown 
                         (change)="addCategory($event,'parameters')" 
                         [multiple]="true" 
-                        [(value)]="this.categoryOptionsSelected[selectedCategory]['parameters']" 
+                        [(value)]="this.categories_search_form[selectedCategory]['parameters']" 
                         [config]="config_select" 
                         [options]="categoryOptions[selectedCategory]['parameters']"
                         [hidden]="!hasCategory">
@@ -167,7 +167,7 @@
                     <ngx-select-dropdown 
                         (change)="addCategory($event,'observations')" 
                         [multiple]="true" 
-                        [(value)]="this.categoryOptionsSelected[selectedCategory]['observations']" 
+                        [(value)]="this.categories_search_form[selectedCategory]['observations']" 
                         [config]="config_select" 
                         [options]="categoryOptions[selectedCategory]['observations']"
                         [hidden]="!hasCategory">
