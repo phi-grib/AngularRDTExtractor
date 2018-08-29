@@ -16,7 +16,7 @@
           {{ value }}
         </span>
       </div> 
-    </div>
+    </div>    
   </div>
 
   <div *ngFor="let key of objectKeys(search_form)">
@@ -36,10 +36,10 @@
   </div>
 
   <ng-container *ngFor="let type of this.types">
-    <div class="col-lg" *ngIf="this.hasTypeInfo[type]">
+    <div *ngIf="this.hasTypeInfo[type]">
       <div class="card">
         <h6 class="card-header">
-            {{type|capitalize}} 
+            {{ type | capitalize }} 
             <button type="button" class="close" aria-label="Close" (click)="removeAll(type)">
               <span aria-hidden="true">&times;</span>
             </button>    
@@ -49,7 +49,7 @@
             <span class="badge badge-info" 
               *ngFor="let value of categories_search_form[category][type]">
               <span class="closebtn" (click)="removeOne(type,value,category)">&times;</span>
-              {{category}} | {{ value }}
+              {{ category }} | {{ value }}
             </span>
           </ng-container>
         </div> 
