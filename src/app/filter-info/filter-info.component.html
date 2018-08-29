@@ -2,7 +2,7 @@
   id="myContainer"
   *ngIf="objectKeys(search_form).length>0 || this.hasType">
   <div *ngFor="let key of objectKeys(search_form)">
-    <div class="card">
+    <div class="card" *ngIf="key!='min_exposure' && key!='max_exposure'">
       <h6 class="card-header">
           {{ key | capitalize }} 
           <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
@@ -14,6 +14,22 @@
           *ngFor="let value of search_form[key]">
           <span class="closebtn" (click)="removeOne(key,value)">&times;</span>
           {{ value }}
+        </span>
+      </div> 
+    </div>
+  </div>
+
+  <div *ngFor="let key of objectKeys(search_form)">
+    <div class="card" *ngIf="key=='min_exposure'">
+      <h6 class="card-header">
+          {{ 'Exposure period' }} 
+          <button type="button" class="close" aria-label="Close" (click)="removeEsposure()">
+            <span aria-hidden="true">&times;</span>
+          </button>    
+      </h6>
+      <div class="card-body">
+        <span class="badge badge-info">
+          {{'From '+search_form['min_exposure']+' to '+search_form['max_exposure']+' days' }}
         </span>
       </div> 
     </div>
