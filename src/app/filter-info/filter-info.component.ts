@@ -50,15 +50,8 @@ export class FilterInfoComponent implements OnInit {
     } 
     else {
       this.categories_search_form[category][key].splice(value, 1);
-     /* if (this.categories_search_form[category][key].length==0){
-        delete this.categories_search_form[category][key];
-        if (Object.keys(this.categories_search_form[category]).length==0) {
-          this.categories_search_form[category] = null;
-        }
-      }*/
       this.findService.changeCategoriesSearchForm(this.categories_search_form);
     }
-    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 
 
@@ -73,7 +66,11 @@ export class FilterInfoComponent implements OnInit {
       }
       this.findService.changeCategoriesSearchForm(this.categories_search_form);
     }
-    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
-
+  
+  removeEsposure(){
+    delete this.search_form["min_exposure"];
+    delete this.search_form["max_exposure"];
+    this.findService.changeSearchFormTable(this.search_form);
+  }
 }
