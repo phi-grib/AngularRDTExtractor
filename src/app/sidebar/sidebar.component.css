@@ -29,12 +29,17 @@
 }
 
 #filterContainer {
-    padding: 8px 8px 8px 32px;
+    padding: 8px 8px 8px 8px;
     text-decoration: none;
     font-size: 18px;
     color: #818181;
     display: block;
     transition: 0.3s;
+}
+
+#mySidebar{
+    zoom: 0.85;
+    -moz-transform: scale(0.85);
 }
 
 
