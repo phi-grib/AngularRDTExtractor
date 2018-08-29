@@ -39,7 +39,7 @@ export class MonoPlotComponent implements AfterViewInit {
     "#60686F",
     "#333C3E"
   ];
-  chartsColors: Array<Color> = [ { }];
+  chartsColors: Array<Color> = [ { } ];
   
   charts = [
     {id: 'pie', name: "Pie"},
