@@ -1,11 +1,13 @@
-<div>
+<div class="row" id="myTabs">
   <span>
     <a class="button"><span (click)="toggleNav()">&#9776; Filters</span></a>
-    <a class="button" href="#plot" routerLink="plot"> Plot </a>
+    <a class="button" href="#plot" routerLink="plot"> Overview </a>
     <a class="button" href="#table" routerLink="table"> Table </a>
   </span>
-    <br>
-    <br>
-    <app-filter-info ></app-filter-info>
-    <router-outlet></router-outlet>
+</div>
+<div>
+  <br>
+  <br>
+  <app-filter-info ></app-filter-info>
+  <router-outlet></router-outlet>
 </div>

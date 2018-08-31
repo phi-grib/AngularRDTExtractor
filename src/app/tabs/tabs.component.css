@@ -25,3 +25,12 @@ p {
     border-style: solid;
     border-color: red;
 }
+
+#myTabs {
+    z-index: 9999;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+}
