@@ -114,7 +114,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
         backgroundColor: this.colors.slice(0,2)
       }];
     a.labels =  ['Selected', 'Not Selected']
-    a.chartType = 'doughnut'
+    a.chartType = 'pie'
     a.title= "Structures"
     this.plots['Structures']=a
 
@@ -127,7 +127,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
         backgroundColor: this.colors.slice(0,2)
       }];
     a.labels = ['Selected', 'Not Selected']
-    a.chartType = 'doughnut'
+    a.chartType = 'pie'
     a.title= "Studies"
     this.plots['Studies']=a
 
@@ -140,7 +140,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
         backgroundColor: this.colors.slice(0,2)
       }];
     a.labels = ['Selected', 'Not Selected']
-    a.chartType = 'doughnut'
+    a.chartType = 'pie'
     a.title= "Findings"
     this.plots['Findings']=a
 
@@ -153,7 +153,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
         backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['normalised_species'][1].length)
       }];
     a.labels = this.plot_info['plotInfo']['normalised_species'][0]
-    a.chartType = 'doughnut'
+    a.chartType = 'pie'
     a.title= "Species"
     this.plots['Species']=a
     
@@ -167,7 +167,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
       }];
     a.labels = this.plot_info['plotInfo']['relevance'][0]
     a.title= "Relevance"
-    a.chartType = 'doughnut'
+    a.chartType = 'pie'
     this.plots['Treatment']=a
 
     var a = new Plot();
@@ -180,7 +180,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
       }];
     a.labels = this.plot_info['plotInfo']['source'][0]
     a.title= "Source"
-    a.chartType = 'doughnut'
+    a.chartType = 'pie'
     this.plots['Source']=a
   }
 
