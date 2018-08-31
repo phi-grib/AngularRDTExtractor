@@ -66,22 +66,6 @@ export class MonoPlotComponent implements AfterViewInit {
         text: this.title,
         fontSize: 20
       },
-      pieceLabel: {
-        render: function (args) {
-          const label = args.label,
-                value = args.value;
-          return label + ': ' + value;
-        },
-        fontColor: '#000',
-        position: 'outside',
-        showZero:true,
-        legend: {
-          display: false,
-          labels: {
-            fontColor: 'rgb(255, 99, 132)'
-          }
-        }
-      },
       legend: {
         position: 'right',
         usePointStyle: true
