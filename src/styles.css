@@ -10,18 +10,6 @@ body {
   font-size: 80%;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: white;
-  color: gray;
-  text-align: center;
-  /* Set the fixed height of the footer here */
-  height: 75px;
-}
-
 .top-margin {
   margin-top: 15px;
 }
