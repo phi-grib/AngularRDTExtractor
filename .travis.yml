@@ -18,6 +18,8 @@ script:
   - ls -l
   #- ng test
 after_success:
+  - ls -l
+  - pwd
   - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
   - ls -l
   - pwd
