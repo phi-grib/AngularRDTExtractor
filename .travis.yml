@@ -19,10 +19,15 @@ script:
   #- ng test
 after_success:
   - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
+  - ls -l
   - git clone git://${GH_REPO}
+  - ls -l
   - mv -f ${FILES} ${REPO}
+  - ls -l
   - cd ${REPO}
+  - ls -l
   - git remote
+  - ls -l
   - git config user.email ${EMAIL}
   - git config user.name ${USER}
   - git add ${FILES}
