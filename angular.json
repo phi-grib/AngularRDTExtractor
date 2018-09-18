@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css",
               "node_modules/ngx-select-dropdown/dist/assets/style.css",
               "src/styles.css",
               "node_modules/ion-rangeslider/css/ion.rangeSlider.css",
@@ -33,7 +33,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/jquery/dist/jquery.min.js", 
-              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js",        
               "node_modules/ion-rangeslider/js/ion.rangeSlider.min.js",
               "node_modules/smiles-drawer/dist/smiles-drawer.min.js",
               "node_modules/chart.js/dist/Chart.min.js"
