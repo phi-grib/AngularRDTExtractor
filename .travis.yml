@@ -20,14 +20,19 @@ script:
 after_success:
   - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
   - ls -l
+  - pwd
   - git clone git://${GH_REPO}
   - ls -l
+  - pwd
   - mv -f ${FILES} ${REPO}
   - ls -l
+  - pwd
   - cd ${REPO}
   - ls -l
+  - pwd
   - git remote
   - ls -l
+  - pwd
   - git config user.email ${EMAIL}
   - git config user.name ${USER}
   - git add ${FILES}
