@@ -17,26 +17,14 @@ script:
   - ng build --prod --aot  --output-hashing none
   #- ng test
 after_success:
-  - ls -l
-  - pwd
-  - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
-  - ls -l
-  - pwd
+  
   - git clone https://github.com/phi-grib/DjangoAPI.git
-  - ls -l
-  - pwd
-  - rm -rfv ${REPO}/static
-  - mv -f ${FILES} ${REPO}/static
-  - ls -l
-  - pwd
-  - cd ${REPO}
-  - ls -l
-  - pwd
+  - rm -rfv ./DjangoAPI/static/*
+  - mv -f ${FILES} ./DjangoAPI/static
+  - cd ./DjangoAPI
   - git remote
-  - ls -l
-  - pwd
   - git config user.email ${EMAIL}
   - git config user.name ${USER}
   - git add ./static
-  - git commit -m ${MESSAGE}
+  - git commit -m 'Build Process' 
   #- git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" master > /dev/null 2>&1
