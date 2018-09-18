@@ -6,9 +6,9 @@ env:
   - USER="IgnacioPasamontes"
   - EMAIL="ignacio.pasamontes@upf.edu"
   - ORG = "phi-grib"
-  - REPO="DjangoAPI/static"
+  - REPO="DjangoAPI"
   - FILES="./dist/frontend"
-  - GH_REPO="github.com/${USER}/${REPO}.git"
+  - GH_REPO="github.com/${ORG}/${REPO}.git"
   #- secure: "put travis gem output here => http://docs.travis-ci.com/user/encryption-keys/"
 before_script:
   - npm install -g @angular/cli
