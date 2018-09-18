@@ -6,4 +6,5 @@ before_script:
 
 script:
   - ng build --prod --aot
+  - ls -l
   #- ng test
