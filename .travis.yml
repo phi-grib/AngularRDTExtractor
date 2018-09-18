@@ -25,6 +25,7 @@ after_success:
   - git clone https://github.com/phi-grib/DjangoAPI.git
   - ls -l
   - pwd
+  - rm -rfv ${REPO}/static
   - mv -f ${FILES} ${REPO}/static
   - ls -l
   - pwd
