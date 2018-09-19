@@ -20,11 +20,22 @@ after_success:
   
   - git clone https://github.com/phi-grib/DjangoAPI.git
   - rm -rfv ./DjangoAPI/static/*
-  - mv -f ${FILES} ./DjangoAPI/static
-  - cd ./DjangoAPI
+  - cd DjangoAPI/
+  - git rm static/*
   - git remote
   - git config user.email ${EMAIL}
   - git config user.name ${USER}
+  - git commit -m 'BUILD:Remove statics' 
+  - git push
+  - mkdir static
+
+  - mv -f ../dist/frontend/* ./static
   - git add ./static
-  - git commit -m 'Build Process' 
+  - mv -f ../dist/frontend/* ./static/*
+  - git add static/*
+  - git remote
+  - git config user.email ${EMAIL}
+  - git config user.name ${USER}
+  - git commit -m ''BUILD:Add statics' 
+  - git push
   #- git push "https://${TRAVIS_SECURE_TOKEN_NAME}@${GH_REPO}" master > /dev/null 2>&1
