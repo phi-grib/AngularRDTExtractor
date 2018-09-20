@@ -9,6 +9,8 @@ env:
   - REPO="DjangoAPI"
   - FILES="./dist/frontend/*"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
+  - secure: "XV9IwdpAxfAg0Tj/TBTOb0XrM1U+jCSOa3wgW7iWYbqRWxQJRNi/FWI/Ne872A7jcyUGfgtL7wn2PmVSqNGsscK7EAIaqFDdL1fJX+vr1hlM3oLC/t9vnU/A2K1VD3vjGEFxkTbnB8J7MlnCPWz4++yU3ef9w93hQByVSLYNSpdcZJIw4/0+yStIY8kwY5nOcU0pEiVgZI4Kf6V8AU24NH98ycXxrvBFHJp8RaWf3psTK/dFt10NxB7DVds9yjN0n/+o1Rc1u/2g6xDFsU3sGaew7RK0Rkt95MId/+h9hdl1rYXEON4dJ5eSt/fDJNuNNQvGn+XIgWQ87+dIdYTamFK96F8oeGqbD0qnNpL0zoOm7imquqJui5lK9eeV9gt9hidS8eZUpse27+9BiKWTiqDWKK49Oh/3vCpx8XwXkXFUanG07VTvDLtlvOPj7GvMIHLDw+t62mCQGYu0FfYkGcuPuI18+Zc2z9AQt7jbhP2c8bJ8UlBiyZIZVmOqLTrux42N7SAcVDDHqxTLn6kJsZQkgTlXUazIeMovg8a4/qPcJhBOVlGHOEEEXJf/ER4BFkPDBdL+n7uKll1ZEECLh/04RT5P3Sfx+WwIMMMbaqsf98XDFruGgjpNAr74yDF+afzi/jyHjCv57x2qjkxAqASdGkZ5HNsuWcQxXMQiutk="
+
 
 before_script:
   - npm install -g @angular/cli
