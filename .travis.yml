@@ -1,6 +1,6 @@
-language:  node_js
+language: node_js
 node_js:
-  - "8"
+- '8'
 env:
   global:
   - USER="IgnacioPasamontes"
@@ -9,28 +9,23 @@ env:
   - REPO="DjangoAPI"
   - FILES="./dist/frontend/*"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
-  - secure: "XV9IwdpAxfAg0Tj/TBTOb0XrM1U+jCSOa3wgW7iWYbqRWxQJRNi/FWI/Ne872A7jcyUGfgtL7wn2PmVSqNGsscK7EAIaqFDdL1fJX+vr1hlM3oLC/t9vnU/A2K1VD3vjGEFxkTbnB8J7MlnCPWz4++yU3ef9w93hQByVSLYNSpdcZJIw4/0+yStIY8kwY5nOcU0pEiVgZI4Kf6V8AU24NH98ycXxrvBFHJp8RaWf3psTK/dFt10NxB7DVds9yjN0n/+o1Rc1u/2g6xDFsU3sGaew7RK0Rkt95MId/+h9hdl1rYXEON4dJ5eSt/fDJNuNNQvGn+XIgWQ87+dIdYTamFK96F8oeGqbD0qnNpL0zoOm7imquqJui5lK9eeV9gt9hidS8eZUpse27+9BiKWTiqDWKK49Oh/3vCpx8XwXkXFUanG07VTvDLtlvOPj7GvMIHLDw+t62mCQGYu0FfYkGcuPuI18+Zc2z9AQt7jbhP2c8bJ8UlBiyZIZVmOqLTrux42N7SAcVDDHqxTLn6kJsZQkgTlXUazIeMovg8a4/qPcJhBOVlGHOEEEXJf/ER4BFkPDBdL+n7uKll1ZEECLh/04RT5P3Sfx+WwIMMMbaqsf98XDFruGgjpNAr74yDF+afzi/jyHjCv57x2qjkxAqASdGkZ5HNsuWcQxXMQiutk="
-
+  - secure: XV9IwdpAxfAg0Tj/TBTOb0XrM1U+jCSOa3wgW7iWYbqRWxQJRNi/FWI/Ne872A7jcyUGfgtL7wn2PmVSqNGsscK7EAIaqFDdL1fJX+vr1hlM3oLC/t9vnU/A2K1VD3vjGEFxkTbnB8J7MlnCPWz4++yU3ef9w93hQByVSLYNSpdcZJIw4/0+yStIY8kwY5nOcU0pEiVgZI4Kf6V8AU24NH98ycXxrvBFHJp8RaWf3psTK/dFt10NxB7DVds9yjN0n/+o1Rc1u/2g6xDFsU3sGaew7RK0Rkt95MId/+h9hdl1rYXEON4dJ5eSt/fDJNuNNQvGn+XIgWQ87+dIdYTamFK96F8oeGqbD0qnNpL0zoOm7imquqJui5lK9eeV9gt9hidS8eZUpse27+9BiKWTiqDWKK49Oh/3vCpx8XwXkXFUanG07VTvDLtlvOPj7GvMIHLDw+t62mCQGYu0FfYkGcuPuI18+Zc2z9AQt7jbhP2c8bJ8UlBiyZIZVmOqLTrux42N7SAcVDDHqxTLn6kJsZQkgTlXUazIeMovg8a4/qPcJhBOVlGHOEEEXJf/ER4BFkPDBdL+n7uKll1ZEECLh/04RT5P3Sfx+WwIMMMbaqsf98XDFruGgjpNAr74yDF+afzi/jyHjCv57x2qjkxAqASdGkZ5HNsuWcQxXMQiutk=
+  - secure: Y/gUUcjmLgMkygly/+fn6XdP0j2i+B8XQuTui+bqqQQPJQAjaGRi3P4HcFv1y7MUlS+k3DErnWv4LxCri1GJkn8eKU9gY1x2wQh7Qdd3aGDxT+OsuVt09QggCUuYyrdVRZY7C16J23Tyn1mEjhWbm1rnTPfCoMpbLXn9zQxw4EUIAS3uqelzOVawbpHROAJu+81aJYF9qtVFCNzp6Ma7nR8+QKN+qsV4tCPlvT2x5i+I5f8ZLn498iP4qBZpYDvHg3IpLC3aDIJGshJlTt4foavJ/krk6kGVM9Wjce3P++U3+cTYv8ELY0t8GLRtzSBqgj4wklKFcqZO5AGWQ75+QmwUHXPt0lumoA11E0iTKaKdrwh1nuG9sNoMR46VBqAEi30t6P+OXRKVv+zMba4CMs2rAS5J2MEnNQ1RpoOSH/Kx5trr7gD/xkqXXjQVJNoMECyeMY07D+Y7d7M7ub3AywUZtNDreOrOclQERAYjE0fGPji4F2xGmiPJ3IejzWR/rpgGLJLNTUU3RUbm7mVb/0Cdum+11Qr+XXKjf0vOdZSvs/IXCMwtiPU1lDd8TaQSPiaNY9k0/aUUnpzUPHAQUaMWpOVWJD7CJhQ0846mo3qI2kpAf6xeLsHaec7UF6m/C990+tOWt9zcTqj1Tok/BqIalnEupI2DIZKqke2fLvI=
 before_script:
-  - npm install -g @angular/cli
-
+- npm install -g @angular/cli
 script:
-  - ng build --prod --aot  --output-hashing none
-  #- ng test
+- ng build --prod --aot  --output-hashing none
 after_success:
-  
-  #REMOVE static
-
-  - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
-  - echo ${MESSAGE}
-  - git clone https://${GH_REPO}
-  - pwd
-  - ls -l
-  - rm -rfv ./DjangoAPI/static/*
-  - cd DjangoAPI/
-  - git rm static/*
-  - git remote
-  - git config user.email ${EMAIL}
-  - git config user.name ${USER}
-  - git commit -m 'BUILD:Remove statics' 
-  - git push
+- MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
+- echo ${MESSAGE}
+- git clone https://${GH_REPO}
+- pwd
+- ls -l
+- rm -rfv ./DjangoAPI/static/*
+- cd DjangoAPI/
+- git rm static/*
+- git remote
+- git config user.email ${EMAIL}
+- git config user.name ${USER}
+- git commit -m 'BUILD:Remove statics'
+- git push
