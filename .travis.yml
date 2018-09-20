@@ -23,7 +23,7 @@ after_success:
 
   - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
   - echo ${MESSAGE}
-  - git clone git://${GH_REPO}
+  - git clone https://${GH_REPO}
   - pwd
   - ls -l
   - rm -rfv ./DjangoAPI/static/*
@@ -33,4 +33,4 @@ after_success:
   - git config user.email ${EMAIL}
   - git config user.name ${USER}
   - git commit -m 'BUILD:Remove statics' 
-  - git push "https://O5gcBdsDWU7efkZuNlnJZA@$github.com/phi-grib/DjangoAPI.git" master > /dev/null 2>&1
+  - git push
