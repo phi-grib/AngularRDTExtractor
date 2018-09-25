@@ -24,8 +24,8 @@ after_success:
 - ls -l
 - rm -rfv ./DjangoAPI/static/*
 - cd DjangoAPI/
-- git rm static/*
 - git remote
+- git rm static/*
 - git config user.email ignacio.pasamontes@upf.edu
 - git config user.name "IgnacioPasamontes"
 - git commit -m 'BUILD:Remove statics'
@@ -35,8 +35,8 @@ after_success:
 #ADD static
 - mkdir static
 - mv -f ../dist/frontend/* ./static
-- git add static/*
 - git remote
+- git add static/*
 - git config user.email ignacio.pasamontes@upf.edu
 - git config user.name "IgnacioPasamontes"
 - git commit -m 'BUILD:ADD statics'
