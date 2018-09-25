@@ -29,7 +29,7 @@ after_success:
 - git config user.name IgnacioPasamontes
 - git rm static/*
 - git commit -m 'BUILD:Remove statics'
-- git push "https://${SOMEVAR}@${GH_REPO}"
+- git push "https://travis@${GH_REPO}"
 
 
 #ADD static
@@ -40,4 +40,4 @@ after_success:
 - git config user.name IgnacioPasamontes
 - git add static/*
 - git commit -m 'BUILD:ADD statics'
-- git push "https://${SOMEVAR}@${GH_REPO}"
+- git push "https://travis@${GH_REPO}"
