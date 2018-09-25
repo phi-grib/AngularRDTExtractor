@@ -18,8 +18,7 @@ script:
 - ng build --prod --aot  --output-hashing none
 after_success:
 - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
-- echo ${MESSAGE}
-- git clone https:/github.com/phi-grib/DjangoAPI.git
+- git clone https://github.com/phi-grib/DjangoAPI.git
 - pwd
 - ls -l
 - rm -rfv ./DjangoAPI/static/*
