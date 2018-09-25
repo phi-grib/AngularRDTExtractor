@@ -3,12 +3,6 @@ node_js:
 - '8'
 env:
   global:
-  - USER="IgnacioPasamontes"
-  - EMAIL="ignacio.pasamontes@upf.edu"
-  - ORG = "phi-grib"
-  - REPO="DjangoAPI"
-  - FILES="./dist/frontend/*"
-  - GH_REPO="github.com/${ORG}/${REPO}.git"
   - secure: "cS4EemspVE4RBQaeTUEdwgCtpZypiglwmUTJQdcn/fMeYyBWZlayJyl0VihrPoTbXlQRd/Et+u97bpD41GpWdWPy9qCjyhUN3JHTYWrfHa5UWGEk2eIKkeAcaV5RmaPsbgJUPkrCZPfN305hId4V6e1OzXC6dRvktyUlxAotT/fCdMhE0PlXXzmTSFwea/Ig2Cvnm9pVdO4rUebCJKpPjwfUpi8BUBOoTxJBmlmUrymc4SyvdqxO2r4SKB0AxRDuv1sMAMir3BzsxjIJFwXRx99jNW77igJFvrFKwzk6yYq6l5R6t8ExcfzudHY8GS4I+3Ucl3oQm4XjcfaDmoqJYXsQZI+FlQxiK2n7rBLwF71gIxeoZqzdCM2zV7VdBzl5s0/gIAZj1sRCIZfHOzONT99tvNMQMM2qOnnYOp7QMC3fxmqL+1FX11Vn1Fu1CnW6AeLT0h3R+wjx1bxQc64sKTsZLDXRgtVYrCZMWAxLPqIE+Nw/PV1MbATn8sohMiPl/0J3x2Bs+kwyR/jp7pPvbN+DmhZzO6+JpnI+HRavwIGq/s6jnqHgILHBYrPHesRSae0iq3yma6EkhMharHSfTHqQcXbUuIes5eZlia+6kFUvMJiEsTuHDa6D/fM4qRA8SZLQxjshjAkheF5Lxq9RHybteClbuHKbGthGa3hSLiE="
 
  
