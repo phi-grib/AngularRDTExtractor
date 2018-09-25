@@ -9,7 +9,7 @@ env:
   - REPO="DjangoAPI"
   #- FILES="./dist/frontend/*"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
-  - secure: "kQGk+VUp6a9hGH+NmeZqesNCpuZ/EzB88//6K2wm3bHlipqnqVVDF5BSmIx175+dKgYcVhVqlayP4I6v8f2y3j6kCDxIN48S8f0ekxjcbmJWUuvODMsbp6TxxAwx5rgvNCA1x8otAlTyPuRi6sFM17Gri5GR0L/xWZZZhTIWCngFrpfDFNw2yb007fqsaP4u99PiOxvCOhoeMkq4vvNkMIQ3W8kfLjmwNv0vV5HftrdoIeCMzWnSv8T9MrGSq6a6XwwNQ+Kb2vCRCE2+ksz6QteqWQnsZYxF8aGhoAFP4fXfI8poUjCDhyfDf8f+rPEmI3k1+CUKX/0blUUxhsGw8bHpkGL9QipzgstG07V2QJp3h0OEbsq7KS+hbGZVrRnRGpWHgrjND43lQrJxIb4Szw/SBcs66BaVk9D3TIbGhW+ibN4F+vjqFGIm1FhmhiiVHLxW9v8GbZJt36xeRCu6Daul5f8aHf2wihAZVSvKoSCu4Uz69JxQYGi7TNzyEWZgLR4SLzM/UNx+5Aj/2dIEQ/NE7NN5x4MLDbxjJE73/U7c+GEfl+svvu7lYN7Cv2NFyh+7MaV35McdMtHfHrbMVph1Urm4GqJryYadAUdrIkonzVYH+PeS44LGT/D9ls5IWIjXaxItEkz56x09LFrF+4SMxvn72vOl6twTYLvN6VQ="
+  - secure: "QBFkf9BP3xqCF06iR/U6wsvacc3+qr9BH6sKmxlg9jbo5fjO7f8TDYSFdT63ICJfUq+RaCcPYOyveT2LJRV4EDSgaRiolluUTHOblZ6AWmN1i+XCnKn0ZN9hTRttsUZAezyIq+RtwbzRk6p22P7e3/pBpUnACxRQ5LUlcD6ZcQJPZXRhOTK1AYCSuE30N5erd1kzW3eKy5SABXYG8fQE8hBqzjxgTj6xkJ8RM7vWaXi7k0JyKmq+XJ8KBk7EE40BTD6vG8GQgZQQnqQahxK5Hb35CML46glKuPuG1bNZxH920TOXSJ6D6P0n7s4YYT9ghBoyhrfK1yT1obatNLSGwP1B9WD/NXMqTMIo+fNqXmOhnI6joRJkxVBVVbUu/rBTp2xR4LhCJ6S/68LiIiFqBcAkEbvQen3CMeA+4WharN6LQItnvzLJ6JNEOWTK2T2zhiAzUpugZzj9iz3HSqHjTFRKsZcHUCLkki1/EeNSLzZ+5vHjjSjwHfstY1d5hfBGukjWChEJTGh7dvWUMky0NU1zM1F3SDP+434kE3xdDQYAlQE3cnL4TY/55zr+s5PZCEpz7YbrggI0DFSEoOurWIfXofaGhJXz6SjlM6Qggf6NsYsSDt8omAFS/7Q5QnbVNLCLWLzVGPAbKDZaWO9KDC3h8jDU1Pda+4dQXQU7dog="
 
  
 efore_script:
@@ -25,10 +25,10 @@ after_success:
 - cd DjangoAPI/
 - git remote
 - git config user.email ignacio.pasamontes@upf.edu
-- git config user.name IgnacioPasamontes
+- git config user.name "IgnacioPasamontes"
 - git rm static/*
 - git commit -m 'BUILD:Remove statics'
-- git push "https://travis@${GH_REPO}"
+- git push "https://Travis@${GH_REPO}"
 
 
 #ADD static
@@ -36,7 +36,7 @@ after_success:
 - mv -f ../dist/frontend/* ./static
 - git remote
 - git config user.email ignacio.pasamontes@upf.edu
-- git config user.name IgnacioPasamontes
+- git config user.name "IgnacioPasamontes"
 - git add static/*
 - git commit -m 'BUILD:ADD statics'
-- git push "https://travis@${GH_REPO}"
+- git push "https://Travis@${GH_REPO}"
