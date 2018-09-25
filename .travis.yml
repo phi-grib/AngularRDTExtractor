@@ -3,16 +3,11 @@ node_js:
 - '8'
 env:
   global:
-  #- USER="IgnacioPasamontes"
-  #- EMAIL="ignacio.pasamontes@upf.edu"
   - ORG="phi-grib"
   - REPO="DjangoAPI"
-  #- FILES="./dist/frontend/*"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
-  - secure: "QBFkf9BP3xqCF06iR/U6wsvacc3+qr9BH6sKmxlg9jbo5fjO7f8TDYSFdT63ICJfUq+RaCcPYOyveT2LJRV4EDSgaRiolluUTHOblZ6AWmN1i+XCnKn0ZN9hTRttsUZAezyIq+RtwbzRk6p22P7e3/pBpUnACxRQ5LUlcD6ZcQJPZXRhOTK1AYCSuE30N5erd1kzW3eKy5SABXYG8fQE8hBqzjxgTj6xkJ8RM7vWaXi7k0JyKmq+XJ8KBk7EE40BTD6vG8GQgZQQnqQahxK5Hb35CML46glKuPuG1bNZxH920TOXSJ6D6P0n7s4YYT9ghBoyhrfK1yT1obatNLSGwP1B9WD/NXMqTMIo+fNqXmOhnI6joRJkxVBVVbUu/rBTp2xR4LhCJ6S/68LiIiFqBcAkEbvQen3CMeA+4WharN6LQItnvzLJ6JNEOWTK2T2zhiAzUpugZzj9iz3HSqHjTFRKsZcHUCLkki1/EeNSLzZ+5vHjjSjwHfstY1d5hfBGukjWChEJTGh7dvWUMky0NU1zM1F3SDP+434kE3xdDQYAlQE3cnL4TY/55zr+s5PZCEpz7YbrggI0DFSEoOurWIfXofaGhJXz6SjlM6Qggf6NsYsSDt8omAFS/7Q5QnbVNLCLWLzVGPAbKDZaWO9KDC3h8jDU1Pda+4dQXQU7dog="
-
- 
-efore_script:
+  - secure: GgwnfGx918B21//WI9cY7BDhv75EP2yfy/4URRTAUM90R/91JkBTFk7ogH+iT/lgvKXN+VaIOGKwarHJgc/HJyf1QiOdRgqpUmncs1KRiZ3loYEO6PwuxOvbVxOnMRxNTPjphF7sLK7MIzLtrQ84pAbyAeRTB9jg07iqA2ZCFzm0kRLTXD0qYui/XBcQ7ZdqARa5kAKDAtzYEeKStGkg6Iqje7MaqPVPd9cgml2r9Ml+UWQ0mpFO5oZgAgEFm5+8wF2ECxVfBcKPOCWgK8s/83qE01mWy9jzkdcP+rWvYKNZ1IEzlvX0aZlLJuzHKM5MHM1B7110O2jxeEDCjD7CGxH5el31oO9QQyekc9NUB9hNe6Oy6fUuywAnC02mFmn7iyfiYonE0DztPtlxEmvzoQV676/tOnT2XXcFWofWCgynN4K0baXtdOVmJUdhEkEy2tDS1042pLq5PWN/+g930Eo30ujrpH1khfOH1StTBf/Ame/O3KnCwNzMlATjHmvgRIpUgBNR0ocF/+LstXc10KoUbvCGrUxlCuF2ZWhGepdv6Jylypi10fefJCjo05Mk5lMhJFOE82QRhY8ZWhdUyaiIXKoDftZoBqFx7Y0QlvC7URhvc5i2571Yi+yPWgWLkUluliT0KAYiixtTnwlBl7j3DlgFQZM4Zx5JX2S3qRU=
+before_script:
 - npm install -g @angular/cli
 script:
 - ng build --prod --aot  --output-hashing none
@@ -28,10 +23,7 @@ after_success:
 - git config user.name "IgnacioPasamontes"
 - git rm static/*
 - git commit -m 'BUILD:Remove statics'
-- git push "https://Travis@${GH_REPO}"
-
-
-#ADD static
+- git push "https://${SOMEVAR}@${GH_REPO}"
 - mkdir static
 - mv -f ../dist/frontend/* ./static
 - git remote
@@ -39,4 +31,4 @@ after_success:
 - git config user.name "IgnacioPasamontes"
 - git add static/*
 - git commit -m 'BUILD:ADD statics'
-- git push "https://Travis@${GH_REPO}"
+- git push "https://${SOMEVAR}@${GH_REPO}"
