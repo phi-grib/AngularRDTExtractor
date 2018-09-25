@@ -25,7 +25,7 @@ after_success:
 - cd DjangoAPI/
 - git rm static/*
 - git remote
-- git config user.email ignacio.pasamontes@upf.edu
-- git config user.name "IgnacioPasamontes"
-- git commit -m 'BUILD:Remove statics'
+#- git config user.email ignacio.pasamontes@upf.edu
+#- git config user.name "IgnacioPasamontes"
+#- git commit -m 'BUILD:Remove statics'
 #- git push "https://${SOMEVAR}@${GH_REPO}" master > /dev/null 2>&1Travis token name
