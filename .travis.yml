@@ -5,7 +5,7 @@ env:
   global:
   #- USER="IgnacioPasamontes"
   #- EMAIL="ignacio.pasamontes@upf.edu"
-  - ORG = "phi-grib"
+  - ORG="phi-grib"
   - REPO="DjangoAPI"
   #- FILES="./dist/frontend/*"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
@@ -30,4 +30,4 @@ after_success:
 - git config user.name "IgnacioPasamontes"
 - git commit -m 'BUILD:Remove statics'
 - echo ${GH_REPO}
-- git push "https://${SOMEVAR}@${GH_REPO}" master
+- git push "https://${SOMEVAR}@${GH_REPO}" master > /dev/null 2>&1 
