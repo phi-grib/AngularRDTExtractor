@@ -40,4 +40,4 @@ after_success:
 - git config user.email ignacio.pasamontes@upf.edu
 - git config user.name "IgnacioPasamontes"
 - git commit -m 'BUILD:ADD statics'
-- git push "https://${SOMEVAR}@${GH_REPO}"
+- git push "https://Travis@${GH_REPO}"
