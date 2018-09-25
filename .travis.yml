@@ -22,5 +22,5 @@ after_success:
 - git config user.email ignacio.pasamontes@upf.edu
 - git config user.name "IgnacioPasamontes"
 - git commit -m 'BUILD:Remove statics'
-- echo ${SOMEVAR}${GH_REPO}
+- echo $SOMEVAR
 - git push "https://${SOMEVAR}${GH_REPO}" master
