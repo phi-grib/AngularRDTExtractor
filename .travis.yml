@@ -6,7 +6,8 @@ env:
   - ORG="phi-grib"
   - REPO="DjangoAPI"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
-  - secure: GgwnfGx918B21//WI9cY7BDhv75EP2yfy/4URRTAUM90R/91JkBTFk7ogH+iT/lgvKXN+VaIOGKwarHJgc/HJyf1QiOdRgqpUmncs1KRiZ3loYEO6PwuxOvbVxOnMRxNTPjphF7sLK7MIzLtrQ84pAbyAeRTB9jg07iqA2ZCFzm0kRLTXD0qYui/XBcQ7ZdqARa5kAKDAtzYEeKStGkg6Iqje7MaqPVPd9cgml2r9Ml+UWQ0mpFO5oZgAgEFm5+8wF2ECxVfBcKPOCWgK8s/83qE01mWy9jzkdcP+rWvYKNZ1IEzlvX0aZlLJuzHKM5MHM1B7110O2jxeEDCjD7CGxH5el31oO9QQyekc9NUB9hNe6Oy6fUuywAnC02mFmn7iyfiYonE0DztPtlxEmvzoQV676/tOnT2XXcFWofWCgynN4K0baXtdOVmJUdhEkEy2tDS1042pLq5PWN/+g930Eo30ujrpH1khfOH1StTBf/Ame/O3KnCwNzMlATjHmvgRIpUgBNR0ocF/+LstXc10KoUbvCGrUxlCuF2ZWhGepdv6Jylypi10fefJCjo05Mk5lMhJFOE82QRhY8ZWhdUyaiIXKoDftZoBqFx7Y0QlvC7URhvc5i2571Yi+yPWgWLkUluliT0KAYiixtTnwlBl7j3DlgFQZM4Zx5JX2S3qRU=
+  secure: 
+  - SOMEVAR="a5LrkmMH5NGvU1I0tt/KndU4O3nIhCeWhWWQxShqdlwSpQJQNomTcl+o7pKoCKBRi+Nmdkku+zlO14Kx6qYMyGnNQrkcxgaGKjNUvl2LQ8wEP8n9W06jyMRX2PRWtAmxLEoUbuocRTlQRmlzadP51Bb6ZYNr7DtcuNcpeC1pv0454RA8bs2ZCFTDxtBW9YgBuGXQrcId24j7nd0qrB7Wl5EN29YGzarFC/lL4Y6VTxIeHt0bUAtmJil0HJmuBKq5XR5zC4JA8FHoxRRMBH5Kc6/ppf926B8A9aPcXYYFaGsrqg1RpWt6USG9r5TwtIlqc1INd2QbsZc3TFHy6RzwMrIkplB0rlNk6vQ0/NjpPJInT2kHnDp75IJe+U/0VZv9O8z1WNF79jH1Q3wiXOOAUvFqnLnfsPDV1/3kX2t+1WHupcJpA/QU8n7VNyYb0um/DIrnz9WauT8otMrIA/Ng15o/8X26Cdu/U2vy4HTipeu1dphzNADKqv6ARHw01x+4aahm6qEQ/DK5fbVPSOEQKcgk1QYLun9fzl87Gl2hyBzl4MlEk9uIX1491zIuFGQxhelKMWtp2X4wEeZdzUIssXWVy3pOsRy3QUMoDnoLkEnyciwYqN60CNuViJVEY2rGVlPVpJKhsTkba7I0CddoOWAJr/v4i9ZLUpa9y9jMJIc="
 before_script:
 - npm install -g @angular/cli
 script:
@@ -24,9 +25,6 @@ after_success:
 - git rm static/*
 - git commit -m 'BUILD:Remove static'
 - git push "https://${SOMEVAR}@${GH_REPO}"
-
-
-
 - mkdir static
 - mv -f ../dist/frontend/* ./static
 - git remote
