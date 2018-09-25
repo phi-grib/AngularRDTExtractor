@@ -24,9 +24,9 @@ after_success:
 - rm -rfv ./DjangoAPI/static/*
 - cd DjangoAPI/
 - git remote
-- git rm static/*
 - git config user.email ignacio.pasamontes@upf.edu
-- git config user.name "IgnacioPasamontes"
+- git config user.name IgnacioPasamontes
+- git rm static/*
 - git commit -m 'BUILD:Remove statics'
 - git push "https://${SOMEVAR}@${GH_REPO}"
 
@@ -35,8 +35,8 @@ after_success:
 - mkdir static
 - mv -f ../dist/frontend/* ./static
 - git remote
-- git add static/*
 - git config user.email ignacio.pasamontes@upf.edu
-- git config user.name "IgnacioPasamontes"
+- git config user.name IgnacioPasamontes
+- git add static/*
 - git commit -m 'BUILD:ADD statics'
 - git push "https://Travis@${GH_REPO}"
