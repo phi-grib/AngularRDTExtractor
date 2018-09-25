@@ -22,7 +22,7 @@ after_success:
 - git config user.email ignacio.pasamontes@upf.edu
 - git config user.name IgnacioPasamontes
 - git rm static/*
-- git commit -m 'BUILD:Remove statics'
+- git commit -m 'BUILD:Remove static'
 - git push "https://${SOMEVAR}@${GH_REPO}"
 
 
@@ -33,5 +33,5 @@ after_success:
 - git config user.email ignacio.pasamontes@upf.edu
 - git config user.name IgnacioPasamontes
 - git add static/*
-- git commit -m 'BUILD:ADD statics'
+- git commit -m 'BUILD:ADD static'
 - git push "https://${SOMEVAR}@${GH_REPO}"
