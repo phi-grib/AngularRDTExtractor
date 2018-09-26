@@ -23,7 +23,7 @@ after_success:
 - git config user.name IgnacioPasamontes
 - git rm static/*
 - git commit -m 'BUILD:Remove static'
-- git push "https://SOMEVAR@${GH_REPO}"
+- git push "https://${SOMEVAR}@${GH_REPO}"
 - mkdir static
 - mv -f ../dist/frontend/* ./static
 - git remote
@@ -31,4 +31,4 @@ after_success:
 - git config user.name IgnacioPasamontes
 - git add static/*
 - git commit -m 'BUILD:ADD static'
-- git push "https://SOMEVAR@${GH_REPO}"
+- git push "https://${SOMEVAR}@${GH_REPO}"
