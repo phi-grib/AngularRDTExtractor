@@ -7,8 +7,8 @@ env:
     - ORG="phi-grib"
     - REPO="DjangoAPI"
     - GH_REPO="github.com/${ORG}/${REPO}.git"
-    - GH_EMAIL="ignacio.pasamontes@upf.edu"
-    - GH_FULL_NAME="Ignacio Pasamontes"
+    - GH_EMAIL=
+    - GH_FULL_NAME=
    
 before_script:
 - npm install -g @angular/cli
@@ -21,8 +21,8 @@ after_success:
 - ls -l
 - rm -rfv ./DjangoAPI/static/*
 - cd DjangoAPI/
-- git config --global user.email "${GH_EMAIL}"
-- git config --global user.name "${GH_FULL_NAME}"
+- git config --global user.email "travis@travis-ci.org"
+- git config --global user.name "Travis CI"
 - git rm static/*
 - touch file.txt
 - git add file.txt
