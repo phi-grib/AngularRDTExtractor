@@ -28,7 +28,7 @@ after_success:
 - git add file.txt
 - git commit -m 'BUILD:Remove static'
 #- git push
-- git push "https://${GH_TOKEN}@${GH_REPO}" master
+#- git push "https://${GH_TOKEN}@${GH_REPO}" master
 
 
 
