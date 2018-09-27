@@ -25,7 +25,8 @@ after_success:
 - touch file.txt
 - git add file.txt
 - git commit -m 'BUILD:Remove static'
-- git push "https://SOMEVAR@${GH_REPO}"
+- git push
+#- git push "https://SOMEVAR@${GH_REPO}"
 
 
 
