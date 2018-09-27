@@ -7,6 +7,8 @@ env:
     - ORG="phi-grib"
     - REPO="DjangoAPI"
     - GH_REPO="github.com/${ORG}/${REPO}.git"
+    - GH_EMAIL="ignacio.pasamontes@upf.edu"
+    - GH_FULL_NAME="Ignacio Pasamontes"
    
 before_script:
 - npm install -g @angular/cli
@@ -14,21 +16,19 @@ script:
 - ng build --prod --aot --output-hashing none
 after_success:
 - MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
-- git config --global user.email "ignacio.pasamontes@upf.edu"
-- git config --global user.name "IgnacioPasamontes"
 - git clone https://github.com/phi-grib/DjangoAPI.git
 - pwd
 - ls -l
 - rm -rfv ./DjangoAPI/static/*
 - cd DjangoAPI/
-- git config --global user.email "ignacio.pasamontes@upf.edu"
-- git config --global user.name "IgnacioPasamontes"
+- git config --global user.email "${GH_EMAIL}"
+- git config --global user.name "${GH_FULL_NAME}"
 - git rm static/*
 - touch file.txt
 - git add file.txt
 - git commit -m 'BUILD:Remove static'
 #- git push
-#- git push "https://${GH_TOKEN}@${GH_REPO}" master
+- git push "https://${GH_TOKEN}@${GH_REPO}" master
 
 
 
