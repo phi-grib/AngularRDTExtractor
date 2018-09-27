@@ -6,7 +6,7 @@ env:
   - ORG="phi-grib"
   - REPO="DjangoAPI"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
-  secure: "oO4GCgLyIptVQx55sowdbAPApwxgBZjsEhYu4epoS2YN5+9oX6HWDOKJ76hyy9mViqTchOI5Um9rxnzIYMqnl2SFZyopMyb92mfxNuJgGzbzSHe3suJlX6XkCkIo2O1wfkdRLPcoRBsP223/BFGrb5c8cEj+TybHUY7LQ1vhNTmO8aSzeKKnCB3GaLyOFPih65VCFCIb4CRsKfCxf3IirpkVBELwTwH9nkYZ/214TWGJPUgPvX2/5iyi4oQZWTsqAX+SM1dwcC8U/jVM0TnJZYYLBwxGpg2/KTVGr+DiZTVpPtTWyTQ4aVTMFWDv7MkmaziLjk19XWcnZhJyNl1uxZW5r1LfO1Hrj4dOByKuT1aK1uO4/xXPgIHubAArl2DkbNHFQXkeSff3MHDGqRcw81BHwG3YKuevvETj1CFzkvQNxcyr3hzPQr56H0rmGVE5FEZjz2G30dz4o8X6LtWRoKWsEjlcUrdjhpx1z6WWdmDMMKL4npX7/YeqLNMUrHB1SlZYmHLH+i74Do0tc06lfSFLgo8pK6TDe2mJ9/PTv51ME0lB3RefpYQM5bUbYIVFD/VG5Gy0gh89qmfroBEiIFI/6TGBjsBNOHRYL667AFjCluNyajiSMK1p9LcMlBGF4AAslNoT+pVQ2gYsZ0SrOvjWYqUUVDZgjlmGde67E9o="
+  - secure: gShioyv0yugwgl7Dwg7cSm4XM3M0+oesHVr6t4+5+BC3IjDLFj1DOEqDbJdJ2BLYqI1Wk/vP5ysK2AHa+IgboC3szntCLab9Im5MZM4ClIgQ+QQTuWlWyazmNqjteRI6zRmi5kg2g9qufmjFpAuEIla1AueDZImUKSIzTRoFKe6xBPBnuLRG1DCD+q/nMsU0tEEMTGcLFVyq4rkHKztmdP1Q7GJ/HVAAIf4RdW5npLmpYWmQVJy4qs8lhruI9bn2JT2Sze5Nq4Wr7v3+pGmzVptjG6YLpdFcbhKFmr3nTH9Asz3hRr1FvdIsOu8hEvNl0QzlBDBXPBzb4+MEo4AevPLWFbjaj8Bmxwkq3y5Im7u8RYf38RkR2NlRRq4rRt/prtjbvAuGdJoHPz+e2pVEWpkQHefWKr4z977s70fzoQzPbdpADYgkWK6lwtKX5xR8Q1e+2hii8S6Kid72OTcpJq0OHLcuKeeYvD859QbyWus/Jqx3ByaK8uAViqamonewIQqe+2+6n1UqJMov7ujccIaj5ftGcGZwYyV2a9llOinMlrUaeetmNbJVN+jsxT7KAGzpcySv1aZdXZftqgL7D1dxNC5+zdwjTzhBgpBF4Oy7aifBzQLbWpfrenZe5jWd+OFfqjYzqUKNgQ6ursJO8Gwp48wi0ayzOGqnksbBL04=
 before_script:
 - npm install -g @angular/cli
 script:
@@ -23,7 +23,7 @@ after_success:
 - git config user.name "IgnacioPasamontes"
 - git rm static/*
 - git commit -m 'BUILD:Remove static'
-- git push "https://${SOMEVAR}@${GH_REPO}"
+- git push "https://SOMEVAR@${GH_REPO}"
 - mkdir static
 - mv -f ../dist/frontend/* ./static
 - git remote
@@ -31,6 +31,6 @@ after_success:
 - git config user.name "IgnacioPasamontes"
 - git add static/*
 - git commit -m 'BUILD:ADD static'
-- git push "https://${SOMEVAR}@${GH_REPO}"
+- git push "https://SOMEVAR@${GH_REPO}"
 - ls -l
 - pwd
