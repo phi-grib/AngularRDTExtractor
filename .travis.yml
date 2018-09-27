@@ -33,3 +33,4 @@ after_success:
 - git commit -m 'BUILD:ADD static'
 - git push "https://${SOMEVAR}@${GH_REPO}"
 - ls -l
+- pwd
