@@ -20,8 +20,8 @@ after_success:
 - rm -rfv ./DjangoAPI/static/*
 - cd DjangoAPI/
 - git remote
-- git config user.email "ignacio.pasamontes@upf.edu"
-- git config user.name "IgnacioPasamontes"
+- git config --global user.email "ignacio.pasamontes@upf.edu"
+- git config --global user.name "IgnacioPasamontes"
 - git rm static/*
 - touch file.txt
 - git add file.txt
