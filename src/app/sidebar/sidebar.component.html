@@ -11,8 +11,6 @@
             </div>
             <div id="CompoundCard" class="collapse show" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
                 <div class="card-body">
-                    <!-- <button type="button" class="btn btn-link" (click)="openSketchModal()">Sketch</button> 
-                    <br> -->
                     <p class="font-weight-bold">Name:</p>
                     <div>
                         <ngx-select-dropdown 
@@ -23,7 +21,6 @@
                             [options]="table_info['allOptions']['compound_name']">
                         </ngx-select-dropdown>
                     </div>
-                    <!-- <app-panel [key]= "'compound_name'" ></app-panel> -->
                     <br>
                     <p class="font-weight-bold">CAS number:</p>
                     <div>
@@ -35,7 +32,6 @@
                             [options]="table_info['allOptions']['cas_number']">
                         </ngx-select-dropdown>
                     </div>
-                    <!-- <app-panel [key]= "'cas_number'" ></app-panel> -->
                     <br>
                 </div>
             </div>
@@ -56,7 +52,6 @@
                             [options]="table_info['allOptions']['pharmacological_action']">
                         </ngx-select-dropdown>
                     </div>
-                    <!-- <app-panel [key]= "'pharmacological_action'" ></app-panel> -->
                     <br>
                 </div>
             </div>
@@ -77,7 +72,6 @@
                             [options]="table_info['allOptions']['species']">
                         </ngx-select-dropdown>
                     </div>
-                    <!-- <app-panel [key]= "'species'" ></app-panel> -->
                     <br>
                     <p class="font-weight-bold">Route:</p>
                     <div>
@@ -89,7 +83,6 @@
                             [options]="table_info['allOptions']['routes']">
                         </ngx-select-dropdown>
                     </div>
-                    <!-- <app-panel [key]= "'routes'" ></app-panel> -->
                     <br>
                     <p class="font-weight-bold">Exposure period (days):</p>
                     <div>
@@ -160,7 +153,6 @@
                         </div>
                     </div>
                     <br>
-                    <!--<app-panel [key]= "'organs'" [categoryForm]="true"></app-panel>-->
 
                     <p class="font-weight-bold" [hidden]="!hasCategory">Observation:</p>
                     <div class="row">
@@ -176,7 +168,6 @@
                         </div>
                     </div>
                     <br>
-                    <!--<app-panel [key]= "'observations'" [categoryForm]="true"></app-panel>-->
                 </div>
             </div>
         </div>
@@ -184,17 +175,11 @@
     <br>
     <div class="card">
         <div class="card-body">
-            <div align="center"><font color="red">
-                {{ table_info.num_structures }} of {{totalStructures}} </font> substances
-            </div>
+            <div align="center"><font color="red"> {{ table_info.num_structures }} of {{totalStructures}} </font> substances </div>
             <progress id="structuresProgress" [value]="table_info['num_structures']*100/totalStructures" max="100" style="width: 100%"></progress>
-            <div align="center"><font color="red">
-                {{ table_info.num_studies }} of {{totalStudies}} </font> studies
-            </div>
+            <div align="center"><font color="red"> {{ table_info.num_studies }} of {{totalStudies}} </font> studies </div>
             <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100" style="width: 100%"></progress>
-            <div align="center"><font color="red">
-                {{ table_info.num_findings }} of {{totalFindings}} </font> findings
-            </div>
+            <div align="center"><font color="red"> {{ table_info.num_findings }} of {{totalFindings}} </font> findings </div>
             <progress id="studiesProgress" [value]="table_info['num_studies']*100/totalStudies" max="100" style="width: 100%"></progress>
         </div>
     </div>
@@ -203,7 +188,4 @@
         <button type="button" class="btn" (click)="resetFilters()" style="background-color: lightgray"> Reset Filters </button>
     </div>
     <br>
-    <!--<div align="center">
-        <button type="button" class="btn" (click)="download()" style="background-color: lightgray"> Export </button>
-    </div>-->
 </div>
