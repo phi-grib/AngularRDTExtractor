@@ -6,7 +6,7 @@ env:
   - ORG="phi-grib"
   - REPO="DjangoAPI"
   - GH_REPO="github.com/${ORG}/${REPO}.git"
-  - secure: gShioyv0yugwgl7Dwg7cSm4XM3M0+oesHVr6t4+5+BC3IjDLFj1DOEqDbJdJ2BLYqI1Wk/vP5ysK2AHa+IgboC3szntCLab9Im5MZM4ClIgQ+QQTuWlWyazmNqjteRI6zRmi5kg2g9qufmjFpAuEIla1AueDZImUKSIzTRoFKe6xBPBnuLRG1DCD+q/nMsU0tEEMTGcLFVyq4rkHKztmdP1Q7GJ/HVAAIf4RdW5npLmpYWmQVJy4qs8lhruI9bn2JT2Sze5Nq4Wr7v3+pGmzVptjG6YLpdFcbhKFmr3nTH9Asz3hRr1FvdIsOu8hEvNl0QzlBDBXPBzb4+MEo4AevPLWFbjaj8Bmxwkq3y5Im7u8RYf38RkR2NlRRq4rRt/prtjbvAuGdJoHPz+e2pVEWpkQHefWKr4z977s70fzoQzPbdpADYgkWK6lwtKX5xR8Q1e+2hii8S6Kid72OTcpJq0OHLcuKeeYvD859QbyWus/Jqx3ByaK8uAViqamonewIQqe+2+6n1UqJMov7ujccIaj5ftGcGZwYyV2a9llOinMlrUaeetmNbJVN+jsxT7KAGzpcySv1aZdXZftqgL7D1dxNC5+zdwjTzhBgpBF4Oy7aifBzQLbWpfrenZe5jWd+OFfqjYzqUKNgQ6ursJO8Gwp48wi0ayzOGqnksbBL04=
+  - secure: gVT01TOvSWqYO704gpZdM1Dd7G6hDrpJ8Ah/MR1uZD7LxTAx3UtT5fkiszxpS7RkVxGzQfmULeiUyP9lZIsvas7lzUxoKpHFxgUbB9U56zkuqmGuq2pSprogWzuDrLd8cw3KoB8RCV/KMCTx9KaSYCSc6d9K6woLoyJtSdQMQDkuQBVYwUW8oeVKrt1Nd7fyRy27sUzXMEBhnZ0jKtU5gvPMvk+sLwnML5rHgLlbOWyeM5akSgLm5/g1RhkEgGNCHGCtkucnK7qU4LL+d4qSJkX6q+N/bRSL2W2YX8mgbnfzC5+2ox+MADemwbI2GT5dnm796Ic8X7+CU4qjMFFQ0hgVas4VIJH7sjN/1rYQQErbJ9lQq2zYkWUmjL+eQt0Q6bK9pmJvz20QBwKhYf19TRSLUMpWn2cE1zEvUeChLOtcxKb/4CwU7youdBphCr/Hve1uaE2Vamr4eAtom1EtEirtERABAKsYeL9pd2ncdODiMrI2reqpOggOl1AwNHqAbsg9eKoNC4ap4iv2sbxrTpD80Oh3XEQVjecjaM1XvylzbpIU4Al9y1uGCqWv3NONkS3+EkOrPkX7c6VBOooikm8GFBV25+BJ/BqgDk8r9c8Jocp+x5dCGZGRs8ROY5ymFc1g6xOC2jxfGrmVmVnPvYM6kI/9p6Rw2+EVi+yLIpU=
 before_script:
 - npm install -g @angular/cli
 script:
@@ -19,25 +19,9 @@ after_success:
 - rm -rfv ./DjangoAPI/static/*
 - cd DjangoAPI/
 - git remote
-- git config user.email "ignacio.pasamontes@upf.edu"
-- git config user.name "IgnacioPasamontes"
+- git config --global user.email "ignacio.pasamontes@upf.edu"
+- git config --global user.name "IgnacioPasamontes"
 - git rm static/*
 - touch file.txt
 - git add file.txt
-- git commit -m 'BUILD:Remove static'
-- git push
-#- git push "https://SOMEVAR@${GH_REPO}"
-
-
-
-
-#- mkdir static
-#- mv -f ../dist/frontend/* ./static
-#- git remote
-#- git config user.email "ignacio.pasamontes@upf.edu"
-#- git config user.name "IgnacioPasamontes"
-#- git add static/*
-#- git commit -m 'BUILD:ADD static'
-#- git push "https://SOMEVAR@${GH_REPO}"
-#- ls -l
-#- pwd
+- git push "https://${GH_TOKEN}@${GH_REPO}"
