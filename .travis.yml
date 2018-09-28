@@ -13,7 +13,6 @@ before_script:
 script:
 - ng build --prod --aot --output-hashing none
 after_success:
-- MESSAGE=$(git log --format=%B -n 1 $TRAVIS_COMMIT)
 - git clone https://github.com/phi-grib/DjangoAPI.git
 - pwd
 - ls -l
@@ -23,7 +22,6 @@ after_success:
 - git config --global user.name "IgnacioPasamontes"
 - git rm static/*
 - git commit -m 'BUILD:Remove static'
-#- git push
 - git push "https://${GH_TOKEN}@${GH_REPO}" master
 
 
