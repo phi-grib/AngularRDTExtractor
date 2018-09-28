@@ -11,7 +11,7 @@ env:
 before_script:
 - npm install -g @angular/cli
 script:
-- ng build --prod --aot --output-hashing none
+- ng build --prod --aot --output-hashing none --base-href=dist/frontend/
 after_success:
 - git clone https://github.com/phi-grib/DjangoAPI.git
 - pwd
