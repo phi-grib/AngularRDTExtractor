@@ -10,8 +10,7 @@ env:
 before_script:
 - npm install -g @angular/cli
 script:
-- ng build --prod --aot --output-hashing none --ouput-path 
-after_success:
+
 - git clone https://github.com/phi-grib/DjangoAPI.git
 - rm -rfv ./DjangoAPI/frontend/*
 - cd DjangoAPI/
@@ -22,8 +21,9 @@ after_success:
 - git push "https://${GH_TOKEN}@${GH_REPO}" master
 
 # ADD
-- mkdir frontend
-- mv -f ../dist/frontend/* ./frontend
+- cd ..
+- ng build --prod --aot --output-hashing none --output-path DjangoAPI/frontend
+- cd DjangoAPI/
 - git remote
 - git config user.email "ignacio.pasamontes@upf.edu"
 - git config user.name "IgnacioPasamontes"
