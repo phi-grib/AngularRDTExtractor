@@ -7,7 +7,7 @@
           {{ key | capitalize }} 
           <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
             <span aria-hidden="true">&times;</span>
-          </button>    
+          </button>
       </h6>
       <div class="card-body">
         <span class="badge badge-info"  
@@ -23,9 +23,9 @@
     <div class="card" *ngIf="key=='min_exposure'">
       <h6 class="card-header">
           {{ 'Exposure period' }} 
-          <!--<button type="button" class="close" aria-label="Close" (click)="removeEsposure()">
+          <button type="button" class="close" aria-label="Close" (click)="removeExposure(key)">
             <span aria-hidden="true">&times;</span>
-          </button>    -->
+          </button>
       </h6>
       <div class="card-body">
         <span class="badge badge-info">

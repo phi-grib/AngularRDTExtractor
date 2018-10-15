@@ -6,6 +6,7 @@ import { FindingsService } from '../findings.service';
   templateUrl: './filter-info.component.html',
   styleUrls: ['./filter-info.component.css']
 })
+
 export class FilterInfoComponent implements OnInit {
 
   objectKeys = Object.keys;
@@ -40,7 +41,7 @@ export class FilterInfoComponent implements OnInit {
     this.findService.currentTable.subscribe ();
   }  
 
-  removeOne(key:string, value:string, category:string){
+  removeOne(key:string, value:string, category:string) {
     if (category===undefined) {
       this.search_form[key].splice(value, 1);
       if (this.search_form[key].length==0){
@@ -55,7 +56,7 @@ export class FilterInfoComponent implements OnInit {
   }
 
 
-  removeAll(type:string){
+  removeAll(type:string) {
     if (type in this.search_form) {
       delete this.search_form[type];   
       this.findService.changeSearchFormTable(this.search_form);
@@ -68,7 +69,7 @@ export class FilterInfoComponent implements OnInit {
     }
   }
   
-  removeEsposure(){
+  removeExposure() {
     delete this.search_form["min_exposure"];
     delete this.search_form["max_exposure"];
     this.findService.changeSearchFormTable(this.search_form);
