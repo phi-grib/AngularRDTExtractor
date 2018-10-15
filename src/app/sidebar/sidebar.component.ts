@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
 import { TreeviewItem, TreeviewEventParser, DownlineTreeviewEventParser} from 'ngx-treeview';
-import { ModalDialogService } from 'ngx-modal-dialog';
 import { Router } from '@angular/router';
 import { Globals } from '../globals';
 
@@ -59,13 +57,8 @@ export class SidebarComponent implements OnInit {
     placeholder: 'select'
   };
 
-  constructor(private httpClient: HttpClient, 
-              private modalDialogService: ModalDialogService, 
-              private viewContainer: ViewContainerRef,
-              private findService : FindingsService,
-              private _router: Router,
+  constructor(private findService : FindingsService,
               public globals: Globals) {
-    this.router = _router;
   }
 
   ngOnInit(){
