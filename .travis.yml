@@ -3,35 +3,31 @@ node_js:
 - '8'
 env:
   global:
-    - secure: f/jjlNN0m5uW9/jfCqw0B4D3i3d0ri7jr2gkZUIIzkIgiaTardEIiBYtICPFp57NUS8LVoUUNZXyo6pRt6PjbeUF1LZmsM6UFkF1+kHgaHENAIt8LBnXxlgZiEBG3hugjfcCf3WXL5wOP1Gn87R5lp9hdl4W/2jxKQfhfXXYjYxaUzI3ddeRK7+tPmNsq3amnS2DQ2tFVAgNtg7GYtmnwWd6hTvDyK5JntriLkI2aSYK+Mi8D5mlGtpnQ/f6fqunld1g/0UYXbwRkfBXemghbak/elZYLQsL10BIT6cR6BLZerW20ZsapNbRukBTiItCseLCawZtFlQZXlcybJE36GbFA6eydIyxJAPKnJ9GSflkTpd4ahpIkZ52mmVLZVUQrzT0cCNTd19jTbDk5JHlIQzfl2eXOlZdG98TZ5WpkrPnUMNtMhDvJci3S7mQm78hOnyGyYrR66yiHXhjsXrZHtKYPeEUQ8FoS/4rgYZVukKjMWuA1sPIq4gm6XdYoIi7TmYKylc8WsunLGqvzpRTsmW0mOK3N2oVR7CCwNaJ2N3/EomiXIxC4wlax1yEUvGClKrT1QOi4fHiQozg0HW//1KpQ7ozs5szfPqsu2Yvb/dKrJejKtr4Mk0pZ80vEgxAek9UTplGDWUp/3eXYlpl3gfaYOJqxWtV4pvB2F4Hm4w=
     - ORG="phi-grib"
     - REPO="DjangoAPI"
     - GH_REPO="github.com/${ORG}/${REPO}.git"
+    
    
 before_script:
 - npm install -g @angular/cli
 script:
-- ng build --prod --aot --output-hashing none --base-href=dist/frontend/
-after_success:
+
 - git clone https://github.com/phi-grib/DjangoAPI.git
-- pwd
-- ls -l
-- rm -rfv ./DjangoAPI/static/*
+- rm -rfv ./DjangoAPI/frontend/*
 - cd DjangoAPI/
 - git config --global user.email "ignacio.pasamontes@upf.edu"
 - git config --global user.name "IgnacioPasamontes"
-- git rm static/*
-- git commit -m 'BUILD:Remove static'
+- git rm frontend/*
+- git commit -m 'BUILD:Remove frontend'
 - git push "https://${GH_TOKEN}@${GH_REPO}" master
 
-
-
 # ADD
-- mkdir static
-- mv -f ../dist/frontend/* ./static
+- cd ..
+- ng build --prod --aot --output-hashing none --output-path DjangoAPI/frontend
+- cd DjangoAPI/
 - git remote
 - git config user.email "ignacio.pasamontes@upf.edu"
 - git config user.name "IgnacioPasamontes"
-- git add static/*
-- git commit -m 'BUILD:ADD static'
+- git add frontend/*
+- git commit -m 'BUILD:ADD frontend'
 - git push "https://${GH_TOKEN}@${GH_REPO}" master
