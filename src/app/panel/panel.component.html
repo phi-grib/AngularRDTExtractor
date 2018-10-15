@@ -1,13 +1,12 @@
 
 <div *ngIf="categoryForm; else regularPanel">
     <div *ngFor="let category of objectKeys(categories_search_form)">
-            <div *ngFor="let value of categories_search_form[category][key]">
-                <span>
-                    <button class = "close" (click)="removeThis(key,value,category)">x</button>
-                    &nbsp;{{category}} | {{ value }}
-                </span>       
-        </div>
-       
+        <div *ngFor="let value of categories_search_form[category][key]">
+            <span>
+                <button class = "close" (click)="removeThis(key,value,category)">x</button>
+                &nbsp;{{category}} | {{ value }}
+            </span>       
+        </div>       
     </div>
 </div>
 

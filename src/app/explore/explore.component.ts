@@ -1,7 +1,4 @@
-import {Component, ViewChild, OnInit, AfterViewInit} from '@angular/core';
-import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-import {ChartsModule, Color} from 'ng2-charts';
-
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-explore',

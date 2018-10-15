@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FindingsService } from '../findings.service';
-import { DndDropEvent } from "ngx-drag-drop";
 import { Router } from '@angular/router';
 import { Plot } from '../plot';
 import { Globals } from '../globals';

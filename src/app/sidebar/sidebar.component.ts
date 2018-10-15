@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FindingsService } from '../findings.service';
 import { TreeviewItem, TreeviewEventParser, DownlineTreeviewEventParser} from 'ngx-treeview';
-import { Router } from '@angular/router';
 import { Globals } from '../globals';
 
 @Component({
@@ -57,11 +56,9 @@ export class SidebarComponent implements OnInit {
     placeholder: 'select'
   };
 
-  constructor(private findService : FindingsService,
-              public globals: Globals) {
-  }
+  constructor(private findService : FindingsService, public globals: Globals) {}
 
-  ngOnInit(){
+  ngOnInit() {
 
     this.globals.showSpinner = true;
     this.globals.showError = false;
@@ -77,14 +74,14 @@ export class SidebarComponent implements OnInit {
         /*Case TABLE*/
         this.globals.showSpinner = true;
         /* If nothing to serach*/
-        if (!this.somethingtoSearch()){
+        if (!this.somethingtoSearch()) {
           this.request = this.findService.initFinding().subscribe(table_info => {
             this.findService.changeTable(table_info);
             this.findService.changePlot(table_info);
             this.globals.showSpinner = false;
           });
         }
-        else{
+        else {
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
             (data) => {  
               this.findService.changeTable(data);
@@ -103,11 +100,11 @@ export class SidebarComponent implements OnInit {
       this.search_form = searchFormTable;
       if (this.firstTimeSearch){
         if (this.request){
-            this.request.unsubscribe();
+          this.request.unsubscribe();
         }
         this.globals.showSpinner = true;
         /* If nothing to serach*/
-        if (!this.somethingtoSearch()){
+        if (!this.somethingtoSearch()) {
           this.request = this.findService.initFinding().subscribe(table_info => {
             this.findService.changeTable(table_info);
             this.findService.changePlot(table_info);
@@ -115,7 +112,7 @@ export class SidebarComponent implements OnInit {
           });
         }
         /* If something to serach*/
-        else{
+        else {
           this.request=this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(
             (data)=> { 
               this.findService.changeTable(data); 
@@ -166,7 +163,7 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  selectCategory(event: any){
+  selectCategory(event: any) {
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
 
@@ -175,7 +172,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  isCategoryFiltered(category: string){
+  isCategoryFiltered(category: string) {
     if (category in this.categories_search_form){
       if (this.categories_search_form[category] == undefined) {
         return false;
@@ -189,7 +186,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  addSearchSelect(event: any){
+  addSearchSelect(event: any) {
       // If the key(field of search) is already inserted   
       if (event.target.id in this.search_form){
         // If the value(name to search) is already inserted
@@ -203,7 +200,7 @@ export class SidebarComponent implements OnInit {
       this.findService.changeSearchFormTable(this.search_form);
   }
 
-  addSearchCheckBox(event: any,id:string){
+  addSearchCheckBox(event: any,id:string) {
 
     if (this.sex.indexOf(event.target.value)!=-1){  
       if (event.target.checked){
@@ -230,7 +227,7 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
-  changeExposureFrom(){
+  changeExposureFrom() {
 
     if (this.search_form['max_exposure'] === undefined) {
       this.search_form['max_exposure'] = this.maxExposure;
@@ -246,7 +243,7 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
-  changeExposureTo(){
+  changeExposureTo() {
 
     if (this.search_form['min_exposure'] === undefined) {
       this.search_form['min_exposure'] = this.maxExposure;
@@ -262,7 +259,7 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
-  resetFilters(){    
+  resetFilters() {    
     this.search_form={}
     this.globals.showSpinner = true;
     for (let source of this.sources){  
@@ -288,7 +285,7 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  addCategory($event: any, type){
+  addCategory($event: any, type) {
    
     if ($event.value!==undefined){
       this.categories_search_form[this.selectedCategory][type] = $event.value;
@@ -296,7 +293,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  addSearchForm($event: any, type){
+  addSearchForm($event: any, type) {
 
     if ($event.value!==undefined){
 
@@ -316,14 +313,6 @@ export class SidebarComponent implements OnInit {
     } 
   }
 
-  tof(x: any) {
-    var count = 0;
-    for(var i in x){
-      count++;
-    }
-    return count;
-  }
-
   closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("mySidenav").style.overflow = "hidden";
@@ -331,15 +320,14 @@ export class SidebarComponent implements OnInit {
     document.getElementById("main").style.width = "100%";
   }
 
-  somethingtoSearch(){
-
-    if (Object.keys(this.search_form).length>0){
+  somethingtoSearch() {
+    if (Object.keys(this.search_form).length>0) {
       return true
     }
-    for (let source of this.sources){ 
-      if (this.categories_search_form[source]['parameters'].length>0 || this.categories_search_form[source]['observations'].length>0){
-        return true
-      }
+    for (let source of this.sources) { 
+      if (this.categories_search_form[source]['parameters'].length>0 ||
+          this.categories_search_form[source]['observations'].length>0)
+        { return true }
     } 
     return false
   }

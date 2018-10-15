@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FindingsService } from '../findings.service';
 
 
@@ -10,13 +10,10 @@ import { FindingsService } from '../findings.service';
 export class PanelComponent implements OnInit {
 
   objectKeys = Object.keys;
-  search_form={};
-  categories_search_form={};
-  //@Input() searchFormPanel = {};
-  //@Input() CategorySearchFormPanel = {};
+  search_form = {};
+  categories_search_form = {};
   @Input() key:string;
   @Input() categoryForm:boolean;
-  //@Output() relevantClose: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(private findService : FindingsService) { }
 
@@ -43,6 +40,5 @@ export class PanelComponent implements OnInit {
       }
       this.findService.changeCategoriesSearchForm(this.categories_search_form);
     }
-    //this.findService.searchFinding(this.search_form,this.categories_search_form,1).subscribe(table_info => this.findService.changeTable(table_info));
   }
 }
