@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FindingsService } from '../findings.service';
-import { IonRangeSliderComponent } from "ng2-ion-range-slider";
 import { TreeviewItem, TreeviewEventParser, DownlineTreeviewEventParser} from 'ngx-treeview';
 import { ModalDialogService } from 'ngx-modal-dialog';
 import { Router } from '@angular/router';
@@ -18,7 +17,6 @@ import { Globals } from '../globals';
 
 export class SidebarComponent implements OnInit {
 
-  @ViewChild('sliderElement') sliderElement: IonRangeSliderComponent;
   @ViewChild('organs') organs: TreeviewItem[];
 
   relevant_form: boolean;
@@ -239,7 +237,7 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
-  changeSliderFrom(){
+  changeExposureFrom(){
 
     if (this.search_form['max_exposure'] === undefined) {
       this.search_form['max_exposure'] = this.maxExposure;
@@ -255,7 +253,7 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
-  changeSliderTo(){
+  changeExposureTo(){
 
     if (this.search_form['min_exposure'] === undefined) {
       this.search_form['min_exposure'] = this.maxExposure;
@@ -282,7 +280,6 @@ export class SidebarComponent implements OnInit {
     this.BOTH = false;
     this.F = false;
     this.M = false;
-    this.sliderElement.reset();
     this.toValue = null;
     this.fromValue = null;
     this.hasCategory = false;
@@ -340,6 +337,7 @@ export class SidebarComponent implements OnInit {
     document.getElementById("main").style.marginLeft = "25px";document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.width = "100%";
   }
+
   somethingtoSearch(){
 
     if (Object.keys(this.search_form).length>0){
