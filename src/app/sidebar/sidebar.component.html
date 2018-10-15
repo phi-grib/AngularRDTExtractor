@@ -86,12 +86,21 @@
                     <br>
                     <p class="font-weight-bold">Exposure period (days):</p>
                     <div>
-                        <ion-range-slider #sliderElement
-                            type="double"
-                            [min]="minExposure"
-                            [max]="maxExposure"
-                            (onFinish)="addSliderInfo($event)">
-                        </ion-range-slider>
+                        <div class="form-group">
+                            from 
+                            <input class="form-control input-sm" 
+                                [placeholder]="this.minExposure" 
+                                [(ngModel)]="this.fromValue"
+                                style="width: 60px; height: 25px; display: inline-block; padding-right: 0px" 
+                                (change)="changeSliderFrom()"> 
+                            to 
+                            <input class="form-control input-sm" 
+                                [placeholder]="this.maxExposure" 
+                                [(ngModel)]='this.toValue'
+                                style="width: 60px; height: 25px; display: inline-block; padding-right: 0px" 
+                                (change)="changeSliderTo()">
+                            days
+                        </div>
                     </div>
                 </div>
             </div>
@@ -138,7 +147,8 @@
                     <br>
 
                     <p class="font-weight-bold" [hidden]="!(hasCategory && 
-                    categoryOptions[selectedCategory]['parameters'].length > 1)">Parameter:</p>
+                    categoryOptions[selectedCategory]['parameters'].length > 1)">
+                    Parameter:</p>
                     <div class="row" [hidden]="!(hasCategory && 
                     categoryOptions[selectedCategory]['parameters'].length > 1)">
                         <div class="col s12 l6">

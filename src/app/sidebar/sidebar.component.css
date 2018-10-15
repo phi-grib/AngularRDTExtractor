@@ -1,3 +1,8 @@
+#mySidebar{
+    zoom: 0.85;
+    -moz-transform: scale(0.85);
+}
+
 .card-header {
     padding: 0px;
 }
@@ -36,12 +41,6 @@
     display: block;
     transition: 0.3s;
 }
-
-/* #mySidebar{
-    zoom: 0.85;
-    -moz-transform: scale(0.85);
-} */
-
 
 [data-toggle="collapse"]:after {
     display: inline-block;

@@ -47,6 +47,8 @@ export class SidebarComponent implements OnInit {
   // Store global minimum and maximum exposure values
   minExposure: number;
   maxExposure: number;
+  fromValue: number=null;
+  toValue: number=null;
 
   categoryOptionsSelected ={};
   categoryOptions = {}
@@ -237,15 +239,34 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
-  addSliderInfo($event){
+  changeSliderFrom(){
 
-    if ($event.from == this.minExposure && $event.to == this.maxExposure){
+    if (this.search_form['max_exposure'] === undefined) {
+      this.search_form['max_exposure'] = this.maxExposure;
+    }
+    if (this.fromValue == this.minExposure && 
+      this.search_form['max_exposure'] == this.maxExposure) {
       delete this.search_form['min_exposure'];
       delete this.search_form['max_exposure'];
     }
     else{
-      this.search_form['min_exposure']=$event.from;
-      this.search_form['max_exposure']=$event.to;
+      this.search_form['min_exposure']=this.fromValue;
+    }
+    this.findService.changeSearchFormTable(this.search_form);
+  }
+
+  changeSliderTo(){
+
+    if (this.search_form['min_exposure'] === undefined) {
+      this.search_form['min_exposure'] = this.maxExposure;
+    }
+    if (this.search_form['min_exposure'] == this.minExposure && 
+        this.toValue == this.maxExposure) {
+      delete this.search_form['min_exposure'];
+      delete this.search_form['max_exposure'];
+    }
+    else{
+      this.search_form['max_exposure']=this.toValue;
     }
     this.findService.changeSearchFormTable(this.search_form);
   }
@@ -262,6 +283,8 @@ export class SidebarComponent implements OnInit {
     this.F = false;
     this.M = false;
     this.sliderElement.reset();
+    this.toValue = null;
+    this.fromValue = null;
     this.hasCategory = false;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
     this.findService.changeSearchFormTable(this.search_form);
