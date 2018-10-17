@@ -232,30 +232,48 @@ export class SidebarComponent implements OnInit {
     if (this.search_form['max_exposure'] === undefined) {
       this.search_form['max_exposure'] = this.maxExposure;
     }
-    if (this.fromValue == this.minExposure && 
-      this.search_form['max_exposure'] == this.maxExposure) {
-      delete this.search_form['min_exposure'];
-      delete this.search_form['max_exposure'];
+    if (this.fromValue == '') {
+      if (this.search_form['max_exposure'] == this.maxExposure) {
+        delete this.search_form['min_exposure'];
+        delete this.search_form['max_exposure'];
+      } else {
+        this.search_form['min_exposure']=this.minExposure;
+      }
+    } else {
+      if (this.fromValue == this.minExposure && 
+          this.search_form['max_exposure'] == this.maxExposure) {
+        delete this.search_form['min_exposure'];
+        delete this.search_form['max_exposure'];
+      } else {
+        this.search_form['min_exposure']=this.fromValue;
+      }
     }
-    else{
-      this.search_form['min_exposure']=this.fromValue;
-    }
+    
     this.findService.changeSearchFormTable(this.search_form);
   }
 
   changeExposureTo() {
 
     if (this.search_form['min_exposure'] === undefined) {
-      this.search_form['min_exposure'] = this.maxExposure;
+      this.search_form['min_exposure'] = this.minExposure;
     }
-    if (this.search_form['min_exposure'] == this.minExposure && 
-        this.toValue == this.maxExposure) {
-      delete this.search_form['min_exposure'];
-      delete this.search_form['max_exposure'];
+    if (this.toValue == '') {
+      if (this.search_form['min_exposure'] == this.minExposure) {
+        delete this.search_form['min_exposure'];
+        delete this.search_form['max_exposure'];
+      } else {
+        this.search_form['max_exposure']=this.maxExposure;
+      }
+    } else {
+      if (this.search_form['min_exposure'] == this.minExposure && 
+          this.toValue == this.maxExposure) {
+        delete this.search_form['min_exposure'];
+        delete this.search_form['max_exposure'];
+      } else {
+        this.search_form['max_exposure']=this.toValue;
+      }
     }
-    else{
-      this.search_form['max_exposure']=this.toValue;
-    }
+    
     this.findService.changeSearchFormTable(this.search_form);
   }
 
