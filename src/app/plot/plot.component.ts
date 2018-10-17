@@ -56,7 +56,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
         this.plots['Studies'].labels = ['Selected', 'Not Selected'];
         this.plots['Structures'].labels = ['Selected', 'Not Selected'];
         this.plots['Findings'].labels =  ['Selected', 'Not Selected'];
-        this.plots['Species'].labels = this.plot_info['plotInfo']['normalised_species'][0];
+        this.plots['Species'].labels = this.plot_info['plotInfo']['species'][0];
         this.plots['Treatment'].labels = ['Not related', 'Treatment related'];
         this.plots['Source'].labels = this.plot_info['plotInfo']['source'][0];
         setTimeout(() => {
@@ -79,8 +79,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
             }];    
           this.plots['Species'].datasets = [
             {
-              data: this.plot_info['plotInfo']['normalised_species'][1],
-              backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['normalised_species'][1].length)
+              data: this.plot_info['plotInfo']['species'][1],
+              backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['species'][1].length)
             }];
          
           this.plots['Treatment'].datasets = [
@@ -148,10 +148,10 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.plotID++;
     a.datasets= [
       {
-        data: this.plot_info['plotInfo']['normalised_species'][1],
-        backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['normalised_species'][1].length)
+        data: this.plot_info['plotInfo']['species'][1],
+        backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['species'][1].length)
       }];
-    a.labels = this.plot_info['plotInfo']['normalised_species'][0]
+    a.labels = this.plot_info['plotInfo']['species'][0]
     a.chartType = 'pie'
     a.title= "Species"
     this.plots['Species']=a
