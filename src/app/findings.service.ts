@@ -92,7 +92,14 @@ export class FindingsService {
     params = params.set('page',page.toString())
     return this.http.get(this.apiRoot+'/page', {params: params})
   }
+
   errorHandler(error:HttpErrorResponse){
     return Observable.throw(error || "Server Error")
+  }
+
+  downloadFiles(): Observable<any>{
+    let url: string = this.apiRoot+"/download";
+    console.log(url);
+    return this.http.get(url)
   }
 }

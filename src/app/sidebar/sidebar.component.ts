@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FindingsService } from '../findings.service';
 import { TreeviewItem, TreeviewEventParser, DownlineTreeviewEventParser} from 'ngx-treeview';
 import { Globals } from '../globals';
+import { FileSaver, Blob } from 'file-saver';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,14 +25,15 @@ export class SidebarComponent implements OnInit {
   sources = [];
   selectedCategory: string;
   hasCategory: boolean=false;
-  firstTimeSearch:boolean=false;
-  firstTimeCategorySearch:boolean=false;
-  request:any;
+  firstTimeSearch: boolean=false;
+  firstTimeCategorySearch: boolean=false;
+  request: any;
 
   objectKeys = Object.keys;
   search_form = <any>{};
   categories_search_form = <any>{};
   table_info = <any>{};
+  files : any;
   router;
 
   // Set this value on init to store the total number of studies and structures
@@ -48,7 +50,7 @@ export class SidebarComponent implements OnInit {
   categoryOptionsSelected ={};
   categoryOptions = {}
 
-  errorMsg:string;
+  errorMsg: string;
 
   config_select = {
     search: true,
@@ -232,7 +234,7 @@ export class SidebarComponent implements OnInit {
     if (this.search_form['max_exposure'] === undefined) {
       this.search_form['max_exposure'] = this.maxExposure;
     }
-    if (this.fromValue == '') {
+    if (String(this.fromValue) == '') {
       if (this.search_form['max_exposure'] == this.maxExposure) {
         delete this.search_form['min_exposure'];
         delete this.search_form['max_exposure'];
@@ -248,7 +250,7 @@ export class SidebarComponent implements OnInit {
         this.search_form['min_exposure']=this.fromValue;
       }
     }
-    
+
     this.findService.changeSearchFormTable(this.search_form);
   }
 
@@ -257,7 +259,7 @@ export class SidebarComponent implements OnInit {
     if (this.search_form['min_exposure'] === undefined) {
       this.search_form['min_exposure'] = this.minExposure;
     }
-    if (this.toValue == '') {
+    if (String(this.toValue) == '') {
       if (this.search_form['min_exposure'] == this.minExposure) {
         delete this.search_form['min_exposure'];
         delete this.search_form['max_exposure'];
@@ -301,6 +303,10 @@ export class SidebarComponent implements OnInit {
       this.findService.changePlot(table_info);
       this.globals.showSpinner = false;
     });
+  }
+
+  download() { 
+    this.findService.downloadFiles();
   }
 
   addCategory($event: any, type) {
