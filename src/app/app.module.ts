@@ -16,7 +16,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { ExploreComponent } from './explore/explore.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BrowseComponent } from './browse/browse.component';
-import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { ModalDialogModule } from 'ngx-modal-dialog';
 import { CustomModalComponent } from './dialog/dialog.component';
 import { TreeviewModule } from 'ngx-treeview';
@@ -57,7 +56,6 @@ import { FilterInfoComponent } from './filter-info/filter-info.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    IonRangeSliderModule,
     ModalDialogModule.forRoot(),
     TooltipModule,
     TreeviewModule.forRoot(),
