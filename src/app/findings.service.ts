@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
@@ -97,9 +97,29 @@ export class FindingsService {
     return Observable.throw(error || "Server Error")
   }
 
-  downloadFiles(): Observable<any>{
-    let url: string = this.apiRoot+"/download";
-    console.log(url);
-    return this.http.get(url)
+  download(data: any) {
+    var blob = new Blob([data], { type: "application/zip"});
+    var url = window.URL.createObjectURL(blob);
+    var pwa = window.open(url);
+    if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
+      alert( 'Please disable your Pop-up blocker and try again.');
+    }
+  }
+
+  downloadFiles(): void{
+    let url: string = this.apiRoot+'/download';
+
+    this.http.get(url, {responseType: 'blob' as 'json'}).subscribe(
+      (response: any) =>{
+          let dataType = response.type;
+          let binaryData = [];
+          binaryData.push(response);
+          let downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(new Blob(binaryData, {type: dataType}));
+          downloadLink.setAttribute('download', 'results.zip');
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+      }
+    )
   }
 }

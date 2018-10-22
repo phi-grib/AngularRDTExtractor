@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FindingsService } from '../findings.service';
 import { TreeviewItem, TreeviewEventParser, DownlineTreeviewEventParser} from 'ngx-treeview';
 import { Globals } from '../globals';
-import { FileSaver, Blob } from 'file-saver';
 
 @Component({
   selector: 'app-sidebar',
