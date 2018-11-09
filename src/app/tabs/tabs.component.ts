@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Globals } from '../globals';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent implements OnInit {
 
-  constructor() { }
+  constructor( public globals: Globals) {}
 
   ngOnInit() {
   }

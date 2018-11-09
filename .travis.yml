@@ -6,12 +6,10 @@ env:
     - ORG="phi-grib"
     - REPO="DjangoAPI"
     - GH_REPO="github.com/${ORG}/${REPO}.git"
-    
-   
 before_script:
 - npm install -g @angular/cli
 script:
-
+# DELETE
 - git clone https://github.com/phi-grib/DjangoAPI.git
 - rm -rfv ./DjangoAPI/frontend/*
 - cd DjangoAPI/

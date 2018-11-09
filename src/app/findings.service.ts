@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { Globals } from './globals'
 
 @Injectable()
 export class FindingsService {
@@ -21,7 +22,7 @@ export class FindingsService {
 
   apiRoot = 'http://localhost:8000/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public globals: Globals) { }
 
   changeTable(table){
     this.table_form.next(table);
@@ -106,9 +107,9 @@ export class FindingsService {
     }
   }
 
-  downloadFiles(): void{
+  downloadFiles(): void {
     let url: string = this.apiRoot+'/download';
-
+    this.globals.downloading = true
     this.http.get(url, {responseType: 'blob' as 'json'}).subscribe(
       (response: any) =>{
           let dataType = response.type;
@@ -119,6 +120,8 @@ export class FindingsService {
           downloadLink.setAttribute('download', 'results.zip');
           document.body.appendChild(downloadLink);
           downloadLink.click();
+          this.globals.downloading = false
+         
       }
     )
   }
