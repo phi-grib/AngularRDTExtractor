@@ -80,10 +80,10 @@
                 <div class="card-body">
                     <p class="font-weight-bold">Sex:</p>
                     <div class="form-inline">
-                        <div class="custom-control custom-checkbox" *ngFor="let value of objectKeys(sex)">
+                        <div class="custom-control custom-checkbox" *ngFor="let value of sex">
                             <input type="checkbox" class="custom-control-input" name="sex" 
                             id="{{value}}" (change)="addSearchCheckBox($event,'sex')" 
-                            value={{value}}  [(ngModel)]="this.sex[value]">
+                            value={{value}}  [(ngModel)]="this[value]">
                             <label class="custom-control-label" for="{{value}}">
                                 {{ value }}&nbsp;&nbsp;&nbsp;&nbsp;
                             </label>
@@ -217,7 +217,7 @@
         <button type="button" class="btn" (click)="resetFilters()" style="background-color: lightgray"> Reset Filters </button>
     </div>
     <div align="center">
-        <button type="button" class="btn" (click)="download()" style="background-color: lightgray"> Export </button>
+        <button type="button" class="btn"  data-toggle="modal" data-target="#exampleModal" style="background-color: lightgray"> Export </button>
     </div>
     <br>
 </div>

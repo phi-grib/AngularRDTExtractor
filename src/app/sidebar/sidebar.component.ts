@@ -102,6 +102,11 @@ export class SidebarComponent implements OnInit {
     });
 
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>{
+      if (!("sex" in this.search_form)){
+        this.F=false
+        this.M=false
+        this.BOTH=false
+      }
       this.globals.showError = false;
       this.search_form = searchFormTable;
       if (this.firstTimeSearch){
@@ -362,10 +367,6 @@ export class SidebarComponent implements OnInit {
       this.findService.changePlot(table_info);
       this.globals.showSpinner = false;
     });
-  }
-
-  download() { 
-    this.findService.downloadFiles();
   }
 
   addCategory($event: any, type) {
