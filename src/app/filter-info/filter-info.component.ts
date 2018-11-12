@@ -74,4 +74,10 @@ export class FilterInfoComponent implements OnInit {
     delete this.search_form["max_exposure"];
     this.findService.changeSearchFormTable(this.search_form);
   }
+  
+  removeDose() {
+    delete this.search_form["min_dose"];
+    delete this.search_form["max_dose"];
+    this.findService.changeSearchFormTable(this.search_form);
+  }
 }

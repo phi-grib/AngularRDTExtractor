@@ -4,63 +4,12 @@
 <div id="mySidebar">
     <div id="" role="tablist">
         <div class="card">
-            <div class="card-header" role="tab" id="CompoundHeading">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#CompoundCard" aria-expanded="true" aria-controls="CompoundCard">
-                    Compound
-                </button>          
-            </div>
-            <div id="CompoundCard" class="collapse show" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
-                <div class="card-body">
-                    <p class="font-weight-bold">Name:</p>
-                    <div>
-                        <ngx-select-dropdown 
-                            (change)="addSearchForm($event,'compound_name')" 
-                            [multiple]="true" 
-                            [(value)]="this.search_form['compound_name']" 
-                            [config]="config_select" 
-                            [options]="table_info['allOptions']['compound_name']">
-                        </ngx-select-dropdown>
-                    </div>
-                    <br>
-                    <p class="font-weight-bold">CAS number:</p>
-                    <div>
-                        <ngx-select-dropdown 
-                            (change)="addSearchForm($event,'cas_number')" 
-                            [multiple]="true" 
-                            [(value)]="this.search_form['cas_number']" 
-                            [config]="config_select" 
-                            [options]="table_info['allOptions']['cas_number']">
-                        </ngx-select-dropdown>
-                    </div>
-                    <br>
-                </div>
-            </div>
-            <div class="card-header" role="tab" id="PharmacologyHeading"> 
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#PharmacologyCard" aria-expanded="true" aria-controls="PharmacologyCard">
-                    Pharmacology
-                </button>   
-            </div>
-            <div id="PharmacologyCard" class="collapse" aria-labelledby="PharmacologyHeading" data-parent="#FilterAccordion">
-                <div class="card-body">
-                    <p class="font-weight-bold">Pharmacological action:</p>
-                    <div>
-                        <ngx-select-dropdown 
-                            (change)="addSearchForm($event,'pharmacological_action')" 
-                            [multiple]="true" 
-                            [(value)]="this.search_form['pharmacological_action']" 
-                            [config]="config_select" 
-                            [options]="table_info['allOptions']['pharmacological_action']">
-                        </ngx-select-dropdown>
-                    </div>
-                    <br>
-                </div>
-            </div>
-            <div class="card-header" role="tab" id="StudyHeading">            
-                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
+            <div class="card-header" role="tab" id="StudyHeading">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#StudyCard" aria-expanded="true" aria-controls="StudyCard">
                     Study
                 </button>             
             </div>
-            <div id="StudyCard" class="collapse" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
+            <div id="StudyCard" class="collapse show" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
                 <div class="card-body">
                     <p class="font-weight-bold">Species:</p>
                     <div>
@@ -84,22 +33,40 @@
                         </ngx-select-dropdown>
                     </div>
                     <br>
-                    <p class="font-weight-bold">Exposure period (days):</p>
+                    <p class="font-weight-bold">Exposure period:</p>
                     <div>
                         <div class="form-group">
                             from 
                             <input class="form-control input-sm" 
                                 [placeholder]="this.minExposure" 
                                 [(ngModel)]="this.fromValue"
-                                style="width: 60px; height: 25px; display: inline-block; padding-right: 0px" 
+                                style="width: 80px; height: 25px; display: inline-block; padding-right: 0px" 
                                 (change)="changeExposureFrom()"> 
                             to 
                             <input class="form-control input-sm" 
                                 [placeholder]="this.maxExposure" 
                                 [(ngModel)]='this.toValue'
-                                style="width: 60px; height: 25px; display: inline-block; padding-right: 0px" 
+                                style="width: 80px; height: 25px; display: inline-block; padding-right: 0px" 
                                 (change)="changeExposureTo()">
                             days
+                        </div>
+                    </div>
+                    <p class="font-weight-bold">Dose range</p>
+                    <div>
+                        <div class="form-group">
+                            from 
+                            <input class="form-control input-sm" 
+                                [placeholder]="this.minDose" 
+                                [(ngModel)]="this.minDoseValue"
+                                style="width: 80px; height: 25px; display: inline-block; padding-right: 0px" 
+                                (change)="changeDoseFrom()"> 
+                            to 
+                            <input class="form-control input-sm" 
+                                [placeholder]="this.maxDose" 
+                                [(ngModel)]='this.maxDoseValue'
+                                style="width: 80px; height: 25px; display: inline-block; padding-right: 0px" 
+                                (change)="changeDoseTo()">
+                            mg/kg
                         </div>
                     </div>
                 </div>
@@ -177,6 +144,57 @@
                             [hidden]="!hasCategory">
                         </ngx-select-dropdown>
                         </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div class="card-header" role="tab" id="CompoundHeading">
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#CompoundCard" aria-expanded="false" aria-controls="CompoundCard">
+                    Compound
+                </button>          
+            </div>
+            <div id="CompoundCard" class="collapse" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
+                <div class="card-body">
+                    <p class="font-weight-bold">Name:</p>
+                    <div>
+                        <ngx-select-dropdown 
+                            (change)="addSearchForm($event,'compound_name')" 
+                            [multiple]="true" 
+                            [(value)]="this.search_form['compound_name']" 
+                            [config]="config_select" 
+                            [options]="table_info['allOptions']['compound_name']">
+                        </ngx-select-dropdown>
+                    </div>
+                    <br>
+                    <p class="font-weight-bold">CAS number:</p>
+                    <div>
+                        <ngx-select-dropdown 
+                            (change)="addSearchForm($event,'cas_number')" 
+                            [multiple]="true" 
+                            [(value)]="this.search_form['cas_number']" 
+                            [config]="config_select" 
+                            [options]="table_info['allOptions']['cas_number']">
+                        </ngx-select-dropdown>
+                    </div>
+                    <br>
+                </div>
+            </div>
+            <div class="card-header" role="tab" id="PharmacologyHeading"> 
+                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#PharmacologyCard" aria-expanded="true" aria-controls="PharmacologyCard">
+                    Pharmacology
+                </button>   
+            </div>
+            <div id="PharmacologyCard" class="collapse" aria-labelledby="PharmacologyHeading" data-parent="#FilterAccordion">
+                <div class="card-body">
+                    <p class="font-weight-bold">Pharmacological action:</p>
+                    <div>
+                        <ngx-select-dropdown 
+                            (change)="addSearchForm($event,'pharmacological_action')" 
+                            [multiple]="true" 
+                            [(value)]="this.search_form['pharmacological_action']" 
+                            [config]="config_select" 
+                            [options]="table_info['allOptions']['pharmacological_action']">
+                        </ngx-select-dropdown>
                     </div>
                     <br>
                 </div>

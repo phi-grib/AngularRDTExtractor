@@ -2,7 +2,7 @@
   id="myContainer"
   *ngIf="objectKeys(search_form).length>0 || this.hasType">
   <div *ngFor="let key of objectKeys(search_form)">
-    <div class="card" *ngIf="key!='min_exposure' && key!='max_exposure'">
+    <div class="card" *ngIf="key!='min_exposure' && key!='max_exposure' && key!='min_dose' && key!='max_dose'">
       <h6 class="card-header">
           {{ key | capitalize }} 
           <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
@@ -30,6 +30,22 @@
       <div class="card-body">
         <span class="badge badge-info">
           {{'From '+search_form['min_exposure']+' to '+search_form['max_exposure']+' days' }}
+        </span>
+      </div> 
+    </div>
+  </div>
+
+  <div *ngFor="let key of objectKeys(search_form)">
+    <div class="card" *ngIf="key=='min_dose'">
+      <h6 class="card-header">
+          {{ 'Dose range' }} 
+          <button type="button" class="close" aria-label="Close" (click)="removeDose(key)">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </h6>
+      <div class="card-body">
+        <span class="badge badge-info">
+          {{'From '+search_form['min_dose']+' to '+search_form['max_dose']+' mg/kg' }}
         </span>
       </div> 
     </div>
