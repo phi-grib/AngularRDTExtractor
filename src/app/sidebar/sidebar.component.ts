@@ -45,6 +45,11 @@ export class SidebarComponent implements OnInit {
   maxExposure: number;
   fromValue: number=null;
   toValue: number=null;
+  // Store global minimum and maximum dose values
+  minDose: number;
+  maxDose: number;
+  minDoseValue: number=null;
+  maxDoseValue: number=null;
 
   categoryOptionsSelected ={};
   categoryOptions = {}
@@ -140,6 +145,9 @@ export class SidebarComponent implements OnInit {
 
       this.minExposure = table_info['allOptions']['exposure_min'];
       this.maxExposure = table_info['allOptions']['exposure_max'];
+
+      this.minDose = table_info['allOptions']['dose_min'];
+      this.maxDose = table_info['allOptions']['dose_max'];
     
       this.sex = table_info['allOptions']['sex'];
       this.sources = table_info['allOptions']['sources'];
@@ -278,6 +286,56 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
+  changeDoseFrom() {
+
+    if (this.search_form['max_dose'] === undefined) {
+      this.search_form['max_dose'] = this.maxDose;
+    }
+    if (String(this.minDoseValue) == '') {
+      if (this.search_form['max_dose'] == this.maxDose) {
+        delete this.search_form['min_dose'];
+        delete this.search_form['max_dose'];
+      } else {
+        this.search_form['min_dose']=this.minDose;
+      }
+    } else {
+      if (this.minDoseValue == this.minDose && 
+          this.search_form['max_dose'] == this.maxDose) {
+        delete this.search_form['min_dose'];
+        delete this.search_form['max_dose'];
+      } else {
+        this.search_form['min_dose']=this.minDoseValue;
+      }
+    }
+
+    this.findService.changeSearchFormTable(this.search_form);
+  }
+
+  changeDoseTo() {
+
+    if (this.search_form['min_dose'] === undefined) {
+      this.search_form['min_dose'] = this.minDose;
+    }
+    if (String(this.maxDoseValue) == '') {
+      if (this.search_form['min_dose'] == this.minDose) {
+        delete this.search_form['min_dose'];
+        delete this.search_form['max_dose'];
+      } else {
+        this.search_form['max_dose']=this.maxDose;
+      }
+    } else {
+      if (this.search_form['min_dose'] == this.minDose && 
+          this.maxDoseValue == this.maxDose) {
+        delete this.search_form['min_dose'];
+        delete this.search_form['max_dose'];
+      } else {
+        this.search_form['max_dose']=this.maxDoseValue;
+      }
+    }
+    
+    this.findService.changeSearchFormTable(this.search_form);
+  }
+
   resetFilters() {    
     this.search_form={}
     this.globals.showSpinner = true;
@@ -291,6 +349,8 @@ export class SidebarComponent implements OnInit {
     this.M = false;
     this.toValue = null;
     this.fromValue = null;
+    this.minDoseValue = null;
+    this.maxDoseValue = null;
     this.hasCategory = false;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
     this.findService.changeSearchFormTable(this.search_form);
