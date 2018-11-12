@@ -113,10 +113,10 @@
                 <div class="card-body">
                     <p class="font-weight-bold">Sex:</p>
                     <div class="form-inline">
-                        <div class="custom-control custom-checkbox" *ngFor="let value of sex">
+                        <div class="custom-control custom-checkbox" *ngFor="let value of objectKeys(sex)">
                             <input type="checkbox" class="custom-control-input" name="sex" 
                             id="{{value}}" (change)="addSearchCheckBox($event,'sex')" 
-                            value={{value}}  [(ngModel)]="this[value]">
+                            value={{value}}  [(ngModel)]="this.sex[value]">
                             <label class="custom-control-label" for="{{value}}">
                                 {{ value }}&nbsp;&nbsp;&nbsp;&nbsp;
                             </label>
@@ -129,11 +129,12 @@
                             <input type="checkbox" class="custom-control-input" 
                                 id="treatmentRelated"  value="relevant" 
                                 (click)="addSearchCheckBox($event,'treatmentRelated')" 
-                                [(ngModel)]=relevant_form>
+                                [(ngModel)]=this.search_form[treatmentRelated]>
                             <label class="custom-control-label" for="treatmentRelated">
-                                &nbsp;Treatment-related only
+                                &nbsp;Treatment-related only 
                             </label>
-                        </div>                   
+                        </div>  
+                                      
                     </div>
                     <br>
                     <p class="font-weight-bold">Category:</p>
