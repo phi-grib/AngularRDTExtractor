@@ -1,13 +1,15 @@
-<div class="row" id="myTabs">
-  <span>
-    <a class="button"><span (click)="toggleNav()">&#9776; Filters</span></a>
-    <a class="button" href="#plot" routerLink="plot"> Overview </a>
-    <a class="button" href="#table" routerLink="table"> Table </a>
-  </span>
-</div>
-<div>
-  <br>
-  <br>
-  <app-filter-info ></app-filter-info>
-  <router-outlet></router-outlet>
+<div [ngClass]="{'loading': globals.downloading}">
+  <div class="row" id="myTabs">
+    <span>
+      <a class="button"><span (click)="toggleNav()">&#9776; Filters</span></a>
+      <a class="button" href="#plot" routerLink="plot"> Overview </a>
+      <a class="button" href="#table" routerLink="table"> Table </a>
+    </span>
+  </div>
+  <div>
+    <br>
+    <br>
+    <app-filter-info ></app-filter-info>
+    <router-outlet></router-outlet>
+  </div>
 </div>

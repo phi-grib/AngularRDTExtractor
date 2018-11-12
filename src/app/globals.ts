@@ -7,4 +7,5 @@ export class Globals {
   totalFindings: number = 0;
   showError: boolean = false;
   errorMsg: string;
+  downloading:boolean = false;
 }

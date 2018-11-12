@@ -8,7 +8,7 @@
 <div *ngIf="!globals.showError">
   <table class="table table-hover" [ngClass]="{ 'loading': globals.showSpinner}" ng-controller="myController" *ngIf="!globals.showError">
     <tr class="text-left" bgcolor=lightgray>
-      <th>Compound</th>
+      <th class="align-middle text-center">Compound</th>
       <th>Name</th>
       <th>CAS no.</th>
       <th>Pharmacological action</th>
@@ -16,7 +16,7 @@
     </tr>
     <tr *ngFor="let row of table_info.data;" class="text-left">
       <td class="align-middle text-center" style="border-right: 1px solid lightgray">
-        <img *ngIf="row.smiles==='-'" src="assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
+        <img *ngIf="row.smiles==='-'" src="../assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
         <div *ngIf="row.smiles!=='-'" (click)="openCustomModal(row.smiles)">
           <canvas #cmp id="{{row.subst_id}}">{{row.smiles}}</canvas>
         </div>
