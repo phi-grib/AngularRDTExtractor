@@ -42,6 +42,7 @@ export class FilterInfoComponent implements OnInit {
   }  
 
   removeOne(key:string, value:string, category:string) {
+
     if (category===undefined) {
       this.search_form[key].splice(value, 1);
       if (this.search_form[key].length==0){

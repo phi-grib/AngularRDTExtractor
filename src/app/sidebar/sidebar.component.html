@@ -96,11 +96,12 @@
                             <input type="checkbox" class="custom-control-input" 
                                 id="treatmentRelated"  value="relevant" 
                                 (click)="addSearchCheckBox($event,'treatmentRelated')" 
-                                [(ngModel)]=relevant_form>
+                                [(ngModel)]=this.search_form[treatmentRelated]>
                             <label class="custom-control-label" for="treatmentRelated">
-                                &nbsp;Treatment-related only
+                                &nbsp;Treatment-related only 
                             </label>
-                        </div>                   
+                        </div>  
+                                      
                     </div>
                     <br>
                     <p class="font-weight-bold">Category:</p>
@@ -216,7 +217,7 @@
         <button type="button" class="btn" (click)="resetFilters()" style="background-color: lightgray"> Reset Filters </button>
     </div>
     <div align="center">
-        <button type="button" class="btn" (click)="download()" style="background-color: lightgray"> Export </button>
+        <button type="button" class="btn"  data-toggle="modal" data-target="#exampleModal" style="background-color: lightgray"> Export </button>
     </div>
     <br>
 </div>
