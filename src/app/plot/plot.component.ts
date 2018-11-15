@@ -62,19 +62,19 @@ export class PlotComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
           this.plots['Studies'].datasets = [
             {
-              data: [this.plot_info['num_studies_positives'], this.plot_info['num_studies_negatives'], this.globals.totalStudies - this.plot_info['num_studies']],
+              data: [this.plot_info['num_studies_positives'], this.plot_info['num_studies_negatives'], this.globals.totalStudies - this.plot_info['num_studies_positives'] - this.plot_info['num_studies_negatives']],
               backgroundColor: this.colors.slice(0,3)
             }];
             
             
           this.plots['Structures'].datasets = [
             {
-              data: [this.plot_info['num_structures_positives'],this.plot_info['num_structures_negatives'], this.globals.totalStructures - this.plot_info['num_structures']],
+              data: [this.plot_info['num_structures_positives'],this.plot_info['num_structures_negatives'], this.globals.totalStructures - this.plot_info['num_structures_positives'] - this.plot_info['num_structures_negatives']],
               backgroundColor: this.colors.slice(0,3)
             }];
           this.plots['Findings'].datasets= [
             {
-              data: [this.plot_info['num_findings_positives'],this.plot_info['num_findings_negatives'] ,this.globals.totalFindings - this.plot_info['num_findings']],
+              data: [this.plot_info['num_findings_positives'],this.plot_info['num_findings_negatives'] ,this.globals.totalFindings - this.plot_info['num_findings_positives'] -this.plot_info['num_findings_negatives']],
               backgroundColor: this.colors.slice(0,3)
             }];    
           this.plots['Species'].datasets = [
