@@ -14,22 +14,44 @@ export class FilterInfoComponent implements OnInit {
   categories_search_form=<any>{};
   hasTypeInfo=<any>{};
   hasType:boolean=false;
-  types: Array<string>;
+  types: Array<string>=['parameters','observations'];
+  studyKeys: Array<string>=['species', 'routes', 'min_exposure', 'min_dose'];
+  findingKeys: Array<string>=['sex', 'treatmentRelated'];
+  compoundKeys: Array<string>=['compound_name', 'cas_number', 
+                                'pharmacological_action'];
+  studies: Array<string>;
+  findings: Array<string>;
+  compounds: Array<string>;
 
   constructor(private findService : FindingsService) { }
 
   ngOnInit() {
-    this.types = ['parameters','observations']
-    this.findService.currentSearchFormTable.subscribe (searchFormTable => this.search_form = searchFormTable);
+    this.findService.currentSearchFormTable.subscribe (searchFormTable => {
+      this.search_form = searchFormTable;
+      this.studies=[];
+      this.findings=[];
+      this.compounds=[];
+      for (let key of Object.keys(this.search_form)) {
+        if (this.studyKeys.includes(key)) {
+          this.studies.push(key);
+        }
+        if (this.findingKeys.includes(key)) {
+          this.findings.push(key);
+        }
+        if (this.compoundKeys.includes(key)) {
+          this.compounds.push(key);
+        }
+      }
+    });
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm => {
       this.categories_search_form = categoriesSearchForm;
-      /*RESET hasTypeInfo*/
+      /* RESET hasTypeInfo */
       this.hasType=false;
-      for (let type of this.types){
+      for (let type of this.types) {
         this.hasTypeInfo[type]=false;
       }
-      /*Check if types has info*/
-      for (let type of this.types){
+      /* Check if types has info */
+      for (let type of this.types) {
         for (let category of this.objectKeys(this.categories_search_form)){
           if (this.categories_search_form[category][type].length>0){
             this.hasTypeInfo[type]=true;

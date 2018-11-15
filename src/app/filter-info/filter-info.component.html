@@ -1,75 +1,113 @@
-<div class="container-fluid row shadow p-2 bg-white rounded" 
-  id="myContainer"
+<div class="container-fluid row shadow p-2 bg-white rounded" id="myContainer"
   *ngIf="objectKeys(search_form).length>0 || this.hasType">
-  <div *ngFor="let key of objectKeys(search_form)">
-    <div class="card" *ngIf="key!='min_exposure' && key!='max_exposure' && key!='min_dose' && key!='max_dose'">
-      <h6 class="card-header">
-          {{ key | capitalize }} 
+  <div class="card" *ngIf="this.studies.length>0">
+    <h5 class="card-header">
+      Study-level filters
+    </h5>
+    <div *ngFor="let key of studies">
+      <div class="card-body" *ngIf="key!='min_exposure' && key!='min_dose'">
+        <h6>
+          <span>
+            <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            &nbsp;{{ key | capitalize }}
+          </span>
+        </h6>
+        <span 
+          *ngFor="let value of search_form[key]">
+          <span class="closebtn" (click)="removeOne(key,value)">&times;</span>
+          &nbsp;{{ value }}
+        </span>
+      </div> 
+      <div class="card-body" *ngIf="key=='min_exposure'">
+        <h6>
+          <span>
+            <button type="button" class="close" aria-label="Close" (click)="removeExposure(key)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            &nbsp;Exposure period
+          </span>
+        </h6>
+        <div style="padding-left: 25px;">
+          {{'From '+search_form['min_exposure']+' to '+search_form['max_exposure']+' days' }}
+        </div>
+      </div>
+      <div class="card-body" *ngIf="key=='min_dose'">
+        <h6>
+          <span>
+            <button type="button" class="close" aria-label="Close" (click)="removeDose(key)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            &nbsp;Dose range
+          </span>
+        </h6>
+        <div style="padding-left: 25px;">
+          {{'From '+search_form['min_dose']+' to '+search_form['max_dose']+' mg/kg' }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" *ngIf="findings.length>0 || hasType">
+    <h5 class="card-header">
+      Finding-level filters
+    </h5>
+    <div *ngFor="let key of findings">
+      <div class="card-body">
+        <h6>
+          <span>
+            <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            &nbsp;{{ key | capitalize }}
+          </span>
+        </h6>
+        <span 
+          *ngFor="let value of search_form[key]">
+          <span class="closebtn" (click)="removeOne(key,value)">&times;</span>
+          &nbsp;{{ value }}
+        </span>
+      </div>
+    </div>
+    <div *ngFor="let type of this.types">
+      <div class="card-body" *ngIf="this.hasTypeInfo[type]">
+        <h6>
+          <span>
+            <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            &nbsp;{{ type | capitalize }}
+          </span>
+        </h6>
+        <div *ngFor="let category of objectKeys(categories_search_form)">
+          <div *ngFor="let value of categories_search_form[category][type]">          
+            <span class="closebtn" (click)="removeOne(key,value)">&times;</span>
+            &nbsp;{{ category }} | {{ value }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <div class="card" *ngIf="this.compounds.length>0">
+    <h5 class="card-header">
+      Compound-level filters
+    </h5>
+    <div *ngFor="let key of compounds">
+      <div class="card-body">
+        <h6>
+        <span>
           <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
             <span aria-hidden="true">&times;</span>
           </button>
-      </h6>
-      <div class="card-body">
-        <span class="badge badge-info"  
+          &nbsp;{{ key | capitalize }}
+        </span>
+        </h6>
+        <span 
           *ngFor="let value of search_form[key]">
           <span class="closebtn" (click)="removeOne(key,value)">&times;</span>
-          {{ value }}
-        </span>
-      </div> 
-    </div>    
-  </div>
-
-  <div *ngFor="let key of objectKeys(search_form)">
-    <div class="card" *ngIf="key=='min_exposure'">
-      <h6 class="card-header">
-          {{ 'Exposure period' }} 
-          <button type="button" class="close" aria-label="Close" (click)="removeExposure(key)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-      </h6>
-      <div class="card-body">
-        <span class="badge badge-info">
-          {{'From '+search_form['min_exposure']+' to '+search_form['max_exposure']+' days' }}
+          &nbsp;{{ value }}
         </span>
       </div> 
     </div>
-  </div>
-
-  <div *ngFor="let key of objectKeys(search_form)">
-    <div class="card" *ngIf="key=='min_dose'">
-      <h6 class="card-header">
-          {{ 'Dose range' }} 
-          <button type="button" class="close" aria-label="Close" (click)="removeDose(key)">
-            <span aria-hidden="true">&times;</span>
-          </button>
-      </h6>
-      <div class="card-body">
-        <span class="badge badge-info">
-          {{'From '+search_form['min_dose']+' to '+search_form['max_dose']+' mg/kg' }}
-        </span>
-      </div> 
-    </div>
-  </div>
-
-  <ng-container *ngFor="let type of this.types">
-    <div *ngIf="this.hasTypeInfo[type]">
-      <div class="card">
-        <h6 class="card-header">
-            {{ type | capitalize }} 
-            <button type="button" class="close" aria-label="Close" (click)="removeAll(type)">
-              <span aria-hidden="true">&times;</span>
-            </button>    
-        </h6>
-        <div class="card-body">
-          <ng-container *ngFor="let category of objectKeys(categories_search_form)">
-            <span class="badge badge-info" 
-              *ngFor="let value of categories_search_form[category][type]">
-              <span class="closebtn" (click)="removeOne(type,value,category)">&times;</span>
-              {{ category }} | {{ value }}
-            </span>
-          </ng-container>
-        </div> 
-      </div>
-    </div>
-  </ng-container>
+  </div> 
 </div>
