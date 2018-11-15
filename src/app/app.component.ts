@@ -14,7 +14,7 @@ export class AppComponent {
   
   download() { 
     alert(this.mindose)
-    //this.findService.downloadFiles();
+    this.findService.downloadFiles();
   }
   enableDose(){
     this.mindose=null
