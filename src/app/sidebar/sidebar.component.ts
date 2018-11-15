@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
   sources = [];
   selectedCategory: string;
   hasCategory: boolean=false;
+  doseDisabled: boolean=true;
   firstTimeSearch: boolean=false;
   firstTimeCategorySearch: boolean=false;
   request: any;
@@ -50,9 +51,10 @@ export class SidebarComponent implements OnInit {
   maxDose: number;
   minDoseValue: number=null;
   maxDoseValue: number=null;
+  negMinDose: number=null;
 
   categoryOptionsSelected ={};
-  categoryOptions = {}
+  categoryOptions = {};
 
   errorMsg: string;
 
@@ -215,7 +217,6 @@ export class SidebarComponent implements OnInit {
   }
 
   addSearchCheckBox(event: any,id:string) {
-
     if (this.sex.indexOf(event.target.value)!=-1){  
       if (event.target.checked){
         if (event.target.value=="F"){
@@ -242,7 +243,6 @@ export class SidebarComponent implements OnInit {
   }
 
   changeExposureFrom() {
-
     if (this.search_form['max_exposure'] === undefined) {
       this.search_form['max_exposure'] = this.maxExposure;
     }
@@ -267,7 +267,6 @@ export class SidebarComponent implements OnInit {
   }
 
   changeExposureTo() {
-
     if (this.search_form['min_exposure'] === undefined) {
       this.search_form['min_exposure'] = this.minExposure;
     }
@@ -292,7 +291,6 @@ export class SidebarComponent implements OnInit {
   }
 
   changeDoseFrom() {
-
     if (this.search_form['max_dose'] === undefined) {
       this.search_form['max_dose'] = this.maxDose;
     }
@@ -317,7 +315,6 @@ export class SidebarComponent implements OnInit {
   }
 
   changeDoseTo() {
-
     if (this.search_form['min_dose'] === undefined) {
       this.search_form['min_dose'] = this.minDose;
     }
@@ -341,6 +338,14 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
+  changeDoseDisabled () {
+    this.doseDisabled = !this.doseDisabled;
+  }
+
+  changeNegMinDose() {
+    this.search_form['negative_min_dose'] = this.negMinDose;
+  }
+
   resetFilters() {    
     this.search_form={}
     this.globals.showSpinner = true;
@@ -356,6 +361,8 @@ export class SidebarComponent implements OnInit {
     this.fromValue = null;
     this.minDoseValue = null;
     this.maxDoseValue = null;
+    this.negMinDose = null;
+    this.doseDisabled = true;
     this.hasCategory = false;
     this.findService.changeCategoriesSearchForm(this.categories_search_form);
     this.findService.changeSearchFormTable(this.search_form);
