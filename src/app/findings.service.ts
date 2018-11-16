@@ -107,10 +107,12 @@ export class FindingsService {
     }
   }
 
-  downloadFiles(): void {
+  downloadFiles(mindose:number): void {
     let url: string = this.apiRoot+'/download';
+    let params = new HttpParams();
+    params = params.set('min_dose',mindose.toString())
     this.globals.downloading = true
-    this.http.get(url, {responseType: 'blob' as 'json'}).subscribe(
+    this.http.get(url, {responseType: 'blob' as 'json', params: params}).subscribe(
       (response: any) =>{
           let dataType = response.type;
           let binaryData = [];
