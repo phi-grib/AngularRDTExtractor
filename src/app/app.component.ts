@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private findService : FindingsService) {}
   
   download() { 
-    this.findService.downloadFiles(this.mindose);
+    this.findService.downloadFiles();
   }
   enableDose(){
     this.mindose=null
