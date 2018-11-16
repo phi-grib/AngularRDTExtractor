@@ -340,10 +340,16 @@ export class SidebarComponent implements OnInit {
 
   changeDoseDisabled () {
     this.doseDisabled = !this.doseDisabled;
+    if (this.doseDisabled) {
+      delete this.search_form['negative_min_dose'];
+      this.negMinDose = null;
+      this.findService.changeSearchFormTable(this.search_form);
+    } 
   }
 
   changeNegMinDose() {
     this.search_form['negative_min_dose'] = this.negMinDose;
+    this.findService.changeSearchFormTable(this.search_form);
   }
 
   resetFilters() {    

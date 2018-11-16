@@ -3,6 +3,7 @@
     -moz-transform: scale(0.85);
 }
 
+
 .card-header {
     padding: 0px;
 }
@@ -25,21 +26,33 @@
     width: 100%;
 }
 
-.closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
 #filterContainer {
-    padding: 8px 8px 8px 8px;
+    /* padding: 8px 8px 8px 8px; */
     text-decoration: none;
     font-size: 22px;
     color: #818181;
     display: block;
     transition: 0.3s;
+    z-index: 2;
+    float: right;
+}
+
+.closebtn {
+    position: sticky;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    /* margin-left: 50px; */
+    color: black;
+}
+
+div.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: whitesmoke;
+    z-index: 1;
+    padding-bottom: 5px;
 }
 
 [data-toggle="collapse"]:after {
@@ -64,8 +77,8 @@
 
 .switch-input {
     display: none;
-  }
-  .switch-label {
+}
+.switch-label {
     position: relative;
     display: inline-block;
     min-width: 112px;
@@ -73,10 +86,10 @@
     font-weight: 500;
     text-align: left;
     margin: 16px;
-    padding: 16px 0 16px 44px;
+    padding: 0 0 0 44px;
     font-size: 0.95rem;
-  }
-  .switch-label:before, .switch-label:after {
+}
+.switch-label:before, .switch-label:after {
     content: "";
     position: absolute;
     margin: 0;
@@ -87,40 +100,40 @@
     transform: translate(0, -50%);
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
-  }
-  .switch-label:before {
+}
+.switch-label:before {
     left: 1px;
     width: 34px;
     height: 14px;
     background-color: #9E9E9E;
     border-radius: 8px;
-  }
-  .switch-label:after {
+}
+.switch-label:after {
     left: 0;
     width: 20px;
     height: 20px;
     background-color: #FAFAFA;
     border-radius: 50%;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098), 0 1px 5px 0 rgba(0, 0, 0, 0.084);
-  }
-  .switch-label .toggle--on {
+}
+.switch-label .toggle--on {
     display: none;
-  }
-  .switch-label .toggle--off {
+}
+.switch-label .toggle--off {
     display: inline-block;
-  }
-  .switch-input:checked + .switch-label:before {
+}
+.switch-input:checked + .switch-label:before {
     background-color: #b3d9ff;
-  }
-  .switch-input:checked + .switch-label:after {
+}
+.switch-input:checked + .switch-label:after {
     background-color: #1a8cff;
     -ms-transform: translate(80%, -50%);
     -webkit-transform: translate(80%, -50%);
     transform: translate(80%, -50%);
-  }
-  .switch-input:checked + .switch-label .toggle--on {
+}
+.switch-input:checked + .switch-label .toggle--on {
     display: inline-block;
-  }
-  .switch-input:checked + .switch-label .toggle--off {
+}
+.switch-input:checked + .switch-label .toggle--off {
     display: none;
-  }
+}
