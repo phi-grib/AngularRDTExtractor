@@ -26,8 +26,8 @@ export class PlotComponent implements OnInit, AfterViewInit {
   firstTime = true;
 
   colors:Array<any> =
-  [ "#E3464A",
-    "#89BDAB",
+  [ "#89BDAB",
+    "#E3464A",
     "#F0EDDB",
     "#216F78",
     "#E8C098",
@@ -53,29 +53,50 @@ export class PlotComponent implements OnInit, AfterViewInit {
       this.plot_info = table_info
      
       if (!this.firstTime){
-        this.plots['Studies'].labels = ['Selected', 'Not Selected'];
-        this.plots['Structures'].labels = ['Selected', 'Not Selected'];
-        this.plots['Findings'].labels =  ['Selected', 'Not Selected'];
+        // Exist some negative finding, structure, study
+        if (this.plot_info['num_findings_negatives']==0){
+          var data_studies = [this.plot_info['num_studies_positives'], this.globals.totalStudies - this.plot_info['num_studies_positives']]
+          var data_structures = [this.plot_info['num_structures_positives'], this.globals.totalStructures - this.plot_info['num_structures_positives']]
+          var data_findings = [this.plot_info['num_findings_positives'], this.globals.totalFindings - this.plot_info['num_findings_positives']]
+          var label_studies = ['Selected ','Not Selected'];
+          var label_structures = ['Selected ','Not Selected'];
+          var label_indings = ['Selected ','Not Selected'];
+        }
+        else{
+          var data_studies = [this.plot_info['num_studies_positives'], this.plot_info['num_studies_negatives'], this.globals.totalStudies - this.plot_info['num_studies_positives'] - this.plot_info['num_studies_negatives']]
+          var data_structures = [this.plot_info['num_structures_positives'],this.plot_info['num_structures_negatives'], this.globals.totalStructures - this.plot_info['num_structures_positives'] - this.plot_info['num_structures_negatives']]
+          var data_findings = [this.plot_info['num_findings_positives'],this.plot_info['num_findings_negatives'] ,this.globals.totalFindings - this.plot_info['num_findings_positives'] -this.plot_info['num_findings_negatives']]
+          var label_studies = ['Selected Positive','Selected Negative','Not Selected'];
+          var label_structures = ['Selected Positive','Selected Negative','Not Selected'];
+          var label_indings = ['Selected Positive','Selected Negative','Not Selected'];
+        }
+
+
+        this.plots['Studies'].labels = label_studies
+        this.plots['Structures'].labels = label_structures
+        this.plots['Findings'].labels =  label_indings
         this.plots['Species'].labels = this.plot_info['plotInfo']['species'][0];
         this.plots['Treatment'].labels = ['Not related', 'Treatment related'];
         this.plots['Source'].labels = this.plot_info['plotInfo']['source'][0];
+
+        
         setTimeout(() => {
           this.plots['Studies'].datasets = [
             {
-              data: [this.plot_info['num_studies'], this.globals.totalStudies - this.plot_info['num_studies']],
-              backgroundColor: this.colors.slice(0,2)
+              data: data_studies,
+              backgroundColor: this.colors.slice(0,data_studies.length)
             }];
             
             
           this.plots['Structures'].datasets = [
             {
-              data: [this.plot_info['num_structures'], this.globals.totalStructures - this.plot_info['num_structures']],
-              backgroundColor: this.colors.slice(0,2)
+              data: data_structures,
+              backgroundColor: this.colors.slice(0,data_structures.length)
             }];
           this.plots['Findings'].datasets= [
             {
-              data: [this.plot_info['num_findings'], this.globals.totalFindings - this.plot_info['num_findings']],
-              backgroundColor: this.colors.slice(0,2)
+              data: data_findings,
+              backgroundColor: this.colors.slice(0,data_findings.length)
             }];    
           this.plots['Species'].datasets = [
             {
@@ -109,10 +130,10 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.plotID++;
     a.datasets= [
       {
-        data: [this.plot_info['num_structures'], this.globals.totalStructures - this.plot_info['num_structures']],
+        data: [this.plot_info['num_structures'],0],
         backgroundColor: this.colors.slice(0,2)
       }];
-    a.labels =  ['Selected', 'Not Selected']
+    a.labels =  ['Selected','Not Selected'];
     a.chartType = 'pie'
     a.title= "Structures"
     this.plots['Structures']=a
@@ -122,10 +143,10 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.plotID++;
     a.datasets= [
       {
-        data: [this.plot_info['num_studies'], this.globals.totalStudies - this.plot_info['num_studies']],
+        data: [this.plot_info['num_studies'],0],
         backgroundColor: this.colors.slice(0,2)
       }];
-    a.labels = ['Selected', 'Not Selected']
+    a.labels = ['Selected','Not Selected'];
     a.chartType = 'pie'
     a.title= "Studies"
     this.plots['Studies']=a
@@ -135,10 +156,10 @@ export class PlotComponent implements OnInit, AfterViewInit {
     this.plotID++;
     a.datasets= [
       {
-        data: [this.plot_info['num_findings'], this.globals.totalFindings - this.plot_info['num_findings']],
+        data: [this.plot_info['num_findings'],0],
         backgroundColor: this.colors.slice(0,2)
       }];
-    a.labels = ['Selected', 'Not Selected']
+    a.labels = ['Selected','Not Selected'];
     a.chartType = 'pie'
     a.title= "Findings"
     this.plots['Findings']=a

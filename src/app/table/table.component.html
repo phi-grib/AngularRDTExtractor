@@ -14,7 +14,7 @@
       <th>Pharmacological action</th>
       <th>Studies per species</th>
     </tr>
-    <tr *ngFor="let row of table_info.data;" class="text-left">
+    <tr *ngFor="let row of table_info.data;" class="text-left"  [ngClass]="{ 'table-danger': !row.positive }">
       <td class="align-middle text-center" style="border-right: 1px solid lightgray">
         <img *ngIf="row.smiles==='-'" src="../assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
         <div *ngIf="row.smiles!=='-'" (click)="openCustomModal(row.smiles)">

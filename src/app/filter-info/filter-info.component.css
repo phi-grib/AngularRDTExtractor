@@ -5,6 +5,7 @@
 
 .card-header {
     padding: 10px;
+    background-color: whitesmoke;
 }
 
 .card-body {
@@ -14,7 +15,7 @@
 .close {
     padding-left: 1px;
     color: rgb(0, 0, 0);
-    float: right;
+    float: left;
     font-size: 125%;
     cursor: pointer;
 }
@@ -45,11 +46,9 @@ divlabel {
     background-color: #f1f1f1;
 }
 .closebtn {
-    padding-left: 10px;
+    padding-left: 15px;
     color: #888;
-    font-weight: bold;
-    float: right;
-    font-size: 20px;
+    float: left;
     cursor: pointer;
 }
 .closebtn:hover {
