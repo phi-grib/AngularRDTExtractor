@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
   F: boolean=false;
   M: boolean=false;
   BOTH: boolean=false;
+  treatmentRelated: boolean=false;
   sex = [];
   sources = [];
   selectedCategory: string;
@@ -109,6 +110,10 @@ export class SidebarComponent implements OnInit {
         this.M=false
         this.BOTH=false
       }
+      if (!("treatmentRelated" in this.search_form)){
+        this.treatmentRelated=false
+      }
+      
       this.globals.showError = false;
       this.search_form = searchFormTable;
       if (this.firstTimeSearch){

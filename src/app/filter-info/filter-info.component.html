@@ -73,7 +73,7 @@
       <div class="card-body" *ngIf="this.hasTypeInfo[type]">
         <h6>
           <span>
-            <button type="button" class="close" aria-label="Close" (click)="removeAll(key)">
+            <button type="button" class="close" aria-label="Close" (click)="removeAll(type)">
               <span aria-hidden="true">&times;</span>
             </button>
             &nbsp;{{ type | capitalize }}
@@ -81,7 +81,7 @@
         </h6>
         <div *ngFor="let category of objectKeys(categories_search_form)">
           <div *ngFor="let value of categories_search_form[category][type]">          
-            <span class="closebtn" (click)="removeOne(key,value)">&times;</span>
+            <span class="closebtn" (click)="removeOne(type,value,category)">&times;</span>
             &nbsp;{{ category }} | {{ value }}
           </div>
         </div>

@@ -121,8 +121,8 @@
                         <div class="custom-control custom-checkbox">
                             <input type="checkbox" class="custom-control-input" 
                                 id="treatmentRelated"  value="relevant" 
-                                (click)="addSearchCheckBox($event,'treatmentRelated')" 
-                                >
+                                (click)="addSearchCheckBox($event,'treatmentRelated')"
+                                [(ngModel)]="this.treatmentRelated" >
                             <label class="custom-control-label" for="treatmentRelated">
                                 &nbsp;Treatment-related only 
                             </label>
