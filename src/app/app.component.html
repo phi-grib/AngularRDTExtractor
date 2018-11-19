@@ -7,39 +7,3 @@
 <div id="main">
     <app-tabs></app-tabs>
 </div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Export options</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="row align-items-center">
-                
-                <div class="col" style="padding-left:0px;padding-right: 0px">
-                    <input type="checkbox" id="id-name--1" name="set-name" class="switch-input" (click)="enableDose()">
-                    <label for="id-name--1" class="switch-label">
-                        <span class="toggle--off">Do not</span>
-                        <span class="toggle--on"></span>
-                        Export negatives compounds
-                    </label>
-                </div>
-                <div class="col-5"> 
-                    <label for="min_dose" class="sr-only">Minimum Dose:</label>
-                    <input type="number" class="form-control" id="min_dose" placeholder="Minimum Dose" min="0.0" max="1000.0" step="0.001" [(ngModel)]="this.mindose" [disabled]="doseDisabled">
-                </div>
-            </div>
-        </div>   
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="download()">Export</button>
-        </div>
-      </div>
-    </div>
-  </div>
-

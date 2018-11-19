@@ -236,7 +236,7 @@
         <button type="button" class="btn" (click)="resetFilters()" style="background-color: lightgray"> Reset Filters </button>
     </div>
     <div align="center">
-        <button type="button" class="btn"  data-toggle="modal" data-target="#exampleModal" style="background-color: lightgray" [disabled]="this.globals.showSpinner"> Export </button>
+        <button type="button" class="btn" (click)="download()" style="background-color: lightgray" [disabled]="this.globals.showSpinner"> Export </button>
     </div>
     <br>
 </div>
