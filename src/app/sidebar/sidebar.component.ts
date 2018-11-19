@@ -398,7 +398,7 @@ export class SidebarComponent implements OnInit {
     } 
     return false
   }
-
+  
   resetFilters() {    
     this.search_form={}
     this.globals.showSpinner = true;
