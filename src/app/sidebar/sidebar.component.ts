@@ -184,6 +184,13 @@ export class SidebarComponent implements OnInit {
     });
   }
 
+  closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.overflow = "hidden";
+    document.getElementById("main").style.marginLeft = "25px";document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.width = "100%";
+  }
+
   selectCategory(event: any) {
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
@@ -357,36 +364,6 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
-  resetFilters() {    
-    this.search_form={}
-    this.globals.showSpinner = true;
-    for (let source of this.sources){  
-      this.categories_search_form[source]['parameters']=[]
-      this.categories_search_form[source]['observations']=[]
-    }
-    this.relevant_form = false;
-    this.BOTH = false;
-    this.F = false;
-    this.M = false;
-    this.toValue = null;
-    this.fromValue = null;
-    this.minDoseValue = null;
-    this.maxDoseValue = null;
-    this.negMinDose = null;
-    this.doseDisabled = true;
-    this.hasCategory = false;
-    this.findService.changeCategoriesSearchForm(this.categories_search_form);
-    this.findService.changeSearchFormTable(this.search_form);
-    if (this.request){
-      this.request.unsubscribe();
-    }
-    this.request = this.findService.initFinding().subscribe(table_info => {
-      this.findService.changeTable(table_info);
-      this.findService.changePlot(table_info);
-      this.globals.showSpinner = false;
-    });
-  }
-
   addCategory($event: any, type) {
    
     if ($event.value!==undefined){
@@ -415,13 +392,6 @@ export class SidebarComponent implements OnInit {
     } 
   }
 
-  closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("mySidenav").style.overflow = "hidden";
-    document.getElementById("main").style.marginLeft = "25px";document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.width = "100%";
-  }
-
   somethingtoSearch() {
     if (Object.keys(this.search_form).length>0) {
       return true
@@ -432,6 +402,36 @@ export class SidebarComponent implements OnInit {
         { return true }
     } 
     return false
+  }
+  
+  resetFilters() {    
+    this.search_form={}
+    this.globals.showSpinner = true;
+    for (let source of this.sources){  
+      this.categories_search_form[source]['parameters']=[]
+      this.categories_search_form[source]['observations']=[]
+    }
+    this.relevant_form = false;
+    this.BOTH = false;
+    this.F = false;
+    this.M = false;
+    this.toValue = null;
+    this.fromValue = null;
+    this.minDoseValue = null;
+    this.maxDoseValue = null;
+    this.negMinDose = null;
+    this.doseDisabled = true;
+    this.hasCategory = false;
+    this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    this.findService.changeSearchFormTable(this.search_form);
+    if (this.request){
+      this.request.unsubscribe();
+    }
+    this.request = this.findService.initFinding().subscribe(table_info => {
+      this.findService.changeTable(table_info);
+      this.findService.changePlot(table_info);
+      this.globals.showSpinner = false;
+    });
   }
 
   download() { 
