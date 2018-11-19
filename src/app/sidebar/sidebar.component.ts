@@ -179,6 +179,13 @@ export class SidebarComponent implements OnInit {
     });
   }
 
+  closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("mySidenav").style.overflow = "hidden";
+    document.getElementById("main").style.marginLeft = "25px";document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.width = "100%";
+  }
+
   selectCategory(event: any) {
     this.hasCategory = true;
     this.selectedCategory = event.target.value;
@@ -352,6 +359,46 @@ export class SidebarComponent implements OnInit {
     this.findService.changeSearchFormTable(this.search_form);
   }
 
+  addCategory($event: any, type) {
+   
+    if ($event.value!==undefined){
+      this.categories_search_form[this.selectedCategory][type] = $event.value;
+      this.findService.changeCategoriesSearchForm(this.categories_search_form);
+    }
+  }
+
+  addSearchForm($event: any, type) {
+
+    if ($event.value!==undefined){
+
+      /*DELETE*/
+      if ($event.value==""){
+        this.search_form[type].splice($event.value, 1);
+        if (this.search_form[type].length==0){
+          delete this.search_form[type]; 
+        }  
+      }
+      /*ADD*/
+      else{      
+        this.search_form[type] = $event.value;
+      }
+
+      this.findService.changeSearchFormTable(this.search_form);
+    } 
+  }
+
+  somethingtoSearch() {
+    if (Object.keys(this.search_form).length>0) {
+      return true
+    }
+    for (let source of this.sources) { 
+      if (this.categories_search_form[source]['parameters'].length>0 ||
+          this.categories_search_form[source]['observations'].length>0)
+        { return true }
+    } 
+    return false
+  }
+
   resetFilters() {    
     this.search_form={}
     this.globals.showSpinner = true;
@@ -382,50 +429,7 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  addCategory($event: any, type) {
-   
-    if ($event.value!==undefined){
-      this.categories_search_form[this.selectedCategory][type] = $event.value;
-      this.findService.changeCategoriesSearchForm(this.categories_search_form);
-    }
-  }
-
-  addSearchForm($event: any, type) {
-
-    if ($event.value!==undefined){
-
-      /*DELETE*/
-      if ($event.value==""){
-        this.search_form[type].splice($event.value, 1);
-        if (this.search_form[type].length==0){
-          delete this.search_form[type]; 
-        }  
-      }
-      /*ADD*/
-      else{      
-        this.search_form[type] = $event.value;
-      }
-
-      this.findService.changeSearchFormTable(this.search_form);
-    } 
-  }
-
-  closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("mySidenav").style.overflow = "hidden";
-    document.getElementById("main").style.marginLeft = "25px";document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.width = "100%";
-  }
-
-  somethingtoSearch() {
-    if (Object.keys(this.search_form).length>0) {
-      return true
-    }
-    for (let source of this.sources) { 
-      if (this.categories_search_form[source]['parameters'].length>0 ||
-          this.categories_search_form[source]['observations'].length>0)
-        { return true }
-    } 
-    return false
+  download() { 
+    this.findService.downloadFiles();
   }
 }
