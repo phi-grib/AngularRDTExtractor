@@ -8,6 +8,3 @@ import { FindingsService } from './findings.service';
 export class AppComponent {
   title = 'RDTExtractor';
 }
-
-
-
