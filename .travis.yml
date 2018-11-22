@@ -21,7 +21,7 @@ script:
 
 # ADD
 - cd ..
-- ng build --prod --aot --output-hashing none --output-path DjangoAPI/frontend
+- ng build --output-hashing none --output-path DjangoAPI/frontend
 - cd DjangoAPI/
 - git remote
 - git config user.email "ignacio.pasamontes@upf.edu"
