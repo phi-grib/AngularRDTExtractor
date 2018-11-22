@@ -45,14 +45,60 @@ export class PlotComponent implements OnInit, AfterViewInit {
   ];
 
   constructor( private findService : FindingsService,  private _router: Router,
-    public globals: Globals,public spinnerService: Ng4LoadingSpinnerService) { }
+    public globals: Globals,public spinnerService: Ng4LoadingSpinnerService) { 
+
+    this.plots=[]
+    this.plotID=1;
+
+    var a = new Plot();
+    a.id=this.plotID;
+    this.plotID++;
+    a.chartType = 'pie'
+    a.title= "Structures"
+    this.plots['Structures']=a
+
+    var a = new Plot();
+    a.id=this.plotID;
+    this.plotID++;
+    a.chartType = 'pie'
+    a.title= "Studies"
+    this.plots['Studies']=a
+
+    var a = new Plot();
+    a.id=this.plotID;
+    this.plotID++;
+    a.chartType = 'pie'
+    a.title= "Findings"
+    this.plots['Findings']=a
+
+    var a = new Plot();
+    a.id=this.plotID;
+    this.plotID++;
+    a.chartType = 'pie'
+    a.title= "Species"
+    this.plots['Species']=a
+    
+    var a = new Plot();
+    a.id=this.plotID;
+    this.plotID++;
+    a.title= "Relevance"
+    a.chartType = 'pie'
+    this.plots['Treatment']=a
+
+    var a = new Plot();
+    a.id=this.plotID;
+    this.plotID++;
+    a.title= "Source"
+    a.chartType = 'pie'
+    this.plots['Source']=a
+
+    }
 
   ngOnInit(){
 
     this.findService.currentTable.subscribe(table_info =>{
       this.plot_info = table_info
-     
-      if (!this.firstTime){
+      if (true){
         // Exist some negative finding, structure, study
         if (this.plot_info['num_findings_negatives']==0){
           var data_studies = [this.plot_info['num_studies_positives'], this.globals.totalStudies - this.plot_info['num_studies_positives']]
@@ -121,87 +167,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
       }
       this.firstTime=false
     });
-   
-    this.plots=[]
-    this.plotID=1;
-
-    var a = new Plot();
-    a.id=this.plotID;
-    this.plotID++;
-    a.datasets= [
-      {
-        data: [this.plot_info['num_structures'],0],
-        backgroundColor: this.colors.slice(0,2)
-      }];
-    a.labels =  ['Selected','Not Selected'];
-    a.chartType = 'pie'
-    a.title= "Structures"
-    this.plots['Structures']=a
-
-    var a = new Plot();
-    a.id=this.plotID;
-    this.plotID++;
-    a.datasets= [
-      {
-        data: [this.plot_info['num_studies'],0],
-        backgroundColor: this.colors.slice(0,2)
-      }];
-    a.labels = ['Selected','Not Selected'];
-    a.chartType = 'pie'
-    a.title= "Studies"
-    this.plots['Studies']=a
-
-    var a = new Plot();
-    a.id=this.plotID;
-    this.plotID++;
-    a.datasets= [
-      {
-        data: [this.plot_info['num_findings'],0],
-        backgroundColor: this.colors.slice(0,2)
-      }];
-    a.labels = ['Selected','Not Selected'];
-    a.chartType = 'pie'
-    a.title= "Findings"
-    this.plots['Findings']=a
-
-    var a = new Plot();
-    a.id=this.plotID;
-    this.plotID++;
-    a.datasets= [
-      {
-        data: this.plot_info['plotInfo']['species'][1],
-        backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['species'][1].length)
-      }];
-    a.labels = this.plot_info['plotInfo']['species'][0]
-    a.chartType = 'pie'
-    a.title= "Species"
-    this.plots['Species']=a
-    
-    var a = new Plot();
-    a.id=this.plotID;
-    this.plotID++;
-    a.datasets= [
-      {
-        data: this.plot_info['plotInfo']['relevance'][1],
-        backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['relevance'][1].length)
-      }];
-    a.labels = this.plot_info['plotInfo']['relevance'][0]
-    a.title= "Relevance"
-    a.chartType = 'pie'
-    this.plots['Treatment']=a
-
-    var a = new Plot();
-    a.id=this.plotID;
-    this.plotID++;
-    a.datasets= [
-      {
-        data: this.plot_info['plotInfo']['source'][1],
-        backgroundColor: this.colors.slice(0,this.plot_info['plotInfo']['source'][1].length)
-      }];
-    a.labels = this.plot_info['plotInfo']['source'][0]
-    a.title= "Source"
-    a.chartType = 'pie'
-    this.plots['Source']=a
+  
   }
 
    ngAfterViewInit() {

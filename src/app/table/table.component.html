@@ -18,9 +18,9 @@
       <td class="align-middle text-center" style="border-right: 1px solid lightgray">
         <img *ngIf="row.smiles==='-'" src="../assets/img/No_Image_Available.png" width="80" height="80" class="mx-auto d-block"> 
         <div *ngIf="row.smiles!=='-'" (click)="openCustomModal(row.smiles)">
-          <canvas #cmp id="{{row.subst_id}}">{{row.smiles}}</canvas>
+          <canvas #cmp id="{{row.inchi_key}}">{{row.smiles}}</canvas>
         </div>
-        <br>{{row.subst_id}}
+        <br>{{row.inchi_key}}
       </td>          
       <td class="align-middle"><pre>{{row.common_name}}</pre></td>
       <td class="align-middle"><pre>{{row.cas_number}}</pre></td>
