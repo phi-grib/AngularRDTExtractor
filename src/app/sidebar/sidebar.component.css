@@ -51,6 +51,7 @@ div.sticky {
     background-color: whitesmoke;
     z-index: 1;
     padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 [data-toggle="collapse"]:after {

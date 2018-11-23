@@ -4,28 +4,7 @@
             &times;
         </a>            
         <br>
-        <!-- Add negative compound defintion -->
-        <div style="padding-left:0px; padding-right:0px; padding-top: 0px;">
-            <input type="checkbox" id="id-name--1" name="set-name"  
-                class="switch-input" 
-                (click)="changeDoseDisabled()"
-                [disabled]="!hasCategory">
-            <label for="id-name--1" class="switch-label"
-                [ngClass]="{'unselected': !hasCategory}">
-                Define negative compounds
-            </label>
-        </div>
-        <div class="form-group" style="padding-left: 15px;" 
-            [ngClass]="{'unselected': (doseDisabled || !hasCategory) }">
-            Minimum Tested Dose:&nbsp;&nbsp;
-            <input class="form-control input-sm" 
-                id="min_dose" 
-                type="number" 
-                [(ngModel)]="negMinDose"
-                style="width: 100px; height: 25px; display: inline-block; padding-right: 0px" 
-                [disabled]="(doseDisabled || !hasCategory)"
-                (change)="changeNegMinDose()" min="0.0" max="1000.0" step="0.001">
-        </div>
+        
     </div>
     <!-- Set filters -->
     <div role="tablist">
@@ -35,7 +14,8 @@
                     Study
                 </button>             
             </div>
-            <div id="StudyCard" class="collapse show" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
+            <!-- Study filter -->
+            <div id="StudyCard" class="collapse show shadow p-3 mb-1 bg-white rounded" aria-labelledby="StudyHeading" data-parent="#FilterAccordion">
                 <div class="card-body">
                     <p class="font-weight-bold">Species:</p>
                     <div>
@@ -97,12 +77,13 @@
                     </div>
                 </div>
             </div>
+            <!-- Finding filter -->
             <div class="card-header" role="tab" id="FindingHeading">
                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#FindingCard" aria-expanded="true" aria-controls="FindingCard">
                     Finding
                 </button>
             </div>
-            <div id="FindingCard" class="collapse" aria-labelledby="FindingHeading" data-parent="#FilterAccordion">
+            <div id="FindingCard" class="collapse shadow p-3 mb-1 bg-white rounded" aria-labelledby="FindingHeading" data-parent="#FilterAccordion">
                 <div class="card-body">
                     <p class="font-weight-bold">Sex:</p>
                     <div class="form-inline">
@@ -172,14 +153,41 @@
                         </div>
                     </div>
                     <br>
+                    <!-- Add negative compound defintion -->
+                  
+                    <div [hidden]="( 
+                        this.categories_search_form[selectedCategory]['parameters'].length == 0)">
+                    <div style="padding-left:0px; padding-right:0px; padding-top: 0px;">
+                        <input type="checkbox" id="id-name--1" name="set-name"  
+                            class="switch-input" 
+                            (click)="changeDoseDisabled()"
+                            [disabled]="!hasCategory">
+                        <label for="id-name--1" class="switch-label"
+                            [ngClass]="{'unselected': !hasCategory}">
+                            Define negative compounds
+                        </label>
+                    </div>
+                    <div class="form-group" style="padding-left: 15px;" 
+                        [ngClass]="{'unselected': (doseDisabled || !hasCategory) }">
+                        Minimum Tested Dose:&nbsp;&nbsp;
+                        <input class="form-control input-sm" 
+                            id="min_dose" 
+                            type="number" 
+                            [(ngModel)]="negMinDose"
+                            style="width: 100px; height: 25px; display: inline-block; padding-right: 0px" 
+                            [disabled]="(doseDisabled || !hasCategory)"
+                            (change)="changeNegMinDose()" min="0.0" max="1000.0" step="0.001"> mg/kg 
+                    </div>
+                </div>
                 </div>
             </div>
+            <!-- Compund filter -->
             <div class="card-header" role="tab" id="CompoundHeading">
                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#CompoundCard" aria-expanded="false" aria-controls="CompoundCard">
                     Compound
                 </button>          
             </div>
-            <div id="CompoundCard" class="collapse" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
+            <div id="CompoundCard" class="collapse shadow p-3 mb-1 bg-white rounded" aria-labelledby="CompoundHeading" data-parent="#FilterAccordion">
                 <div class="card-body">
                     <p class="font-weight-bold">Name:</p>
                     <div>

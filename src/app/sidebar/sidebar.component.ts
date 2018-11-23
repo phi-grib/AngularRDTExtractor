@@ -74,6 +74,7 @@ export class SidebarComponent implements OnInit {
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
       this.globals.showError = false;
+      console.log(this.categoryOptions[this.selectedCategory]['parameters'].length)
       this.categories_search_form = categoriesSearchForm;
       if (this.firstTimeCategorySearch){
         if (this.request){
