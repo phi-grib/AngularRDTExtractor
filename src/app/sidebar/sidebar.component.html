@@ -154,9 +154,12 @@
                     </div>
                     <br>
                     <!-- Add negative compound defintion -->
-                  
                     <div [hidden]="( 
-                        this.categories_search_form[selectedCategory]['parameters'].length == 0)">
+                        this.categories_search_form['Organ weight']['parameters'].length == 0
+                        && this.categories_search_form['Clinical chemical']['parameters'].length == 0
+                        && this.categories_search_form['Clinical hematological']['parameters'].length == 0
+                        && this.categories_search_form['Histopathological']['parameters'].length == 0
+                        && this.categories_search_form['Urinalysis']['parameters'].length == 0 )">
                     <div style="padding-left:0px; padding-right:0px; padding-top: 0px;">
                         <input type="checkbox" id="id-name--1" name="set-name"  
                             class="switch-input" 
