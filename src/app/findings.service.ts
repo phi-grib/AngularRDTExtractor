@@ -121,8 +121,7 @@ export class FindingsService {
           downloadLink.setAttribute('download', 'results.zip');
           document.body.appendChild(downloadLink);
           downloadLink.click();
-          this.globals.downloading = false
-         
+          this.globals.downloading = false    
       }
     )
   }
