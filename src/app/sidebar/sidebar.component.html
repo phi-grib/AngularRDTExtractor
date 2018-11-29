@@ -154,8 +154,6 @@
                     </div>
                     <br>
                     <!-- Add negative compound defintion -->
-                    {{this.hasCategory}}
-                    {{this.doseDisabled}}
                     <div style="background-color: whitesmoke" [hidden]="( 
                         this.categories_search_form['Organ weight']['parameters'].length == 0
                         && this.categories_search_form['Clinical chemical']['parameters'].length == 0
@@ -165,7 +163,7 @@
                     <div style="padding-left:0px; padding-right:0px; padding-top: 0px;">
                         <input type="checkbox" id="id-name--1" name="set-name"  
                             class="switch-input" 
-                            (click)="changeDoseDisabled(event)"
+                            (click)="changeDoseDisabled()"
                             [disabled]="!hasCategory">
                         <label for="id-name--1" class="switch-label"
                             [ngClass]="{'unselected': doseDisabled}">
