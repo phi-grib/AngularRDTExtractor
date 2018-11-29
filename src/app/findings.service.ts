@@ -3,7 +3,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
-import { Globals } from './globals'
+import 'rxjs/add/operator/timeout';
+import { Globals } from './globals';
 
 @Injectable()
 export class FindingsService {
@@ -106,12 +107,14 @@ export class FindingsService {
       alert( 'Please disable your Pop-up blocker and try again.');
     }
   }
-
-  downloadFiles(): void {
+  
+  downloadFiles():any {
     let url: string = this.apiRoot+'/download';
     let params = new HttpParams();
     this.globals.downloading = true
-    this.http.get(url, {responseType: 'blob' as 'json', params: params}).subscribe(
+    this.http.get(url, {responseType: 'blob' as 'json', params: params})
+    .timeout(20000)
+    .subscribe(
       (response: any) =>{
           let dataType = response.type;
           let binaryData = [];
@@ -121,8 +124,14 @@ export class FindingsService {
           downloadLink.setAttribute('download', 'results.zip');
           document.body.appendChild(downloadLink);
           downloadLink.click();
-          this.globals.downloading = false    
-      }
+          this.globals.downloading = false
+          return true
+      },
+     (error:any) => {
+      this.globals.downloading = false
+      this.globals.errorMsg=error.message;
+      this.globals.showError = true;
+    }
     )
   }
 }

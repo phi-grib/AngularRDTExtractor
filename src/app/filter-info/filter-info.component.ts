@@ -64,7 +64,9 @@ export class FilterInfoComponent implements OnInit {
   }  
 
   removeOne(key:string, value:string, category:string) {
-    
+
+    var delete_min_dose=true;
+  
     if (category===undefined) {
       this.search_form[key].splice(value, 1);
       if (this.search_form[key].length==0){
@@ -80,6 +82,8 @@ export class FilterInfoComponent implements OnInit {
 
 
   removeAll(type:string) {
+
+    var delete_min_dose=true;
     
     if (type in this.search_form) {
       delete this.search_form[type];   

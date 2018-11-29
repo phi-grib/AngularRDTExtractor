@@ -73,18 +73,22 @@ export class SidebarComponent implements OnInit {
     this.globals.showError = false;
     this.findService.currentTable.subscribe(table_info =>this.table_info = table_info);
     this.findService.currentCategoriesSearchForm.subscribe (categoriesSearchForm =>{
+
+      
       this.globals.showError = false;
-      console.log(this.categoryOptions[this.selectedCategory]['parameters'].length)
       this.categories_search_form = categoriesSearchForm;
+      if (this.is_empty(this.categories_search_form)) {
+        delete this.search_form['negative_min_dose']
+        this.negMinDose=null;
+      }
       if (this.firstTimeCategorySearch){
         if (this.request){
             this.request.unsubscribe();
-        }
-      
+        } 
         /*Case TABLE*/
         this.globals.showSpinner = true;
         /* If nothing to serach*/
-        if (!this.somethingtoSearch()) {
+        if (this.is_empty(this.categories_search_form) && this.is_empty(this.search_form)) {
           this.request = this.findService.initFinding().subscribe(table_info => {
             this.findService.changeTable(table_info);
             this.findService.changePlot(table_info);
@@ -106,6 +110,7 @@ export class SidebarComponent implements OnInit {
     });
 
     this.findService.currentSearchFormTable.subscribe (searchFormTable =>{
+
       if (!("sex" in this.search_form)){
         this.F=false
         this.M=false
@@ -123,7 +128,7 @@ export class SidebarComponent implements OnInit {
         }
         this.globals.showSpinner = true;
         /* If nothing to serach*/
-        if (!this.somethingtoSearch()) {
+        if (this.is_empty(this.categories_search_form) && this.is_empty(this.search_form)) {
           this.request = this.findService.initFinding().subscribe(table_info => {
             this.findService.changeTable(table_info);
             this.findService.changePlot(table_info);
@@ -366,7 +371,6 @@ export class SidebarComponent implements OnInit {
   }
 
   addCategory($event: any, type) {
-   
     if ($event.value!==undefined){
       this.categories_search_form[this.selectedCategory][type] = $event.value;
       this.findService.changeCategoriesSearchForm(this.categories_search_form);
@@ -393,18 +397,24 @@ export class SidebarComponent implements OnInit {
     } 
   }
 
-  somethingtoSearch() {
-    if (Object.keys(this.search_form).length>0) {
-      return true
+  is_empty(dict:{}){
+
+    for (let key in dict){
+      if (!Array.isArray(dict[key])){
+        var empty = this.is_empty(dict[key]);
+        if (!empty){
+          return false
+        }
+      }
+      else{
+        if (dict[key].length > 0) {
+            return false;
+        }
+      }
     }
-    for (let source of this.sources) { 
-      if (this.categories_search_form[source]['parameters'].length>0 ||
-          this.categories_search_form[source]['observations'].length>0)
-        { return true }
-    } 
-    return false
+    return true;
   }
-  
+
   resetFilters() {    
     this.search_form={}
     this.globals.showSpinner = true;
@@ -436,6 +446,7 @@ export class SidebarComponent implements OnInit {
   }
 
   download() { 
-    this.findService.downloadFiles();
+    this.findService.downloadFiles()
   }
+    
 }
