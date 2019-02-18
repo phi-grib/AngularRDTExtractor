@@ -4,28 +4,29 @@ node_js:
 env:
   global:
     - ORG="phi-grib"
-    - REPO="DjangoAPI"
+    - REPO="RDTExtractorWeb"
     - GH_REPO="github.com/${ORG}/${REPO}.git"
 before_script:
 - npm install -g @angular/cli
 script:
+  
 # DELETE
-# - git clone https://github.com/phi-grib/DjangoAPI.git
-# - rm -rfv ./DjangoAPI/frontend/*
-# - cd DjangoAPI/
-# - git config --global user.email "ignacio.pasamontes@upf.edu"
-# - git config --global user.name "IgnacioPasamontes"
-# - git rm frontend/*
-# - git commit -m 'BUILD:Remove frontend'
-# - git push "https://${GH_TOKEN}@${GH_REPO}" master
+ - git clone https://github.com/phi-grib/RDTExtractorWeb.git
+ - rm -rfv ./RDTExtractorWeb/frontend/*
+ - cd RDTExtractorWeb /
+ - git config --global user.email "ignacio.pasamontes@upf.edu"
+ - git config --global user.name "IgnacioPasamontes"
+ - git rm frontend/*
+ - git commit -m 'BUILD:Remove frontend'
+ - git push "https://${GH_TOKEN}@${GH_REPO}" master
 
 # ADD
-# - cd ..
-# - ng build --output-hashing none --output-path DjangoAPI/frontend
-# - cd DjangoAPI/
-# - git remote
-# - git config user.email "ignacio.pasamontes@upf.edu"
-# - git config user.name "IgnacioPasamontes"
-# - git add frontend/*
-# - git commit -m 'BUILD:Add frontend'
-# - git push "https://${GH_TOKEN}@${GH_REPO}" master
+ - cd ..
+ - ng build --output-hashing none --output-path RDTExtractorWeb/frontend
+ - cd RDTExtractorWeb/
+ - git remote
+ - git config user.email "ignacio.pasamontes@upf.edu"
+ - git config user.name "IgnacioPasamontes"
+ - git add frontend/*
+ - git commit -m 'BUILD:Add frontend'
+ - git push "https://${GH_TOKEN}@${GH_REPO}" master

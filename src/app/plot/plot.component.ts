@@ -106,7 +106,7 @@ export class PlotComponent implements OnInit, AfterViewInit {
           var data_findings = [this.plot_info['num_findings_positives'], this.globals.totalFindings - this.plot_info['num_findings_positives']]
           var label_studies = ['Selected ','Not Selected'];
           var label_structures = ['Selected ','Not Selected'];
-          var label_indings = ['Selected ','Not Selected'];
+          var label_findings = ['Selected ','Not Selected'];
         }
         else{
           var data_studies = [this.plot_info['num_studies_positives'], this.plot_info['num_studies_negatives'], this.globals.totalStudies - this.plot_info['num_studies_positives'] - this.plot_info['num_studies_negatives']]
@@ -114,15 +114,15 @@ export class PlotComponent implements OnInit, AfterViewInit {
           var data_findings = [this.plot_info['num_findings_positives'],this.plot_info['num_findings_negatives'] ,this.globals.totalFindings - this.plot_info['num_findings_positives'] -this.plot_info['num_findings_negatives']]
           var label_studies = ['Selected Positive','Selected Negative','Not Selected'];
           var label_structures = ['Selected Positive','Selected Negative','Not Selected'];
-          var label_indings = ['Selected Positive','Selected Negative','Not Selected'];
+          var label_findings = ['Selected Positive','Selected Negative','Not Selected'];
         }
 
 
         this.plots['Studies'].labels = label_studies
         this.plots['Structures'].labels = label_structures
-        this.plots['Findings'].labels =  label_indings
+        this.plots['Findings'].labels =  label_findings
         this.plots['Species'].labels = this.plot_info['plotInfo']['species'][0];
-        this.plots['Treatment'].labels = ['Not related', 'Treatment related'];
+        this.plots['Treatment'].labels = this.plot_info['plotInfo']['relevance'][0];
         this.plots['Source'].labels = this.plot_info['plotInfo']['source'][0];
 
         
